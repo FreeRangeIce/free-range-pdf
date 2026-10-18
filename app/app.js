@@ -29,7 +29,7 @@ const S = { pending: false, queuedUndo: false, name: '', orig: null, origSha: nu
 const norm = t => (t || '').replace(/\s+/g, ' ').trim();
 const blobUrl = u8 => URL.createObjectURL(new Blob([u8], { type: 'application/pdf' }));
 const b64ToU8 = b => Uint8Array.from(atob(b), c => c.charCodeAt(0));
-function refreshUndo() { $('undo').disabled = S.busy || S.pending || !S.edits.length; }
+function refreshUndo() { $('undo').disabled = !S.edits.length && !S.pending; /* stays clickable while an apply runs: the click is queued like Ctrl+Z */ }
 function refreshNotes() { $('busynote').hidden = !(S.busy && S.rebuilding || S.pending); $('unsaved').hidden = !(S.edits.length && JSON.stringify(S.edits) !== S.savedKey); }
 function setBusy(b, rebuilding = false) { S.busy = b; S.rebuilding = b && rebuilding; $('busyflag').hidden = !b; $('rbody').setAttribute('aria-busy', b ? 'true' : 'false'); if (b) $('download').disabled = true; refreshUndo(); refreshNotes(); if (!b) runQueuedUndo(); }
 function runQueuedUndo() { if (S.queuedUndo && !S.busy && !S.pending) { S.queuedUndo = false; setTimeout(undo, 0); } }
@@ -126,7 +126,7 @@ function showCharMark(t) { // orange underline under each unsupported character 
   $('charmsg').textContent = MSG.charShort; $('charmark').hidden = false;
 }
 function showRefusal(text, reason) { const r = $('refuse'); r.hidden = false; r.textContent = text; if (reason) { const d = document.createElement('div'); d.className = 'reason'; d.textContent = reason; r.appendChild(d); } $('status').textContent = ''; setApply('off'); }
-function errMsg(err) { const m = (err && err.message) || ''; if (err && err.refused) return [MSG.tooLong]; if (/not found/.test(m)) return [MSG.notFound]; if (/exactly once|cannot|unsupported/i.test(m)) return [MSG.cantEdit]; return [MSG.generic, m || String(err)]; }
+function errMsg(err) { const m = (err && err.message) || ''; if (err && err.refused) return [MSG.tooLong]; if (/not found/.test(m)) return [MSG.cantEdit]; /* the words came from the line itself, so a miss is the file (multi-run line), not the user */ if (/exactly once|cannot|unsupported/i.test(m)) return [MSG.cantEdit]; return [MSG.generic, m || String(err)]; }
 function widthNote(o, e) {
   if (o.gapPt > 0) { const len = Math.max(1, (e.replace || '').length), n = Math.max(1, Math.round(o.gapPt / ((o.naturalWidthPt || 1) / len))); return MSG.gap(n); }
   const parts = []; const sp = o.spacingEm || 0, sc = o.scale || 1;
@@ -141,7 +141,25 @@ async function drawStrip(r, line) {
   const w = Math.round(x1 - x0), h = Math.round(y1 - y0); cv_.width = w + 2 * P; cv_.height = h + 2 * P; const g = cv_.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, cv_.width, cv_.height);
   g.drawImage(full, Math.round(x0), Math.round(y0), w, h, P, P, w, h);
   if (r.font.used === 'fallback') { const b = r.span.bboxPdf; g.strokeStyle = '#d9600b'; g.lineWidth = 2; g.strokeRect(P + (b.x0 - vb[0]) * K - Math.round(x0), P + (vb[3] - b.y1) * K - Math.round(y0) + 2, (b.x1 - b.x0) * K, Math.min(h - 4, (b.y1 - b.y0) * K)); }
-  cv_.style.width = (cv_.width * S.scale / K) + 'px'; /* same px-per-point as the page, so strip text = page text size */ cv_.hidden = false;
+  layoutStrip(cv_, K);
+}
+// Whole new line always visible at page text size: if the strip is wider than the panel it is cut into rows at blank columns (spaces) and stacked.
+function layoutStrip(cv_, K) {
+  const avail = Math.floor($('preview').clientWidth) - 2, ppp = S.scale / K, cw = cv_.width, ch = cv_.height; cv_.style.maxWidth = 'none';
+  if (cw * ppp <= avail) { cv_.style.width = cw * ppp + 'px'; cv_.hidden = false; return; }
+  const src = document.createElement('canvas'); src.width = cw; src.height = ch; src.getContext('2d').drawImage(cv_, 0, 0);
+  const px = src.getContext('2d').getImageData(0, 0, cw, ch).data, blank = new Uint8Array(cw);
+  for (let x = 0; x < cw; x++) { let b = 1; for (let y = 0; y < ch && b; y++) { const o = (y * cw + x) * 4; if (px[o] < 170 && px[o + 1] < 170 && px[o + 2] < 170) b = 0; /* text ink only: the orange substitute-font outline must not count */ } blank[x] = b; }
+  const wg = new Uint8Array(cw), minGap = Math.round(2.6 * K); // word gaps only: blank runs at least ~a space wide (letter gaps are narrower)
+  for (let x = 0, st = -1; x <= cw; x++) { if (x < cw && blank[x]) { if (st < 0) st = x; } else if (st >= 0) { if (x - st >= minGap) wg.fill(1, st, x); st = -1; } }
+  const Rw = Math.floor(avail / ppp), rows = []; let pos = 0;
+  while (pos < cw) { let end = Math.min(cw, pos + Rw);
+    if (end < cw) { let k = end; while (k > pos + Rw * 0.3 && !wg[k]) k--; if (k > pos + Rw * 0.3) end = k; }
+    rows.push([pos, end]); pos = end; while (pos < cw && wg[pos]) pos++; }
+  const gap = 4, W = Math.max(...rows.map(r => r[1] - r[0])), H = rows.length * ch + (rows.length - 1) * gap;
+  cv_.width = W; cv_.height = H; const g = cv_.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, W, H);
+  rows.forEach((r, n) => { g.drawImage(src, r[0], 0, r[1] - r[0], ch, 0, n * (ch + gap), r[1] - r[0], ch); if (n) { g.fillStyle = '#c5cbd8'; g.fillRect(0, n * (ch + gap) - gap / 2 - 0.5, W, 1); } });
+  cv_.style.width = W * ppp + 'px'; cv_.hidden = false; S.stripRows = rows.length;
 }
 function showPreview(r, e) {
   for (const id of ['gapbar', 'subst', 'refuse', 'crop']) $(id).hidden = true; const o = r.overflow;
@@ -245,10 +263,10 @@ async function openBytes(u8, name) {
       return failOpen(MSG.unreadable); }
     const cls = classifyPages(pd)[0];
     const sha = await sha256(u8); if (my !== openSeq) return;
-    S.everOpened = true; S.name = name; S.orig = new Uint8Array(u8); S.origSha = sha; S.edits = []; S.curRes = []; S.sel = -1; S.cur = S.orig.slice();
+    S.name = name; S.orig = new Uint8Array(u8); S.origSha = sha; S.edits = []; S.curRes = []; S.sel = -1; S.cur = S.orig.slice();
     $('docinfo').textContent = `${name}  \u00b7  ${pd.getPageCount()} page(s), editing page 1  \u00b7  SHA-256 ${S.origSha.slice(0, 12)}\u2026`;
-    if (cls.route !== 'text') { const msg = MSG.notText; await showCurrent().catch(() => {}); if (my !== openSeq) return; $('nosel').className = 'refuse'; $('nosel').textContent = msg; $('overlay').innerHTML = ''; S.lines = []; return; }
-    await showCurrent(); if (my !== openSeq) return; $('legendwrap').hidden = false; renderEdits(); await verify(); select(0, false, false, false);
+    if (cls.route !== 'text') { failOpen(MSG.notText); S.everOpened = true; return; } /* same closed state and earlier-file line as any other bad file */
+    S.everOpened = true; await showCurrent(); if (my !== openSeq) return; $('legendwrap').hidden = false; renderEdits(); await verify(); select(0, false, false, false);
   } catch (err) { console.warn('open failed:', err && err.message); failOpen(MSG.unreadable); }
   finally { if (my === openSeq) setBusy(false); }
 }
