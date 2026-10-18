@@ -9,9 +9,9 @@ main{display:flex;gap:16px;padding:14px 16px;align-items:flex-start}
 .ln{position:absolute;cursor:pointer;border-radius:2px}.ln:hover{background:#1d4ed81a}.ln.sel{outline:2px solid #1d4ed8;background:#1d4ed812}
 .ln.edited::before{content:"";position:absolute;left:-7px;top:1px;bottom:1px;width:2px;background:#1d4ed8}
 .ln.substspan{outline:2px solid #d9600b;outline-offset:1px}
-.legend{display:flex;gap:22px;margin:8px 0 2px;font-size:12px;color:#4f576a}.sw{display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-2px;border-radius:2px}.sw.blue{border:2px solid #1d4ed8}.sw.orange{border:2px solid #d9600b}
+.legend{display:flex;gap:22px;margin:8px 0 6px;font-size:12px;line-height:16px;color:#3a4254}.sw{display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-2px;border-radius:2px}.sw.blue{border:2px solid #1d4ed8}.sw.orange{border:2px solid #d9600b}
 #right{width:552px;flex:none;background:#fff;border:1px solid #d5d9e2;border-radius:8px;display:flex;flex-direction:column;height:calc(100vh - 82px);min-height:560px}
-#rbody{flex:1;overflow:auto;padding:2px 18px 12px}#rfoot{display:flex;gap:10px;align-items:center;padding:10px 18px;border-top:1px solid #d5d9e2;background:#fafbfd;border-radius:0 0 8px 8px}
+#rbody{flex:1;overflow:auto;padding:2px 18px 12px}#rfoot{display:flex;flex-direction:column;gap:6px;padding:10px 18px;border-top:1px solid #d5d9e2;background:#fafbfd;border-radius:0 0 8px 8px}#footrow{display:flex;gap:10px;align-items:center}#footnotes{font-size:13px;color:#1d2330;display:flex;gap:14px;min-height:0}#footnotes span{font-weight:600}.reason{margin-top:4px;font-size:12px;color:#4f576a;font-weight:400}
 .mono{font:14px/1.4 ui-monospace,Menlo,Consolas,monospace}#orig{padding:6px 8px;background:#f3f4f8;border-radius:4px;white-space:pre-wrap}
 #newtext{width:100%;padding:7px 8px;border:1px solid #6d7892;border-radius:4px}.lbl,label.lbl{display:block;font-size:12px;color:#4f576a;margin:8px 0 3px}
 kbd{border:1px solid #9aa3b5;border-bottom-width:2px;border-radius:3px;padding:0 4px;font-size:12px;background:#fafafa;color:#1d2330}
@@ -21,8 +21,8 @@ kbd{border:1px solid #9aa3b5;border-bottom-width:2px;border-radius:3px;padding:0
 .refuse{margin-top:8px;padding:8px 10px;border:1px solid #b42318;border-radius:6px;background:#fff0f0;color:#7a1111;font-size:13px}
 #crop{display:block;max-width:100%;margin-top:8px;border:1px solid #c5cbd8}
 #edits{margin:0;padding-left:22px;font-size:13px}#edits li{margin:2px 0}
-.checks{list-style:none;margin:6px 0 0;padding:0;font-size:13px}.checks li{padding:1px 0}.ok::before{content:"\2713 ";color:#146c43;font-weight:700}.bad{color:#9b1c10}.bad::before{content:"\2717 ";font-weight:700}
-#checksum{font-size:13px;display:inline}#checksum.fail{color:#9b1c10;font-weight:600}#checkdetails{margin-left:8px;font-size:12px;color:#1d4ed8}
+.checks{list-style:none;margin:6px 0 0;padding:0;font-size:13px}.checks li{padding:1px 0}.ok::before{content:"\2713 ";color:#146c43;font-weight:700}.bad{color:#1d2330}.bad::before{content:"\2717 ";font-weight:700}
+#checksum{font-size:13px;display:inline}#checksum.fail{color:#1d2330;font-weight:600}#checksum.fail .reason{font-weight:400}#checkdetails{margin-left:8px;font-size:12px;color:#1d4ed8}
 .hint{color:#4f576a;font-size:12px;margin:4px 0}#credits{position:fixed;inset:0;background:#0006;display:flex;justify-content:center;padding-top:40px}
 #credits .card{background:#fff;width:900px;max-height:80vh;overflow:auto;border-radius:8px;padding:12px 24px}#credits table{border-collapse:collapse;width:100%}#credits td,#credits th{border-bottom:1px solid #e1e4ea;padding:5px 8px;text-align:left;vertical-align:top;font-size:13px}
 [hidden]{display:none!important}
@@ -31,3 +31,4 @@ kbd{border:1px solid #9aa3b5;border-bottom-width:2px;border-radius:3px;padding:0
 #apply.blocked{opacity:.5;cursor:not-allowed}
 #charmark{margin-top:6px}#charmirror{padding:4px 8px;background:#fff6ee;border:1px solid #d9600b;border-radius:4px;white-space:pre-wrap;word-break:break-word}.badch{text-decoration:underline;text-decoration-color:#d9600b;text-decoration-thickness:3px;text-underline-offset:3px;background:#ffe3cc}
 #charmsg{font-size:13px;color:#8a3a00;margin-top:3px}
+#checksum.fail{display:block}#footnotes:not(:has(span:not([hidden]))){display:none}

@@ -5,25 +5,34 @@ import { classifyPages } from '../src/lib/classify.js';
 import { renderPage, sha256, diff, pdfjsLib, openPdf } from '../src/lib/img-util.js';
 
 const SUBST_SENTENCE = "This PDF's font doesn't include every letter you typed, so the outlined text uses a close substitute font and may look slightly different.";
-const PH = 'PLACEHOLDER (wording for Berean): ';
 const MSG = {
-  notText: PH + 'This page has no editable text layer (it looks like a scan or a photo). This editor only changes PDFs that contain real text.',
-  tooLong: (o) => PH + `The new text is too long for the space it replaces (${o.over} pt over). Words to its right may not move, so nothing was changed.`,
-  cantEdit: "This line can't be edited here. Nothing was changed.", // draft wording (Berean to confirm); used for every unsupported line / unexpected error
-  password: "This PDF is password-protected, so it can't be opened here. Nothing was changed.", // draft, Berean to confirm
-  restricted: PH + "This PDF has editing restrictions, so it can't be edited here. Nothing was changed.",
-  empty: 'Type some text first. An empty line can\u2019t be applied.', // draft
+  notText: 'This page is a picture, like a scan or photo, so it has no text to edit. This editor only changes PDFs made of real text. Nothing was changed.',
+  tooLong: "That's too long to fit where the old words were, and the words after it can't move. Try something shorter. Nothing was changed.",
+  notFound: "I couldn't find those words in this file. Nothing was changed.",
+  cantEdit: "This line can't be edited here. The file stores it in a way this editor can't change safely. Nothing was changed.",
+  generic: "This edit couldn't be applied. Nothing was changed.",
+  password: "This PDF is password-protected, so it can't be opened here. Remove the password first, then try again.",
+  restricted: "This PDF is password-protected, so it can't be opened here. Remove the password first, then try again.", // owner-restricted PDFs: same approved wording
+  empty: 'Type the new text first. To remove words, delete them and keep the rest of the line.',
   charShort: "This character can't be used here",
   charLong: (c) => `This editor can't write that character: ${c}. Use letters, numbers and common punctuation.`,
-  unreadable: PH + 'This file could not be opened as a PDF. Nothing was changed.',
-  verifyFailed: PH + 'The edited file did not pass our re-open check, so Download is not offered.',
+  unreadable: "This file couldn't be opened as a PDF. Nothing was changed.",
+  verifyFailed: "The edited file didn't pass our check, so Download isn't offered. Your original is untouched.",
+  busy: 'Applying your edit, one moment.',
+  unsaved: "Edits aren't saved until you download.",
+  openFailedAfter: "That file couldn't be opened. The earlier file is closed.",
+  fits: 'Fits the old space.',
+  gap: (n) => `Shorter than the old word, so a gap of about ${n} ${n === 1 ? 'letter' : 'letters'} is left. Nothing to the right moves.`,
 };
 const $ = id => document.getElementById(id);
-const S = { name: '', orig: null, origSha: null, edits: [], cur: null, curRes: [], lines: [], vb: null, scale: 1, sel: -1, verified: false, busy: false, previewSeq: 0, lastPreview: null };
+const S = { pending: false, queuedUndo: false, name: '', orig: null, origSha: null, edits: [], cur: null, curRes: [], lines: [], vb: null, scale: 1, sel: -1, verified: false, busy: false, previewSeq: 0, lastPreview: null };
 const norm = t => (t || '').replace(/\s+/g, ' ').trim();
 const blobUrl = u8 => URL.createObjectURL(new Blob([u8], { type: 'application/pdf' }));
 const b64ToU8 = b => Uint8Array.from(atob(b), c => c.charCodeAt(0));
-function setBusy(b) { S.busy = b; $('busyflag').hidden = !b; $('rbody').setAttribute('aria-busy', b ? 'true' : 'false'); $('undo').disabled = b || !S.edits.length; if (b) $('download').disabled = true; }
+function refreshUndo() { $('undo').disabled = S.busy || S.pending || !S.edits.length; }
+function refreshNotes() { $('busynote').hidden = !(S.busy && S.rebuilding || S.pending); $('unsaved').hidden = !(S.edits.length && JSON.stringify(S.edits) !== S.savedKey); }
+function setBusy(b, rebuilding = false) { S.busy = b; S.rebuilding = b && rebuilding; $('busyflag').hidden = !b; $('rbody').setAttribute('aria-busy', b ? 'true' : 'false'); if (b) $('download').disabled = true; refreshUndo(); refreshNotes(); if (!b) runQueuedUndo(); }
+function runQueuedUndo() { if (S.queuedUndo && !S.busy && !S.pending) { S.queuedUndo = false; setTimeout(undo, 0); } }
 // Apply states: 'ok' (enabled), 'off' (nothing to apply), 'blocked' (looks disabled, still reachable: pressing it explains why; never applies)
 function setApply(state) { const a = $('apply'); S.applyState = state; a.disabled = state === 'off'; a.setAttribute('aria-disabled', state === 'ok' ? 'false' : 'true'); a.classList.toggle('blocked', state === 'blocked'); }
 const EMOJI_OK = new Set(['\u00a9', '\u00ae', '\u2122']);
@@ -62,7 +71,7 @@ function deriveEdit(oldT, newT) {
 async function showCurrent() {
   const rl = await readLines(S.cur); S.lines = rl.lines; S.vb = rl.viewBox;
   const doc = await openPdf(S.cur); const page = await doc.getPage(1);
-  const base = page.getViewport({ scale: 1 }); const sizes = S.lines.map(l => l.size).sort((a, b) => a - b); const medSize = sizes[sizes.length >> 1] || 11; S.scale = Math.min(824 / base.width, 14.5 / medSize); const vp = page.getViewport({ scale: S.scale });
+  const base = page.getViewport({ scale: 1 }); const sizes = S.lines.map(l => l.size).sort((a, b) => a - b); const medSize = sizes[sizes.length >> 1] || 11; S.scale = Math.min(824 / base.width, 15 / medSize); /* fit the left column (824 px), but keep body text at most 15 px */ const vp = page.getViewport({ scale: S.scale });
   const c = $('page'); c.width = Math.round(vp.width); c.height = Math.round(vp.height);
   const ctx = c.getContext('2d'); ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height);
   await page.render({ canvasContext: ctx, viewport: vp, background: 'rgb(255,255,255)' }).promise; await doc.destroy();
@@ -110,19 +119,20 @@ async function preview() {
   try {
     const r = await applyOne(S.cur, e); if (seq !== S.previewSeq) return;
     showPreview(r, e);
-  } catch (err) { if (seq !== S.previewSeq) return; resetPreview(); console.warn('preview failed:', err && err.message); showRefusal(MSG.cantEdit); }
+  } catch (err) { if (seq !== S.previewSeq) return; resetPreview(); console.warn('preview failed:', err && err.message); showRefusal(...errMsg(err)); }
 }
 function showCharMark(t) { // orange underline under each unsupported character + the short inline message
   const m = $('charmirror'); m.textContent = ''; for (const ch of t) { if (badChar(ch)) { const sp = document.createElement('span'); sp.className = 'badch'; sp.textContent = /\p{Cc}|\p{Cf}/u.test(ch) ? '\u00b7' : ch; m.appendChild(sp); } else m.appendChild(document.createTextNode(ch)); }
   $('charmsg').textContent = MSG.charShort; $('charmark').hidden = false;
 }
-function showRefusal(text) { $('refuse').hidden = false; $('refuse').textContent = text; $('status').textContent = ''; setApply('off'); }
-function widthNote(o) { // plain-words draft (wording is Berean's)
-  if (o.gapPt > 0) return `Shorter by ${o.gapPt.toFixed(1)} pt. The words to the right stay where they are, so a gap remains.`;
+function showRefusal(text, reason) { const r = $('refuse'); r.hidden = false; r.textContent = text; if (reason) { const d = document.createElement('div'); d.className = 'reason'; d.textContent = reason; r.appendChild(d); } $('status').textContent = ''; setApply('off'); }
+function errMsg(err) { const m = (err && err.message) || ''; if (err && err.refused) return [MSG.tooLong]; if (/not found/.test(m)) return [MSG.notFound]; if (/exactly once|cannot|unsupported/i.test(m)) return [MSG.cantEdit]; return [MSG.generic, m || String(err)]; }
+function widthNote(o, e) {
+  if (o.gapPt > 0) { const len = Math.max(1, (e.replace || '').length), n = Math.max(1, Math.round(o.gapPt / ((o.naturalWidthPt || 1) / len))); return MSG.gap(n); }
   const parts = []; const sp = o.spacingEm || 0, sc = o.scale || 1;
-  if (Math.abs(sp) >= 0.0005) parts.push(`letters ${sp < 0 ? 'tightened' : 'loosened'} by ${(Math.abs(sp) * 100).toFixed(0)}%`);
-  if (Math.abs(sc - 1) >= 0.0005) parts.push(`text ${sc < 1 ? 'narrowed' : 'widened'} by ${(Math.abs(sc - 1) * 100).toFixed(0)}%`);
-  return parts.length ? `Fits: ${parts.join(', ')}.` : 'Fits: same width, nothing adjusted.';
+  if (Math.abs(sp) >= 0.0005) parts.push(`Letters ${sp < 0 ? 'tightened' : 'loosened'} by ${(Math.abs(sp) * 100).toFixed(0)}%.`);
+  if (Math.abs(sc - 1) >= 0.0005) parts.push(`Text ${sc < 1 ? 'narrowed' : 'widened'} by ${(Math.abs(sc - 1) * 100).toFixed(0)}%.`);
+  return parts.length ? `Fits. ${parts.join(' ')}` : MSG.fits;
 }
 // preview strip: ONLY the edited line (+4 px), 8 px padding, rendered from the trial result; orange box when the font is substituted
 async function drawStrip(r, line) {
@@ -135,10 +145,10 @@ async function drawStrip(r, line) {
 }
 function showPreview(r, e) {
   for (const id of ['gapbar', 'subst', 'refuse', 'crop']) $(id).hidden = true; const o = r.overflow;
-  if (r.refused) { showRefusal(MSG.tooLong({ over: (-o.leftoverAfterSpacingAndScalePt).toFixed(2) })); S.lastPreview = null; return; }
+  if (r.refused) { showRefusal(MSG.tooLong); S.lastPreview = null; return; }
   const slot = o.slotPt, nat = o.naturalWidthPt; $('gapbar').hidden = false;
   const drawn = o.gapPt > 0 ? nat : slot; $('gapnat').style.width = (drawn / slot * 100) + '%'; $('gapgap').style.width = (o.gapPt > 0 ? o.gapPt / slot * 100 : 0) + '%';
-  $('gaptext').textContent = widthNote(o);
+  $('gaptext').textContent = widthNote(o, e);
   if (r.font.used === 'fallback') { $('subst').hidden = false; $('subst').textContent = SUBST_SENTENCE; }
   drawStrip(r, S.lines[S.sel]).catch(err => console.error("strip", err.message));
   $('status').textContent = `Ready: "${e.find}" \u2192 "${e.replace}"`; setApply('ok'); S.lastPreview = e;
@@ -146,30 +156,37 @@ function showPreview(r, e) {
 
 // ---- apply / undo / verify ----
 async function rebuild() {
-  setBusy(true); try {
+  setBusy(true, true); try {
     if (!S.edits.length) { S.cur = S.orig.slice(); S.curRes = []; } else { const { bytes, results } = await replay(S.edits); S.cur = bytes; S.curRes = results; }
     await showCurrent(); renderEdits(); await verify();
   } finally { setBusy(false); }
 }
 $('apply').addEventListener('click', tryApply);
 function tryApply() { // Apply is pressed (button or Enter)
-  if (S.busy) return; clearTimeout(timer);
+  if (S.busy || S.pending) return; clearTimeout(timer);
   if (S.applyState === 'ok') return applyEdit();
   const t = $('newtext').value, bad = findBad(t);
   if (bad.length) { showCharMark(t); $('charmsg').textContent = MSG.charLong(showCp(bad[0])); return; } // longer sentence only when Apply is pressed; nothing is applied
   if (!t.trim()) { $('status').textContent = MSG.empty; return; }
-  preview().then(() => { if (S.applyState === 'ok') applyEdit(); });
+  S.pending = true; refreshUndo(); refreshNotes();
+  preview().then(() => { if (S.applyState === 'ok') return applyEdit(true); }).finally(() => endPending());
 }
-async function applyEdit() {
-  if (!S.lastPreview || S.busy) return; const e = { ...S.lastPreview }; delete e.line; S.edits.push(e); setApply('off');
+function endPending() { S.pending = false; refreshUndo(); refreshNotes(); runQueuedUndo(); }
+async function applyEdit(inChain) {
+  if (!S.lastPreview || S.busy) return; const e = { ...S.lastPreview }; delete e.line; S.edits.push(e); setApply('off'); S.pending = true; refreshUndo(); refreshNotes();
   try { await rebuild(); $('newtext').value = S.lines[S.sel]?.text || ''; resetPreview(); }
-  catch (err) { S.edits.pop(); await rebuild(); showRefusal(err.refused ? MSG.tooLong({ over: '?' }) : MSG.cantEdit); }
+  catch (err) { S.edits.pop(); S.queuedUndo = false; await rebuild(); showRefusal(...errMsg(err)); }
+  finally { if (!inChain) endPending(); }
 }
-async function undo() { if (!S.edits.length || S.busy) return; S.edits.pop(); await rebuild(); if (S.sel >= 0) { $('newtext').value = S.lines[S.sel]?.text || ''; resetPreview(); } }
-$('undo').addEventListener('click', undo);
+function requestUndo() { // never silent: while an apply is starting/running the undo is queued and the user is told why
+  if (S.busy || S.pending) { S.queuedUndo = true; $('busynote').hidden = false; return; }
+  undo();
+}
+async function undo() { if (!S.edits.length || S.busy || S.pending) return; S.edits.pop(); await rebuild(); if (S.sel >= 0) { $('newtext').value = S.lines[S.sel]?.text || ''; resetPreview(); } }
+$('undo').addEventListener('click', requestUndo);
 function renderEdits() {
-  $('edits').innerHTML = S.edits.map((e, k) => { const r = S.curRes[k]; return `<li><span class="mono">"${esc(e.find)}" \u2192 "${esc(e.replace)}"</span> <span class="muted">${r ? (r.font.used === 'fallback' ? 'substitute font' : 'original font') + (r.overflow.gapPt > 0 ? `, gap ${r.overflow.gapPt.toFixed(1)} pt` : '') : ''}</span></li>`; }).join('') || '<li class="muted">none</li>';
-  $('undo').disabled = S.busy || !S.edits.length;
+  $('edits').innerHTML = S.edits.map((e, k) => { const r = S.curRes[k]; return `<li><span class="mono">"${esc(e.find)}" \u2192 "${esc(e.replace)}"</span> <span class="muted">${r ? (r.font.used === 'fallback' ? 'substitute font' : 'original font') + (r.overflow.gapPt > 0 ? `, small gap left` : '') : ''}</span></li>`; }).join('') || '<li class="muted">none</li>';
+  refreshUndo(); refreshNotes();
 }
 const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 function outName() { const b = S.name.replace(/\.pdf$/i, ''); return (/-edited(-\d+)?$/.test(b) ? b.replace(/-edited(-(\d+))?$/, (m, x, n) => `-edited-${(+n || 1) + 1}`) : b + '-edited') + '.pdf'; }
@@ -202,20 +219,20 @@ async function verify() {
   sum.className = nbad ? 'fail' : 'muted'; sum.textContent = nbad ? `${nbad} of ${items.length} checks failed` : `All ${items.length} checks passed`;
   det.hidden = false; ul.hidden = !nbad; det.textContent = nbad ? 'Hide details' : 'Details'; // failed checks stay open
   S.verified = items.every(i => i[0]);
-  if (S.verified) { $('download').disabled = false; $('dlname').textContent = outName(); } else { $('dlname').textContent = ''; sum.textContent += '. ' + MSG.verifyFailed; }
+  if (S.verified) { $('download').disabled = false; $('dlname').textContent = outName(); } else { $('dlname').textContent = ''; sum.textContent = MSG.verifyFailed; const rs = document.createElement('div'); rs.className = 'reason'; rs.textContent = `${nbad} of ${items.length} checks failed: ` + items.filter(i => !i[0]).map(i => i[1]).join('; '); sum.appendChild(rs); }
 }
 $('checkdetails').addEventListener('click', ev => { ev.preventDefault(); const ul = $('checks'); ul.hidden = !ul.hidden; $('checkdetails').textContent = ul.hidden ? 'Details' : 'Hide details'; });
-$('download').addEventListener('click', () => { if (!S.verified) return; const a = document.createElement('a'); a.href = blobUrl(S.cur); a.download = outName(); a.click(); S.savedKey = JSON.stringify(S.edits); setTimeout(() => URL.revokeObjectURL(a.href), 5000); });
+$('download').addEventListener('click', () => { if (!S.verified) return; const a = document.createElement('a'); a.href = blobUrl(S.cur); a.download = outName(); a.click(); S.savedKey = JSON.stringify(S.edits); refreshNotes(); setTimeout(() => URL.revokeObjectURL(a.href), 5000); });
 
 // ---- open ----
 function resetDoc() { // FIRST thing on every open: nothing of a previous document may stay live
-  S.cur = null; S.orig = null; S.origSha = null; S.edits = []; S.curRes = []; S.lines = []; S.sel = -1; S.verified = false; S.lastPreview = null; S.savedKey = null; S.name = ''; S.previewSeq++;
-  clearTimeout(timer); $('download').disabled = true; $('undo').disabled = true; $('dlname').textContent = ''; setApply('off'); $('docinfo').textContent = '';
+  S.cur = null; S.orig = null; S.queuedUndo = false; S.pending = false; S.origSha = null; S.edits = []; S.curRes = []; S.lines = []; S.sel = -1; S.verified = false; S.lastPreview = null; S.savedKey = null; S.name = ''; S.previewSeq++;
+  clearTimeout(timer); $('download').disabled = true; $('undo').disabled = true; refreshNotes(); $('dlname').textContent = ''; setApply('off'); $('docinfo').textContent = '';
   $('editor').hidden = true; $('nosel').hidden = false; $('nosel').className = 'muted'; $('nosel').textContent = 'No line selected.'; $('overlay').innerHTML = ''; $('legendwrap').hidden = true;
   const c = $('page'); c.width = 1; c.height = 1; $('checks').hidden = true; $('checkdetails').hidden = true; $('checksum').className = 'muted'; $('checksum').textContent = 'No edits yet.'; $('edits').innerHTML = '';
   for (const id of ['gapbar', 'subst', 'refuse', 'crop', 'charmark']) $(id).hidden = true;
 }
-function failOpen(text) { resetDoc(); $('nosel').className = 'refuse'; $('nosel').textContent = text; }
+function failOpen(text) { resetDoc(); $('nosel').className = 'refuse'; $('nosel').textContent = text; if (S.everOpened) { const d = document.createElement('div'); d.className = 'reason'; d.textContent = MSG.openFailedAfter; $('nosel').appendChild(d); } }
 let openSeq = 0;
 async function openBytes(u8, name) {
   const my = ++openSeq; resetDoc(); setBusy(true);
@@ -228,7 +245,7 @@ async function openBytes(u8, name) {
       return failOpen(MSG.unreadable); }
     const cls = classifyPages(pd)[0];
     const sha = await sha256(u8); if (my !== openSeq) return;
-    S.name = name; S.orig = new Uint8Array(u8); S.origSha = sha; S.edits = []; S.curRes = []; S.sel = -1; S.cur = S.orig.slice();
+    S.everOpened = true; S.name = name; S.orig = new Uint8Array(u8); S.origSha = sha; S.edits = []; S.curRes = []; S.sel = -1; S.cur = S.orig.slice();
     $('docinfo').textContent = `${name}  \u00b7  ${pd.getPageCount()} page(s), editing page 1  \u00b7  SHA-256 ${S.origSha.slice(0, 12)}\u2026`;
     if (cls.route !== 'text') { const msg = MSG.notText; await showCurrent().catch(() => {}); if (my !== openSeq) return; $('nosel').className = 'refuse'; $('nosel').textContent = msg; $('overlay').innerHTML = ''; S.lines = []; return; }
     await showCurrent(); if (my !== openSeq) return; $('legendwrap').hidden = false; renderEdits(); await verify(); select(0, false, false, false);
@@ -245,7 +262,7 @@ document.addEventListener('keydown', ev => {
   if (ev.key === 'Enter' && inInput) { ev.preventDefault(); tryApply(); }
   else if (ev.key === 'Escape') { if ($('credits').hidden === false) { $('credits').hidden = true; $('creditsBtn').focus(); } else if (S.sel >= 0) { $('newtext').value = S.lines[S.sel].text; resetPreview(); } }
   else if (inInput && ev.altKey && (ev.key === 'ArrowUp' || ev.key === 'ArrowDown') && S.lines.length) { ev.preventDefault(); select(Math.max(0, Math.min(S.lines.length - 1, S.sel + (ev.key === 'ArrowDown' ? 1 : -1)))); }
-  else if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 'z' && (!inInput || $('newtext').value === S.lines[S.sel]?.text)) { ev.preventDefault(); undo(); }
+  else if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 'z' && (!inInput || S.busy || S.pending || $('newtext').value === S.lines[S.sel]?.text)) { ev.preventDefault(); requestUndo(); }
 });
 // unsaved edits: ask before leaving
 window.addEventListener('beforeunload', ev => { if (S.edits.length && JSON.stringify(S.edits) !== S.savedKey) { ev.preventDefault(); ev.returnValue = ''; } });
