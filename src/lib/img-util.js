@@ -1,10 +1,11 @@
 // Canvas / pdf.js helpers shared by the proof pipelines (browser ES module).
-import * as pdfjsLib from '/vendor/pdfjs/pdf.min.mjs';
-pdfjsLib.GlobalWorkerOptions.workerSrc = '/vendor/pdfjs/pdf.worker.min.mjs';
+import * as pdfjsLib from '../../vendor/pdfjs/pdf.min.mjs';
+const REPO = p => new URL('../../' + p, import.meta.url).href; // repo-root-relative -> absolute URL, works under any base path
+pdfjsLib.GlobalWorkerOptions.workerSrc = REPO('vendor/pdfjs/pdf.worker.min.mjs');
 export { pdfjsLib };
 
-export const PDFJS_OPTS = { cMapUrl: '/vendor/pdfjs/cmaps/', cMapPacked: true,
-  standardFontDataUrl: '/vendor/pdfjs/standard_fonts/', wasmUrl: '/vendor/pdfjs/wasm/', iccUrl: '/vendor/pdfjs/iccs/',
+export const PDFJS_OPTS = { cMapUrl: REPO('vendor/pdfjs/cmaps/'), cMapPacked: true,
+  standardFontDataUrl: REPO('vendor/pdfjs/standard_fonts/'), wasmUrl: REPO('vendor/pdfjs/wasm/'), iccUrl: REPO('vendor/pdfjs/iccs/'),
   isEvalSupported: false, useSystemFonts: false };
 
 export async function sha256(u8) {

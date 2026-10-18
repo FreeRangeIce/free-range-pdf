@@ -4,12 +4,13 @@
 import { openPdf, renderPage, diff, crop, png, sha256, u8ToB64, fetchBytes } from './img-util.js';
 import { collectGarbage } from './pdf-gc.js';
 import { tokenize, textShows, bytesToBinary, binaryToBytes, mul, apply } from './content-stream.js';
+const REPO = p => new URL('../../' + p, import.meta.url).href; // repo-root-relative -> absolute URL, works under any base path
 const { PDFDocument, PDFName, PDFArray, PDFDict, PDFRef, PDFNumber, decodePDFRawStream } = window.PDFLib;
 
 export const FALLBACK_FONTS = {
-  serif: { file: '/vendor/fonts/liberation/LiberationSerif-Regular.ttf', name: 'Liberation Serif Regular 2.1.5', license: 'vendor/fonts/liberation/LICENSE (SIL OFL 1.1)' },
-  sans: { file: '/vendor/fonts/liberation/LiberationSans-Regular.ttf', name: 'Liberation Sans Regular 2.1.5', license: 'vendor/fonts/liberation/LICENSE (SIL OFL 1.1)' },
-  mono: { file: '/vendor/fonts/liberation/LiberationMono-Regular.ttf', name: 'Liberation Mono Regular 2.1.5', license: 'vendor/fonts/liberation/LICENSE (SIL OFL 1.1)' },
+  serif: { file: REPO('vendor/fonts/liberation/LiberationSerif-Regular.ttf'), name: 'Liberation Serif Regular 2.1.5', license: 'vendor/fonts/liberation/LICENSE (SIL OFL 1.1)' },
+  sans: { file: REPO('vendor/fonts/liberation/LiberationSans-Regular.ttf'), name: 'Liberation Sans Regular 2.1.5', license: 'vendor/fonts/liberation/LICENSE (SIL OFL 1.1)' },
+  mono: { file: REPO('vendor/fonts/liberation/LiberationMono-Regular.ttf'), name: 'Liberation Mono Regular 2.1.5', license: 'vendor/fonts/liberation/LICENSE (SIL OFL 1.1)' },
 };
 
 export async function readLines(u8, pageNo = 1) {
@@ -223,7 +224,7 @@ export async function editTextLine({ url, find, replace, lineContains, occurrenc
     size = sh0.size * sc;
     newTx = (pfont.widthOfTextAtSize(replace, size) + sh0.Tc * [...replace].length) * k;
     fontOp = page.node.newFontDictionary('FRPFallback', pfont.ref).toString(); textHex = pfont.encodeText(replace).toString();
-    Object.assign(record, { used: 'fallback', fallbackKind: kind, fallbackFont: FB.name, fallbackFile: 'vendor' + FB.file.replace('/vendor', ''), fallbackLicense: FB.license,
+    Object.assign(record, { used: 'fallback', fallbackKind: kind, fallbackFont: FB.name, fallbackFile: FB.file.slice(FB.file.indexOf('vendor/')), fallbackLicense: FB.license,
       reason: `embedded ${fi.subset ? 'SUBSET ' : ''}font ${fi.baseFont} has no glyph for ${missing.map(c => JSON.stringify(c)).join(', ')}; the WHOLE replacement run uses the fallback (no per-glyph mixing)`,
       sizeScale: +sc.toFixed(4), sizeMethod: method, widthRatio: { sharedGlyphs: ratios.length, min: +(ratios[0] || 1).toFixed(4), median: +med.toFixed(4), max: +(ratios[ratios.length - 1] || 1).toFixed(4) } });
   }

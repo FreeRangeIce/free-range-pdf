@@ -1,8 +1,8 @@
 // FreeRangePDF text-PDF editor (browser only; no network). The ORIGINAL bytes are never modified: every state of the
 // document is produced by replaying the edit list (Path A, src/lib/text-edit.js) onto a fresh copy of those bytes.
-import { editTextLine, readLines } from '/src/lib/text-edit.js';
-import { classifyPages } from '/src/lib/classify.js';
-import { renderPage, sha256, diff, pdfjsLib, openPdf } from '/src/lib/img-util.js';
+import { editTextLine, readLines } from '../src/lib/text-edit.js';
+import { classifyPages } from '../src/lib/classify.js';
+import { renderPage, sha256, diff, pdfjsLib, openPdf } from '../src/lib/img-util.js';
 
 const SUBST_SENTENCE = "This PDF's font doesn't include every letter you typed, so the outlined text uses a close substitute font and may look slightly different.";
 const PH = 'PLACEHOLDER (wording for Berean): ';
@@ -237,7 +237,7 @@ async function openBytes(u8, name) {
 }
 $('openbtn').addEventListener('click', () => $('file').click());
 $('file').addEventListener('change', async ev => { const f = ev.target.files[0]; ev.target.value = ''; if (!f) return; let b; try { b = new Uint8Array(await f.arrayBuffer()); } catch { return failOpen(MSG.unreadable); } openBytes(b, f.name); });
-$('sample').addEventListener('click', async () => openBytes(new Uint8Array(await (await fetch('/proof/inputs/text-standin.pdf')).arrayBuffer()), 'text-standin.pdf'));
+$('sample').addEventListener('click', async () => openBytes(new Uint8Array(await (await fetch('../proof/inputs/text-standin.pdf')).arrayBuffer()), 'text-standin.pdf'));
 
 // ---- keyboard ----
 document.addEventListener('keydown', ev => {

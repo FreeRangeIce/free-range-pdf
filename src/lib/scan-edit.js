@@ -9,6 +9,7 @@ import { collectGarbage } from './pdf-gc.js';
 import { classifyPages } from './classify.js';
 const { PDFDocument, PDFName, PDFDict, PDFArray, PDFRawStream, PDFRef, PDFNumber, decodePDFRawStream } = window.PDFLib;
 import { bytesToBinary, binaryToBytes } from './content-stream.js';
+const REPO = p => new URL('../../' + p, import.meta.url).href; // repo-root-relative -> absolute URL, works under any base path
 
 let cvReady = null;
 export function getCv() {
@@ -22,9 +23,9 @@ export function getCv() {
   return cvReady.then(w => w.cv);
 }
 const FONTS = {
-  serif: { family: 'FRP Liberation Serif', file: '/vendor/fonts/liberation/LiberationSerif-Regular.ttf', name: 'Liberation Serif Regular 2.1.5' },
-  sans: { family: 'FRP Liberation Sans', file: '/vendor/fonts/liberation/LiberationSans-Regular.ttf', name: 'Liberation Sans Regular 2.1.5' },
-  mono: { family: 'FRP Liberation Mono', file: '/vendor/fonts/liberation/LiberationMono-Regular.ttf', name: 'Liberation Mono Regular 2.1.5' },
+  serif: { family: 'FRP Liberation Serif', file: REPO('vendor/fonts/liberation/LiberationSerif-Regular.ttf'), name: 'Liberation Serif Regular 2.1.5' },
+  sans: { family: 'FRP Liberation Sans', file: REPO('vendor/fonts/liberation/LiberationSans-Regular.ttf'), name: 'Liberation Sans Regular 2.1.5' },
+  mono: { family: 'FRP Liberation Mono', file: REPO('vendor/fonts/liberation/LiberationMono-Regular.ttf'), name: 'Liberation Mono Regular 2.1.5' },
 };
 let fontsLoaded = null;
 function loadFonts() {
@@ -34,7 +35,7 @@ function loadFonts() {
 let workerP = null;
 function getWorker() {
   if (!workerP) workerP = window.Tesseract.createWorker('eng', 1, {
-    workerPath: '/vendor/tesseract/worker.min.js', corePath: '/vendor/tesseract/core/', langPath: '/vendor/tessdata/',
+    workerPath: REPO('vendor/tesseract/worker.min.js'), corePath: REPO('vendor/tesseract/core/'), langPath: REPO('vendor/tessdata/'),
     gzip: false, cacheMethod: 'none', workerBlobURL: false, logger: m => { if (m.status && (m.progress === 0 || m.progress === 1)) console.log('[tess]', m.status, m.progress); },
   });
   return workerP;
@@ -927,7 +928,7 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
       return { showGapBeforeSave: !!g, gapPx: overflow.gapPx, gapMm: +(overflow.gapPx / 300 * 25.4).toFixed(2), slotPx: overflow.slotPx, drawnInkWidthPx: overflow.naturalInkWidthPx, decision: overflow.decision,
         gapRectDeskewedPx: g, gapPolygonPdfUser: g ? [[g.x0, g.y0], [g.x1, g.y0], [g.x1, g.y1], [g.x0, g.y1]].map(back).map(tu).map(p => p.map(v => +v.toFixed(2))) : null }; })(),
     visual, look: { ...look, inpaintThreshold: bgInfo.dbg.thr, inpaintLocalPaper: bgInfo.dbg.localPaper, strokeWidth50: { untouchedMedian: +target.strokeWidth.toFixed(3), newWord: +strokeW(i => { const D = finalCanvasData; return grayAt(D, i); }, bw, bh, swThr).toFixed(3) }, colourTarget, inpaintPixels: bgInfo.inpaintPixels, localPaperNoiseStd: bgInfo.localPaperNoiseStd, noiseModel: 'Gaussian field (0.7 px correlation): fitted line noise on new ink, local paper noise on inpainted paper, none on untouched paper' }, overflow, editedWords: { tokens: [ti0, ti1], ocrWords: [oi0, oi1], old: oldSeg, new: newSeg, ocr: eWords, tokenAlignment },
-    font: { localFit, chosen: fontKey, file: F.file.replace(/^\//, ''), name: F.name, license: 'vendor/fonts/liberation/LICENSE (SIL OFL 1.1)', sizePx: FT.sizePx, horizontalScale: +hsWord.toFixed(4), lineHorizontalScale: +hScale.toFixed(4), blurPx, trials: fontTrials, fitGrid_blur_weight_ncc: fitGrid },
+    font: { localFit, chosen: fontKey, file: F.file.slice(F.file.indexOf('vendor/')), name: F.name, license: 'vendor/fonts/liberation/LICENSE (SIL OFL 1.1)', sizePx: FT.sizePx, horizontalScale: +hsWord.toFixed(4), lineHorizontalScale: +hScale.toFixed(4), blurPx, trials: fontTrials, fitGrid_blur_weight_ncc: fitGrid },
     paintBox: { corrected: box, originalPolygon: poly.map(p => p.map(v => +v.toFixed(2))), patchRect: { x0: px0, y0: py0, x1: px1, y1: py1 }, maskPixels: maskCount, colouredMarkPixelsExcludedFromPatch: colouredExcluded },
     pixel: { compositeChangedOutsideMask: dPix.outside, compositeChangedInsideMask: dPix.inside,
       renderScale: scale, renderSize: [rA.width, rA.height], renderChangedOutsidePatchRect: dRender.outside, renderChangedInsidePatchRect: dRender.inside, renderChangedOutsideMask: dRender.outside + renderOutsideMask, renderMaxAbsDiffOutside: renderMaxAbsOutside, renderDiffHistogram: renderHist, outsideSamples: dRender.outsideSamples },
@@ -996,7 +997,7 @@ async function hiddenTextCheck(out, pageIndex, find, replace, original) {
 // invisible OCR layer for an image-only page (Tr 3), Liberation Sans subset with ToUnicode, one run per word
 async function addHiddenLayer(pdoc, page, { lines, li, newTokens, back, W, H, ctm, standard = false, dropLine = -1 }) {
   pdoc.registerFontkit(window.fontkit);
-  const font = standard ? await pdoc.embedFont(window.PDFLib.StandardFonts.Helvetica) : await pdoc.embedFont(await fetchBytes('/vendor/fonts/liberation/LiberationSans-Regular.ttf'), { subset: true });
+  const font = standard ? await pdoc.embedFont(window.PDFLib.StandardFonts.Helvetica) : await pdoc.embedFont(await fetchBytes(REPO('vendor/fonts/liberation/LiberationSans-Regular.ttf')), { subset: true });
   const fname = page.node.newFontDictionary(standard ? 'F3' : 'FRPOCR', font.ref);
   const toUser = ([ix, iy]) => [ctm[4] + ix / W * ctm[0], ctm[5] + (1 - iy / H) * ctm[3]];
   const f = n => (+n.toFixed(4)).toString(); let cs = 'q\nBT\n3 Tr\n'; let words = 0;
