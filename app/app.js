@@ -141,7 +141,7 @@ async function drawStrip(r, line) {
   const w = Math.round(x1 - x0), h = Math.round(y1 - y0); cv_.width = w + 2 * P; cv_.height = h + 2 * P; const g = cv_.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, cv_.width, cv_.height);
   g.drawImage(full, Math.round(x0), Math.round(y0), w, h, P, P, w, h);
   if (r.font.used === 'fallback') { const b = r.span.bboxPdf; g.strokeStyle = '#d9600b'; g.lineWidth = 2; g.strokeRect(P + (b.x0 - vb[0]) * K - Math.round(x0), P + (vb[3] - b.y1) * K - Math.round(y0) + 2, (b.x1 - b.x0) * K, Math.min(h - 4, (b.y1 - b.y0) * K)); }
-  cv_.style.width = Math.min(cv_.width / 1.5, 516) + 'px'; cv_.hidden = false;
+  cv_.style.width = (cv_.width * S.scale / K) + 'px'; /* same px-per-point as the page, so strip text = page text size */ cv_.hidden = false;
 }
 function showPreview(r, e) {
   for (const id of ['gapbar', 'subst', 'refuse', 'crop']) $(id).hidden = true; const o = r.overflow;
@@ -214,7 +214,7 @@ async function verify() {
     const vb = o.viewBox; const inside = (x, y) => bands.some(b => x >= (b.x0 - vb[0]) - 3 && x <= (b.x1 - vb[0]) + 3 && y >= (vb[3] - b.y1) - 3 && y <= (vb[3] - b.y0) + 3);
     const d = diff(cA, cB, inside); add(d.outside === 0, `Rendered pixels outside the edited spans: ${d.outside} changed`);
   } catch (err) { add(false, 'Re-open check failed: ' + err.message); }
-  ul.innerHTML = items.map(([ok, t]) => `<li class="${ok ? 'ok' : 'bad'}">${esc(t)}</li>`).join('');
+  ul.innerHTML = items.map(([ok, t]) => { const m = /^(.*?) \[(line \d+:.*)\]$/s.exec(t); return `<li class="${ok ? 'ok' : 'bad'}">${esc(m ? m[1] : t)}${m ? `<span class="tech">${esc(m[2])}</span>` : ''}</li>`; }).join('');
   const nbad = items.filter(i => !i[0]).length; const sum = $('checksum'), det = $('checkdetails');
   sum.className = nbad ? 'fail' : 'muted'; sum.textContent = nbad ? `${nbad} of ${items.length} checks failed` : `All ${items.length} checks passed`;
   det.hidden = false; ul.hidden = !nbad; det.textContent = nbad ? 'Hide details' : 'Details'; // failed checks stay open
@@ -228,11 +228,11 @@ $('download').addEventListener('click', () => { if (!S.verified) return; const a
 function resetDoc() { // FIRST thing on every open: nothing of a previous document may stay live
   S.cur = null; S.orig = null; S.queuedUndo = false; S.pending = false; S.origSha = null; S.edits = []; S.curRes = []; S.lines = []; S.sel = -1; S.verified = false; S.lastPreview = null; S.savedKey = null; S.name = ''; S.previewSeq++;
   clearTimeout(timer); $('download').disabled = true; $('undo').disabled = true; refreshNotes(); $('dlname').textContent = ''; setApply('off'); $('docinfo').textContent = '';
-  $('editor').hidden = true; $('nosel').hidden = false; $('nosel').className = 'muted'; $('nosel').textContent = 'No line selected.'; $('overlay').innerHTML = ''; $('legendwrap').hidden = true;
+  $('emptystate').hidden = true; $('editor').hidden = true; $('nosel').hidden = false; $('nosel').className = 'muted'; $('nosel').textContent = 'No line selected.'; $('overlay').innerHTML = ''; $('legendwrap').hidden = true;
   const c = $('page'); c.width = 1; c.height = 1; $('checks').hidden = true; $('checkdetails').hidden = true; $('checksum').className = 'muted'; $('checksum').textContent = 'No edits yet.'; $('edits').innerHTML = '';
   for (const id of ['gapbar', 'subst', 'refuse', 'crop', 'charmark']) $(id).hidden = true;
 }
-function failOpen(text) { resetDoc(); $('nosel').className = 'refuse'; $('nosel').textContent = text; if (S.everOpened) { const d = document.createElement('div'); d.className = 'reason'; d.textContent = MSG.openFailedAfter; $('nosel').appendChild(d); } }
+function failOpen(text) { resetDoc(); $('emptystate').hidden = false; $('nosel').className = 'refuse'; $('nosel').textContent = text; if (S.everOpened) { const d = document.createElement('div'); d.className = 'reason'; d.textContent = MSG.openFailedAfter; $('nosel').appendChild(d); } }
 let openSeq = 0;
 async function openBytes(u8, name) {
   const my = ++openSeq; resetDoc(); setBusy(true);
@@ -252,7 +252,7 @@ async function openBytes(u8, name) {
   } catch (err) { console.warn('open failed:', err && err.message); failOpen(MSG.unreadable); }
   finally { if (my === openSeq) setBusy(false); }
 }
-$('openbtn').addEventListener('click', () => $('file').click());
+$('openbtn').addEventListener('click', () => $('file').click()); $('openbtn2').addEventListener('click', () => $('file').click());
 $('file').addEventListener('change', async ev => { const f = ev.target.files[0]; ev.target.value = ''; if (!f) return; let b; try { b = new Uint8Array(await f.arrayBuffer()); } catch { return failOpen(MSG.unreadable); } openBytes(b, f.name); });
 $('sample').addEventListener('click', async () => openBytes(new Uint8Array(await (await fetch('../proof/inputs/text-standin.pdf')).arrayBuffer()), 'text-standin.pdf'));
 

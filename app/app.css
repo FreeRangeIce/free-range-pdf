@@ -21,7 +21,7 @@ kbd{border:1px solid #9aa3b5;border-bottom-width:2px;border-radius:3px;padding:0
 .refuse{margin-top:8px;padding:8px 10px;border:1px solid #b42318;border-radius:6px;background:#fff0f0;color:#7a1111;font-size:13px}
 #crop{display:block;max-width:100%;margin-top:8px;border:1px solid #c5cbd8}
 #edits{margin:0;padding-left:22px;font-size:13px}#edits li{margin:2px 0}
-.checks{list-style:none;margin:6px 0 0;padding:0;font-size:13px}.checks li{padding:1px 0}.ok::before{content:"\2713 ";color:#146c43;font-weight:700}.bad{color:#1d2330}.bad::before{content:"\2717 ";font-weight:700}
+.checks{list-style:none;margin:6px 0 0;padding:0;font-size:13px}.checks li{padding:1px 0}.ok::before{content:"\2713 ";color:#146c43;font-weight:700}.bad{color:#1d2330}#checksum .reason{font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;color:#3a4254}.bad::before{content:"\2717 ";font-weight:700}
 #checksum{font-size:13px;display:inline}#checksum.fail{color:#1d2330;font-weight:600}#checksum.fail .reason{font-weight:400}#checkdetails{margin-left:8px;font-size:12px;color:#1d4ed8}
 .hint{color:#4f576a;font-size:12px;margin:4px 0}#credits{position:fixed;inset:0;background:#0006;display:flex;justify-content:center;padding-top:40px}
 #credits .card{background:#fff;width:900px;max-height:80vh;overflow:auto;border-radius:8px;padding:12px 24px}#credits table{border-collapse:collapse;width:100%}#credits td,#credits th{border-bottom:1px solid #e1e4ea;padding:5px 8px;text-align:left;vertical-align:top;font-size:13px}
@@ -32,3 +32,6 @@ kbd{border:1px solid #9aa3b5;border-bottom-width:2px;border-radius:3px;padding:0
 #charmark{margin-top:6px}#charmirror{padding:4px 8px;background:#fff6ee;border:1px solid #d9600b;border-radius:4px;white-space:pre-wrap;word-break:break-word}.badch{text-decoration:underline;text-decoration-color:#d9600b;text-decoration-thickness:3px;text-underline-offset:3px;background:#ffe3cc}
 #charmsg{font-size:13px;color:#8a3a00;margin-top:3px}
 #checksum.fail{display:block}#footnotes:not(:has(span:not([hidden]))){display:none}
+#emptystate{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;min-height:420px;font-size:15px;color:#1d2330}#crop{height:auto}
+.tech{display:block;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;color:#3a4254;margin:1px 0 3px 14px;word-break:break-word}
+#preview{overflow-x:auto}#crop{max-width:none}#emptystate:not([hidden]) ~ .hint{display:none}
