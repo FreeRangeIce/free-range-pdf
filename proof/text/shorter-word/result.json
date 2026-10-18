@@ -1,0 +1,129 @@
+{
+ "input": "/proof/inputs/text-standin.pdf",
+ "shaBefore": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+ "shaAfterRefetch": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+ "line": {
+  "text": "Thursday morning with tools and spare parts. Please bring gloves and a flask of tea, because the ",
+  "baseline": 516.65,
+  "size": 12,
+  "occurrence": 0,
+  "candidatesOnPage": 1
+ },
+ "edit": {
+  "find": "Thursday",
+  "replace": "Friday",
+  "newText": "Friday morning with tools and spare parts. Please bring gloves and a flask of tea, because the "
+ },
+ "span": {
+  "startChar": 0,
+  "endChar": 6,
+  "text": "Friday",
+  "oldStartChar": 0,
+  "oldEndChar": 8,
+  "bboxPdf": {
+   "x0": 72.1,
+   "y0": 512.81,
+   "x1": 117.376,
+   "y1": 528.65
+  },
+  "bboxPx": {
+   "x0": 142,
+   "y0": 524,
+   "x1": 237,
+   "y1": 561
+  },
+  "font": "embedded"
+ },
+ "contentStream": {
+  "opsTotal": 146,
+  "showOpsTotal": 14,
+  "showOpsRewritten": 1,
+  "spanGlyphs": 8,
+  "structure": [
+   {
+    "op": "TJ",
+    "glyphsInOp": 97,
+    "spanGlyphsInOp": 8
+   }
+  ],
+  "oldStreamRefs": [
+   "2 0 R"
+  ]
+ },
+ "font": {
+  "originalFont": "BAAAAA+LiberationSerif",
+  "resName": "F1",
+  "subtype": "TrueType",
+  "subset": true,
+  "embeddedFontFile": "FontFile2",
+  "glyphsNeeded": "Friday",
+  "missingGlyphs": [],
+  "used": "embedded",
+  "reason": "embedded font BAAAAA+LiberationSerif has a glyph (ToUnicode + width) for every character of the replacement run"
+ },
+ "overflow": {
+  "rule": "letter spacing up to +/-0.04 em per letter, then horizontal scale 0.97-1.03; still shorter -> natural width + gap; still longer -> refused",
+  "slotPt": 45.276,
+  "naturalWidthPt": 31.308,
+  "letters": 6,
+  "spacingNeededEm": 0.2328,
+  "spacingTriedEm": 0.04,
+  "scaleTried": 1.03,
+  "leftoverAfterSpacingAndScalePt": 10.557,
+  "decision": "still shorter after max spacing and scale -> drawn at natural width from the original start; gap reported",
+  "spacingEm": 0,
+  "scale": 1,
+  "gapPt": 13.968
+ },
+ "verify": {
+  "pdfjsNewLineText": "Friday morning with tools and spare parts. Please bring gloves and a flask of tea, because the",
+  "expected": "Friday morning with tools and spare parts. Please bring gloves and a flask of tea, because the ",
+  "newLineMatches": true,
+  "findCountBefore": 1,
+  "findCountAfter": 0,
+  "replaceCountBefore": 0,
+  "replaceCountAfter": 1,
+  "findGoneFromEditedLine": true,
+  "otherLinesIdentical": true,
+  "untouchedGlyphs": 957,
+  "untouchedGlyphsAfter": 957,
+  "untouchedGlyphMaxShiftPt": 0,
+  "untouchedGlyphCodeMismatches": 0,
+  "glyphsRightOfSpanOnLine": 89,
+  "textRightOfSpan": " morning with tools and spare parts. Please bring gloves and a flask of tea, because the ",
+  "newRunFont": "F1",
+  "newRunTz": 100
+ },
+ "fileHygiene": {
+  "gcRemovedObjects": [
+   "3 0 R",
+   "12 0 R"
+  ],
+  "objectsKept": 20
+ },
+ "pixel": {
+  "renderScale": 2,
+  "boxPx": {
+   "x0": 142,
+   "y0": 524,
+   "x1": 237,
+   "y1": 561
+  },
+  "changedOutsideBox": 0,
+  "changedInsideBox": 794,
+  "rightOfBoxSameLineChanged": 0,
+  "rightOfBoxSameLinePixels": 36519,
+  "outsideSamples": [],
+  "width": 1224,
+  "height": 1584
+ },
+ "case": {
+  "name": "shorter-word-gap",
+  "dir": "text/shorter-word",
+  "file": "text-standin.pdf",
+  "lineContains": "Thursday morning",
+  "find": "Thursday",
+  "replace": "Friday",
+  "note": "shorter replacement: following words must stay put; the gap is reported"
+ }
+}

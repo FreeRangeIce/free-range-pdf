@@ -1,0 +1,35 @@
+{
+ "exact": {
+  "truthWords": 139,
+  "ocrWords": 139,
+  "correct": 139,
+  "accuracy": 1,
+  "wer": 0,
+  "errors": []
+ },
+ "normalized": {
+  "truthWords": 139,
+  "ocrWords": 139,
+  "correct": 139,
+  "accuracy": 1,
+  "wer": 0,
+  "errors": []
+ },
+ "lowConfidenceWords": [
+  {
+   "word": "42",
+   "confidence": 72,
+   "line": 1
+  }
+ ],
+ "targetLine": {
+  "ocr": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+  "truth": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+  "truthWords": 17,
+  "ocrWords": 17,
+  "correct": 17,
+  "accuracy": 1,
+  "wer": 0,
+  "errors": []
+ }
+}

@@ -1,0 +1,569 @@
+{
+ "input": {
+  "file": "/workspace/free-range-pdf/proof/inputs/text-standin.pdf",
+  "bytes": 19981,
+  "eofMarkers": 1,
+  "startxrefs": 1,
+  "trailerHasPrev": false,
+  "incrementalUpdate": false,
+  "reachabilityMethod": "raw object graph (no object streams)",
+  "objects": 22,
+  "orphans": [],
+  "fonts": {
+   "p1/F1": {
+    "base": "/BAAAAA+LiberationSerif",
+    "unicodeSource": "ToUnicode"
+   }
+  },
+  "streams": 4,
+  "undecodableStreams": 0,
+  "search": {
+   "plainHitsNonImageStreams": {
+    "spare parts": [],
+    "spare": [],
+    "parts": [],
+    "a spare nozzle": [],
+    "a": [
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 999,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 1141,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 1310,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 1327,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 1334,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 1337,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 1352,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 1369,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 1376,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 1379,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 1566,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 1680,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 1723,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 1747,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 1937,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 1986,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 2300,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 2700,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 4320,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 7875,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 13796,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14480,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14484,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14552,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14614,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14640,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14672,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14708,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14740,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14798,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14828,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14846,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14854,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14862,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14886,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14944,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14956,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14968,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14976,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 14998,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15014,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15092,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15116,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15132,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15176,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15220,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15236,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15242,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15258,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15324,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15348,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15366,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15416,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15494,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15498,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15518,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15522,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15546,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15564,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15582,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15600,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15604,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15624,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15738,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15770,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15812,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15828,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15846,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15884,
+      "context": "(binary)"
+     },
+     {
+      "stream": "11 0 R",
+      "kind": "embedded font program (binary)",
+      "at": 15940,
+      "context": "(binary)"
+     }
+    ],
+    "nozzle": []
+   },
+   "glyphCodeHits": {
+    "spare parts": [],
+    "spare": [],
+    "parts": [],
+    "a spare nozzle": [],
+    "a": [
+     {
+      "fontObj": "(15, 0)",
+      "font": "/BAAAAA+LiberationSerif",
+      "codes": "06",
+      "stream": "2 0 R",
+      "contiguousBytes": 0,
+      "hexForm": 56,
+      "kind": "page 1 content stream"
+     },
+     {
+      "fontObj": "(15, 0)",
+      "font": "/BAAAAA+LiberationSerif",
+      "codes": "06",
+      "stream": "11 0 R",
+      "contiguousBytes": 102,
+      "hexForm": 0,
+      "kind": "embedded font program (binary)"
+     },
+     {
+      "fontObj": "(15, 0)",
+      "font": "/BAAAAA+LiberationSerif",
+      "codes": "06",
+      "stream": "14 0 R",
+      "contiguousBytes": 0,
+      "hexForm": 15,
+      "kind": "ToUnicode CMap"
+     }
+    ],
+    "nozzle": []
+   },
+   "perShowOpHits": {
+    "spare parts": [
+     {
+      "page": 1,
+      "font": "/BAAAAA+LiberationSerif",
+      "y": 5415.599999999999,
+      "text": "Thursday morning with tools and spare parts. Please bring gloves and a flask of tea, because the "
+     }
+    ],
+    "spare": [
+     {
+      "page": 1,
+      "font": "/BAAAAA+LiberationSerif",
+      "y": 5415.599999999999,
+      "text": "Thursday morning with tools and spare parts. Please bring gloves and a flask of tea, because the "
+     }
+    ],
+    "parts": [
+     {
+      "page": 1,
+      "font": "/BAAAAA+LiberationSerif",
+      "y": 5415.599999999999,
+      "text": "Thursday morning with tools and spare parts. Please bring gloves and a flask of tea, because the "
+     }
+    ],
+    "a spare nozzle": [],
+    "a": [
+     {
+      "page": 1,
+      "font": "/BAAAAA+LiberationSerif",
+      "y": 5415.599999999999,
+      "text": "Thursday morning with tools and spare parts. Please bring gloves and a flask of tea, because the "
+     }
+    ],
+    "nozzle": []
+   },
+   "newWordShowOpHits": {}
+  },
+  "pdftotext": {
+   "spare parts": 1,
+   "spare": 1,
+   "parts": 1,
+   "a spare nozzle": 0,
+   "a": 1,
+   "nozzle": 0
+  },
+  "pdftotextReplacementChars": 0,
+  "pdftotextLinesWith": {
+   "spare parts": [
+    "Thursday morning with tools and spare parts. Please bring gloves and a flask of tea, because the"
+   ],
+   "spare": [
+    "Thursday morning with tools and spare parts. Please bring gloves and a flask of tea, because the"
+   ],
+   "parts": [
+    "Thursday morning with tools and spare parts. Please bring gloves and a flask of tea, because the"
+   ],
+   "a spare nozzle": [],
+   "a": [
+    "Thursday morning with tools and spare parts. Please bring gloves and a flask of tea, because the"
+   ],
+   "nozzle": []
+  },
+  "images": [],
+  "pageThumbs": [],
+  "catalogMetadata": true,
+  "pageRotate": [
+   0
+  ],
+  "rawFileMarkers": {
+   "Exif\\0\\0": 0,
+   "GPS (text)": 0,
+   "xmpmeta": 2,
+   "/Thumb": 0,
+   "ICC_PROFILE": 0,
+   "/Metadata": 2
+  },
+  "pdfimagesList": [
+   "page   num  type   width height color comp bpc  enc interp  object ID x-ppi y-ppi size ratio",
+   "--------------------------------------------------------------------------------------------"
+  ]
+ },
+ "output": null
+}

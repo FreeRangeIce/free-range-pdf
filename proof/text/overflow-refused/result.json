@@ -1,0 +1,61 @@
+{
+ "input": "/proof/inputs/text-standin.pdf",
+ "refused": true,
+ "edit": {
+  "find": "spare parts",
+  "replace": "a spare nozzle",
+  "newText": "Thursday morning with tools and a spare nozzle. Please bring gloves and a flask of tea, because the "
+ },
+ "line": {
+  "text": "Thursday morning with tools and spare parts. Please bring gloves and a flask of tea, because the ",
+  "baseline": 516.65
+ },
+ "font": {
+  "originalFont": "BAAAAA+LiberationSerif",
+  "resName": "F1",
+  "subtype": "TrueType",
+  "subset": true,
+  "embeddedFontFile": "FontFile2",
+  "glyphsNeeded": "a sprenozl",
+  "missingGlyphs": [
+   "z"
+  ],
+  "used": "fallback",
+  "fallbackKind": "serif",
+  "fallbackFont": "Liberation Serif Regular 2.1.5",
+  "fallbackFile": "vendor/fonts/liberation/LiberationSerif-Regular.ttf",
+  "fallbackLicense": "vendor/fonts/liberation/LICENSE (SIL OFL 1.1)",
+  "reason": "embedded SUBSET font BAAAAA+LiberationSerif has no glyph for \"z\"; the WHOLE replacement run uses the fallback (no per-glyph mixing)",
+  "sizeScale": 1,
+  "sizeMethod": "metric-compatible (median width ratio within 2%), size kept",
+  "widthRatio": {
+   "sharedGlyphs": 36,
+   "min": 0.997,
+   "median": 0.9998,
+   "max": 1
+  }
+ },
+ "overflow": {
+  "rule": "letter spacing up to +/-0.04 em per letter, then horizontal scale 0.97-1.03; still shorter -> natural width + gap; still longer -> refused",
+  "slotPt": 51.636,
+  "naturalWidthPt": 67.957,
+  "letters": 14,
+  "spacingNeededEm": -0.1046,
+  "spacingTriedEm": -0.04,
+  "scaleTried": 0.97,
+  "leftoverAfterSpacingAndScalePt": -8.23,
+  "decision": "REFUSED",
+  "explanation": "replacement is 67.96pt; the slot is 51.64pt. Even at -0.040 em spacing and 97.0% scale it is 8.23pt too long, and the words to its right may not move. Nothing written."
+ },
+ "shaBefore": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+ "shaAfterRefetch": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+ "case": {
+  "name": "overflow-refused",
+  "dir": "text/overflow-refused",
+  "file": "text-standin.pdf",
+  "lineContains": "Thursday morning",
+  "find": "spare parts",
+  "replace": "a spare nozzle",
+  "note": "too long for the slot even at 85% -> refused, nothing written"
+ }
+}

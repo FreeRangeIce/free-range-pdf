@@ -1,0 +1,152 @@
+{
+ "input": {
+  "file": "/workspace/free-range-pdf/proof/inputs/text-standin.pdf",
+  "bytes": 19981,
+  "eofMarkers": 1,
+  "startxrefs": 1,
+  "trailerHasPrev": false,
+  "incrementalUpdate": false,
+  "reachabilityMethod": "raw object graph (no object streams)",
+  "objects": 22,
+  "orphans": [],
+  "fonts": {
+   "p1/F1": {
+    "base": "/BAAAAA+LiberationSerif",
+    "unicodeSource": "ToUnicode"
+   }
+  },
+  "streams": 4,
+  "undecodableStreams": 0,
+  "search": {
+   "plainHitsNonImageStreams": {
+    "eleven": [],
+    "twelve": []
+   },
+   "glyphCodeHits": {
+    "eleven": [],
+    "twelve": []
+   },
+   "perShowOpHits": {
+    "eleven": [
+     {
+      "page": 1,
+      "font": "/BAAAAA+LiberationSerif",
+      "y": 3221.6,
+      "text": "Our egg sales rose by eleven percent compared with last year. Most of the growth came from the "
+     }
+    ],
+    "twelve": []
+   },
+   "newWordShowOpHits": {}
+  },
+  "pdftotext": {
+   "eleven": 1,
+   "twelve": 0
+  },
+  "pdftotextReplacementChars": 0,
+  "pdftotextLinesWith": {
+   "eleven": [
+    "Our egg sales rose by eleven percent compared with last year. Most of the growth came from the"
+   ],
+   "twelve": []
+  },
+  "images": [],
+  "pageThumbs": [],
+  "catalogMetadata": true,
+  "pageRotate": [
+   0
+  ],
+  "rawFileMarkers": {
+   "Exif\\0\\0": 0,
+   "GPS (text)": 0,
+   "xmpmeta": 2,
+   "/Thumb": 0,
+   "ICC_PROFILE": 0,
+   "/Metadata": 2
+  },
+  "pdfimagesList": [
+   "page   num  type   width height color comp bpc  enc interp  object ID x-ppi y-ppi size ratio",
+   "--------------------------------------------------------------------------------------------"
+  ]
+ },
+ "output": {
+  "file": "/workspace/free-range-pdf/proof/text/midline-single-tj/text-standin.edited.pdf",
+  "bytes": 20109,
+  "eofMarkers": 1,
+  "startxrefs": 1,
+  "trailerHasPrev": false,
+  "incrementalUpdate": false,
+  "reachabilityMethod": "raw object graph (no object streams)",
+  "objects": 20,
+  "orphans": [],
+  "fonts": {
+   "p1/F1": {
+    "base": "/BAAAAA+LiberationSerif",
+    "unicodeSource": "ToUnicode"
+   }
+  },
+  "streams": 4,
+  "undecodableStreams": 0,
+  "search": {
+   "plainHitsNonImageStreams": {
+    "eleven": [],
+    "twelve": []
+   },
+   "glyphCodeHits": {
+    "eleven": [],
+    "twelve": [
+     {
+      "fontObj": "(15, 0)",
+      "font": "/BAAAAA+LiberationSerif",
+      "codes": "0d1d031c0f03",
+      "stream": "23 0 R",
+      "contiguousBytes": 0,
+      "hexForm": 1,
+      "kind": "page 1 content stream"
+     }
+    ]
+   },
+   "perShowOpHits": {
+    "eleven": [],
+    "twelve": [
+     {
+      "page": 1,
+      "font": "/BAAAAA+LiberationSerif",
+      "y": 598.25,
+      "text": "twelve"
+     }
+    ]
+   },
+   "newWordShowOpHits": {}
+  },
+  "pdftotext": {
+   "eleven": 0,
+   "twelve": 1
+  },
+  "pdftotextReplacementChars": 0,
+  "pdftotextLinesWith": {
+   "eleven": [],
+   "twelve": [
+    "Our egg sales rose by twelve percent compared with last year. Most of the growth came from the"
+   ]
+  },
+  "images": [],
+  "pageThumbs": [],
+  "catalogMetadata": true,
+  "pageRotate": [
+   0
+  ],
+  "rawFileMarkers": {
+   "Exif\\0\\0": 0,
+   "GPS (text)": 0,
+   "xmpmeta": 2,
+   "/Thumb": 0,
+   "ICC_PROFILE": 0,
+   "/Metadata": 2
+  },
+  "pdfimagesList": [
+   "page   num  type   width height color comp bpc  enc interp  object ID x-ppi y-ppi size ratio",
+   "--------------------------------------------------------------------------------------------"
+  ]
+ }
+}

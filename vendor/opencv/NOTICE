@@ -1,0 +1,4 @@
+opencv.js - official prebuilt OpenCV.js 4.9.0 downloaded from https://docs.opencv.org/4.9.0/opencv.js (unmodified).
+OpenCV 4.5.0 and later is licensed under the Apache License 2.0 (see LICENSE, taken from opencv/opencv tag 4.9.0);
+copyright holders are listed in COPYRIGHT (same tag). OpenCV.js is compiled with Emscripten (MIT/University of
+Illinois NCSA licence for the Emscripten runtime).

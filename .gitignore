@@ -1,0 +1,12 @@
+node_modules/
+# private customer documents and anything derived from them: never in the repo (see scripts/check-no-private.sh)
+micah-real*
+**/micah-real*
+frm-pdf-private/
+**/frm-pdf-private/
+proof/real/
+*.private.*
+
+# generated, large
+proof/searchable/
+proof/scan/

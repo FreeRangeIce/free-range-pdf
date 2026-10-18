@@ -1,0 +1,268 @@
+{
+ "input": {
+  "file": "/workspace/free-range-pdf/proof/inputs/text-standin.pdf",
+  "bytes": 19981,
+  "eofMarkers": 1,
+  "startxrefs": 1,
+  "trailerHasPrev": false,
+  "incrementalUpdate": false,
+  "reachabilityMethod": "raw object graph (no object streams)",
+  "objects": 22,
+  "orphans": [],
+  "fonts": {
+   "p1/F1": {
+    "base": "/BAAAAA+LiberationSerif",
+    "unicodeSource": "ToUnicode"
+   }
+  },
+  "streams": 4,
+  "undecodableStreams": 0,
+  "search": {
+   "plainHitsNonImageStreams": {
+    "wet weather": [],
+    "wet": [],
+    "weather": [],
+    "winter freeze": [],
+    "winter": [],
+    "freeze": []
+   },
+   "glyphCodeHits": {
+    "wet weather": [],
+    "wet": [],
+    "weather": [],
+    "winter freeze": [],
+    "winter": [],
+    "freeze": []
+   },
+   "perShowOpHits": {
+    "wet weather": [
+     {
+      "page": 1,
+      "font": "/BAAAAA+LiberationSerif",
+      "y": 4364.4,
+      "text": "the new coop doors have held up well through the wet weather."
+     }
+    ],
+    "wet": [
+     {
+      "page": 1,
+      "font": "/BAAAAA+LiberationSerif",
+      "y": 4364.4,
+      "text": "the new coop doors have held up well through the wet weather."
+     }
+    ],
+    "weather": [
+     {
+      "page": 1,
+      "font": "/BAAAAA+LiberationSerif",
+      "y": 4364.4,
+      "text": "the new coop doors have held up well through the wet weather."
+     }
+    ],
+    "winter freeze": [],
+    "winter": [
+     {
+      "page": 1,
+      "font": "/BAAAAA+LiberationSerif",
+      "y": 6385.2,
+      "text": "Finally, the board thanks every family who helped with the winter feed drive. Your time and "
+     }
+    ],
+    "freeze": []
+   },
+   "newWordShowOpHits": {}
+  },
+  "pdftotext": {
+   "wet weather": 1,
+   "wet": 1,
+   "weather": 1,
+   "winter freeze": 0,
+   "winter": 1,
+   "freeze": 0
+  },
+  "pdftotextReplacementChars": 0,
+  "pdftotextLinesWith": {
+   "wet weather": [
+    "the new coop doors have held up well through the wet weather."
+   ],
+   "wet": [
+    "the new coop doors have held up well through the wet weather."
+   ],
+   "weather": [
+    "the new coop doors have held up well through the wet weather."
+   ],
+   "winter freeze": [],
+   "winter": [
+    "Finally, the board thanks every family who helped with the winter feed drive. Your time and"
+   ],
+   "freeze": []
+  },
+  "images": [],
+  "pageThumbs": [],
+  "catalogMetadata": true,
+  "pageRotate": [
+   0
+  ],
+  "rawFileMarkers": {
+   "Exif\\0\\0": 0,
+   "GPS (text)": 0,
+   "xmpmeta": 2,
+   "/Thumb": 0,
+   "ICC_PROFILE": 0,
+   "/Metadata": 2
+  },
+  "pdfimagesList": [
+   "page   num  type   width height color comp bpc  enc interp  object ID x-ppi y-ppi size ratio",
+   "--------------------------------------------------------------------------------------------"
+  ]
+ },
+ "output": {
+  "file": "/workspace/free-range-pdf/proof/text/text-standin.edited.pdf",
+  "bytes": 25382,
+  "eofMarkers": 1,
+  "startxrefs": 1,
+  "trailerHasPrev": false,
+  "incrementalUpdate": false,
+  "reachabilityMethod": "raw object graph (no object streams)",
+  "objects": 24,
+  "orphans": [],
+  "fonts": {
+   "p1/F1": {
+    "base": "/BAAAAA+LiberationSerif",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/FRPFallback-7098480789": {
+    "base": "/LiberationSerif-9742",
+    "unicodeSource": "ToUnicode"
+   }
+  },
+  "streams": 6,
+  "undecodableStreams": 0,
+  "search": {
+   "plainHitsNonImageStreams": {
+    "wet weather": [],
+    "wet": [],
+    "weather": [],
+    "winter freeze": [],
+    "winter": [],
+    "freeze": []
+   },
+   "glyphCodeHits": {
+    "wet weather": [],
+    "wet": [],
+    "weather": [],
+    "winter freeze": [
+     {
+      "fontObj": "(23, 0)",
+      "font": "/LiberationSerif-9742",
+      "codes": "0001000200030004000500060007000800060005000500090005",
+      "stream": "26 0 R",
+      "contiguousBytes": 0,
+      "hexForm": 1,
+      "kind": "page 1 content stream"
+     }
+    ],
+    "winter": [
+     {
+      "fontObj": "(23, 0)",
+      "font": "/LiberationSerif-9742",
+      "codes": "000100020003000400050006",
+      "stream": "26 0 R",
+      "contiguousBytes": 0,
+      "hexForm": 1,
+      "kind": "page 1 content stream"
+     }
+    ],
+    "freeze": [
+     {
+      "fontObj": "(23, 0)",
+      "font": "/LiberationSerif-9742",
+      "codes": "000800060005000500090005",
+      "stream": "26 0 R",
+      "contiguousBytes": 0,
+      "hexForm": 1,
+      "kind": "page 1 content stream"
+     }
+    ]
+   },
+   "perShowOpHits": {
+    "wet weather": [],
+    "wet": [],
+    "weather": [],
+    "winter freeze": [
+     {
+      "page": 1,
+      "font": "/LiberationSerif-9742",
+      "y": 562.45,
+      "text": "winter freeze"
+     }
+    ],
+    "winter": [
+     {
+      "page": 1,
+      "font": "/BAAAAA+LiberationSerif",
+      "y": 6385.2,
+      "text": "Finally, the board thanks every family who helped with the winter feed drive. Your time and "
+     },
+     {
+      "page": 1,
+      "font": "/LiberationSerif-9742",
+      "y": 562.45,
+      "text": "winter freeze"
+     }
+    ],
+    "freeze": [
+     {
+      "page": 1,
+      "font": "/LiberationSerif-9742",
+      "y": 562.45,
+      "text": "winter freeze"
+     }
+    ]
+   },
+   "newWordShowOpHits": {}
+  },
+  "pdftotext": {
+   "wet weather": 0,
+   "wet": 0,
+   "weather": 0,
+   "winter freeze": 1,
+   "winter": 2,
+   "freeze": 1
+  },
+  "pdftotextReplacementChars": 0,
+  "pdftotextLinesWith": {
+   "wet weather": [],
+   "wet": [],
+   "weather": [],
+   "winter freeze": [
+    "the new coop doors have held up well through the winter freeze."
+   ],
+   "winter": [
+    "the new coop doors have held up well through the winter freeze.",
+    "Finally, the board thanks every family who helped with the winter feed drive. Your time and"
+   ],
+   "freeze": [
+    "the new coop doors have held up well through the winter freeze."
+   ]
+  },
+  "images": [],
+  "pageThumbs": [],
+  "catalogMetadata": true,
+  "pageRotate": [
+   0
+  ],
+  "rawFileMarkers": {
+   "Exif\\0\\0": 0,
+   "GPS (text)": 0,
+   "xmpmeta": 2,
+   "/Thumb": 0,
+   "ICC_PROFILE": 0,
+   "/Metadata": 2
+  },
+  "pdfimagesList": [
+   "page   num  type   width height color comp bpc  enc interp  object ID x-ppi y-ppi size ratio",
+   "--------------------------------------------------------------------------------------------"
+  ]
+ }
+}

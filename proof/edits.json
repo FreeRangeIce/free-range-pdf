@@ -1,0 +1,97 @@
+{
+ "text": [
+  {
+   "name": "main",
+   "dir": "text",
+   "file": "text-standin.pdf",
+   "lineContains": "through the wet weather",
+   "find": "wet weather",
+   "replace": "winter freeze",
+   "note": "mid-page line 7/13, LibreOffice single TJ per line; 'z' is not in the embedded subset -> whole run in fallback"
+  },
+  {
+   "name": "midline-single-TJ-embedded",
+   "dir": "text/midline-single-tj",
+   "file": "text-standin.pdf",
+   "lineContains": "Our egg sales rose",
+   "find": "eleven",
+   "replace": "twelve",
+   "note": "edited word sits inside one TJ run between untouched words; all glyphs in subset -> embedded font"
+  },
+  {
+   "name": "shorter-word-gap",
+   "dir": "text/shorter-word",
+   "file": "text-standin.pdf",
+   "lineContains": "Thursday morning",
+   "find": "Thursday",
+   "replace": "Friday",
+   "note": "shorter replacement: following words must stay put; the gap is reported"
+  },
+  {
+   "name": "overflow-refused",
+   "dir": "text/overflow-refused",
+   "file": "text-standin.pdf",
+   "lineContains": "Thursday morning",
+   "find": "spare parts",
+   "replace": "a spare nozzle",
+   "note": "too long for the slot even at 85% -> refused, nothing written"
+  },
+  {
+   "name": "separate-runs",
+   "dir": "text/separate-runs",
+   "file": "text-runs-standin.pdf",
+   "lineContains": "front office on Monday",
+   "find": "Monday",
+   "replace": "Tuesday",
+   "note": "pdf-lib stand-in, every word is its own positioned BT/Tm/Tj run; embedded Type0 subset"
+  },
+  {
+   "name": "repeated-block",
+   "dir": "text/repeated-block",
+   "file": "text-runs-standin.pdf",
+   "lineContains": "Parking space: 17",
+   "occurrence": 1,
+   "find": "17",
+   "replace": "26",
+   "note": "the same field line appears twice (Tenant copy / Office copy); edit only the Office copy; '6' not in subset -> whole run '26' in fallback"
+  }
+ ],
+ "scans": [
+  {
+   "name": "scan",
+   "dir": "scan",
+   "file": "inputs/scan-standin.pdf",
+   "trueLine": "seed library, and a vote on the proposed change to the yearly dues. Copies of the",
+   "find": "yearly",
+   "replace": "annual"
+  },
+  {
+   "name": "photo",
+   "dir": "photo",
+   "file": "inputs/photo-standin.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine"
+  },
+  {
+   "name": "searchable",
+   "dir": "searchable",
+   "file": "inputs/searchable-standin.pdf",
+   "hidden": "edit",
+   "trueLine": "seed library, and a vote on the proposed change to the yearly dues. Copies of the",
+   "find": "yearly",
+   "replace": "annual",
+   "note": "searchable-scan stand-in: edit a mappable line; the existing hidden layer must carry the new word"
+  },
+  {
+   "name": "searchable-rewrite",
+   "dir": "searchable/out-rewrite",
+   "file": "inputs/searchable-standin.pdf",
+   "hidden": "edit",
+   "trueLine": "Saturday, May 16, starting at ten in the morning. All members are welcome, and guests",
+   "find": "morning",
+   "replace": "evening",
+   "note": "the stand-in's hidden layer kept only 'Saturday,' on this line (like the real scan's lost line): our OCR read the line, so the scanner runs in the line box are replaced by a fresh line from our OCR"
+  }
+ ]
+}

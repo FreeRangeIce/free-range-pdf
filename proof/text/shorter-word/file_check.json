@@ -1,0 +1,152 @@
+{
+ "input": {
+  "file": "/workspace/free-range-pdf/proof/inputs/text-standin.pdf",
+  "bytes": 19981,
+  "eofMarkers": 1,
+  "startxrefs": 1,
+  "trailerHasPrev": false,
+  "incrementalUpdate": false,
+  "reachabilityMethod": "raw object graph (no object streams)",
+  "objects": 22,
+  "orphans": [],
+  "fonts": {
+   "p1/F1": {
+    "base": "/BAAAAA+LiberationSerif",
+    "unicodeSource": "ToUnicode"
+   }
+  },
+  "streams": 4,
+  "undecodableStreams": 0,
+  "search": {
+   "plainHitsNonImageStreams": {
+    "Thursday": [],
+    "Friday": []
+   },
+   "glyphCodeHits": {
+    "Thursday": [],
+    "Friday": []
+   },
+   "perShowOpHits": {
+    "Thursday": [
+     {
+      "page": 1,
+      "font": "/BAAAAA+LiberationSerif",
+      "y": 5415.599999999999,
+      "text": "Thursday morning with tools and spare parts. Please bring gloves and a flask of tea, because the "
+     }
+    ],
+    "Friday": []
+   },
+   "newWordShowOpHits": {}
+  },
+  "pdftotext": {
+   "Thursday": 1,
+   "Friday": 0
+  },
+  "pdftotextReplacementChars": 0,
+  "pdftotextLinesWith": {
+   "Thursday": [
+    "Thursday morning with tools and spare parts. Please bring gloves and a flask of tea, because the"
+   ],
+   "Friday": []
+  },
+  "images": [],
+  "pageThumbs": [],
+  "catalogMetadata": true,
+  "pageRotate": [
+   0
+  ],
+  "rawFileMarkers": {
+   "Exif\\0\\0": 0,
+   "GPS (text)": 0,
+   "xmpmeta": 2,
+   "/Thumb": 0,
+   "ICC_PROFILE": 0,
+   "/Metadata": 2
+  },
+  "pdfimagesList": [
+   "page   num  type   width height color comp bpc  enc interp  object ID x-ppi y-ppi size ratio",
+   "--------------------------------------------------------------------------------------------"
+  ]
+ },
+ "output": {
+  "file": "/workspace/free-range-pdf/proof/text/shorter-word/text-standin.edited.pdf",
+  "bytes": 20092,
+  "eofMarkers": 1,
+  "startxrefs": 1,
+  "trailerHasPrev": false,
+  "incrementalUpdate": false,
+  "reachabilityMethod": "raw object graph (no object streams)",
+  "objects": 20,
+  "orphans": [],
+  "fonts": {
+   "p1/F1": {
+    "base": "/BAAAAA+LiberationSerif",
+    "unicodeSource": "ToUnicode"
+   }
+  },
+  "streams": 4,
+  "undecodableStreams": 0,
+  "search": {
+   "plainHitsNonImageStreams": {
+    "Thursday": [],
+    "Friday": []
+   },
+   "glyphCodeHits": {
+    "Thursday": [],
+    "Friday": [
+     {
+      "fontObj": "(15, 0)",
+      "font": "/BAAAAA+LiberationSerif",
+      "codes": "01020e19061a",
+      "stream": "23 0 R",
+      "contiguousBytes": 0,
+      "hexForm": 1,
+      "kind": "page 1 content stream"
+     }
+    ]
+   },
+   "perShowOpHits": {
+    "Thursday": [],
+    "Friday": [
+     {
+      "page": 1,
+      "font": "/BAAAAA+LiberationSerif",
+      "y": 516.65,
+      "text": "Friday"
+     }
+    ]
+   },
+   "newWordShowOpHits": {}
+  },
+  "pdftotext": {
+   "Thursday": 0,
+   "Friday": 1
+  },
+  "pdftotextReplacementChars": 0,
+  "pdftotextLinesWith": {
+   "Thursday": [],
+   "Friday": [
+    "Friday morning with tools and spare parts. Please bring gloves and a flask of tea, because the"
+   ]
+  },
+  "images": [],
+  "pageThumbs": [],
+  "catalogMetadata": true,
+  "pageRotate": [
+   0
+  ],
+  "rawFileMarkers": {
+   "Exif\\0\\0": 0,
+   "GPS (text)": 0,
+   "xmpmeta": 2,
+   "/Thumb": 0,
+   "ICC_PROFILE": 0,
+   "/Metadata": 2
+  },
+  "pdfimagesList": [
+   "page   num  type   width height color comp bpc  enc interp  object ID x-ppi y-ppi size ratio",
+   "--------------------------------------------------------------------------------------------"
+  ]
+ }
+}

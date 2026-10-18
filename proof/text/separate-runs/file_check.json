@@ -1,0 +1,586 @@
+{
+ "input": {
+  "file": "/workspace/free-range-pdf/proof/inputs/text-runs-standin.pdf",
+  "bytes": 14948,
+  "eofMarkers": 1,
+  "startxrefs": 1,
+  "trailerHasPrev": false,
+  "incrementalUpdate": false,
+  "reachabilityMethod": "raw object graph (no object streams)",
+  "objects": 10,
+  "orphans": [],
+  "fonts": {
+   "p1/FTJ-2759204048": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-1095114838": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-1186010726": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-1275322832": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-1316047934": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-1733050384": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-1848524175": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-192510541": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2000805986": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2114655688": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2163799337": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-250812044": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2514629607": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2515018183": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2525737140": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2668124169": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2708199956": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2917584337": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-352453411": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-4525072762": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-4533867633": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-4734724052": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-4824990222": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-4869070959": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-5563853605": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-578830786": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-5824662338": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-5845047960": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-6186664300": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-6235467693": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-6611578703": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-6703682664": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-6837590713": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-6857870938": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7098480789": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7312274522": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-735569487": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7572533686": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7592840450": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7720966295": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7733119529": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7845208436": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7888911063": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7959582482": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-8268612002": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-8450180107": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-8659871878": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-8784015711": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-8834764880": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-9538628408": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-9668333493": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-9742682568": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-9750469207": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-979344929": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   }
+  },
+  "streams": 3,
+  "undecodableStreams": 0,
+  "search": {
+   "plainHitsNonImageStreams": {
+    "Monday": [],
+    "Tuesday": []
+   },
+   "glyphCodeHits": {
+    "Monday": [
+     {
+      "fontObj": "(4, 0)",
+      "font": "/LiberationSans-4482",
+      "codes": "00070008000300150004001a",
+      "stream": "6 0 R",
+      "contiguousBytes": 0,
+      "hexForm": 1,
+      "kind": "page 1 content stream"
+     }
+    ],
+    "Tuesday": []
+   },
+   "perShowOpHits": {
+    "Monday": [
+     {
+      "page": 1,
+      "font": "/LiberationSans-4482",
+      "y": 684,
+      "text": "Monday"
+     }
+    ],
+    "Tuesday": []
+   },
+   "newWordShowOpHits": {}
+  },
+  "pdftotext": {
+   "Monday": 1,
+   "Tuesday": 0
+  },
+  "pdftotextReplacementChars": 0,
+  "pdftotextLinesWith": {
+   "Monday": [
+    "Keys will be handed over at the front office on Monday after ten."
+   ],
+   "Tuesday": []
+  },
+  "images": [],
+  "pageThumbs": [],
+  "catalogMetadata": false,
+  "pageRotate": [
+   0
+  ],
+  "rawFileMarkers": {
+   "Exif\\0\\0": 0,
+   "GPS (text)": 0,
+   "xmpmeta": 0,
+   "/Thumb": 0,
+   "ICC_PROFILE": 0,
+   "/Metadata": 0
+  },
+  "pdfimagesList": [
+   "page   num  type   width height color comp bpc  enc interp  object ID x-ppi y-ppi size ratio",
+   "--------------------------------------------------------------------------------------------"
+  ]
+ },
+ "output": {
+  "file": "/workspace/free-range-pdf/proof/text/separate-runs/text-runs-standin.edited.pdf",
+  "bytes": 15012,
+  "eofMarkers": 1,
+  "startxrefs": 1,
+  "trailerHasPrev": false,
+  "incrementalUpdate": false,
+  "reachabilityMethod": "raw object graph (no object streams)",
+  "objects": 10,
+  "orphans": [],
+  "fonts": {
+   "p1/FTJ-2759204048": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-1095114838": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-1186010726": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-1275322832": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-1316047934": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-1733050384": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-1848524175": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-192510541": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2000805986": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2114655688": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2163799337": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-250812044": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2514629607": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2515018183": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2525737140": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2668124169": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2708199956": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-2917584337": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-352453411": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-4525072762": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-4533867633": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-4734724052": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-4824990222": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-4869070959": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-5563853605": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-578830786": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-5824662338": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-5845047960": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-6186664300": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-6235467693": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-6611578703": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-6703682664": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-6837590713": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-6857870938": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7098480789": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7312274522": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-735569487": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7572533686": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7592840450": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7720966295": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7733119529": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7845208436": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7888911063": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-7959582482": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-8268612002": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-8450180107": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-8659871878": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-8784015711": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-8834764880": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-9538628408": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-9668333493": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-9742682568": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-9750469207": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   },
+   "p1/LiberationSans-979344929": {
+    "base": "/LiberationSans-4482",
+    "unicodeSource": "ToUnicode"
+   }
+  },
+  "streams": 3,
+  "undecodableStreams": 0,
+  "search": {
+   "plainHitsNonImageStreams": {
+    "Monday": [],
+    "Tuesday": []
+   },
+   "glyphCodeHits": {
+    "Monday": [],
+    "Tuesday": [
+     {
+      "fontObj": "(4, 0)",
+      "font": "/LiberationSans-4482",
+      "codes": "0001001b0002001200150004001a",
+      "stream": "11 0 R",
+      "contiguousBytes": 0,
+      "hexForm": 1,
+      "kind": "page 1 content stream"
+     }
+    ]
+   },
+   "perShowOpHits": {
+    "Monday": [],
+    "Tuesday": [
+     {
+      "page": 1,
+      "font": "/LiberationSans-4482",
+      "y": 684,
+      "text": "Tuesday"
+     }
+    ]
+   },
+   "newWordShowOpHits": {}
+  },
+  "pdftotext": {
+   "Monday": 0,
+   "Tuesday": 1
+  },
+  "pdftotextReplacementChars": 0,
+  "pdftotextLinesWith": {
+   "Monday": [],
+   "Tuesday": [
+    "Keys will be handed over at the front office on Tuesday after ten."
+   ]
+  },
+  "images": [],
+  "pageThumbs": [],
+  "catalogMetadata": false,
+  "pageRotate": [
+   0
+  ],
+  "rawFileMarkers": {
+   "Exif\\0\\0": 0,
+   "GPS (text)": 0,
+   "xmpmeta": 0,
+   "/Thumb": 0,
+   "ICC_PROFILE": 0,
+   "/Metadata": 0
+  },
+  "pdfimagesList": [
+   "page   num  type   width height color comp bpc  enc interp  object ID x-ppi y-ppi size ratio",
+   "--------------------------------------------------------------------------------------------"
+  ]
+ }
+}

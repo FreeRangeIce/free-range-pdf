@@ -1,0 +1,3 @@
+pdf.js (pdfjs-dist 5.4.296, https://github.com/mozilla/pdf.js) - Apache License 2.0, see LICENSE. Copyright Mozilla Foundation.
+Includes standard_fonts/ (Foxit and Liberation fonts, see the licence files inside), cmaps/ (Adobe, BSD-3-Clause), wasm/ and iccs/
+as shipped in pdfjs-dist. Unmodified.

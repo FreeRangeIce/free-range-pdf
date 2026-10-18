@@ -1,0 +1,126 @@
+{
+ "input": "/proof/inputs/text-runs-standin.pdf",
+ "shaBefore": "a092f47dba142f21ece7e43bf39576077fdc79cd060dfefb1798dbd61d3b1c4b",
+ "shaAfterRefetch": "a092f47dba142f21ece7e43bf39576077fdc79cd060dfefb1798dbd61d3b1c4b",
+ "line": {
+  "text": "Keys will be handed over at the front office on Monday after ten.",
+  "baseline": 684,
+  "size": 11,
+  "occurrence": 0,
+  "candidatesOnPage": 1
+ },
+ "edit": {
+  "find": "Monday",
+  "replace": "Tuesday",
+  "newText": "Keys will be handed over at the front office on Tuesday after ten."
+ },
+ "span": {
+  "startChar": 48,
+  "endChar": 55,
+  "text": "Tuesday",
+  "oldStartChar": 48,
+  "oldEndChar": 54,
+  "bboxPdf": {
+   "x0": 297.634,
+   "y0": 680.48,
+   "x1": 336.768,
+   "y1": 695
+  },
+  "bboxPx": {
+   "x0": 593,
+   "y0": 192,
+   "x1": 676,
+   "y1": 226
+  },
+  "font": "embedded"
+ },
+ "contentStream": {
+  "opsTotal": 562,
+  "showOpsTotal": 57,
+  "showOpsRewritten": 1,
+  "spanGlyphs": 6,
+  "structure": [
+   {
+    "op": "Tj",
+    "glyphsInOp": 6,
+    "spanGlyphsInOp": 6
+   }
+  ],
+  "oldStreamRefs": [
+   "6 0 R"
+  ]
+ },
+ "font": {
+  "originalFont": "LiberationSans-4482",
+  "resName": "LiberationSans-2163799337",
+  "subtype": "Type0",
+  "subset": false,
+  "embeddedFontFile": "FontFile2",
+  "glyphsNeeded": "Tuesday",
+  "missingGlyphs": [],
+  "used": "embedded",
+  "reason": "embedded font LiberationSans-4482 has a glyph (ToUnicode + width) for every character of the replacement run"
+ },
+ "overflow": {
+  "rule": "letter spacing up to +/-0.04 em per letter, then horizontal scale 0.97-1.03; still shorter -> natural width + gap; still longer -> refused",
+  "slotPt": 39.134,
+  "naturalWidthPt": 42.19,
+  "letters": 7,
+  "spacingNeededEm": -0.0463,
+  "spacingTriedEm": -0.04,
+  "scaleTried": 0.9895,
+  "leftoverAfterSpacingAndScalePt": 0,
+  "spacingEm": -0.04,
+  "scale": 0.9895,
+  "gapPt": 0,
+  "decision": "fits: spacing -0.0400 em per letter, scale 98.95%; following words do not move"
+ },
+ "verify": {
+  "pdfjsNewLineText": "Keys will be handed over at the front office on Tuesday after ten.",
+  "expected": "Keys will be handed over at the front office on Tuesday after ten.",
+  "newLineMatches": true,
+  "findCountBefore": 1,
+  "findCountAfter": 0,
+  "replaceCountBefore": 0,
+  "replaceCountAfter": 1,
+  "findGoneFromEditedLine": true,
+  "otherLinesIdentical": true,
+  "untouchedGlyphs": 515,
+  "untouchedGlyphsAfter": 515,
+  "untouchedGlyphMaxShiftPt": 0,
+  "untouchedGlyphCodeMismatches": 0,
+  "glyphsRightOfSpanOnLine": 9,
+  "textRightOfSpan": " after ten.",
+  "newRunFont": "LiberationSans-2163799337",
+  "newRunTz": 98.94778
+ },
+ "fileHygiene": {
+  "gcRemovedObjects": [],
+  "objectsKept": 10
+ },
+ "pixel": {
+  "renderScale": 2,
+  "boxPx": {
+   "x0": 593,
+   "y0": 192,
+   "x1": 676,
+   "y1": 226
+  },
+  "changedOutsideBox": 0,
+  "changedInsideBox": 763,
+  "rightOfBoxSameLineChanged": 0,
+  "rightOfBoxSameLinePixels": 18632,
+  "outsideSamples": [],
+  "width": 1224,
+  "height": 1584
+ },
+ "case": {
+  "name": "separate-runs",
+  "dir": "text/separate-runs",
+  "file": "text-runs-standin.pdf",
+  "lineContains": "front office on Monday",
+  "find": "Monday",
+  "replace": "Tuesday",
+  "note": "pdf-lib stand-in, every word is its own positioned BT/Tm/Tj run; embedded Type0 subset"
+ }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "free-range-pdf",
+  "version": "0.0.1",
+  "private": true,
+  "description": "FreeRangePDF - static, in-browser PDF line editor (proof stage)",
+  "scripts": {
+    "vendor": "node scripts/vendor.mjs",
+    "proof": "node proof/run-proof.mjs"
+  },
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@pdf-lib/fontkit": "^1.1.1",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^5.4.296",
+    "playwright-core": "^1.64.0",
+    "tesseract.js": "^7.0.0",
+    "tesseract.js-core": "^7.0.0"
+  }
+}

@@ -1,0 +1,144 @@
+{
+ "input": "/proof/inputs/text-runs-standin.pdf",
+ "shaBefore": "a092f47dba142f21ece7e43bf39576077fdc79cd060dfefb1798dbd61d3b1c4b",
+ "shaAfterRefetch": "a092f47dba142f21ece7e43bf39576077fdc79cd060dfefb1798dbd61d3b1c4b",
+ "line": {
+  "text": "Name: Jordan Ellis    Unit: 2B    Parking space: 17    Deposit paid: yes",
+  "baseline": 542,
+  "size": 11,
+  "occurrence": 1,
+  "candidatesOnPage": 2
+ },
+ "edit": {
+  "find": "17",
+  "replace": "26",
+  "newText": "Name: Jordan Ellis    Unit: 2B    Parking space: 26    Deposit paid: yes"
+ },
+ "span": {
+  "startChar": 49,
+  "endChar": 51,
+  "text": "26",
+  "oldStartChar": 49,
+  "oldEndChar": 51,
+  "bboxPdf": {
+   "x0": 305.425,
+   "y0": 538.48,
+   "x1": 317.66,
+   "y1": 553
+  },
+  "bboxPx": {
+   "x0": 608,
+   "y0": 476,
+   "x1": 638,
+   "y1": 510
+  },
+  "font": "fallback"
+ },
+ "contentStream": {
+  "opsTotal": 562,
+  "showOpsTotal": 57,
+  "showOpsRewritten": 1,
+  "spanGlyphs": 2,
+  "structure": [
+   {
+    "op": "TJ",
+    "glyphsInOp": 72,
+    "spanGlyphsInOp": 2
+   }
+  ],
+  "oldStreamRefs": [
+   "6 0 R"
+  ]
+ },
+ "font": {
+  "originalFont": "LiberationSans-4482",
+  "resName": "FTJ-2759204048",
+  "subtype": "Type0",
+  "subset": false,
+  "embeddedFontFile": "FontFile2",
+  "glyphsNeeded": "26",
+  "missingGlyphs": [
+   "6"
+  ],
+  "used": "fallback",
+  "fallbackKind": "sans",
+  "fallbackFont": "Liberation Sans Regular 2.1.5",
+  "fallbackFile": "vendor/fonts/liberation/LiberationSans-Regular.ttf",
+  "fallbackLicense": "vendor/fonts/liberation/LICENSE (SIL OFL 1.1)",
+  "reason": "embedded font LiberationSans-4482 has no glyph for \"6\"; the WHOLE replacement run uses the fallback (no per-glyph mixing)",
+  "sizeScale": 1,
+  "sizeMethod": "x-height from FontDescriptor",
+  "widthRatio": {
+   "sharedGlyphs": 44,
+   "min": 1,
+   "median": 1,
+   "max": 1
+  }
+ },
+ "overflow": {
+  "rule": "letter spacing up to +/-0.04 em per letter, then horizontal scale 0.97-1.03; still shorter -> natural width + gap; still longer -> refused",
+  "slotPt": 12.235,
+  "naturalWidthPt": 12.235,
+  "letters": 2,
+  "spacingNeededEm": 0,
+  "spacingTriedEm": 0,
+  "scaleTried": 1,
+  "leftoverAfterSpacingAndScalePt": 0,
+  "spacingEm": 0,
+  "scale": 1,
+  "gapPt": 0,
+  "decision": "fits: spacing 0.0000 em per letter, no scaling; following words do not move"
+ },
+ "verify": {
+  "pdfjsNewLineText": "Name: Jordan Ellis Unit: 2B Parking space: 26 Deposit paid: yes",
+  "expected": "Name: Jordan Ellis    Unit: 2B    Parking space: 26    Deposit paid: yes",
+  "newLineMatches": true,
+  "findCountBefore": 2,
+  "findCountAfter": 1,
+  "replaceCountBefore": 0,
+  "replaceCountAfter": 1,
+  "findGoneFromEditedLine": true,
+  "otherLinesIdentical": true,
+  "untouchedGlyphs": 519,
+  "untouchedGlyphsAfter": 519,
+  "untouchedGlyphMaxShiftPt": 2.75e-8,
+  "untouchedGlyphCodeMismatches": 0,
+  "glyphsRightOfSpanOnLine": 21,
+  "textRightOfSpan": "    Deposit paid: yes",
+  "newRunFont": "FRPFallback-7098480789",
+  "newRunTz": 100
+ },
+ "fileHygiene": {
+  "gcRemovedObjects": [
+   "12 0 R",
+   "13 0 R"
+  ],
+  "objectsKept": 15
+ },
+ "pixel": {
+  "renderScale": 2,
+  "boxPx": {
+   "x0": 608,
+   "y0": 476,
+   "x1": 638,
+   "y1": 510
+  },
+  "changedOutsideBox": 0,
+  "changedInsideBox": 238,
+  "rightOfBoxSameLineChanged": 0,
+  "rightOfBoxSameLinePixels": 19924,
+  "outsideSamples": [],
+  "width": 1224,
+  "height": 1584
+ },
+ "case": {
+  "name": "repeated-block",
+  "dir": "text/repeated-block",
+  "file": "text-runs-standin.pdf",
+  "lineContains": "Parking space: 17",
+  "occurrence": 1,
+  "find": "17",
+  "replace": "26",
+  "note": "the same field line appears twice (Tenant copy / Office copy); edit only the Office copy; '6' not in subset -> whole run '26' in fallback"
+ }
+}

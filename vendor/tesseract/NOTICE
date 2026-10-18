@@ -1,0 +1,8 @@
+Tesseract.js 7.0.0 (https://github.com/naptha/tesseract.js) - Apache License 2.0, see LICENSE.md.
+tesseract.js-core 7.0.0 (https://github.com/naptha/tesseract.js-core) - Apache License 2.0, see core/LICENSE.
+  tesseract.js-core is an Emscripten/WebAssembly build of Tesseract OCR (https://github.com/tesseract-ocr/tesseract,
+  Apache License 2.0, Copyright Google Inc. and contributors) and Leptonica (http://www.leptonica.org, BSD-2-Clause-style
+  Leptonica licence, Copyright Dan Bloomberg). Bundled third-party notices are in tesseract.min.js.LICENSE.txt and
+  worker.min.js.LICENSE.txt.
+Upstream Tesseract.js / tesseract.js-core repositories do not ship a NOTICE file; this NOTICE was written by
+FreeRangePDF to satisfy Apache-2.0 section 4(d) attribution. No modifications were made to the vendored files.

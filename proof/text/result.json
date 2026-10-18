@@ -1,0 +1,146 @@
+{
+ "input": "/proof/inputs/text-standin.pdf",
+ "shaBefore": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+ "shaAfterRefetch": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+ "line": {
+  "text": "the new coop doors have held up well through the wet weather.",
+  "baseline": 562.45,
+  "size": 12,
+  "occurrence": 0,
+  "candidatesOnPage": 1
+ },
+ "edit": {
+  "find": "wet weather",
+  "replace": "winter freeze",
+  "newText": "the new coop doors have held up well through the winter freeze."
+ },
+ "span": {
+  "startChar": 49,
+  "endChar": 62,
+  "text": "winter freeze",
+  "oldStartChar": 49,
+  "oldEndChar": 60,
+  "bboxPdf": {
+   "x0": 314.584,
+   "y0": 558.61,
+   "x1": 372.844,
+   "y1": 574.45
+  },
+  "bboxPx": {
+   "x0": 627,
+   "y0": 433,
+   "x1": 748,
+   "y1": 469
+  },
+  "font": "fallback"
+ },
+ "contentStream": {
+  "opsTotal": 146,
+  "showOpsTotal": 14,
+  "showOpsRewritten": 1,
+  "spanGlyphs": 11,
+  "structure": [
+   {
+    "op": "TJ",
+    "glyphsInOp": 61,
+    "spanGlyphsInOp": 11
+   }
+  ],
+  "oldStreamRefs": [
+   "2 0 R"
+  ]
+ },
+ "font": {
+  "originalFont": "BAAAAA+LiberationSerif",
+  "resName": "F1",
+  "subtype": "TrueType",
+  "subset": true,
+  "embeddedFontFile": "FontFile2",
+  "glyphsNeeded": "winter fz",
+  "missingGlyphs": [
+   "z"
+  ],
+  "used": "fallback",
+  "fallbackKind": "serif",
+  "fallbackFont": "Liberation Serif Regular 2.1.5",
+  "fallbackFile": "vendor/fonts/liberation/LiberationSerif-Regular.ttf",
+  "fallbackLicense": "vendor/fonts/liberation/LICENSE (SIL OFL 1.1)",
+  "reason": "embedded SUBSET font BAAAAA+LiberationSerif has no glyph for \"z\"; the WHOLE replacement run uses the fallback (no per-glyph mixing)",
+  "sizeScale": 1,
+  "sizeMethod": "metric-compatible (median width ratio within 2%), size kept",
+  "widthRatio": {
+   "sharedGlyphs": 36,
+   "min": 0.997,
+   "median": 0.9998,
+   "max": 1
+  }
+ },
+ "overflow": {
+  "rule": "letter spacing up to +/-0.04 em per letter, then horizontal scale 0.97-1.03; still shorter -> natural width + gap; still longer -> refused",
+  "slotPt": 58.26,
+  "naturalWidthPt": 62.953,
+  "letters": 13,
+  "spacingNeededEm": -0.0326,
+  "spacingTriedEm": -0.0326,
+  "scaleTried": 1,
+  "leftoverAfterSpacingAndScalePt": 0,
+  "spacingEm": -0.0326,
+  "scale": 1,
+  "gapPt": 0,
+  "decision": "fits: spacing -0.0326 em per letter, no scaling; following words do not move"
+ },
+ "verify": {
+  "pdfjsNewLineText": "the new coop doors have held up well through the winter freeze.",
+  "expected": "the new coop doors have held up well through the winter freeze.",
+  "newLineMatches": true,
+  "findCountBefore": 1,
+  "findCountAfter": 0,
+  "replaceCountBefore": 0,
+  "replaceCountAfter": 1,
+  "findGoneFromEditedLine": true,
+  "otherLinesIdentical": true,
+  "untouchedGlyphs": 954,
+  "untouchedGlyphsAfter": 954,
+  "untouchedGlyphMaxShiftPt": 1.137e-13,
+  "untouchedGlyphCodeMismatches": 0,
+  "glyphsRightOfSpanOnLine": 1,
+  "textRightOfSpan": ".",
+  "newRunFont": "FRPFallback-7098480789",
+  "newRunTz": 100
+ },
+ "fileHygiene": {
+  "gcRemovedObjects": [
+   "3 0 R",
+   "12 0 R",
+   "16 0 R",
+   "24 0 R",
+   "25 0 R"
+  ],
+  "objectsKept": 24
+ },
+ "pixel": {
+  "renderScale": 2,
+  "boxPx": {
+   "x0": 627,
+   "y0": 433,
+   "x1": 748,
+   "y1": 469
+  },
+  "changedOutsideBox": 0,
+  "changedInsideBox": 908,
+  "rightOfBoxSameLineChanged": 0,
+  "rightOfBoxSameLinePixels": 17136,
+  "outsideSamples": [],
+  "width": 1224,
+  "height": 1584
+ },
+ "case": {
+  "name": "main",
+  "dir": "text",
+  "file": "text-standin.pdf",
+  "lineContains": "through the wet weather",
+  "find": "wet weather",
+  "replace": "winter freeze",
+  "note": "mid-page line 7/13, LibreOffice single TJ per line; 'z' is not in the embedded subset -> whole run in fallback"
+ }
+}

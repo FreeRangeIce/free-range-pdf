@@ -1,0 +1,52 @@
+{
+ "scan": {
+  "size": [
+   2620,
+   3380
+  ],
+  "dpi": 300,
+  "tilt_deg": 1.6,
+  "noise_sigma": 5,
+  "jpeg_quality": 88,
+  "simulated": true
+ },
+ "photo": {
+  "camera": {
+   "f_px": 3000,
+   "pitch_deg": 13,
+   "yaw_deg": 4,
+   "roll_deg": -6,
+   "distance_in": 14
+  },
+  "capture_size": [
+   3024,
+   4032
+  ],
+  "saved_size": [
+   1512,
+   2016
+  ],
+  "paper_corners_in_capture": [
+   [
+    395.24909319054996,
+    895.7886412038372
+   ],
+   [
+    2371.008850962992,
+    629.279294504179
+   ],
+   [
+    2488.537660850347,
+    2995.5636370711713
+   ],
+   [
+    822.3165361287892,
+    3129.3742551268438
+   ]
+  ],
+  "blur_px": 2.2,
+  "jpeg_quality": 72,
+  "lighting": "radial falloff 0.62-1.04 + bottom-left shadow",
+  "simulated": true
+ }
+}

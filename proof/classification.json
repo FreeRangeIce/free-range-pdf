@@ -1,0 +1,86 @@
+{
+ "inputs/text-standin.pdf": [
+  {
+   "page": 1,
+   "rotate": 0,
+   "images": [],
+   "visibleTextRuns": 14,
+   "invisibleTextRuns": 0,
+   "formXObjectsDrawn": 0,
+   "route": "text",
+   "reason": "14 visible text runs"
+  }
+ ],
+ "inputs/text-runs-standin.pdf": [
+  {
+   "page": 1,
+   "rotate": 0,
+   "images": [],
+   "visibleTextRuns": 57,
+   "invisibleTextRuns": 0,
+   "formXObjectsDrawn": 0,
+   "route": "text",
+   "reason": "57 visible text runs"
+  }
+ ],
+ "inputs/scan-standin.pdf": [
+  {
+   "page": 1,
+   "rotate": 0,
+   "images": [
+    {
+     "name": "Image-7098480789",
+     "coverage": 1,
+     "filter": "/DCTDecode",
+     "w": 2620,
+     "h": 3380
+    }
+   ],
+   "visibleTextRuns": 0,
+   "invisibleTextRuns": 0,
+   "formXObjectsDrawn": 0,
+   "route": "scan",
+   "reason": "one image covers 100.0% of the page and there is no visible text"
+  }
+ ],
+ "inputs/photo-standin.pdf": [
+  {
+   "page": 1,
+   "rotate": 0,
+   "images": [
+    {
+     "name": "Image-7098480789",
+     "coverage": 1,
+     "filter": "/DCTDecode",
+     "w": 1512,
+     "h": 2016
+    }
+   ],
+   "visibleTextRuns": 0,
+   "invisibleTextRuns": 0,
+   "formXObjectsDrawn": 0,
+   "route": "scan",
+   "reason": "one image covers 100.0% of the page and there is no visible text"
+  }
+ ],
+ "inputs/searchable-standin.pdf": [
+  {
+   "page": 1,
+   "rotate": 0,
+   "images": [
+    {
+     "name": "Image-7098480789",
+     "coverage": 1,
+     "filter": "/DCTDecode",
+     "w": 2620,
+     "h": 3380
+    }
+   ],
+   "visibleTextRuns": 0,
+   "invisibleTextRuns": 143,
+   "formXObjectsDrawn": 0,
+   "route": "scan",
+   "reason": "one image covers 100.0% of the page and there is no visible text; 143 invisible (Tr 3) text runs = an existing OCR layer, which path B keeps and edits"
+  }
+ ]
+}

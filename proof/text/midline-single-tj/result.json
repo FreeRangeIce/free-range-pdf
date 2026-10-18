@@ -1,0 +1,129 @@
+{
+ "input": "/proof/inputs/text-standin.pdf",
+ "shaBefore": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+ "shaAfterRefetch": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+ "line": {
+  "text": "Our egg sales rose by eleven percent compared with last year. Most of the growth came from the ",
+  "baseline": 598.25,
+  "size": 12,
+  "occurrence": 0,
+  "candidatesOnPage": 1
+ },
+ "edit": {
+  "find": "eleven",
+  "replace": "twelve",
+  "newText": "Our egg sales rose by twelve percent compared with last year. Most of the growth came from the "
+ },
+ "span": {
+  "startChar": 22,
+  "endChar": 28,
+  "text": "twelve",
+  "oldStartChar": 22,
+  "oldEndChar": 28,
+  "bboxPdf": {
+   "x0": 178.36,
+   "y0": 594.41,
+   "x1": 209.644,
+   "y1": 610.25
+  },
+  "bboxPx": {
+   "x0": 354,
+   "y0": 361,
+   "x1": 422,
+   "y1": 398
+  },
+  "font": "embedded"
+ },
+ "contentStream": {
+  "opsTotal": 146,
+  "showOpsTotal": 14,
+  "showOpsRewritten": 1,
+  "spanGlyphs": 6,
+  "structure": [
+   {
+    "op": "TJ",
+    "glyphsInOp": 95,
+    "spanGlyphsInOp": 6
+   }
+  ],
+  "oldStreamRefs": [
+   "2 0 R"
+  ]
+ },
+ "font": {
+  "originalFont": "BAAAAA+LiberationSerif",
+  "resName": "F1",
+  "subtype": "TrueType",
+  "subset": true,
+  "embeddedFontFile": "FontFile2",
+  "glyphsNeeded": "twelv",
+  "missingGlyphs": [],
+  "used": "embedded",
+  "reason": "embedded font BAAAAA+LiberationSerif has a glyph (ToUnicode + width) for every character of the replacement run"
+ },
+ "overflow": {
+  "rule": "letter spacing up to +/-0.04 em per letter, then horizontal scale 0.97-1.03; still shorter -> natural width + gap; still longer -> refused",
+  "slotPt": 31.284,
+  "naturalWidthPt": 31.944,
+  "letters": 6,
+  "spacingNeededEm": -0.011,
+  "spacingTriedEm": -0.011,
+  "scaleTried": 1,
+  "leftoverAfterSpacingAndScalePt": 0,
+  "spacingEm": -0.011,
+  "scale": 1,
+  "gapPt": 0,
+  "decision": "fits: spacing -0.0110 em per letter, no scaling; following words do not move"
+ },
+ "verify": {
+  "pdfjsNewLineText": "Our egg sales rose by twelve percent compared with last year. Most of the growth came from the",
+  "expected": "Our egg sales rose by twelve percent compared with last year. Most of the growth came from the ",
+  "newLineMatches": true,
+  "findCountBefore": 1,
+  "findCountAfter": 0,
+  "replaceCountBefore": 0,
+  "replaceCountAfter": 1,
+  "findGoneFromEditedLine": true,
+  "otherLinesIdentical": true,
+  "untouchedGlyphs": 959,
+  "untouchedGlyphsAfter": 959,
+  "untouchedGlyphMaxShiftPt": 0,
+  "untouchedGlyphCodeMismatches": 0,
+  "glyphsRightOfSpanOnLine": 67,
+  "textRightOfSpan": " percent compared with last year. Most of the growth came from the ",
+  "newRunFont": "F1",
+  "newRunTz": 100
+ },
+ "fileHygiene": {
+  "gcRemovedObjects": [
+   "3 0 R",
+   "12 0 R"
+  ],
+  "objectsKept": 20
+ },
+ "pixel": {
+  "renderScale": 2,
+  "boxPx": {
+   "x0": 354,
+   "y0": 361,
+   "x1": 422,
+   "y1": 398
+  },
+  "changedOutsideBox": 0,
+  "changedInsideBox": 552,
+  "rightOfBoxSameLineChanged": 0,
+  "rightOfBoxSameLinePixels": 29674,
+  "outsideSamples": [],
+  "width": 1224,
+  "height": 1584
+ },
+ "case": {
+  "name": "midline-single-TJ-embedded",
+  "dir": "text/midline-single-tj",
+  "file": "text-standin.pdf",
+  "lineContains": "Our egg sales rose",
+  "find": "eleven",
+  "replace": "twelve",
+  "note": "edited word sits inside one TJ run between untouched words; all glyphs in subset -> embedded font"
+ }
+}

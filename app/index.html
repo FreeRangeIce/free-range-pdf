@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>FreeRangePDF - text PDF editor</title>
+<meta name="viewport" content="width=1440">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' blob: data:; script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval' blob:; worker-src 'self' blob:; connect-src 'self' blob: data:; img-src 'self' blob: data:; style-src 'self' 'unsafe-inline'; font-src 'self' blob: data:">
+<link rel="stylesheet" href="/app/app.css">
+<script src="/vendor/pdf-lib/pdf-lib.min.js"></script>
+<script src="/vendor/fontkit/fontkit.umd.min.js"></script>
+</head><body>
+<header>
+  <h1>FreeRangePDF</h1><span class="tag">text PDFs only</span>
+  <button id="openbtn" class="btn">Open PDF</button><input id="file" type="file" accept="application/pdf" hidden>
+  <button id="sample" class="btn">Open sample</button>
+  <span id="docinfo" class="muted"></span><span id="busyflag" class="muted" hidden>Working…</span>
+  <span class="spacer"></span>
+  <button id="creditsBtn" class="btn">Credits</button>
+</header>
+<main>
+  <section id="left"><div class="legend" id="legendwrap" hidden><span><i class="sw blue"></i>Selected line (thin blue tick = edited)</span><span><i class="sw orange"></i>Substituted font</span></div>
+    <div id="pagewrap"><canvas id="page"></canvas><div id="overlay"></div></div>
+    
+    <p class="hint">Click a line, or Tab to the page and use the arrow keys to move between lines (<kbd>Alt</kbd>+<kbd>↑</kbd>/<kbd>↓</kbd> from the text box).</p></section>
+  <section id="right">
+    <div id="rbody">
+    <h2>Line being edited</h2>
+    <div id="nosel" class="muted">No line selected.</div>
+    <div id="editor" hidden>
+      <div class="lbl">Original line</div><div id="orig" class="mono"></div>
+      <label class="lbl" for="newtext">New text. <kbd>Enter</kbd> applies, <kbd>Esc</kbd> resets.</label>
+      <input id="newtext" class="mono" autocomplete="off" spellcheck="false">
+      <div id="charmark" hidden><div id="charmirror" class="mono"></div><div id="charmsg"></div></div>
+      <div id="preview"><div id="status" class="status">&nbsp;</div>
+        <div id="gapbar" hidden><div class="bar"><div id="gapnat"></div><div id="gapgap"></div></div><div id="gaptext"></div></div>
+        <div id="subst" class="substnote" hidden></div>
+        <div id="refuse" class="refuse" hidden></div>
+        <canvas id="crop" hidden></canvas></div>
+      <div class="row"><button id="apply" class="btn" disabled>Apply edit</button></div>
+    </div>
+    <h2>Edits <span class="muted">(replayed onto the untouched original)</span></h2>
+    <ol id="edits"></ol>
+    <h2>Checks</h2>
+    <div id="checkwrap"><div id="checksum" class="muted">No edits yet.</div><a href="#" id="checkdetails" hidden>Details</a><ul id="checks" class="checks" hidden></ul></div>
+    </div>
+    <div id="rfoot"><button id="undo" class="btn" disabled title="Ctrl+Z">Undo</button><span id="dlname" class="muted"></span><span class="spacer"></span><button id="download" class="btn primary" disabled>Download</button></div>
+  </section>
+</main>
+<div id="credits" hidden><div class="card"><button id="creditsClose" class="btn">Close</button><h2>Credits</h2><div id="creditsBody"></div></div></div>
+<script type="module" src="/app/app.js"></script>
+</body></html>
