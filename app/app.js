@@ -256,11 +256,12 @@ const CREDITS = [
   ['pdf-lib', 'MIT', 'vendor/pdf-lib/LICENSE.md', 'writing the new PDF'],
   ['@pdf-lib/fontkit', 'MIT', 'vendor/fontkit/LICENSE', 'reading font files for the substitute font'],
   ['Liberation Sans / Serif / Mono 2.1.5', 'SIL Open Font License 1.1', 'vendor/fonts/liberation/LICENSE', 'substitute fonts (also debian-copyright.txt)'],
+  ['Foxit standard fonts (pdf.js standard_fonts)', 'see licence file (PDFium Authors, 2014)', 'vendor/pdfjs/standard_fonts/LICENSE_FOXIT', 'display only'],
   ['OpenCV.js 4.9.0', 'Apache-2.0', 'vendor/opencv/LICENSE', 'bundled for the scan/photo path; NOT loaded by this text editor'],
   ['Tesseract.js + core', 'Apache-2.0', 'vendor/tesseract/LICENSE.md', 'bundled for the scan/photo path; NOT loaded by this text editor'],
   ['tessdata_fast (eng)', 'Apache-2.0', 'vendor/tessdata/LICENSE', 'bundled for the scan/photo path; NOT loaded by this text editor'],
 ];
 $('creditsBody').innerHTML = '<p>Everything runs in your browser; nothing is uploaded. Bundled tools and fonts:</p><table><tr><th>Name</th><th>Licence</th><th>Licence file</th><th>Used for</th></tr>' +
-  CREDITS.map(c => `<tr><td>${c[0]}</td><td>${c[1]}</td><td><a href="/${c[2]}" target="_blank">${c[2]}</a></td><td>${c[3]}</td></tr>`).join('') + '</table>';
+  CREDITS.map(c => `<tr><td>${c[0]}</td><td>${c[1]}</td><td><a href="../${c[2]}" target="_blank">${c[2]}</a></td><td>${c[3]}</td></tr>`).join('') + '</table>';
 $('creditsBtn').addEventListener('click', () => $('credits').hidden = false); $('creditsClose').addEventListener('click', () => $('credits').hidden = true);
 window.FRP_APP = { S, deriveEdit, verify };

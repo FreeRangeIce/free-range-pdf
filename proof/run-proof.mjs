@@ -140,7 +140,7 @@ const run = { when: new Date().toString(), origin: ORIGIN, blockedExternalReques
   inputsSha256Before: shaBefore, inputsSha256After: shaAfter, inputsUnchanged: JSON.stringify(shaBefore) === JSON.stringify(shaAfter),
   inputsMtimeUnchanged: INPUTS.every(f => fs.statSync(f).mtimeMs === mtimeBefore[path.basename(f)]), consoleLog: consoleLog.slice(-200) };
 const isPriv = k => PRIV && INPUTS.some(f => f.startsWith(PRIV) && path.basename(f) === k);
-const pub = { ...run, inputsSha256Before: Object.fromEntries(Object.entries(shaBefore).filter(([k]) => !isPriv(k))), inputsSha256After: Object.fromEntries(Object.entries(shaAfter).filter(([k]) => !isPriv(k))), consoleLog: undefined, privateInputs: INPUTS.filter(f => PRIV && f.startsWith(PRIV)).length };
+const pub = { ...run, inputsSha256Before: Object.fromEntries(Object.entries(shaBefore).filter(([k]) => !isPriv(k))), inputsSha256After: Object.fromEntries(Object.entries(shaAfter).filter(([k]) => !isPriv(k))), consoleLog: undefined, realInputs: INPUTS.filter(f => PRIV && f.startsWith(PRIV)).length };
 if (only !== 'real') { const prev = fs.existsSync(path.join(PROOF, 'run.json')) ? JSON.parse(fs.readFileSync(path.join(PROOF, 'run.json'))) : {}; fs.writeFileSync(path.join(PROOF, 'run.json'), JSON.stringify({ ...prev, [only || 'all']: pub }, null, 1)); }
 if (PRIV) { const pf = path.join(PRIV, 'run-real.json'); const prev = fs.existsSync(pf) ? JSON.parse(fs.readFileSync(pf)) : {}; fs.writeFileSync(pf, JSON.stringify({ ...prev, [only || 'all']: run }, null, 1)); }
 console.log(JSON.stringify({ blocked, inputsUnchanged: run.inputsUnchanged }, null, 1));
