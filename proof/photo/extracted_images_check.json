@@ -41,8 +41,8 @@
  ],
  "independentPixelCheck": {
   "changedOutsideMask": 0,
-  "changedInsideMask": 926,
-  "maskPixels": 1069,
+  "changedInsideMask": 918,
+  "maskPixels": 1062,
   "maxAbsDiffOutside": 0
  },
  "popplerRenderDiff": {
@@ -54,7 +54,7 @@
    2016
   ],
   "changedOutsideMask": 9,
-  "changedInsideMask": 922,
+  "changedInsideMask": 891,
   "maxAbsOutside": 3
  }
 }

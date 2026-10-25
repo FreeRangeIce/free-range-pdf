@@ -1,0 +1,133 @@
+{
+ "input": [
+  {
+   "file": "orient/icc-wide-app2/extracted_input/img-000.png",
+   "page": 1,
+   "type": "image",
+   "enc": "jpeg",
+   "width": 1512,
+   "height": 2016,
+   "counts": {
+    "five": 1,
+    "nine": 0
+   },
+   "linesWithWords": [
+    "transfer. A late fee will apply if payment is more than five days late. The security deposit"
+   ],
+   "meanConf": 95.7,
+   "lowConf": [
+    [
+     "42",
+     70
+    ]
+   ],
+   "textHead": "Rental Agreement Summary\n\nThis summary covers the lease of the second floor apartment at 42 Oak Avenue. The\nlease begins on the first day of June and runs for twelve months, ending on the last day of\n"
+  }
+ ],
+ "output": [
+  {
+   "file": "orient/icc-wide-app2/extracted_output/img-000.png",
+   "page": 1,
+   "type": "image",
+   "enc": "image",
+   "width": 1512,
+   "height": 2016,
+   "counts": {
+    "five": 0,
+    "nine": 1
+   },
+   "linesWithWords": [
+    "transfer. A late fee will apply if payment is more than nine days late. The security deposit"
+   ],
+   "meanConf": 95.7,
+   "lowConf": [
+    [
+     "42",
+     70
+    ]
+   ],
+   "textHead": "Rental Agreement Summary\n\nThis summary covers the lease of the second floor apartment at 42 Oak Avenue. The\nlease begins on the first day of June and runs for twelve months, ending on the last day of\n"
+  }
+ ],
+ "independentPixelCheck": {
+  "changedOutsideMask": 0,
+  "changedInsideMask": 942,
+  "maskPixels": 1093,
+  "maxAbsDiffOutside": 0
+ },
+ "popplerRenderDiff": {
+  "changedOutsideMaskBeyond2px": 0,
+  "changedInRing0to2pxOutsideMask": 10,
+  "renderer": "poppler pdftoppm pdftoppm version 25.03.0",
+  "size": [
+   1512,
+   2016
+  ],
+  "changedOutsideMask": 10,
+  "changedInsideMask": 924,
+  "maxAbsOutside": 2
+ },
+ "orientColorCheck": {
+  "poppler": {
+   "sizeIn": [
+    1512,
+    2016
+   ],
+   "sizeOut": [
+    1512,
+    2016
+   ],
+   "original": {
+    "rotationToUpright": 0,
+    "upright": true,
+    "meanAbsVsUprightRef": 0.7
+   },
+   "edited": {
+    "rotationToUpright": 0,
+    "upright": true,
+    "meanAbsVsUprightRef": 0.7
+   },
+   "orientationKept": true,
+   "editRectRotationDeg": 0,
+   "changedOutsideEditRect": 0,
+   "maxAbsOutsideEditRect": 0,
+   "meanAbsOutsideEditRect": 0,
+   "changedInsideEditRect": 934
+  },
+  "pdfjs": {
+   "sizeIn": [
+    1512,
+    2016
+   ],
+   "sizeOut": [
+    1512,
+    2016
+   ],
+   "original": {
+    "rotationToUpright": 0,
+    "upright": true,
+    "meanAbsVsUprightRef": 0.04
+   },
+   "edited": {
+    "rotationToUpright": 0,
+    "upright": true,
+    "meanAbsVsUprightRef": 0.03
+   },
+   "orientationKept": true,
+   "editRectRotationDeg": 0,
+   "changedOutsideEditRect": 340277,
+   "maxAbsOutsideEditRect": 7,
+   "meanAbsOutsideEditRect": 0.1711,
+   "changedInsideEditRect": 989
+  },
+  "colorSpace": {
+   "input": {
+    "kind": "/DeviceRGB"
+   },
+   "output": {
+    "kind": "/DeviceRGB"
+   },
+   "same": true
+  }
+ }
+}

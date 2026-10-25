@@ -1,9 +1,9 @@
 {
  "all": {
-  "when": "Sun Oct 25 2026 10:03:41 GMT-0700 (Pacific Daylight Time)",
-  "origin": "http://127.0.0.1:46461",
+  "when": "Sun Oct 25 2026 13:08:05 GMT-0700 (Pacific Daylight Time)",
+  "origin": "http://127.0.0.1:45937",
   "blockedExternalRequests": [],
-  "servedCount": 113,
+  "servedCount": 169,
   "servedOutsideProjectVendorSrcProof": [],
   "inputsSha256Before": {
    "text-standin.pdf": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
@@ -365,5 +365,125 @@
   "inputsUnchanged": true,
   "inputsMtimeUnchanged": true,
   "realInputs": 3
+ },
+ "icc-wide-iccbased": {
+  "when": "Sun Oct 25 2026 10:25:31 GMT-0700 (Pacific Daylight Time)",
+  "origin": "http://127.0.0.1:46737",
+  "blockedExternalRequests": [],
+  "servedCount": 30,
+  "servedOutsideProjectVendorSrcProof": [],
+  "inputsSha256Before": {
+   "text-standin.pdf": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+   "text-runs-standin.pdf": "a092f47dba142f21ece7e43bf39576077fdc79cd060dfefb1798dbd61d3b1c4b",
+   "scan-standin.pdf": "7fe78d6ac0dd9719453f3e44b0e8bd4ee55d784027f19a2b356269ecadde9af1",
+   "photo-standin.pdf": "1acb6370268c73b1c8efb177ea111ad2fd28bcdeb218947f24ed0f1611b3bb50",
+   "searchable-standin.pdf": "aa46a16a621604d8f0dbcbd7f10f5f881d1ccd7ac4df89a582f4fc0d2e28e59f"
+  },
+  "inputsSha256After": {
+   "text-standin.pdf": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+   "text-runs-standin.pdf": "a092f47dba142f21ece7e43bf39576077fdc79cd060dfefb1798dbd61d3b1c4b",
+   "scan-standin.pdf": "7fe78d6ac0dd9719453f3e44b0e8bd4ee55d784027f19a2b356269ecadde9af1",
+   "photo-standin.pdf": "1acb6370268c73b1c8efb177ea111ad2fd28bcdeb218947f24ed0f1611b3bb50",
+   "searchable-standin.pdf": "aa46a16a621604d8f0dbcbd7f10f5f881d1ccd7ac4df89a582f4fc0d2e28e59f"
+  },
+  "inputsUnchanged": true,
+  "inputsMtimeUnchanged": true,
+  "realInputs": 0
+ },
+ "orient-exif6": {
+  "when": "Sun Oct 25 2026 10:26:13 GMT-0700 (Pacific Daylight Time)",
+  "origin": "http://127.0.0.1:33315",
+  "blockedExternalRequests": [],
+  "servedCount": 28,
+  "servedOutsideProjectVendorSrcProof": [],
+  "inputsSha256Before": {
+   "text-standin.pdf": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+   "text-runs-standin.pdf": "a092f47dba142f21ece7e43bf39576077fdc79cd060dfefb1798dbd61d3b1c4b",
+   "scan-standin.pdf": "7fe78d6ac0dd9719453f3e44b0e8bd4ee55d784027f19a2b356269ecadde9af1",
+   "photo-standin.pdf": "1acb6370268c73b1c8efb177ea111ad2fd28bcdeb218947f24ed0f1611b3bb50",
+   "searchable-standin.pdf": "aa46a16a621604d8f0dbcbd7f10f5f881d1ccd7ac4df89a582f4fc0d2e28e59f"
+  },
+  "inputsSha256After": {
+   "text-standin.pdf": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+   "text-runs-standin.pdf": "a092f47dba142f21ece7e43bf39576077fdc79cd060dfefb1798dbd61d3b1c4b",
+   "scan-standin.pdf": "7fe78d6ac0dd9719453f3e44b0e8bd4ee55d784027f19a2b356269ecadde9af1",
+   "photo-standin.pdf": "1acb6370268c73b1c8efb177ea111ad2fd28bcdeb218947f24ed0f1611b3bb50",
+   "searchable-standin.pdf": "aa46a16a621604d8f0dbcbd7f10f5f881d1ccd7ac4df89a582f4fc0d2e28e59f"
+  },
+  "inputsUnchanged": true,
+  "inputsMtimeUnchanged": true,
+  "realInputs": 0
+ },
+ "orient-exif8": {
+  "when": "Sun Oct 25 2026 10:31:47 GMT-0700 (Pacific Daylight Time)",
+  "origin": "http://127.0.0.1:35623",
+  "blockedExternalRequests": [],
+  "servedCount": 28,
+  "servedOutsideProjectVendorSrcProof": [],
+  "inputsSha256Before": {
+   "text-standin.pdf": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+   "text-runs-standin.pdf": "a092f47dba142f21ece7e43bf39576077fdc79cd060dfefb1798dbd61d3b1c4b",
+   "scan-standin.pdf": "7fe78d6ac0dd9719453f3e44b0e8bd4ee55d784027f19a2b356269ecadde9af1",
+   "photo-standin.pdf": "1acb6370268c73b1c8efb177ea111ad2fd28bcdeb218947f24ed0f1611b3bb50",
+   "searchable-standin.pdf": "aa46a16a621604d8f0dbcbd7f10f5f881d1ccd7ac4df89a582f4fc0d2e28e59f"
+  },
+  "inputsSha256After": {
+   "text-standin.pdf": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+   "text-runs-standin.pdf": "a092f47dba142f21ece7e43bf39576077fdc79cd060dfefb1798dbd61d3b1c4b",
+   "scan-standin.pdf": "7fe78d6ac0dd9719453f3e44b0e8bd4ee55d784027f19a2b356269ecadde9af1",
+   "photo-standin.pdf": "1acb6370268c73b1c8efb177ea111ad2fd28bcdeb218947f24ed0f1611b3bb50",
+   "searchable-standin.pdf": "aa46a16a621604d8f0dbcbd7f10f5f881d1ccd7ac4df89a582f4fc0d2e28e59f"
+  },
+  "inputsUnchanged": true,
+  "inputsMtimeUnchanged": true,
+  "realInputs": 0
+ },
+ "icc-wide-app2": {
+  "when": "Sun Oct 25 2026 11:06:01 GMT-0700 (Pacific Daylight Time)",
+  "origin": "http://127.0.0.1:39763",
+  "blockedExternalRequests": [],
+  "servedCount": 28,
+  "servedOutsideProjectVendorSrcProof": [],
+  "inputsSha256Before": {
+   "text-standin.pdf": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+   "text-runs-standin.pdf": "a092f47dba142f21ece7e43bf39576077fdc79cd060dfefb1798dbd61d3b1c4b",
+   "scan-standin.pdf": "7fe78d6ac0dd9719453f3e44b0e8bd4ee55d784027f19a2b356269ecadde9af1",
+   "photo-standin.pdf": "1acb6370268c73b1c8efb177ea111ad2fd28bcdeb218947f24ed0f1611b3bb50",
+   "searchable-standin.pdf": "aa46a16a621604d8f0dbcbd7f10f5f881d1ccd7ac4df89a582f4fc0d2e28e59f"
+  },
+  "inputsSha256After": {
+   "text-standin.pdf": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+   "text-runs-standin.pdf": "a092f47dba142f21ece7e43bf39576077fdc79cd060dfefb1798dbd61d3b1c4b",
+   "scan-standin.pdf": "7fe78d6ac0dd9719453f3e44b0e8bd4ee55d784027f19a2b356269ecadde9af1",
+   "photo-standin.pdf": "1acb6370268c73b1c8efb177ea111ad2fd28bcdeb218947f24ed0f1611b3bb50",
+   "searchable-standin.pdf": "aa46a16a621604d8f0dbcbd7f10f5f881d1ccd7ac4df89a582f4fc0d2e28e59f"
+  },
+  "inputsUnchanged": true,
+  "inputsMtimeUnchanged": true,
+  "realInputs": 0
+ },
+ "orient-cm90": {
+  "when": "Sun Oct 25 2026 11:01:42 GMT-0700 (Pacific Daylight Time)",
+  "origin": "http://127.0.0.1:34099",
+  "blockedExternalRequests": [],
+  "servedCount": 28,
+  "servedOutsideProjectVendorSrcProof": [],
+  "inputsSha256Before": {
+   "text-standin.pdf": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+   "text-runs-standin.pdf": "a092f47dba142f21ece7e43bf39576077fdc79cd060dfefb1798dbd61d3b1c4b",
+   "scan-standin.pdf": "7fe78d6ac0dd9719453f3e44b0e8bd4ee55d784027f19a2b356269ecadde9af1",
+   "photo-standin.pdf": "1acb6370268c73b1c8efb177ea111ad2fd28bcdeb218947f24ed0f1611b3bb50",
+   "searchable-standin.pdf": "aa46a16a621604d8f0dbcbd7f10f5f881d1ccd7ac4df89a582f4fc0d2e28e59f"
+  },
+  "inputsSha256After": {
+   "text-standin.pdf": "b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe0770f3e1c159b",
+   "text-runs-standin.pdf": "a092f47dba142f21ece7e43bf39576077fdc79cd060dfefb1798dbd61d3b1c4b",
+   "scan-standin.pdf": "7fe78d6ac0dd9719453f3e44b0e8bd4ee55d784027f19a2b356269ecadde9af1",
+   "photo-standin.pdf": "1acb6370268c73b1c8efb177ea111ad2fd28bcdeb218947f24ed0f1611b3bb50",
+   "searchable-standin.pdf": "aa46a16a621604d8f0dbcbd7f10f5f881d1ccd7ac4df89a582f4fc0d2e28e59f"
+  },
+  "inputsUnchanged": true,
+  "inputsMtimeUnchanged": true,
+  "realInputs": 0
  }
 }
