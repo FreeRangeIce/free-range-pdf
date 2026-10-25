@@ -34,27 +34,27 @@
    "linesWithWords": [
     "transfer. A late fee will apply if payment is more than nine days late. The security deposit"
    ],
-   "meanConf": 96,
+   "meanConf": 95.9,
    "lowConf": [],
    "textHead": "Rental Agreement Summary\n\nThis summary covers the lease of the second floor apartment at 42 Oak Avenue. The\nlease begins on the first day of June and runs for twelve months, ending on the last day of\n"
   }
  ],
  "independentPixelCheck": {
   "changedOutsideMask": 0,
-  "changedInsideMask": 910,
-  "maskPixels": 1051,
+  "changedInsideMask": 918,
+  "maskPixels": 1062,
   "maxAbsDiffOutside": 0
  },
  "popplerRenderDiff": {
   "changedOutsideMaskBeyond2px": 0,
-  "changedInRing0to2pxOutsideMask": 8,
+  "changedInRing0to2pxOutsideMask": 9,
   "renderer": "poppler pdftoppm pdftoppm version 25.03.0",
   "size": [
    1512,
    2016
   ],
-  "changedOutsideMask": 8,
-  "changedInsideMask": 884,
+  "changedOutsideMask": 9,
+  "changedInsideMask": 891,
   "maxAbsOutside": 3
  }
 }

@@ -85,7 +85,7 @@
  },
  "output": {
   "file": "/workspace/free-range-pdf/proof/photo/photo-standin.edited.pdf",
-  "bytes": 850498,
+  "bytes": 850499,
   "eofMarkers": 1,
   "startxrefs": 1,
   "trailerHasPrev": false,
@@ -155,7 +155,7 @@
     "jpegAPP1Exif": false,
     "jpegICC": false,
     "jpegXMP": false,
-    "bytes": 834930
+    "bytes": 834931
    }
   ],
   "pageThumbs": [],

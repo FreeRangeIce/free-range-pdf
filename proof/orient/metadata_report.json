@@ -1,0 +1,43 @@
+{
+ "input": {
+  "pdfInfo": {
+   "/CreationDate": "D:20261011222829Z",
+   "/Creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+   "/ModDate": "D:20261011222829Z",
+   "/Producer": "FreeRangePDF stand-in generator",
+   "/Title": "FreeRangePDF proof stand-in (photo, SIMULATED)"
+  },
+  "catalogXMP": true,
+  "pageThumb": true,
+  "imageFilter": "/DCTDecode",
+  "imageColorSpace": "/DeviceRGB",
+  "imageXMP": true,
+  "jpegExif": true,
+  "jpegICC": true,
+  "jpegXMP": false,
+  "exifMakeModel": true,
+  "exifDateTime": true,
+  "anyGpsMarkerInFile": true
+ },
+ "output": {
+  "pdfInfo": {
+   "/CreationDate": "D:20261011222829Z",
+   "/Creator": "pdf-lib (https://github.com/Hopding/pdf-lib)",
+   "/ModDate": "D:20261011222829Z",
+   "/Producer": "FreeRangePDF stand-in generator",
+   "/Title": "FreeRangePDF proof stand-in (photo, SIMULATED)"
+  },
+  "catalogXMP": false,
+  "pageThumb": false,
+  "imageFilter": "/FlateDecode",
+  "imageColorSpace": "/DeviceRGB",
+  "imageXMP": false,
+  "jpegExif": false,
+  "jpegICC": false,
+  "jpegXMP": false,
+  "exifMakeModel": false,
+  "exifDateTime": false,
+  "anyGpsMarkerInFile": false
+ },
+ "pdfInfoUnchanged": true
+}

@@ -2,7 +2,7 @@
 // OpenCV.js: paper edges -> perspective/deskew -> crop -> ~300 dpi; CLAHE / adaptive threshold for OCR only.
 // Tesseract.js (eng, tessdata_fast, vendored) gives lines/words/confidences.
 // Output: the page image is decoded, the patch is written INTO it, and the whole image is re-saved losslessly
-// (Flate + PNG predictor). The old JPEG stream, image/catalog XMP, EXIF/GPS/ICC segments and /Thumb are gone.
+// (Flate + PNG predictor) under the original /ColorSpace. The old JPEG stream (with its EXIF/GPS/APP2 ICC segments), image/catalog XMP and /Thumb are gone.
 import { openPdf, renderPage, diff, crop, scaled, png, sha256, u8ToB64, fetchBytes, getData } from './img-util.js';
 import { tokenize, mul, apply } from './content-stream.js';
 import { collectGarbage } from './pdf-gc.js';
@@ -63,10 +63,20 @@ function findPageImage(pdoc, pageIndex = 0) {
   throw new Error('no page image found');
 }
 
+function jpegWithoutApp1(u8) { // drop APP1 (EXIF/XMP) marker segments before SOS; everything else byte for byte
+  if (u8[0] !== 0xFF || u8[1] !== 0xD8) return u8; const parts = [u8.subarray(0, 2)]; let i = 2;
+  while (i + 4 <= u8.length && u8[i] === 0xFF) { const m = u8[i + 1]; if (m === 0xDA) break; const L = (u8[i + 2] << 8) | u8[i + 3]; if (m !== 0xE1) parts.push(u8.subarray(i, i + 2 + L)); i += 2 + L; }
+  parts.push(u8.subarray(i)); const out = new Uint8Array(parts.reduce((a, p) => a + p.length, 0)); let o = 0; for (const p of parts) { out.set(p, o); o += p.length; } return out; }
 async function decodeImageToCanvas(img) {
   if (img.filter !== '/DCTDecode') throw new Error('proof handles DCTDecode (JPEG) page images; got ' + img.filter);
-  // colorSpaceConversion 'default': an embedded ICC profile is applied, so the lossless re-save (DeviceRGB = sRGB) keeps colour
-  const bmp = await createImageBitmap(new Blob([img.raw], { type: 'image/jpeg' }), { colorSpaceConversion: 'default', premultiplyAlpha: 'none' });
+  // The pixels are kept in the image's OWN colour space (colorSpaceConversion 'none': a JPEG APP2 ICC profile is NOT applied)
+  // and re-saved under the original /ColorSpace, so a PDF viewer shows exactly what it showed for the original (pdf.js and
+  // poppler ignore APP2 inside a DCT stream; an /ICCBased ColorSpace is copied as is). imageOrientation 'none': EXIF
+  // Orientation is ignored, as PDF viewers ignore it inside an image stream (the on-page orientation comes from the PDF only).
+  // Chrome still applies EXIF Orientation with imageOrientation 'none', so the APP1 (EXIF) segments are left out of the bytes
+  // given to the DECODER only (they carry no pixel data; the entropy-coded data is untouched).
+  const bmp = await createImageBitmap(new Blob([jpegWithoutApp1(img.raw)], { type: 'image/jpeg' }), { colorSpaceConversion: 'none', imageOrientation: 'none', premultiplyAlpha: 'none' });
+  if (bmp.width !== img.width || bmp.height !== img.height) throw new Error(`decoded image is ${bmp.width}x${bmp.height}, the PDF says ${img.width}x${img.height}`);
   const c = document.createElement('canvas'); c.width = bmp.width; c.height = bmp.height;
   c.getContext('2d', { willReadFrequently: true }).drawImage(bmp, 0, 0); return c;
 }
@@ -227,7 +237,9 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
     paper.quad = [[0, 0], [W, 0], [W, H], [0, H]]; paper.method = `full image: ${(paper.borderBrightFrac * 100).toFixed(1)}% of the outer frame is paper-bright, so the paper fills the scan (no background edge)`;
   }
   // page /Rotate: reorder the quad so its first corner is the DISPLAYED top-left (rotation is clockwise)
-  { const perm = { 0: [0, 1, 2, 3], 90: [3, 0, 1, 2], 180: [2, 3, 0, 1], 270: [1, 2, 3, 0] }[rot]; paper.quadImage = paper.quad; paper.quad = perm.map(i => paper.quad[i]); paper.pageRotate = rot; }
+  // + a rotated placement matrix (cm): the image's x axis in user space; a clockwise turn on the page counts like /Rotate
+  const ctmRot = ((-Math.round(Math.atan2(img.ctm[1], img.ctm[0]) / (Math.PI / 2)) * 90) % 360 + 360) % 360, rotEff = (rot + ctmRot) % 360;
+  { const perm = { 0: [0, 1, 2, 3], 90: [3, 0, 1, 2], 180: [2, 3, 0, 1], 270: [1, 2, 3, 0] }[rotEff]; paper.quadImage = paper.quad; paper.quad = perm.map(i => paper.quad[i]); paper.pageRotate = rot; paper.placementRotate = ctmRot; }
   const ps = paperSize(paper.quad, W, H);
   // crop to the paper: pull the corners 0.4% toward the centre so no background sliver reaches OCR
   { const cx = paper.quad.reduce((a, p) => a + p[0], 0) / 4, cy = paper.quad.reduce((a, p) => a + p[1], 0) / 4; paper.quadInset = paper.quad.map(([x, y]) => [x + (cx - x) * 0.008, y + (cy - y) * 0.008]); }
@@ -465,6 +477,10 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
   for (const s of segs) { s.up = s.up || s.dn; s.dn = s.dn || s.up; }
   const paperRGB = [0, 1, 2].map(i => Math.round(median(segs.flatMap(s => [s.up[i], s.dn[i]]))));
   const bw = box.x1 - box.x0, bh = box.y1 - box.y0;
+  // "coloured mark" test: distance of a pixel from the paper->ink colour line (not absolute chroma). Tinted paper (warm
+  // phone photos) and the ink's own JPEG colour fringe lie on/near that line and are NOT marks; a red pen or highlighter is far off it.
+  const markDist = (() => { const P = paperRGB, I = target.inkRGB, d = [0, 1, 2].map(q => I[q] - P[q]), dd = d[0] ** 2 + d[1] ** 2 + d[2] ** 2 || 1;
+    return (r, g, b) => { const v = [r - P[0], g - P[1], b - P[2]]; const t = Math.max(0, Math.min(1, (v[0] * d[0] + v[1] * d[1] + v[2] * d[2]) / dd)); return Math.hypot(v[0] - t * d[0], v[1] - t * d[1], v[2] - t * d[2]); }; })();
   const colAt = (x, which) => { let a = segs[0], b = segs[segs.length - 1]; for (let i = 0; i < segs.length - 1; i++) if (x >= segs[i].cx && x <= segs[i + 1].cx) { a = segs[i]; b = segs[i + 1]; break; } const t = b.cx === a.cx ? 0 : Math.min(1, Math.max(0, (x - a.cx) / (b.cx - a.cx))); return [0, 1, 2].map(i => a[which][i] * (1 - t) + b[which][i] * t); };
   const inkLeftReal = (() => { for (let x = wb.x0; x < wb.x1; x++) for (let y = bb.y0; y < bb.y1; y++) if (gd[y * cw + x] < thr) return x; return wb.x0; })();
   const drawX = inkLeftReal - (r0.inkLeftRel - 20) * hsWord;
@@ -524,7 +540,10 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
     const pm = pv.reduce((a, b) => a + b, 0) / pv.length, psd = Math.sqrt(pv.reduce((a, b) => a + (b - pm) ** 2, 0) / pv.length);
     const delta = Math.max(4, 3 * psd, 0.04 * (paperLvl - target.inkMedianGray));
     // coloured marks (handwriting, highlighter strokes, stamps) are never part of a printed word: chroma > 40
-    const hand = new cv.Mat(eh, ew, cv.CV_8U); let handN = 0; for (let i = 0; i < ew * eh; i++) { const r_ = rgb.data[i * 3], g_ = rgb.data[i * 3 + 1], b_ = rgb.data[i * 3 + 2]; const c_ = Math.max(r_, g_, b_) - Math.min(r_, g_, b_); hand.data[i] = c_ > 40 && g.data[i] < lp.data[i] - delta ? 255 : 0; handN += hand.data[i] ? 1 : 0; }
+    const hand = new cv.Mat(eh, ew, cv.CV_8U); let handN = 0; for (let i = 0; i < ew * eh; i++) { const r_ = rgb.data[i * 3], g_ = rgb.data[i * 3 + 1], b_ = rgb.data[i * 3 + 2]; const c_ = markDist(r_, g_, b_); hand.data[i] = c_ > 40 && g.data[i] < lp.data[i] - delta ? 255 : 0; handN += hand.data[i] ? 1 : 0; }
+    { // the edited word itself is never a "coloured mark": its JPEG colour fringe used to be kept from the original (old-digit specks, holes in the new glyphs)
+      const wy0_ = Math.min(...eWords.map(w => w.bbox.y0)), wy1_ = Math.max(...eWords.map(w => w.bbox.y1));
+      for (let y = Math.max(0, wy0_ - 4 - ey0); y < Math.min(eh, wy1_ + 4 - ey0); y++) for (let x = Math.max(0, wb.x0 - 4 - ex0); x < Math.min(ew, wb.x1 + 4 - ex0); x++) if (hand.data[y * ew + x]) { hand.data[y * ew + x] = 0; handN--; } }
     const kh = cv.getStructuringElement(cv.MORPH_RECT, new cv.Size(3, 3)); const handD = new cv.Mat(); cv.dilate(hand, handD, kh); kh.delete();
     const inkM = new cv.Mat(eh, ew, cv.CV_8U); for (let i = 0; i < ew * eh; i++) inkM.data[i] = g.data[i] < lp.data[i] - delta && !hand.data[i] ? 255 : 0;
     // only ink blobs that belong to the old word are removed: connected components touching the old word's box.
@@ -549,7 +568,12 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
         const kc = cv.getStructuringElement(cv.MORPH_ELLIPSE, new cv.Size(5, 5)); cv.morphologyEx(oldD, oldD, cv.MORPH_CLOSE, kc); kc.delete(); }
       near.delete(); far.delete(); }
     // dilate: letter pixels + their soft edge + JPEG ringing never feed the inpaint or the paper sample
-    const kdsz = isPhoto ? kd0sz : 7; const kd = cv.getStructuringElement(cv.MORPH_ELLIPSE, new cv.Size(kdsz, kdsz)); const inkD = new cv.Mat(); cv.dilate(isPhoto ? strongM : inkM, inkD, kd); kd.delete(); // photos: only STRONG ink is withheld from the paper model, so natural paper mottling stays in it (no lighter halo)
+    const kdsz = isPhoto ? kd0sz + 6 : 7; const kd = cv.getStructuringElement(cv.MORPH_ELLIPSE, new cv.Size(kdsz, kdsz)); const inkD = new cv.Mat(); cv.dilate(isPhoto ? strongM : inkM, inkD, kd); kd.delete();
+    // photos: paper donors are pixels FAR from any ink (spatial exclusion, so the paper tone is not biased lighter), and never a
+    // pixel whose chroma differs from the paper's (the ink's JPEG colour fringe); this is what left pink specks / halos before
+    let paperChroma = null;
+    if (isPhoto) { const A = [], B = []; for (let i = 0; i < ew * eh; i += 2) if (!inkD.data[i]) { A.push(rgb.data[i * 3] - rgb.data[i * 3 + 1]); B.push(rgb.data[i * 3 + 2] - rgb.data[i * 3 + 1]); }
+      if (A.length > 100) { paperChroma = [median(A), median(B)]; { const mad = (v, m) => 1.4826 * median(v.map(t => Math.abs(t - m))); paperChroma.push(Math.max(4, 4 * mad(A, paperChroma[0])), Math.max(4, 4 * mad(B, paperChroma[1]))); } for (let i = 0; i < ew * eh; i++) { const da = Math.abs(rgb.data[i * 3] - rgb.data[i * 3 + 1] - paperChroma[0]) + Math.abs(rgb.data[i * 3 + 2] - rgb.data[i * 3 + 1] - paperChroma[1]); if (da > 10) inkD.data[i] = 255; } } } // photos: only STRONG ink is withheld from the paper model, so natural paper mottling stays in it (no lighter halo)
     // inpaint mask = dilated ink INSIDE the box only (outside the box nothing is touched)
     const m = new cv.Mat(eh, ew, cv.CV_8U); m.data.fill(0); for (let y = oy; y < oy + bh; y++) for (let x = ox; x < ox + bw; x++) m.data[y * ew + x] = oldD.data[y * ew + x] && !handD.data[y * ew + x] ? 255 : 0;
     if (isPhoto) { const k5 = cv.getStructuringElement(cv.MORPH_ELLIPSE, new cv.Size(5, 5)); cv.dilate(m, m, k5); k5.delete(); for (let y = 0; y < eh; y++) for (let x = 0; x < ew; x++) { const e = y * ew + x; if (!(y >= oy && y < oy + bh && x >= ox && x < ox + bw) || handD.data[e]) m.data[e] = 0; } } // +2 px so the feather below sits outside the old ink
@@ -573,6 +597,12 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
       for (let y = ty; y < Math.min(bh, ty + 2); y++) for (let x = tx; x < Math.min(bw, tx + 2); x++) { const e = (y + oy) * ew + x + ox; if (!m.data[e]) continue;
         const ss = Math.min(eh - 1, sy + y - ty) * ew + Math.min(ew - 1, sx + x - tx); const src = inkF.data[ss] ? s : ss;
         for (let q = 0; q < 3; q++) bg[(y * bw + x) * 3 + q] = Math.max(0, Math.min(255, sm.data[e * 3 + q] + (rgb.data[src * 3 + q] - sm.data[src * 3 + q]))); im[y * bw + x] = 1; n++; } }
+    if (isPhoto && paperChroma) for (let y = 0; y < bh; y++) for (let x = 0; x < bw; x++) { const e = (y + oy) * ew + x + ox; if (!m.data[e]) continue; const j = y * bw + x;
+      // keep the donor paper's own colour grain; only clamp chroma OUTLIERS (ink fringe specks) to the paper's chroma +- 4 sd
+      const Y = 0.299 * bg[j * 3] + 0.587 * bg[j * 3 + 1] + 0.114 * bg[j * 3 + 2];
+      const ca = paperChroma[0] + Math.max(-paperChroma[2], Math.min(paperChroma[2], bg[j * 3] - bg[j * 3 + 1] - paperChroma[0])), cb = paperChroma[1] + Math.max(-paperChroma[3], Math.min(paperChroma[3], bg[j * 3 + 2] - bg[j * 3 + 1] - paperChroma[1]));
+      const G = Y - 0.299 * ca - 0.114 * cb;
+      bg[j * 3] = Math.max(0, Math.min(255, G + ca)); bg[j * 3 + 1] = Math.max(0, Math.min(255, G)); bg[j * 3 + 2] = Math.max(0, Math.min(255, G + cb)); }
     if (isPhoto) { // 2-4 px feather: blend repainted paper into the untouched pixels with a soft mask (gradient and grain carry across)
       const mf = new cv.Mat(); m.convertTo(mf, cv.CV_32F, 1 / 255); cv.GaussianBlur(mf, mf, new cv.Size(0, 0), 1.0);
       for (let y = 0; y < bh; y++) for (let x = 0; x < bw; x++) { const e = (y + oy) * ew + x + ox; if (!m.data[e]) continue; const a = Math.min(1, mf.data32F[e]); const j = y * bw + x; for (let q = 0; q < 3; q++) bg[j * 3 + q] = rgb.data[e * 3 + q] * (1 - a) + bg[j * 3 + q] * a; }
@@ -584,8 +614,56 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
     const nz = new cv.Mat(bh, bw, cv.CV_32F); const rn2 = mulberry32(99); for (let i = 0; i < bw * bh; i++) nz.data32F[i] = Math.sqrt(-2 * Math.log(rn2() + 1e-12)) * Math.cos(2 * Math.PI * rn2());
     cv.GaussianBlur(nz, nz, new cv.Size(0, 0), 0.7); let s2 = 0; for (let i = 0; i < bw * bh; i++) s2 += nz.data32F[i] ** 2; const ns = Math.sqrt(s2 / (bw * bh)); const field = Float32Array.from(nz.data32F, v => v / ns);
     [rgb, g, lp, hand, handD, inkM, inkD, inkF, oldD, m, out, sm, nz, dbgM, dbgO].forEach(x => x.delete()); if (strongM) strongM.delete();
-    return { bg, handInBox, handInBoxN, inpaintMask: im, inpaintPixels: n, localPaperNoiseStd: +psd.toFixed(3), inkDelta: +delta.toFixed(2), grainPoolPixels: pool.length, field, dbg };
+    return { bg, isPhoto, paperChroma, handInBox, handInBoxN, inpaintMask: im, inpaintPixels: n, localPaperNoiseStd: +psd.toFixed(3), inkDelta: +delta.toFixed(2), grainPoolPixels: pool.length, field, dbg };
   })();
+  // ---- GLYPH REUSE: when every character of the new text exists among the old word's own glyphs (e.g. 1643 -> 1634),
+  // the photo's own glyphs are cut out and placed in the new order: same baseline (rows are copied unchanged), slot
+  // spacing kept (the original gaps between neighbouring glyphs, in order). Ink is transferred as darkness over the
+  // rebuilt paper: out = paper_new + w * (orig - paper_rebuilt_at_source). Otherwise the font path below is used.
+  const glyphPlan = (() => {
+    const oldCh = [...oldSeg].filter(c => c.trim()), newCh = [...newSeg].filter(c => c.trim());
+    if (oldSeg.includes(' ') || newSeg.includes(' ') || newCh.length !== oldCh.length) return null;
+    const col = []; for (let x = wb.x0; x < wb.x1; x++) { let k = 0; for (let y = bb.y0; y < bb.y1; y++) if (gd[y * cw + x] < thr) k++; col.push(k); }
+    const runs = []; let r = null; col.forEach((k, i) => { if (k > 0) { if (!r) r = { x0: wb.x0 + i, x1: wb.x0 + i + 1 }; else r.x1 = wb.x0 + i + 1; } else if (r) { runs.push(r); r = null; } }); if (r) runs.push(r);
+    if (runs.length !== oldCh.length) return { reason: `glyph segmentation found ${runs.length} glyphs for ${oldCh.length} characters`, runs };
+    const used = new Set(), src = [];
+    for (const c of newCh) { const k = oldCh.findIndex((o, i) => o === c && !used.has(i)); if (k < 0) return { reason: `character "${c}" not on the old word`, runs }; used.add(k); src.push(k); }
+    const gaps = runs.slice(0, -1).map((g, i) => runs[i + 1].x0 - g.x1); const dest = []; let x = runs[0].x0;
+    src.forEach((k, i) => { dest.push(x); x += runs[k].x1 - runs[k].x0 + (i < gaps.length ? gaps[i] : 0); });
+    return { ok: true, runs, src, dest, gaps, chars: newCh };
+  })();
+  const useGlyphs = !!(glyphPlan && glyphPlan.ok && bgInfo.isPhoto);
+  function glyphCompose() {
+    const c = document.createElement('canvas'); c.width = bw; c.height = bh; const x = c.getContext('2d', { willReadFrequently: true });
+    const D0 = x.createImageData(bw, bh); for (let i = 0; i < bw * bh; i++) { for (let q = 0; q < 3; q++) D0.data[i * 4 + q] = bgInfo.bg[i * 3 + q]; D0.data[i * 4 + 3] = 255; }
+    const ink0 = paperLvl - target.inkMedianGray, lo = Math.max(4, 0.10 * ink0), hi = Math.max(lo + 4, 0.30 * ink0);
+    const { runs, src, dest, gaps } = glyphPlan;
+    // ink colour of the glyphs that stay (chroma R-G, B-G of their strong ink); moved glyphs are pulled to it (luminance kept)
+    const inkChroma = ks => { const A = [], B = []; for (const k of ks) { const g = runs[k]; for (let y = 0; y < bh; y++) for (let sx = g.x0; sx < g.x1; sx++) { const bx = sx - box.x0; if (bx < 0 || bx >= bw) continue; const j = y * bw + bx, o = ((box.y0 + y) * cw + sx) * 4;
+      const dk = (0.299 * bgInfo.bg[j * 3] + 0.587 * bgInfo.bg[j * 3 + 1] + 0.114 * bgInfo.bg[j * 3 + 2]) - (0.299 * cd[o] + 0.587 * cd[o + 1] + 0.114 * cd[o + 2]); if (dk > 0.6 * ink0) { A.push(cd[o] - cd[o + 1]); B.push(cd[o + 2] - cd[o + 1]); } } } return A.length ? [median(A), median(B)] : null; };
+    const stay = src.map((k, i) => k === i ? k : -1).filter(k => k >= 0); const refChroma = inkChroma(stay); glyphPlan.inkChroma = { stay: refChroma, moved: {} };
+    src.forEach((k, i) => { const g = runs[k]; const padL = Math.max(1, Math.min(3, Math.floor(((k > 0 ? gaps[k - 1] : 6)) / 2))), padR = Math.max(1, Math.min(3, Math.floor(((k < gaps.length ? gaps[k] : 6)) / 2)));
+      const w = g.x1 - g.x0 + padL + padR, dx = dest[i] - g.x0;
+      // weight: darkness of the source pixel vs the rebuilt paper at the source, smoothstep lo..hi, limited to within 3 px
+      // of the glyph's STRONG ink (so paper mottling / JPEG specks in the cut window are never carried over: no box edges)
+      const dkA = new Float32Array(w * bh);
+      for (let y = 0; y < bh; y++) for (let u = 0; u < w; u++) { const sx = g.x0 - padL + u; const bx = sx - box.x0; if (bx < 0 || bx >= bw) continue; const j = y * bw + bx, o = ((box.y0 + y) * cw + sx) * 4;
+        dkA[y * w + u] = (0.299 * bgInfo.bg[j * 3] + 0.587 * bgInfo.bg[j * 3 + 1] + 0.114 * bgInfo.bg[j * 3 + 2]) - (0.299 * cd[o] + 0.587 * cd[o + 1] + 0.114 * cd[o + 2]); }
+      const strongThr = 0.45 * ink0, R = 3; const near = new Uint8Array(w * bh);
+      for (let y = 0; y < bh; y++) for (let u = 0; u < w; u++) if (dkA[y * w + u] > strongThr) for (let dy = -R; dy <= R; dy++) for (let du = -R; du <= R; du++) { const yy = y + dy, uu = u + du; if (yy >= 0 && yy < bh && uu >= 0 && uu < w && dy * dy + du * du <= R * R) near[yy * w + uu] = 1; }
+      const movedC = k !== i && refChroma ? inkChroma([k]) : null; if (movedC) glyphPlan.inkChroma.moved[glyphPlan.chars[i]] = { before: movedC, shift: [refChroma[0] - movedC[0], refChroma[1] - movedC[1]] };
+      const wg = new Float32Array(w * bh); for (let i = 0; i < w * bh; i++) { if (!near[i]) continue; const t = Math.max(0, Math.min(1, (dkA[i] - lo) / (hi - lo))); wg[i] = t * t * (3 - 2 * t); }
+      for (let y = 0; y < bh; y++) for (let u = 0; u < w; u++) { const a = wg[y * w + u]; if (a <= 0) continue; const sx = g.x0 - padL + u, tx = sx + dx; const bs = sx - box.x0, bt = tx - box.x0; if (bs < 0 || bs >= bw || bt < 0 || bt >= bw) continue;
+        const js = y * bw + bs, jt = y * bw + bt, o = ((box.y0 + y) * cw + sx) * 4;
+        // darkness is transferred as luminance; the ink's own colour only in the stroke core (edge JPEG colour fringe -> neutral, no pink specks)
+        const dQ = [0, 1, 2].map(q => cd[o + q] - bgInfo.bg[js * 3 + q]); const dY = 0.299 * dQ[0] + 0.587 * dQ[1] + 0.114 * dQ[2];
+        // stroke core: the source pixel itself (exact original weight/tone); soft edge: luminance darkness over the new paper
+        const core = Math.max(0, Math.min(1, (dkA[y * w + u] - 0.4 * ink0) / (0.3 * ink0)));
+        const v = [0, 1, 2].map(q => (bgInfo.bg[jt * 3 + q] + dY) * (1 - core) + cd[o + q] * core);
+        if (movedC) { const f = Math.max(0, Math.min(1, dkA[y * w + u] / ink0)); const Yv = 0.299 * v[0] + 0.587 * v[1] + 0.114 * v[2]; const ca = v[0] - v[1] + f * (refChroma[0] - movedC[0]), cb = v[2] - v[1] + f * (refChroma[1] - movedC[1]); const G = Yv - 0.299 * ca - 0.114 * cb; v[0] = G + ca; v[1] = G; v[2] = G + cb; }
+        for (let q = 0; q < 3; q++) D0.data[jt * 4 + q] = Math.max(0, Math.min(255, D0.data[jt * 4 + q] * (1 - a) + v[q] * a)); } });
+    x.putImageData(D0, 0, 0); return c;
+  }
   function compose(color, sigma, noiseSd, seed = 1234) {
     const c = document.createElement('canvas'); c.width = bw; c.height = bh; const x = c.getContext('2d', { willReadFrequently: true });
     const fill = x.createImageData(bw, bh); for (let i = 0; i < bw * bh; i++) { for (let q = 0; q < 3; q++) fill.data[i * 4 + q] = bgInfo.bg[i * 3 + q]; fill.data[i * 4 + 3] = 255; }
@@ -614,7 +692,7 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
     return P ? 2 * A / P : 0; }
   const swThr = (paperLvl + Math.min(...target.inkP10RGB)) / 2;
   target.strokeWidth = median(uWords.map(w => strokeW(i => gd[i], cw, ch, swThr, w.bbox)));
-  for (let it = 0; it < 6; it++) {
+  for (let it = 0; it < (useGlyphs ? 0 : 6); it++) {
     // 1) stroke weight FIRST, on a blur-invariant measure: ink mass = sum(paper - pixel) per px of word width
     //    (a Gaussian blur moves ink around but keeps its total). Bisection on w with the current colour, no blur.
     { // stroke width at the 50% level between paper and ink core: 2 * area / boundary pixels. A Gaussian blur keeps
@@ -656,7 +734,7 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
   let inkGray = target.coreMedianGray; gain = 1; const fitLog = [];
   const sgC = sigma; const sgs = []; for (let s_ = Math.max(0, sgC - 1.2); s_ <= sgC + 1.5001; s_ += 0.05) sgs.push(+s_.toFixed(2));
   let best = null; const fitCands = [];
-  for (const sg of sgs) for (const gn of [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.8, 2.1, 2.5, 3, 3.5, 4, 5]) {
+  for (const sg of (useGlyphs ? [] : sgs)) for (const gn of [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.8, 2.1, 2.5, 3, 3.5, 4, 5]) {
     let ig = target.coreMedianGray, w_ = wpx, r = null;
     // weight first (stem), then the ink TONE through the colour; repeat, and finish with a weight fit so the stem is
     // what the colour step left exact
@@ -672,8 +750,8 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
     fitCands.push({ sg, gn, med: +r.med.toFixed(1), stem: +r.stem.toFixed(3), edge: r.edge, core: r.core, ok: okSharp });
     if (!best || cost < best.cost) best = { cost, sg, gn, w: w_, ig, core: r.core, inkMedian: r.med, stem: r.stem, edge: r.edge };
   }
-  sigma = best.sg; gain = best.gn; wpx = best.w; inkGray = best.ig; color = colOf(inkGray);
-  fitLog.push({ ...best, candidatesTried: fitCands.length, nearMisses: fitCands.filter(c => c.ok && Math.abs(c.med - targetMed) <= 3).sort((a, b) => Math.abs(a.edge - target.edge) - Math.abs(b.edge - target.edge)).slice(0, 6) });
+  if (best) { sigma = best.sg; gain = best.gn; wpx = best.w; inkGray = best.ig; color = colOf(inkGray); } else fitLog.push({ glyphReuse: glyphPlan });
+  if (best) fitLog.push({ ...best, candidatesTried: fitCands.length, nearMisses: fitCands.filter(c => c.ok && Math.abs(c.med - targetMed) <= 3).sort((a, b) => Math.abs(a.edge - target.edge) - Math.abs(b.edge - target.edge)).slice(0, 6) });
   // ---- patch boundary: gradient-domain (membrane) correction + 3-px feather ----
   // The composed box keeps its own gradients; the low-frequency difference to the original along the 1-px border
   // (smoothed along the border so grain is not smeared inward) is spread over the box by solving Laplace's equation
@@ -701,17 +779,25 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
   // finalise = compose + patch-edge blend + coloured-mark restore; then the stem is calibrated on exactly this output
   // (the same box metric the report uses): the weight is nudged until the final stem matches the untouched words
   const buildFinal = () => {
-    const finalCanvas = compose(color, sigma, noiseSd); const edgeBlend = blendEdge(finalCanvas); const handKeep = (() => { // coloured marks inside the box are restored from the original, pixel for pixel
+    const finalCanvas = useGlyphs ? glyphCompose() : compose(color, sigma, noiseSd); const edgeBlend = blendEdge(finalCanvas); const handKeep = (() => { // coloured marks inside the box are restored from the original, pixel for pixel
     const ctx = finalCanvas.getContext('2d', { willReadFrequently: true }); const C = ctx.getImageData(0, 0, bw, bh); const O = corrCanvas.getContext('2d', { willReadFrequently: true }).getImageData(box.x0, box.y0, bw, bh).data;
     let changedBefore = 0; for (let i = 0; i < bw * bh; i++) if (bgInfo.handInBox[i]) { if (Math.abs(C.data[i * 4] - O[i * 4]) + Math.abs(C.data[i * 4 + 1] - O[i * 4 + 1]) + Math.abs(C.data[i * 4 + 2] - O[i * 4 + 2]) > 0) changedBefore++; for (let q = 0; q < 4; q++) C.data[i * 4 + q] = O[i * 4 + q]; }
     ctx.putImageData(C, 0, 0); return { colouredMarkPixelsInBox: bgInfo.handInBoxN, restoredFromOriginal: changedBefore }; })();
-    return { finalCanvas, edgeBlend, handKeep }; };
+    const keepUnmoved = useGlyphs ? (() => { // glyph swap: only the columns of the moved glyphs (+ their vacated slots) change; a 3 px ramp
+      // blends back to the ORIGINAL outside them, so untouched glyphs (e.g. the 1 and 6) and their paper stay exactly as they were
+      const { runs, src, dest } = glyphPlan; const mv = src.map((k, i) => k !== i ? i : -1).filter(i => i >= 0); if (!mv.length) return null;
+      const L = Math.min(...mv.map(i => Math.min(dest[i], runs[i].x0))) - 3 - box.x0, R = Math.max(...mv.map(i => Math.max(dest[i] + runs[src[i]].x1 - runs[src[i]].x0, runs[i].x1))) + 3 - box.x0, RAMP = 3;
+      const ctx = finalCanvas.getContext('2d', { willReadFrequently: true }); const C = ctx.getImageData(0, 0, bw, bh); const O = corrCanvas.getContext('2d', { willReadFrequently: true }).getImageData(box.x0, box.y0, bw, bh).data;
+      for (let x = 0; x < bw; x++) { const dd = x < L ? L - x : x >= R ? x - R + 1 : 0; const a = dd === 0 ? 1 : dd > RAMP ? 0 : 1 - dd / (RAMP + 1); if (a === 1) continue;
+        for (let y = 0; y < bh; y++) { const k = (y * bw + x) * 4; for (let q = 0; q < 3; q++) C.data[k + q] = a === 0 ? O[k + q] : Math.round(O[k + q] * (1 - a) + C.data[k + q] * a); } }
+      ctx.putImageData(C, 0, 0); glyphPlan.keepUnmoved = { movedColumns: [L + box.x0, R + box.x0], rampPx: RAMP }; return glyphPlan.keepUnmoved; })() : null;
+    return { finalCanvas, edgeBlend, handKeep, keepUnmoved }; };
   let _f = buildFinal(); const finStem = () => strokeW(i => grayAt(_f.finalCanvas.getContext('2d', { willReadFrequently: true }).getImageData(0, 0, bw, bh).data, i), bw, bh, swThr);
   const stemCal = [];
   // word-only stem (same region as the visual table) AND edge width: both pulled to the untouched words' values
   const wordRect = { x0: Math.max(0, wb.x0 - 3 - box.x0), y0: 0, x1: Math.min(bw, wb.x1 + 3 - box.x0), y1: bh };
   const sharpestNb = Math.min(...uStats.map(s => s.edge10_90px).filter(v => v != null));
-  for (let it = 0; it < 14; it++) { const D = _f.finalCanvas.getContext('2d', { willReadFrequently: true }).getImageData(0, 0, bw, bh).data;
+  for (let it = 0; it < (useGlyphs ? 0 : 14); it++) { const D = _f.finalCanvas.getContext('2d', { willReadFrequently: true }).getImageData(0, 0, bw, bh).data;
     const sNow = strokeW(i => grayAt(D, i), bw, bh, swThr, wordRect); const eNow = measure(_f.finalCanvas).edge10_90px;
     stemCal.push({ weightPx: +wpx.toFixed(3), sigma: +sigma.toFixed(3), wordStem: +sNow.toFixed(3), edge: eNow == null ? null : +eNow.toFixed(3) });
     const stemOk = Math.abs(sNow - target.strokeWidth) <= 0.01 * target.strokeWidth;
@@ -751,7 +837,8 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
     const ch_ = new cv.Mat(PH, PW, cv.CV_8U); for (let i = 0; i < PW * PH; i++) { let d = 0; for (let c = 0; c < 3; c++) d = Math.max(d, Math.abs(patchMat.data[i * 4 + c] - po.data[i * 4 + c])); ch_.data[i] = d > 0 ? 255 : 0; }
     const k1 = cv.getStructuringElement(cv.MORPH_RECT, new cv.Size(3, 3)); cv.dilate(ch_, ch_, k1);
     const O = origCanvas.getContext('2d', { willReadFrequently: true }).getImageData(px0, py0, PW, PH).data; const colr = new cv.Mat(PH, PW, cv.CV_8U);
-    for (let i = 0; i < PW * PH; i++) { const c_ = Math.max(O[i * 4], O[i * 4 + 1], O[i * 4 + 2]) - Math.min(O[i * 4], O[i * 4 + 1], O[i * 4 + 2]); colr.data[i] = c_ > 40 ? 255 : 0; }
+    { const hb = cv.Mat.zeros(ch, cw, cv.CV_8UC1); for (let y = 0; y < bh; y++) for (let x = 0; x < bw; x++) if (bgInfo.handInBox[y * bw + x]) hb.data[(y + box.y0) * cw + x + box.x0] = 255;
+      cv.warpPerspective(hb, colr, Hp, new cv.Size(PW, PH), cv.INTER_NEAREST, cv.BORDER_CONSTANT, new cv.Scalar(0)); hb.delete(); }
     const k2 = cv.getStructuringElement(cv.MORPH_RECT, new cv.Size(3, 3)); cv.dilate(colr, colr, k2);
     var colouredExcluded = 0; for (let i = 0; i < PW * PH; i++) { if (pMask.data[i] && colr.data[i]) colouredExcluded++; pMask.data[i] = pMask.data[i] && ch_.data[i] && !colr.data[i] ? 255 : 0; }
     [po, ch_, k1, colr, k2].forEach(m => m.delete()); }
@@ -772,7 +859,15 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
   const rgb = new Uint8Array(W * H * 3); for (let i = 0, j = 0; i < W * H; i++, j += 3) { rgb[j] = compData[i * 4]; rgb[j + 1] = compData[i * 4 + 1]; rgb[j + 2] = compData[i * 4 + 2]; }
   const filtered = pngPredict(rgb, W, H, 3);
   const page = pdoc.getPage(pageIndex);
-  const newImg = pdoc.context.flateStream(filtered, { Type: 'XObject', Subtype: 'Image', Width: W, Height: H, ColorSpace: 'DeviceRGB', BitsPerComponent: 8,
+  // colour space: the original image's /ColorSpace entry is reused unchanged (same object, so an /ICCBased profile stream is
+  // byte-identical); the pixels above are in that space (not converted)
+  const origCS = img.obj.dict.get(PDFName.of('ColorSpace'));
+  const csInfo = (() => { const o = origCS instanceof PDFRef ? pdoc.context.lookup(origCS) : origCS; const t = o ? o.toString() : null;
+    if (!o || t === '/DeviceRGB') return { kind: 'DeviceRGB' };
+    if (o instanceof PDFArray && o.get(0).toString() === '/ICCBased') { const st = pdoc.context.lookup(o.get(1)); const N = st.dict.lookup(PDFName.of('N'))?.asNumber?.(); return { kind: 'ICCBased', N, profileStreamBytes: st.contents.length }; }
+    return { kind: 'other', text: t.slice(0, 80) }; })();
+  if (!(csInfo.kind === 'DeviceRGB' || (csInfo.kind === 'ICCBased' && csInfo.N === 3))) throw new Error('SAVE BLOCKED: the page image uses colour space ' + JSON.stringify(csInfo) + '; only RGB images (DeviceRGB or a 3-channel ICC profile) can be re-saved without a colour change');
+  const newImg = pdoc.context.flateStream(filtered, { Type: 'XObject', Subtype: 'Image', Width: W, Height: H, ColorSpace: origCS || 'DeviceRGB', BitsPerComponent: 8,
     DecodeParms: { Predictor: 15, Colors: 3, BitsPerComponent: 8, Columns: W } });
   const newImgRef = pdoc.context.register(newImg);
   img.xo.set(PDFName.of(img.name), newImgRef);
@@ -782,7 +877,7 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
   pdoc.getPages().forEach((pg, i) => { if (pg.node.get(PDFName.of('Thumb'))) { pg.node.delete(PDFName.of('Thumb')); stripped.push(`page ${i + 1} /Thumb`); } });
   if (img.obj.dict.get(PDFName.of('Metadata'))) stripped.push('page image /Metadata (XMP) - dropped with the old image');
   const jpegSegs = jpegSegments(img.raw); if (jpegSegs.some(x => x.name === 'APP1-Exif')) stripped.push('JPEG APP1 EXIF (incl. GPS IFD and IFD1 thumbnail) - dropped with the old JPEG stream');
-  if (jpegSegs.some(x => x.name === 'APP2-ICC')) stripped.push('JPEG APP2 ICC profile - applied while decoding, then dropped (pixels are sRGB, written as DeviceRGB)');
+  if (jpegSegs.some(x => x.name === 'APP2-ICC')) stripped.push('JPEG APP2 ICC profile - NOT applied (PDF viewers ignore it; pixels kept in the image\'s own values), dropped with the old JPEG stream');
   // hidden text layer
   const hiddenInfo = hidden === 'edit' ? await editHiddenLayer(pdoc, page, pageIndex, { find, replace, poly, W, H, ctm: img.ctm, L, oi0, oi1, back, confirm, confirmBelow })
     : await addHiddenLayer(pdoc, page, { lines: O.lines, li, newTokens: newText.split(' '), back, W, H, ctm: img.ctm });
@@ -797,11 +892,11 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
     const same = back2[j] === O0[k] && back2[j + 1] === O0[k + 1] && back2[j + 2] === O0[k + 2];
     if (back2[j] !== compData[k] || back2[j + 1] !== compData[k + 1] || back2[j + 2] !== compData[k + 2]) imgVsComposite++;
     if (!same) { if (inMaskOrig(x, y)) imgInside++; else imgOutside++; } }
-  const imageCheck = { newFilter: img2.filter, newImageStreamBytes: img2.raw.length, oldImageStreamBytes: img.raw.length, decodedVsComposite: imgVsComposite, changedOutsidePatchMask: imgOutside, changedInsidePatchMask: imgInside, imagesInOutput: countImages(chk) };
+  const imageCheck = { colorSpace: csInfo, newFilter: img2.filter, newImageStreamBytes: img2.raw.length, oldImageStreamBytes: img.raw.length, decodedVsComposite: imgVsComposite, changedOutsidePatchMask: imgOutside, changedInsidePatchMask: imgInside, imagesInOutput: countImages(chk) };
   const maskCanvas = document.createElement('canvas'); maskCanvas.width = W; maskCanvas.height = H; { const mc = maskCanvas.getContext('2d'); const md = mc.createImageData(W, H); for (let y = py0; y < py1; y++) for (let x = px0; x < px1; x++) if (inMaskOrig(x, y)) { const k = (y * W + x) * 4; md.data[k] = md.data[k + 1] = md.data[k + 2] = 255; } for (let i = 3; i < md.data.length; i += 4) md.data[i] = 255; mc.putImageData(md, 0, 0); }
 
   // 11) render both PDFs with pdf.js at 1 image pixel = 1 device pixel and diff (every page)
-  const scale = W / Math.abs(img.ctm[0]);
+  const scale = W / Math.hypot(img.ctm[0], img.ctm[1]); // 1 image px = 1 device px (rotated placements too)
   const rA = await renderPage(original, scale, pageIndex + 1), rB = await renderPage(out, scale, pageIndex + 1);
   const toRender = renderMapper(img.ctm, W, H, rot, rA.width, rA.height, scale, chk.getPage(pageIndex));
   const polyR = poly.map(toRender); const rx0 = Math.floor(Math.min(...polyR.map(p => p[0]))) - 2, ry0 = Math.floor(Math.min(...polyR.map(p => p[1]))) - 2, rx1 = Math.ceil(Math.max(...polyR.map(p => p[0]))) + 2, ry1 = Math.ceil(Math.max(...polyR.map(p => p[1]))) + 2;
@@ -924,11 +1019,11 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
     measure: { ...meas, inkRGB_untouchedMedian: target.inkRGB, inkRGB_darkest40pct: inkRGB, inkRGB_drawn: inkFitRGB, paperRGB, lineHeight: lh },
     preview: (() => { // what the UI shows BEFORE Save: the natural-width gap the width rule leaves (nothing to the right moves)
       const g = overflow.gapPx > 0 ? { x0: Math.round(inkLeftReal + overflow.naturalInkWidthPx), x1: wb.x1, y0: box.y0, y1: box.y1 } : null;
-      const tu = ([ix, iy]) => [img.ctm[4] + ix / W * img.ctm[0], img.ctm[5] + (1 - iy / H) * img.ctm[3]];
+      const tu = ([ix, iy]) => [img.ctm[4] + ix / W * img.ctm[0] + (1 - iy / H) * img.ctm[2], img.ctm[5] + ix / W * img.ctm[1] + (1 - iy / H) * img.ctm[3]];
       return { showGapBeforeSave: !!g, gapPx: overflow.gapPx, gapMm: +(overflow.gapPx / 300 * 25.4).toFixed(2), slotPx: overflow.slotPx, drawnInkWidthPx: overflow.naturalInkWidthPx, decision: overflow.decision,
         gapRectDeskewedPx: g, gapPolygonPdfUser: g ? [[g.x0, g.y0], [g.x1, g.y0], [g.x1, g.y1], [g.x0, g.y1]].map(back).map(tu).map(p => p.map(v => +v.toFixed(2))) : null }; })(),
     visual, look: { ...look, inpaintThreshold: bgInfo.dbg.thr, inpaintLocalPaper: bgInfo.dbg.localPaper, strokeWidth50: { untouchedMedian: +target.strokeWidth.toFixed(3), newWord: +strokeW(i => { const D = finalCanvasData; return grayAt(D, i); }, bw, bh, swThr).toFixed(3) }, colourTarget, inpaintPixels: bgInfo.inpaintPixels, localPaperNoiseStd: bgInfo.localPaperNoiseStd, noiseModel: 'Gaussian field (0.7 px correlation): fitted line noise on new ink, local paper noise on inpainted paper, none on untouched paper' }, overflow, editedWords: { tokens: [ti0, ti1], ocrWords: [oi0, oi1], old: oldSeg, new: newSeg, ocr: eWords, tokenAlignment },
-    font: { localFit, chosen: fontKey, file: F.file.slice(F.file.indexOf('vendor/')), name: F.name, license: 'vendor/fonts/liberation/LICENSE (SIL OFL 1.1)', sizePx: FT.sizePx, horizontalScale: +hsWord.toFixed(4), lineHorizontalScale: +hScale.toFixed(4), blurPx, trials: fontTrials, fitGrid_blur_weight_ncc: fitGrid },
+    font: { glyphReuse: useGlyphs ? { method: 'own glyphs cut from the photo and re-ordered (baseline + slot gaps kept)', ...glyphPlan } : (glyphPlan && !glyphPlan.ok ? { notUsed: glyphPlan.reason } : null), localFit, chosen: useGlyphs ? 'own glyphs' : fontKey, file: F.file.slice(F.file.indexOf('vendor/')), name: F.name, license: 'vendor/fonts/liberation/LICENSE (SIL OFL 1.1)', sizePx: FT.sizePx, horizontalScale: +hsWord.toFixed(4), lineHorizontalScale: +hScale.toFixed(4), blurPx, trials: fontTrials, fitGrid_blur_weight_ncc: fitGrid },
     paintBox: { corrected: box, originalPolygon: poly.map(p => p.map(v => +v.toFixed(2))), patchRect: { x0: px0, y0: py0, x1: px1, y1: py1 }, maskPixels: maskCount, colouredMarkPixelsExcludedFromPatch: colouredExcluded },
     pixel: { compositeChangedOutsideMask: dPix.outside, compositeChangedInsideMask: dPix.inside,
       renderScale: scale, renderSize: [rA.width, rA.height], renderChangedOutsidePatchRect: dRender.outside, renderChangedInsidePatchRect: dRender.inside, renderChangedOutsideMask: dRender.outside + renderOutsideMask, renderMaxAbsDiffOutside: renderMaxAbsOutside, renderDiffHistogram: renderHist, outsideSamples: dRender.outsideSamples },
@@ -975,7 +1070,7 @@ function jpegSegments(b) {
 function countImages(pdoc) { let n = 0; for (const [, o] of pdoc.context.enumerateIndirectObjects()) if (o instanceof PDFRawStream && o.dict.lookup(PDFName.of('Subtype'))?.toString() === '/Image') n++; return n; }
 function renderMapper(ctm, W, H, rot, RW, RH, s, page) {
   const { width: PW, height: PH } = page.getMediaBox();
-  return ([ix, iy]) => { const x = ctm[4] + ix / W * ctm[0], y = ctm[5] + (1 - iy / H) * ctm[3];
+  return ([ix, iy]) => { const x = ctm[4] + ix / W * ctm[0] + (1 - iy / H) * ctm[2], y = ctm[5] + ix / W * ctm[1] + (1 - iy / H) * ctm[3];
     if (rot === 0) return [x * s, (PH - y) * s]; if (rot === 180) return [(PW - x) * s, y * s]; if (rot === 90) return [y * s, x * s]; return [(PH - y) * s, (PW - x) * s]; };
 }
 async function sameImageStream(a, b, p) { const A = await PDFDocument.load(a.slice()), B = await PDFDocument.load(b.slice()); return (await sha256(findPageImage(A, p).raw)) === (await sha256(findPageImage(B, p).raw)); }
@@ -999,7 +1094,7 @@ async function addHiddenLayer(pdoc, page, { lines, li, newTokens, back, W, H, ct
   pdoc.registerFontkit(window.fontkit);
   const font = standard ? await pdoc.embedFont(window.PDFLib.StandardFonts.Helvetica) : await pdoc.embedFont(await fetchBytes(REPO('vendor/fonts/liberation/LiberationSans-Regular.ttf')), { subset: true });
   const fname = page.node.newFontDictionary(standard ? 'F3' : 'FRPOCR', font.ref);
-  const toUser = ([ix, iy]) => [ctm[4] + ix / W * ctm[0], ctm[5] + (1 - iy / H) * ctm[3]];
+  const toUser = ([ix, iy]) => [ctm[4] + ix / W * ctm[0] + (1 - iy / H) * ctm[2], ctm[5] + ix / W * ctm[1] + (1 - iy / H) * ctm[3]]; // full placement matrix (rotated placements too)
   const f = n => (+n.toFixed(4)).toString(); let cs = 'q\nBT\n3 Tr\n'; let words = 0;
   lines.forEach((l, i) => l.words.forEach((w, wi) => {
     if (i === dropLine && wi > 0) return; // simulate a scanner OCR layer that lost the rest of this line
@@ -1021,7 +1116,7 @@ async function editHiddenLayer(pdoc, page, pageIndex, { find, replace, poly, W, 
   const cvr = page.node.get(PDFName.of('Contents')); const refs = cvr instanceof PDFArray ? cvr.asArray() : [cvr];
   const s = refs.map(r => bytesToBinary(decodePDFRawStream(pdoc.context.lookup(r)).decode())).join('\n');
   const ops = tokenize(s);
-  const toUser = ([ix, iy]) => [ctm[4] + ix / W * ctm[0], ctm[5] + (1 - iy / H) * ctm[3]];
+  const toUser = ([ix, iy]) => [ctm[4] + ix / W * ctm[0] + (1 - iy / H) * ctm[2], ctm[5] + ix / W * ctm[1] + (1 - iy / H) * ctm[3]]; // full placement matrix (rotated placements too)
   const up = poly.map(toUser); const bx0 = Math.min(...up.map(p => p[0])), bx1 = Math.max(...up.map(p => p[0])), by0 = Math.min(...up.map(p => p[1])), by1 = Math.max(...up.map(p => p[1]));
   let C = [1, 0, 0, 1, 0, 0], Tm = [1, 0, 0, 1, 0, 0], Tlm = Tm, Tr = 0, size = 12, TL = 0; const st = []; const runs = [];
   for (let i = 0; i < ops.length; i++) { const o = ops[i]; const a = o.args;

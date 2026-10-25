@@ -101,12 +101,15 @@
     "bytes": 181
    }
   ],
+  "colorSpace": {
+   "kind": "DeviceRGB"
+  },
   "newFilter": "/FlateDecode",
-  "newImageStreamBytes": 834930,
+  "newImageStreamBytes": 834931,
   "oldImageStreamBytes": 151122,
   "decodedVsComposite": 0,
   "changedOutsidePatchMask": 0,
-  "changedInsidePatchMask": 910,
+  "changedInsidePatchMask": 918,
   "imagesInOutput": 1
  },
  "stripped": [
@@ -114,7 +117,7 @@
   "page 1 /Thumb",
   "page image /Metadata (XMP) - dropped with the old image",
   "JPEG APP1 EXIF (incl. GPS IFD and IFD1 thumbnail) - dropped with the old JPEG stream",
-  "JPEG APP2 ICC profile - applied while decoding, then dropped (pixels are sRGB, written as DeviceRGB)"
+  "JPEG APP2 ICC profile - NOT applied (PDF viewers ignore it; pixels kept in the image's own values), dropped with the old JPEG stream"
  ],
  "decoderCheck": {
   "pdfjsRenderOfOutputVsWrittenPixels": 0,
@@ -178,7 +181,7 @@
  },
  "sizes": {
   "inputBytes": 156878,
-  "outputBytes": 850498
+  "outputBytes": 850499
  },
  "paper": {
   "quad": [
@@ -222,6 +225,7 @@
    ]
   ],
   "pageRotate": 0,
+  "placementRotate": 0,
   "quadInset": [
    [
     206.1,
@@ -3543,9 +3547,9 @@
    107
   ],
   "inkRGB_drawn": [
-   107,
-   102,
-   93
+   98,
+   93,
+   84
   ],
   "paperRGB": [
    233,
@@ -3573,13 +3577,13 @@
     "y1": 925,
     "pixels": 396
    },
-   "gapMean": 208.95,
-   "gapStd": 19.46,
+   "gapMean": 209.83,
+   "gapStd": 19.2,
    "paperMean": 207.78,
    "paperStd": 30.74,
-   "meanDelta": 1.17,
+   "meanDelta": 2.05,
    "noiseFloor5x5": 89.29,
-   "maxBlobDeviation5x5": 30.92,
+   "maxBlobDeviation5x5": 28.76,
    "blobAboveFloor": false,
    "oldWordAreaBefore": 203
   },
@@ -3869,7 +3873,7 @@
      "inkRight": 1551,
      "inkWidthPx": 72,
      "advancePerCharPx": 18,
-     "stemWidthPx": 7.947
+     "stemWidthPx": 7.68
     }
    },
    {
@@ -3997,7 +4001,7 @@
    "baselineDeltaPx": 0,
    "xHeightDeltaPx": -3,
    "capHeightDeltaPx": -13,
-   "stemWidthPx": 7.947,
+   "stemWidthPx": 7.68,
    "stemWidthUntouchedMedianPx": 7.891,
    "stemWidthOldWordPx": 7.144,
    "advancePerCharPx": 18,
@@ -4012,14 +4016,14 @@
   "oldWordBaselineDeltaPx": -1,
   "oldWordXHeightDeltaPx": -2,
   "patchEdge": {
-   "meanAbsStepAcrossBorderAfter": 0.483,
+   "meanAbsStepAcrossBorderAfter": 0.482,
    "sameSpotsBefore": 0.48,
    "paperBorderPixels": 378
   },
   "grain": {
    "insidePatchAfter": {
-    "std": 0.819,
-    "samples": 6889
+    "std": 0.84,
+    "samples": 6899
    },
    "insidePatchBefore": {
     "std": 1.014,
@@ -4428,168 +4432,186 @@
    "text": "nine",
    "inkMedianRGB": [
     160,
-    154,
+    155,
     145
    ],
-   "inkMedianGray": 154.8,
+   "inkMedianGray": 155.4,
    "inkP10RGB": [
-    140,
-    135,
-    125
+    142,
+    137,
+    127
    ],
-   "inkPixels": 1900,
-   "edge10_90px": 4.293,
-   "edgeSamples": 141,
-   "noiseStd": 0.827,
-   "noiseSamples": 5741
+   "inkPixels": 1891,
+   "edge10_90px": 4.375,
+   "edgeSamples": 124,
+   "noiseStd": 0.822,
+   "noiseSamples": 5732
   },
   "drawnColor": [
-   107,
-   102,
-   93
+   98,
+   93,
+   84
   ],
   "drawnColorUnclamped": [
-   107,
-   102,
-   93
+   98,
+   93,
+   84
   ],
-  "blurSigmaPx": 3.8296999999999985,
-  "strokeWeightPx": 0.23,
-  "inkGain": 1.6,
+  "blurSigmaPx": 3.829099999999999,
+  "strokeWeightPx": 0.49,
+  "inkGain": 1.4,
   "jointFit": {
-   "cost": 3.0196900675080864,
+   "cost": 2.8328588701271564,
    "sg": 3.05,
-   "gn": 1.6,
-   "w": 0.424072265625,
-   "ig": 102.00600000000001,
-   "core": 123.35499999999999,
-   "inkMedian": 144.355,
-   "stem": 7.918158567774936,
-   "edge": 4.034,
+   "gn": 1.4,
+   "w": 0.697998046875,
+   "ig": 93.70700000000002,
+   "core": 124.76799999999999,
+   "inkMedian": 144.469,
+   "stem": 7.9282051282051285,
+   "edge": 4.105,
    "candidatesTried": 770,
    "nearMisses": [
     {
      "sg": 4.2,
      "gn": 5,
-     "med": 144.8,
-     "stem": 11.789,
-     "edge": 4.355,
-     "core": 127.76799999999999,
-     "ok": true
-    },
-    {
-     "sg": 4.1,
-     "gn": 5,
-     "med": 146.4,
-     "stem": 11.63,
-     "edge": 4.326,
-     "core": 128.768,
-     "ok": true
-    },
-    {
-     "sg": 4.05,
-     "gn": 5,
-     "med": 147.4,
-     "stem": 11.317,
-     "edge": 4.308,
-     "core": 129.768,
+     "med": 145.4,
+     "stem": 11.771,
+     "edge": 4.327,
+     "core": 128.355,
      "ok": true
     },
     {
      "sg": 4.25,
      "gn": 5,
      "med": 144.4,
-     "stem": 12.008,
-     "edge": 4.377,
-     "core": 128.05599999999998,
+     "stem": 12.065,
+     "edge": 4.364,
+     "core": 128.355,
+     "ok": true
+    },
+    {
+     "sg": 3.7,
+     "gn": 4,
+     "med": 147.4,
+     "stem": 7.935,
+     "edge": 4.287,
+     "core": 126.469,
      "ok": true
     },
     {
      "sg": 4.15,
      "gn": 5,
-     "med": 145.4,
-     "stem": 11.65,
-     "edge": 4.293,
-     "core": 128.05599999999998,
+     "med": 145.8,
+     "stem": 11.695,
+     "edge": 4.276,
+     "core": 128.355,
      "ok": true
     },
     {
      "sg": 3.65,
      "gn": 5,
-     "med": 146.5,
-     "stem": 7.934,
-     "edge": 4.265,
-     "core": 125.768,
+     "med": 146.4,
+     "stem": 7.928,
+     "edge": 4.275,
+     "core": 125.46900000000001,
+     "ok": true
+    },
+    {
+     "sg": 3.7,
+     "gn": 5,
+     "med": 147.4,
+     "stem": 7.947,
+     "edge": 4.263,
+     "core": 127.05599999999998,
      "ok": true
     }
    ]
   },
   "stemCalibration": [
    {
-    "weightPx": 0.424,
+    "weightPx": 0.698,
     "sigma": 3.05,
-    "wordStem": 7.392,
-    "edge": 3.999
+    "wordStem": 7.326,
+    "edge": 4.088
    },
    {
-    "weightPx": 0.664,
-    "sigma": 3.153,
+    "weightPx": 0.967,
+    "sigma": 3.126,
     "wordStem": 8.017,
-    "edge": 3.94
+    "edge": 4.133
    },
    {
-    "weightPx": 0.622,
-    "sigma": 3.273,
+    "weightPx": 0.925,
+    "sigma": 3.189,
+    "wordStem": 7.988,
+    "edge": 4.119
+   },
+   {
+    "weightPx": 0.925,
+    "sigma": 3.256,
     "wordStem": 8.146,
-    "edge": 4.094
+    "edge": 4.112
    },
    {
-    "weightPx": 0.522,
-    "sigma": 3.348,
-    "wordStem": 8.096,
-    "edge": 4.12
+    "weightPx": 0.825,
+    "sigma": 3.325,
+    "wordStem": 8.036,
+    "edge": 4.141
    },
    {
-    "weightPx": 0.444,
-    "sigma": 3.414,
-    "wordStem": 7.994,
-    "edge": 4.045
+    "weightPx": 0.775,
+    "sigma": 3.385,
+    "wordStem": 7.97,
+    "edge": 4.128
    },
    {
-    "weightPx": 0.444,
-    "sigma": 3.504,
-    "wordStem": 8.181,
-    "edge": 4.018
+    "weightPx": 0.775,
+    "sigma": 3.449,
+    "wordStem": 8.055,
+    "edge": 4.105
    },
    {
-    "weightPx": 0.329,
-    "sigma": 3.601,
-    "wordStem": 7.968,
-    "edge": 4.101
+    "weightPx": 0.716,
+    "sigma": 3.52,
+    "wordStem": 8.094,
+    "edge": 4.086
    },
    {
-    "weightPx": 0.329,
-    "sigma": 3.673,
-    "wordStem": 8.064,
-    "edge": 4.131
+    "weightPx": 0.64,
+    "sigma": 3.597,
+    "wordStem": 7.855,
+    "edge": 4.078
    },
    {
-    "weightPx": 0.266,
-    "sigma": 3.736,
-    "wordStem": 8.007,
-    "edge": 4.123
+    "weightPx": 0.64,
+    "sigma": 3.676,
+    "wordStem": 8.104,
+    "edge": 4.103
    },
    {
-    "weightPx": 0.228,
+    "weightPx": 0.559,
+    "sigma": 3.748,
+    "wordStem": 7.915,
+    "edge": 4.161
+   },
+   {
+    "weightPx": 0.559,
     "sigma": 3.802,
-    "wordStem": 7.875,
-    "edge": 4.25
+    "wordStem": 8.04,
+    "edge": 4.253
    },
    {
-    "weightPx": 0.228,
-    "sigma": 3.83,
-    "wordStem": 7.947,
-    "edge": 4.293
+    "weightPx": 0.507,
+    "sigma": 3.829,
+    "wordStem": 7.771,
+    "edge": 4.358
+   },
+   {
+    "weightPx": 0.576,
+    "sigma": 3.829,
+    "wordStem": 8.113,
+    "edge": 4.311
    }
   ],
   "deepCores": {
@@ -4669,118 +4691,118 @@
      "x": 103,
      "y": 44,
      "d": [
-      73,
-      74,
-      73
+      79,
+      80,
+      79
      ],
      "raw": [
-      74,
-      75,
-      74
+      80,
+      80,
+      79
      ]
     },
     {
      "x": 103,
      "y": 45,
      "d": [
-      73,
-      74,
-      73
+      79,
+      80,
+      79
      ],
      "raw": [
-      75,
-      76,
-      75
+      81,
+      82,
+      81
      ]
     },
     {
      "x": 103,
      "y": 46,
      "d": [
-      73,
-      74,
-      73
+      79,
+      80,
+      79
      ],
      "raw": [
-      73,
-      74,
-      73
+      79,
+      80,
+      79
      ]
     },
     {
      "x": 103,
      "y": 43,
      "d": [
-      72,
-      73,
-      71
+      78,
+      78,
+      77
      ],
      "raw": [
-      72,
-      73,
-      71
-     ]
-    },
-    {
-     "x": 103,
-     "y": 42,
-     "d": [
-      67,
-      68,
-      66
-     ],
-     "raw": [
-      67,
-      68,
-      66
+      78,
+      78,
+      77
      ]
     },
     {
      "x": 103,
      "y": 47,
      "d": [
-      68,
-      68,
-      67
+      72,
+      73,
+      72
      ],
      "raw": [
-      68,
-      68,
-      67
+      72,
+      73,
+      72
+     ]
+    },
+    {
+     "x": 103,
+     "y": 42,
+     "d": [
+      72,
+      72,
+      71
+     ],
+     "raw": [
+      72,
+      72,
+      71
      ]
     },
     {
      "x": 103,
      "y": 41,
      "d": [
-      63,
-      64,
-      63
+      67,
+      68,
+      67
      ],
      "raw": [
-      63,
-      64,
-      63
+      67,
+      68,
+      67
      ]
     },
     {
      "x": 103,
      "y": 48,
      "d": [
-      61,
-      62,
-      61
+      66,
+      67,
+      65
      ],
      "raw": [
-      61,
-      62,
-      61
+      66,
+      67,
+      65
      ]
     }
    ],
    "bw": 104,
    "bh": 96,
-   "membraneMaxAbsBorderDiff": 74,
+   "membraneMaxAbsBorderDiff": 80,
    "featherPx": 3,
    "method": "Poisson clone: Laplace membrane (Jacobi, 1500 it) pinned to the original along the border (5-px median), then 3-px linear feather"
   },
@@ -4790,49 +4812,49 @@
   },
   "coreMedian": {
    "untouched": 120,
-   "newWord": 139.76799999999997
+   "newWord": 141.05599999999998
   },
   "paperRebuild": {
    "inkDelta": 5.77,
-   "grainPoolPixels": 6897,
+   "grainPoolPixels": 5968,
    "inpaintPixels": 5194
   },
   "sigmaTrials": [
    [
     0,
-    1.574
+    1.571
    ],
    [
     0.1,
-    1.574
+    1.571
    ],
    [
     0.2,
-    1.574
+    1.571
    ],
    [
     0.3,
-    1.574
+    1.572
    ],
    [
     0.4,
-    1.643
+    1.638
    ],
    [
     0.5,
-    1.77
+    1.769
    ],
    [
     0.6,
-    1.946
+    1.941
    ],
    [
     0.7,
-    2.191
+    2.194
    ],
    [
     0.8,
-    2.425
+    2.427
    ],
    [
     0.9,
@@ -4840,51 +4862,51 @@
    ],
    [
     1,
-    2.69
+    2.702
    ],
    [
     1.1,
-    2.81
+    2.816
    ],
    [
     1.2,
-    2.938
+    2.932
    ],
    [
     1.3,
-    3.035
+    3.043
    ],
    [
     1.4,
-    3.157
+    3.172
    ],
    [
     1.5,
-    3.308
+    3.31
    ],
    [
     1.6,
-    3.423
+    3.444
    ],
    [
     1.7,
-    3.512
+    3.517
    ],
    [
     1.8,
-    3.595
+    3.626
    ],
    [
     1.9,
-    3.662
+    3.655
    ],
    [
     2,
-    3.675
+    3.694
    ],
    [
     2.1,
-    3.717
+    3.722
    ],
    [
     2.2,
@@ -4892,75 +4914,75 @@
    ],
    [
     2.3,
-    3.759
-   ],
-   [
-    2.4,
     3.794
    ],
    [
+    2.4,
+    3.865
+   ],
+   [
     2.5,
-    3.789
+    3.875
    ],
    [
     2.6,
-    3.83
+    3.845
    ],
    [
     2.7,
-    3.841
+    3.953
    ],
    [
     2.8,
-    3.864
+    3.919
    ],
    [
     2.9,
-    3.936
+    4.029
    ],
    [
     3,
-    3.965
+    4.058
    ],
    [
     3.1,
-    4
+    4.052
    ],
    [
     3.2,
-    4.025
-   ],
-   [
-    3.3,
-    4.082
-   ],
-   [
-    3.4,
-    4.046
-   ],
-   [
-    3.5,
-    4.104
-   ],
-   [
-    3.6,
-    4.031
-   ],
-   [
-    3.7,
     4.074
    ],
    [
+    3.3,
+    4.104
+   ],
+   [
+    3.4,
+    4.017
+   ],
+   [
+    3.5,
+    4.074
+   ],
+   [
+    3.6,
+    4.105
+   ],
+   [
+    3.7,
+    4.067
+   ],
+   [
     3.8,
-    4.134
+    4.126
    ],
    [
     3.9,
-    4.409
+    4.36
    ],
    [
     4,
-    4.502
+    4.566
    ]
   ],
   "addedNoiseSd": 1.356,
@@ -4976,20 +4998,20 @@
     "measured": {
      "inkMedianRGB": [
       167,
-      161,
+      162,
       152
      ],
-     "inkMedianGray": 161.8,
+     "inkMedianGray": 162.1,
      "inkP10RGB": [
       157,
       152,
       142
      ],
-     "inkPixels": 2001,
-     "edge10_90px": 4.334,
-     "edgeSamples": 107,
-     "noiseStd": 0.861,
-     "noiseSamples": 5615
+     "inkPixels": 1994,
+     "edge10_90px": 4.319,
+     "edgeSamples": 111,
+     "noiseStd": 0.868,
+     "noiseSamples": 5624
     },
     "strokeWeightPx": 3.997
    },
@@ -5010,44 +5032,44 @@
      "inkMedianGray": 151.5,
      "inkP10RGB": [
       138,
-      134,
+      133,
       125
      ],
-     "inkPixels": 2332,
-     "edge10_90px": 4.35,
-     "edgeSamples": 117,
-     "noiseStd": 0.828,
-     "noiseSamples": 5556
+     "inkPixels": 2341,
+     "edge10_90px": 4.33,
+     "edgeSamples": 120,
+     "noiseStd": 0.823,
+     "noiseSamples": 5560
     },
-    "strokeWeightPx": 2.554
+    "strokeWeightPx": 2.602
    },
    {
     "sigma": 3.6,
     "color": [
      78,
-     74,
+     75,
      66
     ],
     "noiseSd": 1.36,
     "measured": {
      "inkMedianRGB": [
       158,
-      153,
+      154,
       144
      ],
-     "inkMedianGray": 153.8,
+     "inkMedianGray": 154.1,
      "inkP10RGB": [
       139,
-      134,
+      135,
       125
      ],
-     "inkPixels": 2195,
-     "edge10_90px": 4.29,
-     "edgeSamples": 136,
-     "noiseStd": 0.808,
-     "noiseSamples": 5609
+     "inkPixels": 2194,
+     "edge10_90px": 4.298,
+     "edgeSamples": 132,
+     "noiseStd": 0.798,
+     "noiseSamples": 5612
     },
-    "strokeWeightPx": 1.344
+    "strokeWeightPx": 1.358
    },
    {
     "sigma": 3.8,
@@ -5055,6 +5077,34 @@
      51,
      48,
      40
+    ],
+    "noiseSd": 1.36,
+    "measured": {
+     "inkMedianRGB": [
+      158,
+      154,
+      144
+     ],
+     "inkMedianGray": 154.2,
+     "inkP10RGB": [
+      139,
+      135,
+      125
+     ],
+     "inkPixels": 2143,
+     "edge10_90px": 4.45,
+     "edgeSamples": 112,
+     "noiseStd": 0.784,
+     "noiseSamples": 5637
+    },
+    "strokeWeightPx": 0.626
+   },
+   {
+    "sigma": 3.9,
+    "color": [
+     24,
+     21,
+     14
     ],
     "noiseSd": 1.36,
     "measured": {
@@ -5069,48 +5119,20 @@
       135,
       126
      ],
-     "inkPixels": 2128,
-     "edge10_90px": 4.429,
-     "edgeSamples": 110,
-     "noiseStd": 0.789,
-     "noiseSamples": 5631
+     "inkPixels": 2079,
+     "edge10_90px": 4.427,
+     "edgeSamples": 107,
+     "noiseStd": 0.774,
+     "noiseSamples": 5677
     },
-    "strokeWeightPx": 0.585
-   },
-   {
-    "sigma": 3.8,
-    "color": [
-     24,
-     21,
-     13
-    ],
-    "noiseSd": 1.36,
-    "measured": {
-     "inkMedianRGB": [
-      158,
-      154,
-      144
-     ],
-     "inkMedianGray": 154.1,
-     "inkP10RGB": [
-      138,
-      133,
-      124
-     ],
-     "inkPixels": 2083,
-     "edge10_90px": 4.235,
-     "edgeSamples": 140,
-     "noiseStd": 0.787,
-     "noiseSamples": 5662
-    },
-    "strokeWeightPx": 0.032
+    "strokeWeightPx": 0.045
    },
    {
     "sigma": 3.9,
     "color": [
-     -2,
-     -4,
-     -12
+     -3,
+     -6,
+     -13
     ],
     "noiseSd": 1.36,
     "measured": {
@@ -5125,13 +5147,13 @@
       133,
       127
      ],
-     "inkPixels": 2088,
-     "edge10_90px": 4.409,
-     "edgeSamples": 123,
-     "noiseStd": 0.777,
-     "noiseSamples": 5667
+     "inkPixels": 2073,
+     "edge10_90px": 4.36,
+     "edgeSamples": 126,
+     "noiseStd": 0.775,
+     "noiseSamples": 5685
     },
-    "strokeWeightPx": -0.31
+    "strokeWeightPx": -0.303
    }
   ],
   "newWordIsSharpestOnLine": false,
@@ -5146,7 +5168,7 @@
   "inpaintLocalPaper": 231,
   "strokeWidth50": {
    "untouchedMedian": 7.924,
-   "newWord": 7.947
+   "newWord": 7.68
   },
   "colourTarget": "ink p10",
   "inpaintPixels": 5194,
@@ -5262,6 +5284,9 @@
   ]
  },
  "font": {
+  "glyphReuse": {
+   "notUsed": "glyph segmentation found 2 glyphs for 4 characters"
+  },
   "localFit": null,
   "chosen": "serif",
   "file": "vendor/fonts/liberation/LiberationSerif-Regular.ttf",
@@ -5270,7 +5295,7 @@
   "sizePx": 56.44,
   "horizontalScale": 0.9746,
   "lineHorizontalScale": 0.9746,
-  "blurPx": 3.8296999999999985,
+  "blurPx": 3.829099999999999,
   "trials": {
    "serif": {
     "font": "Liberation Serif Regular 2.1.5",
@@ -5721,19 +5746,19 @@
    "x1": 833,
    "y1": 753
   },
-  "maskPixels": 1051,
+  "maskPixels": 1062,
   "colouredMarkPixelsExcludedFromPatch": 0
  },
  "pixel": {
   "compositeChangedOutsideMask": 0,
-  "compositeChangedInsideMask": 910,
+  "compositeChangedInsideMask": 918,
   "renderScale": 2,
   "renderSize": [
    1512,
    2016
   ],
   "renderChangedOutsidePatchRect": 458159,
-  "renderChangedInsidePatchRect": 953,
+  "renderChangedInsidePatchRect": 964,
   "renderChangedOutsideMask": 458159,
   "renderMaxAbsDiffOutside": 7,
   "renderDiffHistogram": {
@@ -5834,7 +5859,7 @@
   "editedWords": [
    {
     "text": "transfer.",
-    "confidence": 96,
+    "confidence": 95,
     "bbox": {
      "x0": 280,
      "y0": 876,
@@ -5844,7 +5869,7 @@
    },
    {
     "text": "A",
-    "confidence": 96,
+    "confidence": 95,
     "bbox": {
      "x0": 485,
      "y0": 884,
@@ -6005,13 +6030,13 @@
   ]
  },
  "timingsMs": {
-  "load": 76,
-  "geometry": 946,
-  "enhance": 787,
-  "ocr": 8592,
-  "edit": 182270,
-  "patch": 275,
-  "render+diff": 1850,
-  "reocr": 719
+  "load": 34,
+  "geometry": 521,
+  "enhance": 419,
+  "ocr": 2266,
+  "edit": 230738,
+  "patch": 272,
+  "render+diff": 2196,
+  "reocr": 880
  }
 }

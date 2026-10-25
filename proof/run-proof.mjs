@@ -130,6 +130,7 @@ d = (a != b).any(axis=2); print(json.dumps({'changedOutsideMask': int((d & ~m).s
 `, path.join(dir, 'extracted_input', fs.readdirSync(path.join(dir, 'extracted_input')).filter(f => f.endsWith('.png')).sort()[c.pageIndex || 0]), path.join(dir, 'extracted_output', fs.readdirSync(path.join(dir, 'extracted_output')).filter(f => f.endsWith('.png')).sort()[c.pageIndex || 0]), path.join(dir, 'patch_mask.png')]).toString();
   ex.independentPixelCheck = JSON.parse(pyc);
   ex.popplerRenderDiff = JSON.parse(execFileSync(PY, [path.join(PROOF, 'tools/render_diff.py'), inPdf, outPdf, String((c.pageIndex || 0) + 1), String(r.image.width), String(r.image.height), String(r.pageRotate), path.join(dir, 'patch_mask.png'), path.join(dir, 'diff_full_poppler.png')]).toString());
+  if (c.dir.startsWith('orient/')) ex.orientColorCheck = JSON.parse(execFileSync(PY, [path.join(PROOF, 'tools/orient_color_check.py'), inPdf, outPdf, dir, path.join(PROOF, 'standins/photo-standin.jpg'), '144'], { maxBuffer: 1 << 26 }).toString());
   fs.writeFileSync(path.join(dir, 'extracted_images_check.json'), JSON.stringify(ex, null, 1));
   console.log(c.name, 'done', ((Date.now() - t1) / 1000).toFixed(1) + 's', JSON.stringify(ex.independentPixelCheck), JSON.stringify(ex.popplerRenderDiff));
 }

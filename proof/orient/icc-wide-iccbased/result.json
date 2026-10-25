@@ -1,0 +1,6023 @@
+{
+ "kind": "icc-wide-iccbased",
+ "input": "/proof/inputs/icc-wide-iccbased.pdf",
+ "shaBefore": "3a07cffd74b18b2b24832920afeb9d6814d07a1097d6b8ebb889924c7f6cea34",
+ "shaAfterRefetch": "3a07cffd74b18b2b24832920afeb9d6814d07a1097d6b8ebb889924c7f6cea34",
+ "inputUnchanged": true,
+ "classification": [
+  {
+   "page": 1,
+   "rotate": 0,
+   "images": [
+    {
+     "name": "Image-7098480789",
+     "coverage": 1,
+     "filter": "/DCTDecode",
+     "w": 1512,
+     "h": 2016
+    }
+   ],
+   "visibleTextRuns": 0,
+   "invisibleTextRuns": 0,
+   "formXObjectsDrawn": 0,
+   "route": "scan",
+   "reason": "one image covers 100.0% of the page and there is no visible text"
+  }
+ ],
+ "classificationOutput": [
+  {
+   "page": 1,
+   "rotate": 0,
+   "images": [
+    {
+     "name": "Image-7098480789",
+     "coverage": 1,
+     "filter": "/FlateDecode",
+     "w": 1512,
+     "h": 2016
+    }
+   ],
+   "visibleTextRuns": 0,
+   "invisibleTextRuns": 139,
+   "formXObjectsDrawn": 0,
+   "route": "scan",
+   "reason": "one image covers 100.0% of the page and there is no visible text; 139 invisible (Tr 3) text runs = an existing OCR layer, which path B keeps and edits"
+  }
+ ],
+ "pageIndex": 0,
+ "pageRotate": 0,
+ "image": {
+  "width": 1512,
+  "height": 2016,
+  "filter": "/DCTDecode",
+  "placement": [
+   756,
+   0,
+   0,
+   1008,
+   0,
+   0
+  ],
+  "sha256Before": "7403b5e718db7dbc0c1cca555e41e3a83b0bf536e6725a9ccbc9344bc594e51a",
+  "jpegSegments": [
+   {
+    "name": "APP0-JFIF(thumb 0x0)",
+    "bytes": 16
+   },
+   {
+    "name": "APP2-ICC",
+    "bytes": 544
+   },
+   {
+    "name": "FFDB",
+    "bytes": 67
+   },
+   {
+    "name": "FFDB",
+    "bytes": 67
+   },
+   {
+    "name": "FFC0",
+    "bytes": 17
+   },
+   {
+    "name": "FFC4",
+    "bytes": 31
+   },
+   {
+    "name": "FFC4",
+    "bytes": 181
+   },
+   {
+    "name": "FFC4",
+    "bytes": 31
+   },
+   {
+    "name": "FFC4",
+    "bytes": 181
+   }
+  ],
+  "colorSpace": {
+   "kind": "ICCBased",
+   "N": 3,
+   "profileStreamBytes": 259
+  },
+  "newFilter": "/FlateDecode",
+  "newImageStreamBytes": 840462,
+  "oldImageStreamBytes": 214739,
+  "decodedVsComposite": 0,
+  "changedOutsidePatchMask": 0,
+  "changedInsidePatchMask": 942,
+  "imagesInOutput": 1
+ },
+ "stripped": [
+  "JPEG APP2 ICC profile - NOT applied (PDF viewers ignore it; pixels kept in the image's own values), dropped with the old JPEG stream"
+ ],
+ "decoderCheck": {
+  "pdfjsRenderOfOutputVsWrittenPixels": 3048051,
+  "pdfjsRenderOfOriginalVsBrowserJpegDecode": 3048044,
+  "pdfjsVsBrowserJpegMaxAbs": 19,
+  "pixels": 3048192
+ },
+ "hiddenLayer": {
+  "mode": "added (the input had no text layer)",
+  "words": 139,
+  "font": "Liberation Sans Regular 2.1.5 (subset, Identity-H, ToUnicode)",
+  "editedLineUsesCorrectedText": true
+ },
+ "textLayer": {
+  "pdfjs": {
+   "five": {
+    "before": [
+     0
+    ],
+    "after": [
+     0
+    ]
+   },
+   "nine": {
+    "before": [
+     0
+    ],
+    "after": [
+     1
+    ]
+   }
+  },
+  "hitsBefore": {
+   "five": []
+  },
+  "hitsAfter": {
+   "five": [],
+   "nine": [
+    {
+     "page": 1,
+     "str": "nine",
+     "x": 397.9,
+     "y": 370
+    }
+   ]
+  },
+  "garbageCharsAfter": 0,
+  "pageTextAfter": [
+   "Rental  Agreement   Summary  This  summary  covers  the  lease  of  the  second  floor  apartment  at   42  Oak  Avenue.   The  lease  begins  on  the  first  day  of  June  and  runs  for  twelve  months,   ending  on  the  last  day  of  May  next   year.  The  monthly  rent  is  due   on  the  first  of  each  month  and  may  be  paid  by   check  or  bank  transfer.  A  late  fee  will  apply  if  payment  is  more  than  nine  days  late.  The  security  deposit  equals  one  month  of  rent.  The  tenant  is  responsible  for  electricity  and  internet   service.  The  landlord  pays  for  water, trash  pickup,  and  yard  care.  Pets  are  allowed  with   written  approval  and  a  small  extra  deposit.  Either   party  may  end  the  lease  early  with  sixty  days  of  written   notice.  Please  keep  this  summary  with  your  signed  copy  of  the  full  agreement  for  future  reference."
+  ]
+ },
+ "otherPages": [],
+ "fileHygiene": {
+  "gcRemovedObjects": [
+   "4 0 R"
+  ],
+  "objectsKept": 15
+ },
+ "sizes": {
+  "inputBytes": 216580,
+  "outputBytes": 856427
+ },
+ "paper": {
+  "quad": [
+   [
+    201.6,
+    447.6
+   ],
+   [
+    1183.4,
+    316.5
+   ],
+   [
+    1241.9,
+    1493.9
+   ],
+   [
+    411.3,
+    1560.4
+   ]
+  ],
+  "method": "largest contour -> approxPolyDP quad",
+  "otsu": 149,
+  "areaFrac": 0.346058,
+  "borderBrightFrac": 0,
+  "quadImage": [
+   [
+    201.6,
+    447.55199999999996
+   ],
+   [
+    1183.392,
+    316.512
+   ],
+   [
+    1241.856,
+    1493.856
+   ],
+   [
+    411.264,
+    1560.384
+   ]
+  ],
+  "pageRotate": 0,
+  "placementRotate": 0,
+  "quadInset": [
+   [
+    206.1,
+    451.6
+   ],
+   [
+    1180,
+    321.6
+   ],
+   [
+    1238,
+    1489.5
+   ],
+   [
+    414.1,
+    1555.5
+   ]
+  ],
+  "edgeAnglesDeg": {
+   "top": -7.6,
+   "bottom": -4.58,
+   "left": 10.67,
+   "right": 2.84
+  },
+  "size": "US Letter",
+  "measuredRatio": 1.2933,
+  "rawEdgeRatio": 1.2673,
+  "perspectiveRatio": 1.2933,
+  "focalPx": 1499,
+  "ratioMethod": "perspective-corrected (Zhang-He)",
+  "sourceDpiEquivalent": 107.3,
+  "corrected": [
+   2550,
+   3300
+  ],
+  "upscale": 2.796
+ },
+ "ocr": {
+  "variantChosen": "clahe",
+  "meanConf": {
+   "clahe": 95.9,
+   "adaptive": 93.49
+  },
+  "lines": [
+   {
+    "text": "Rental Agreement Summary",
+    "confidence": 95,
+    "bbox": {
+     "x0": 285,
+     "y0": 355,
+     "x1": 1301,
+     "y1": 431
+    },
+    "baseline": {
+     "x0": 285,
+     "y0": 416,
+     "x1": 1301,
+     "y1": 414
+    },
+    "words": [
+     {
+      "text": "Rental",
+      "confidence": 96,
+      "bbox": {
+       "x0": 285,
+       "y0": 355,
+       "x1": 513,
+       "y1": 416
+      }
+     },
+     {
+      "text": "Agreement",
+      "confidence": 95,
+      "bbox": {
+       "x0": 537,
+       "y0": 358,
+       "x1": 934,
+       "y1": 431
+      }
+     },
+     {
+      "text": "Summary",
+      "confidence": 95,
+      "bbox": {
+       "x0": 955,
+       "y0": 357,
+       "x1": 1301,
+       "y1": 430
+      }
+     }
+    ]
+   },
+   {
+    "text": "This summary covers the lease of the second floor apartment at 42 Oak Avenue. The",
+    "confidence": 96,
+    "bbox": {
+     "x0": 282,
+     "y0": 498,
+     "x1": 2143,
+     "y1": 553
+    },
+    "baseline": {
+     "x0": 282,
+     "y0": 542,
+     "x1": 2143,
+     "y1": 540
+    },
+    "words": [
+     {
+      "text": "This",
+      "confidence": 96,
+      "bbox": {
+       "x0": 278,
+       "y0": 494,
+       "x1": 383,
+       "y1": 557
+      }
+     },
+     {
+      "text": "summary",
+      "confidence": 96,
+      "bbox": {
+       "x0": 404,
+       "y0": 494,
+       "x1": 583,
+       "y1": 557
+      }
+     },
+     {
+      "text": "covers",
+      "confidence": 96,
+      "bbox": {
+       "x0": 608,
+       "y0": 494,
+       "x1": 740,
+       "y1": 557
+      }
+     },
+     {
+      "text": "the",
+      "confidence": 96,
+      "bbox": {
+       "x0": 766,
+       "y0": 494,
+       "x1": 824,
+       "y1": 557
+      }
+     },
+     {
+      "text": "lease",
+      "confidence": 96,
+      "bbox": {
+       "x0": 845,
+       "y0": 494,
+       "x1": 956,
+       "y1": 557
+      }
+     },
+     {
+      "text": "of",
+      "confidence": 96,
+      "bbox": {
+       "x0": 976,
+       "y0": 494,
+       "x1": 1019,
+       "y1": 557
+      }
+     },
+     {
+      "text": "the",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1039,
+       "y0": 494,
+       "x1": 1097,
+       "y1": 557
+      }
+     },
+     {
+      "text": "second",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1123,
+       "y0": 494,
+       "x1": 1255,
+       "y1": 557
+      }
+     },
+     {
+      "text": "floor",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1275,
+       "y0": 494,
+       "x1": 1386,
+       "y1": 557
+      }
+     },
+     {
+      "text": "apartment",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1406,
+       "y0": 494,
+       "x1": 1612,
+       "y1": 557
+      }
+     },
+     {
+      "text": "at",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1634,
+       "y0": 494,
+       "x1": 1680,
+       "y1": 557
+      }
+     },
+     {
+      "text": "42",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1700,
+       "y0": 500,
+       "x1": 1740,
+       "y1": 541
+      }
+     },
+     {
+      "text": "Oak",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1774,
+       "y0": 494,
+       "x1": 1848,
+       "y1": 557
+      }
+     },
+     {
+      "text": "Avenue.",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1874,
+       "y0": 494,
+       "x1": 2042,
+       "y1": 557
+      }
+     },
+     {
+      "text": "The",
+      "confidence": 96,
+      "bbox": {
+       "x0": 2068,
+       "y0": 494,
+       "x1": 2147,
+       "y1": 557
+      }
+     }
+    ]
+   },
+   {
+    "text": "lease begins on the first day of June and runs for twelve months, ending on the last day of",
+    "confidence": 96,
+    "bbox": {
+     "x0": 285,
+     "y0": 583,
+     "x1": 2251,
+     "y1": 639
+    },
+    "baseline": {
+     "x0": 285,
+     "y0": 628,
+     "x1": 2251,
+     "y1": 625
+    },
+    "words": [
+     {
+      "text": "lease",
+      "confidence": 96,
+      "bbox": {
+       "x0": 281,
+       "y0": 579,
+       "x1": 388,
+       "y1": 643
+      }
+     },
+     {
+      "text": "begins",
+      "confidence": 96,
+      "bbox": {
+       "x0": 414,
+       "y0": 579,
+       "x1": 543,
+       "y1": 643
+      }
+     },
+     {
+      "text": "on",
+      "confidence": 95,
+      "bbox": {
+       "x0": 563,
+       "y0": 579,
+       "x1": 607,
+       "y1": 643
+      }
+     },
+     {
+      "text": "the",
+      "confidence": 95,
+      "bbox": {
+       "x0": 622,
+       "y0": 579,
+       "x1": 687,
+       "y1": 643
+      }
+     },
+     {
+      "text": "first",
+      "confidence": 96,
+      "bbox": {
+       "x0": 707,
+       "y0": 579,
+       "x1": 809,
+       "y1": 643
+      }
+     },
+     {
+      "text": "day",
+      "confidence": 96,
+      "bbox": {
+       "x0": 830,
+       "y0": 579,
+       "x1": 895,
+       "y1": 643
+      }
+     },
+     {
+      "text": "of",
+      "confidence": 96,
+      "bbox": {
+       "x0": 915,
+       "y0": 579,
+       "x1": 953,
+       "y1": 643
+      }
+     },
+     {
+      "text": "June",
+      "confidence": 96,
+      "bbox": {
+       "x0": 974,
+       "y0": 579,
+       "x1": 1065,
+       "y1": 643
+      }
+     },
+     {
+      "text": "and",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1086,
+       "y0": 579,
+       "x1": 1151,
+       "y1": 643
+      }
+     },
+     {
+      "text": "runs",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1171,
+       "y0": 579,
+       "x1": 1263,
+       "y1": 643
+      }
+     },
+     {
+      "text": "for",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1285,
+       "y0": 579,
+       "x1": 1348,
+       "y1": 643
+      }
+     },
+     {
+      "text": "twelve",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1369,
+       "y0": 579,
+       "x1": 1508,
+       "y1": 643
+      }
+     },
+     {
+      "text": "months,",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1534,
+       "y0": 579,
+       "x1": 1695,
+       "y1": 643
+      }
+     },
+     {
+      "text": "ending",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1715,
+       "y0": 579,
+       "x1": 1849,
+       "y1": 643
+      }
+     },
+     {
+      "text": "on",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1870,
+       "y0": 579,
+       "x1": 1913,
+       "y1": 643
+      }
+     },
+     {
+      "text": "the",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1934,
+       "y0": 579,
+       "x1": 1993,
+       "y1": 643
+      }
+     },
+     {
+      "text": "last",
+      "confidence": 96,
+      "bbox": {
+       "x0": 2014,
+       "y0": 579,
+       "x1": 2095,
+       "y1": 643
+      }
+     },
+     {
+      "text": "day",
+      "confidence": 96,
+      "bbox": {
+       "x0": 2115,
+       "y0": 579,
+       "x1": 2180,
+       "y1": 643
+      }
+     },
+     {
+      "text": "of",
+      "confidence": 96,
+      "bbox": {
+       "x0": 2206,
+       "y0": 583,
+       "x1": 2251,
+       "y1": 624
+      }
+     }
+    ]
+   },
+   {
+    "text": "May next year.",
+    "confidence": 95,
+    "bbox": {
+     "x0": 285,
+     "y0": 671,
+     "x1": 612,
+     "y1": 724
+    },
+    "baseline": {
+     "x0": 285,
+     "y0": 713,
+     "x1": 612,
+     "y1": 712
+    },
+    "words": [
+     {
+      "text": "May",
+      "confidence": 96,
+      "bbox": {
+       "x0": 281,
+       "y0": 667,
+       "x1": 364,
+       "y1": 729
+      }
+     },
+     {
+      "text": "next",
+      "confidence": 95,
+      "bbox": {
+       "x0": 389,
+       "y0": 667,
+       "x1": 483,
+       "y1": 729
+      }
+     },
+     {
+      "text": "year.",
+      "confidence": 95,
+      "bbox": {
+       "x0": 503,
+       "y0": 667,
+       "x1": 612,
+       "y1": 729
+      }
+     }
+    ]
+   },
+   {
+    "text": "The monthly rent is due on the first of each month and may be paid by check or bank",
+    "confidence": 96,
+    "bbox": {
+     "x0": 283,
+     "y0": 796,
+     "x1": 2151,
+     "y1": 851
+    },
+    "baseline": {
+     "x0": 283,
+     "y0": 841,
+     "x1": 2151,
+     "y1": 838
+    },
+    "words": [
+     {
+      "text": "The",
+      "confidence": 95,
+      "bbox": {
+       "x0": 279,
+       "y0": 792,
+       "x1": 363,
+       "y1": 855
+      }
+     },
+     {
+      "text": "monthly",
+      "confidence": 95,
+      "bbox": {
+       "x0": 389,
+       "y0": 792,
+       "x1": 552,
+       "y1": 855
+      }
+     },
+     {
+      "text": "rent",
+      "confidence": 96,
+      "bbox": {
+       "x0": 573,
+       "y0": 792,
+       "x1": 657,
+       "y1": 855
+      }
+     },
+     {
+      "text": "is",
+      "confidence": 96,
+      "bbox": {
+       "x0": 678,
+       "y0": 792,
+       "x1": 715,
+       "y1": 855
+      }
+     },
+     {
+      "text": "due",
+      "confidence": 96,
+      "bbox": {
+       "x0": 735,
+       "y0": 792,
+       "x1": 799,
+       "y1": 855
+      }
+     },
+     {
+      "text": "on",
+      "confidence": 96,
+      "bbox": {
+       "x0": 819,
+       "y0": 792,
+       "x1": 862,
+       "y1": 855
+      }
+     },
+     {
+      "text": "the",
+      "confidence": 96,
+      "bbox": {
+       "x0": 882,
+       "y0": 792,
+       "x1": 946,
+       "y1": 855
+      }
+     },
+     {
+      "text": "first",
+      "confidence": 96,
+      "bbox": {
+       "x0": 961,
+       "y0": 792,
+       "x1": 1062,
+       "y1": 855
+      }
+     },
+     {
+      "text": "of",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1082,
+       "y0": 792,
+       "x1": 1125,
+       "y1": 855
+      }
+     },
+     {
+      "text": "each",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1145,
+       "y0": 792,
+       "x1": 1240,
+       "y1": 855
+      }
+     },
+     {
+      "text": "month",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1260,
+       "y0": 792,
+       "x1": 1387,
+       "y1": 855
+      }
+     },
+     {
+      "text": "and",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1407,
+       "y0": 792,
+       "x1": 1482,
+       "y1": 855
+      }
+     },
+     {
+      "text": "may",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1502,
+       "y0": 792,
+       "x1": 1576,
+       "y1": 855
+      }
+     },
+     {
+      "text": "be",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1596,
+       "y0": 792,
+       "x1": 1644,
+       "y1": 855
+      }
+     },
+     {
+      "text": "paid",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1665,
+       "y0": 792,
+       "x1": 1760,
+       "y1": 855
+      }
+     },
+     {
+      "text": "by",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1780,
+       "y0": 792,
+       "x1": 1828,
+       "y1": 855
+      }
+     },
+     {
+      "text": "check",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1848,
+       "y0": 792,
+       "x1": 1965,
+       "y1": 855
+      }
+     },
+     {
+      "text": "or",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1985,
+       "y0": 792,
+       "x1": 2028,
+       "y1": 855
+      }
+     },
+     {
+      "text": "bank",
+      "confidence": 96,
+      "bbox": {
+       "x0": 2053,
+       "y0": 792,
+       "x1": 2154,
+       "y1": 855
+      }
+     }
+    ]
+   },
+   {
+    "text": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+    "confidence": 96,
+    "bbox": {
+     "x0": 284,
+     "y0": 881,
+     "x1": 2238,
+     "y1": 937
+    },
+    "baseline": {
+     "x0": 284,
+     "y0": 926,
+     "x1": 2238,
+     "y1": 923
+    },
+    "words": [
+     {
+      "text": "transfer.",
+      "confidence": 95,
+      "bbox": {
+       "x0": 280,
+       "y0": 877,
+       "x1": 464,
+       "y1": 941
+      }
+     },
+     {
+      "text": "A",
+      "confidence": 95,
+      "bbox": {
+       "x0": 488,
+       "y0": 884,
+       "x1": 504,
+       "y1": 926
+      }
+     },
+     {
+      "text": "late",
+      "confidence": 96,
+      "bbox": {
+       "x0": 525,
+       "y0": 877,
+       "x1": 606,
+       "y1": 941
+      }
+     },
+     {
+      "text": "fee",
+      "confidence": 96,
+      "bbox": {
+       "x0": 626,
+       "y0": 877,
+       "x1": 691,
+       "y1": 941
+      }
+     },
+     {
+      "text": "will",
+      "confidence": 96,
+      "bbox": {
+       "x0": 706,
+       "y0": 877,
+       "x1": 792,
+       "y1": 941
+      }
+     },
+     {
+      "text": "apply",
+      "confidence": 96,
+      "bbox": {
+       "x0": 813,
+       "y0": 877,
+       "x1": 920,
+       "y1": 941
+      }
+     },
+     {
+      "text": "if",
+      "confidence": 96,
+      "bbox": {
+       "x0": 942,
+       "y0": 881,
+       "x1": 976,
+       "y1": 925
+      }
+     },
+     {
+      "text": "payment",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1000,
+       "y0": 877,
+       "x1": 1166,
+       "y1": 941
+      }
+     },
+     {
+      "text": "is",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1186,
+       "y0": 877,
+       "x1": 1227,
+       "y1": 941
+      }
+     },
+     {
+      "text": "more",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1256,
+       "y0": 877,
+       "x1": 1342,
+       "y1": 941
+      }
+     },
+     {
+      "text": "than",
+      "confidence": 97,
+      "bbox": {
+       "x0": 1362,
+       "y0": 877,
+       "x1": 1448,
+       "y1": 941
+      }
+     },
+     {
+      "text": "five",
+      "confidence": 97,
+      "bbox": {
+       "x0": 1469,
+       "y0": 877,
+       "x1": 1555,
+       "y1": 941
+      }
+     },
+     {
+      "text": "days",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1576,
+       "y0": 877,
+       "x1": 1662,
+       "y1": 941
+      }
+     },
+     {
+      "text": "late.",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1682,
+       "y0": 877,
+       "x1": 1779,
+       "y1": 941
+      }
+     },
+     {
+      "text": "The",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1810,
+       "y0": 877,
+       "x1": 1875,
+       "y1": 941
+      }
+     },
+     {
+      "text": "security",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1896,
+       "y0": 877,
+       "x1": 2067,
+       "y1": 941
+      }
+     },
+     {
+      "text": "deposit",
+      "confidence": 96,
+      "bbox": {
+       "x0": 2088,
+       "y0": 877,
+       "x1": 2238,
+       "y1": 941
+      }
+     }
+    ]
+   },
+   {
+    "text": "equals one month of rent.",
+    "confidence": 96,
+    "bbox": {
+     "x0": 283,
+     "y0": 966,
+     "x1": 842,
+     "y1": 1022
+    },
+    "baseline": {
+     "x0": 283,
+     "y0": 1011,
+     "x1": 842,
+     "y1": 1010
+    },
+    "words": [
+     {
+      "text": "equals",
+      "confidence": 96,
+      "bbox": {
+       "x0": 283,
+       "y0": 966,
+       "x1": 842,
+       "y1": 1022
+      }
+     },
+     {
+      "text": "one",
+      "confidence": 95,
+      "bbox": {
+       "x0": 444,
+       "y0": 962,
+       "x1": 519,
+       "y1": 1026
+      }
+     },
+     {
+      "text": "month",
+      "confidence": 96,
+      "bbox": {
+       "x0": 540,
+       "y0": 962,
+       "x1": 658,
+       "y1": 1026
+      }
+     },
+     {
+      "text": "of",
+      "confidence": 96,
+      "bbox": {
+       "x0": 679,
+       "y0": 962,
+       "x1": 722,
+       "y1": 1026
+      }
+     },
+     {
+      "text": "rent.",
+      "confidence": 96,
+      "bbox": {
+       "x0": 737,
+       "y0": 962,
+       "x1": 845,
+       "y1": 1026
+      }
+     }
+    ]
+   },
+   {
+    "text": "The tenant is responsible for electricity and internet service. The landlord pays for water,",
+    "confidence": 96,
+    "bbox": {
+     "x0": 283,
+     "y0": 1093,
+     "x1": 2234,
+     "y1": 1149
+    },
+    "baseline": {
+     "x0": 283,
+     "y0": 1137,
+     "x1": 2234,
+     "y1": 1139
+    },
+    "words": [
+     {
+      "text": "The",
+      "confidence": 96,
+      "bbox": {
+       "x0": 279,
+       "y0": 1089,
+       "x1": 354,
+       "y1": 1153
+      }
+     },
+     {
+      "text": "tenant",
+      "confidence": 96,
+      "bbox": {
+       "x0": 375,
+       "y0": 1089,
+       "x1": 503,
+       "y1": 1153
+      }
+     },
+     {
+      "text": "is",
+      "confidence": 96,
+      "bbox": {
+       "x0": 524,
+       "y0": 1089,
+       "x1": 567,
+       "y1": 1153
+      }
+     },
+     {
+      "text": "responsible",
+      "confidence": 96,
+      "bbox": {
+       "x0": 588,
+       "y0": 1089,
+       "x1": 823,
+       "y1": 1153
+      }
+     },
+     {
+      "text": "for",
+      "confidence": 95,
+      "bbox": {
+       "x0": 844,
+       "y0": 1089,
+       "x1": 903,
+       "y1": 1153
+      }
+     },
+     {
+      "text": "electricity",
+      "confidence": 97,
+      "bbox": {
+       "x0": 924,
+       "y0": 1089,
+       "x1": 1143,
+       "y1": 1153
+      }
+     },
+     {
+      "text": "and",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1164,
+       "y0": 1089,
+       "x1": 1229,
+       "y1": 1153
+      }
+     },
+     {
+      "text": "internet",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1249,
+       "y0": 1089,
+       "x1": 1410,
+       "y1": 1153
+      }
+     },
+     {
+      "text": "service.",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1431,
+       "y0": 1089,
+       "x1": 1596,
+       "y1": 1153
+      }
+     },
+     {
+      "text": "The",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1628,
+       "y0": 1089,
+       "x1": 1693,
+       "y1": 1153
+      }
+     },
+     {
+      "text": "landlord",
+      "confidence": 95,
+      "bbox": {
+       "x0": 1713,
+       "y0": 1089,
+       "x1": 1885,
+       "y1": 1153
+      }
+     },
+     {
+      "text": "pays",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1911,
+       "y0": 1089,
+       "x1": 1997,
+       "y1": 1153
+      }
+     },
+     {
+      "text": "for",
+      "confidence": 96,
+      "bbox": {
+       "x0": 2024,
+       "y0": 1089,
+       "x1": 2087,
+       "y1": 1153
+      }
+     },
+     {
+      "text": "water,",
+      "confidence": 96,
+      "bbox": {
+       "x0": 2103,
+       "y0": 1089,
+       "x1": 2234,
+       "y1": 1153
+      }
+     }
+    ]
+   },
+   {
+    "text": "trash pickup, and yard care. Pets are allowed with written approval and a small extra",
+    "confidence": 96,
+    "bbox": {
+     "x0": 285,
+     "y0": 1178,
+     "x1": 2136,
+     "y1": 1234
+    },
+    "baseline": {
+     "x0": 285,
+     "y0": 1223,
+     "x1": 2136,
+     "y1": 1220
+    },
+    "words": [
+     {
+      "text": "trash",
+      "confidence": 96,
+      "bbox": {
+       "x0": 281,
+       "y0": 1174,
+       "x1": 388,
+       "y1": 1238
+      }
+     },
+     {
+      "text": "pickup,",
+      "confidence": 96,
+      "bbox": {
+       "x0": 409,
+       "y0": 1174,
+       "x1": 564,
+       "y1": 1238
+      }
+     },
+     {
+      "text": "and",
+      "confidence": 96,
+      "bbox": {
+       "x0": 585,
+       "y0": 1174,
+       "x1": 655,
+       "y1": 1238
+      }
+     },
+     {
+      "text": "yard",
+      "confidence": 96,
+      "bbox": {
+       "x0": 675,
+       "y0": 1174,
+       "x1": 761,
+       "y1": 1238
+      }
+     },
+     {
+      "text": "care.",
+      "confidence": 96,
+      "bbox": {
+       "x0": 782,
+       "y0": 1174,
+       "x1": 889,
+       "y1": 1238
+      }
+     },
+     {
+      "text": "Pets",
+      "confidence": 96,
+      "bbox": {
+       "x0": 910,
+       "y0": 1174,
+       "x1": 991,
+       "y1": 1238
+      }
+     },
+     {
+      "text": "are",
+      "confidence": 97,
+      "bbox": {
+       "x0": 1011,
+       "y0": 1174,
+       "x1": 1076,
+       "y1": 1238
+      }
+     },
+     {
+      "text": "allowed",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1097,
+       "y0": 1174,
+       "x1": 1257,
+       "y1": 1238
+      }
+     },
+     {
+      "text": "with",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1283,
+       "y0": 1174,
+       "x1": 1375,
+       "y1": 1238
+      }
+     },
+     {
+      "text": "written",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1395,
+       "y0": 1174,
+       "x1": 1545,
+       "y1": 1238
+      }
+     },
+     {
+      "text": "approval",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1566,
+       "y0": 1174,
+       "x1": 1743,
+       "y1": 1238
+      }
+     },
+     {
+      "text": "and",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1763,
+       "y0": 1174,
+       "x1": 1833,
+       "y1": 1238
+      }
+     },
+     {
+      "text": "a",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1856,
+       "y0": 1191,
+       "x1": 1876,
+       "y1": 1221
+      }
+     },
+     {
+      "text": "small",
+      "confidence": 95,
+      "bbox": {
+       "x0": 1897,
+       "y0": 1174,
+       "x1": 2004,
+       "y1": 1238
+      }
+     },
+     {
+      "text": "extra",
+      "confidence": 96,
+      "bbox": {
+       "x0": 2025,
+       "y0": 1174,
+       "x1": 2137,
+       "y1": 1238
+      }
+     }
+    ]
+   },
+   {
+    "text": "deposit.",
+    "confidence": 96,
+    "bbox": {
+     "x0": 284,
+     "y0": 1264,
+     "x1": 455,
+     "y1": 1319
+    },
+    "baseline": {
+     "x0": 284,
+     "y0": 1319,
+     "x1": 455,
+     "y1": 1319
+    },
+    "words": [
+     {
+      "text": "deposit.",
+      "confidence": 96,
+      "bbox": {
+       "x0": 284,
+       "y0": 1264,
+       "x1": 455,
+       "y1": 1319
+      }
+     }
+    ]
+   },
+   {
+    "text": "Either party may end the lease early with sixty days of written notice. Please keep this",
+    "confidence": 96,
+    "bbox": {
+     "x0": 287,
+     "y0": 1391,
+     "x1": 2174,
+     "y1": 1447
+    },
+    "baseline": {
+     "x0": 287,
+     "y0": 1435,
+     "x1": 2174,
+     "y1": 1433
+    },
+    "words": [
+     {
+      "text": "Either",
+      "confidence": 90,
+      "bbox": {
+       "x0": 283,
+       "y0": 1387,
+       "x1": 417,
+       "y1": 1451
+      }
+     },
+     {
+      "text": "party",
+      "confidence": 96,
+      "bbox": {
+       "x0": 437,
+       "y0": 1387,
+       "x1": 550,
+       "y1": 1451
+      }
+     },
+     {
+      "text": "may",
+      "confidence": 96,
+      "bbox": {
+       "x0": 571,
+       "y0": 1387,
+       "x1": 641,
+       "y1": 1451
+      }
+     },
+     {
+      "text": "end",
+      "confidence": 96,
+      "bbox": {
+       "x0": 667,
+       "y0": 1387,
+       "x1": 731,
+       "y1": 1451
+      }
+     },
+     {
+      "text": "the",
+      "confidence": 97,
+      "bbox": {
+       "x0": 752,
+       "y0": 1387,
+       "x1": 817,
+       "y1": 1451
+      }
+     },
+     {
+      "text": "lease",
+      "confidence": 96,
+      "bbox": {
+       "x0": 837,
+       "y0": 1387,
+       "x1": 945,
+       "y1": 1451
+      }
+     },
+     {
+      "text": "early",
+      "confidence": 96,
+      "bbox": {
+       "x0": 965,
+       "y0": 1387,
+       "x1": 1073,
+       "y1": 1451
+      }
+     },
+     {
+      "text": "with",
+      "confidence": 97,
+      "bbox": {
+       "x0": 1093,
+       "y0": 1387,
+       "x1": 1179,
+       "y1": 1451
+      }
+     },
+     {
+      "text": "sixty",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1200,
+       "y0": 1387,
+       "x1": 1307,
+       "y1": 1451
+      }
+     },
+     {
+      "text": "days",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1328,
+       "y0": 1387,
+       "x1": 1414,
+       "y1": 1451
+      }
+     },
+     {
+      "text": "of",
+      "confidence": 97,
+      "bbox": {
+       "x0": 1435,
+       "y0": 1387,
+       "x1": 1478,
+       "y1": 1451
+      }
+     },
+     {
+      "text": "written",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1499,
+       "y0": 1387,
+       "x1": 1643,
+       "y1": 1451
+      }
+     },
+     {
+      "text": "notice.",
+      "confidence": 95,
+      "bbox": {
+       "x0": 1664,
+       "y0": 1387,
+       "x1": 1807,
+       "y1": 1451
+      }
+     },
+     {
+      "text": "Please",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1835,
+       "y0": 1387,
+       "x1": 1963,
+       "y1": 1451
+      }
+     },
+     {
+      "text": "keep",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1984,
+       "y0": 1387,
+       "x1": 2070,
+       "y1": 1451
+      }
+     },
+     {
+      "text": "this",
+      "confidence": 96,
+      "bbox": {
+       "x0": 2091,
+       "y0": 1387,
+       "x1": 2174,
+       "y1": 1451
+      }
+     }
+    ]
+   },
+   {
+    "text": "summary with your signed copy of the full agreement for future reference.",
+    "confidence": 96,
+    "bbox": {
+     "x0": 285,
+     "y0": 1476,
+     "x1": 1916,
+     "y1": 1531
+    },
+    "baseline": {
+     "x0": 285,
+     "y0": 1520,
+     "x1": 1916,
+     "y1": 1519
+    },
+    "words": [
+     {
+      "text": "summary",
+      "confidence": 96,
+      "bbox": {
+       "x0": 281,
+       "y0": 1472,
+       "x1": 481,
+       "y1": 1535
+      }
+     },
+     {
+      "text": "with",
+      "confidence": 96,
+      "bbox": {
+       "x0": 506,
+       "y0": 1472,
+       "x1": 596,
+       "y1": 1535
+      }
+     },
+     {
+      "text": "your",
+      "confidence": 96,
+      "bbox": {
+       "x0": 622,
+       "y0": 1472,
+       "x1": 707,
+       "y1": 1535
+      }
+     },
+     {
+      "text": "signed",
+      "confidence": 96,
+      "bbox": {
+       "x0": 727,
+       "y0": 1472,
+       "x1": 864,
+       "y1": 1535
+      }
+     },
+     {
+      "text": "copy",
+      "confidence": 96,
+      "bbox": {
+       "x0": 890,
+       "y0": 1472,
+       "x1": 980,
+       "y1": 1535
+      }
+     },
+     {
+      "text": "of",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1000,
+       "y0": 1472,
+       "x1": 1043,
+       "y1": 1535
+      }
+     },
+     {
+      "text": "the",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1063,
+       "y0": 1472,
+       "x1": 1121,
+       "y1": 1535
+      }
+     },
+     {
+      "text": "full",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1142,
+       "y0": 1472,
+       "x1": 1226,
+       "y1": 1535
+      }
+     },
+     {
+      "text": "agreement",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1247,
+       "y0": 1472,
+       "x1": 1452,
+       "y1": 1535
+      }
+     },
+     {
+      "text": "for",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1480,
+       "y0": 1472,
+       "x1": 1536,
+       "y1": 1535
+      }
+     },
+     {
+      "text": "future",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1556,
+       "y0": 1472,
+       "x1": 1683,
+       "y1": 1535
+      }
+     },
+     {
+      "text": "reference.",
+      "confidence": 96,
+      "bbox": {
+       "x0": 1703,
+       "y0": 1472,
+       "x1": 1916,
+       "y1": 1535
+      }
+     }
+    ]
+   }
+  ],
+  "text": "Rental Agreement Summary\n\nThis summary covers the lease of the second floor apartment at 42 Oak Avenue. The\nlease begins on the first day of June and runs for twelve months, ending on the last day of\n\nMay next year.\nThe monthly rent is due on the first of each month and may be paid by check or bank\n\ntransfer. A late fee will apply if payment is more than five days late. The security deposit\nequals one month of rent.\n\nThe tenant is responsible for electricity and internet service. The landlord pays for water,\ntrash pickup, and yard care. Pets are allowed with written approval and a small extra\n\ndeposit.\n\nEither party may end the lease early with sixty days of written notice. Please keep this\nsummary with your signed copy of the full agreement for future reference.\n",
+  "otherVariant": {
+   "adaptive": {
+    "text": "Rental Agreement Summary\n\nThis summary covers the lease of the second floor apartment at 42 Oak Avenue. The\nlease begins on the first day of June and runs for twelve months, ending on the last day of\nMay next year.\n\nThe monthly rent fs due on the first of each month and may be paid by check or bank\ntransfer. A late fee will apply if payment Is more than five days late. The security deposit\nequals one month of rent.\n\nThe tenant is responsible for electricity and internet service. The landlord pays for water,\ntrash pickup, and yard care. Pets are allowed with written approval and a small extra\ndeposit.\n\nEither party may end the lease early with sixty days of written notice. Please keep this\nsummary with your signed copy of the full agreement for future reference.\n",
+    "lines": [
+     {
+      "text": "Rental Agreement Summary",
+      "confidence": 95,
+      "bbox": {
+       "x0": 287,
+       "y0": 355,
+       "x1": 1301,
+       "y1": 430
+      },
+      "baseline": {
+       "x0": 287,
+       "y0": 415,
+       "x1": 1301,
+       "y1": 413
+      },
+      "words": [
+       {
+        "text": "Rental",
+        "confidence": 96,
+        "bbox": {
+         "x0": 287,
+         "y0": 355,
+         "x1": 511,
+         "y1": 415
+        }
+       },
+       {
+        "text": "Agreement",
+        "confidence": 95,
+        "bbox": {
+         "x0": 538,
+         "y0": 359,
+         "x1": 934,
+         "y1": 430
+        }
+       },
+       {
+        "text": "Summary",
+        "confidence": 95,
+        "bbox": {
+         "x0": 956,
+         "y0": 358,
+         "x1": 1301,
+         "y1": 429
+        }
+       }
+      ]
+     },
+     {
+      "text": "This summary covers the lease of the second floor apartment at 42 Oak Avenue. The",
+      "confidence": 96,
+      "bbox": {
+       "x0": 282,
+       "y0": 497,
+       "x1": 2144,
+       "y1": 554
+      },
+      "baseline": {
+       "x0": 282,
+       "y0": 542,
+       "x1": 2144,
+       "y1": 541
+      },
+      "words": [
+       {
+        "text": "This",
+        "confidence": 96,
+        "bbox": {
+         "x0": 282,
+         "y0": 500,
+         "x1": 382,
+         "y1": 542
+        }
+       },
+       {
+        "text": "summary",
+        "confidence": 96,
+        "bbox": {
+         "x0": 395,
+         "y0": 511,
+         "x1": 600,
+         "y1": 554
+        }
+       },
+       {
+        "text": "covers",
+        "confidence": 96,
+        "bbox": {
+         "x0": 613,
+         "y0": 511,
+         "x1": 756,
+         "y1": 542
+        }
+       },
+       {
+        "text": "the",
+        "confidence": 96,
+        "bbox": {
+         "x0": 770,
+         "y0": 498,
+         "x1": 837,
+         "y1": 542
+        }
+       },
+       {
+        "text": "lease",
+        "confidence": 95,
+        "bbox": {
+         "x0": 851,
+         "y0": 498,
+         "x1": 960,
+         "y1": 542
+        }
+       },
+       {
+        "text": "of",
+        "confidence": 96,
+        "bbox": {
+         "x0": 974,
+         "y0": 498,
+         "x1": 1022,
+         "y1": 541
+        }
+       },
+       {
+        "text": "the",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1033,
+         "y0": 498,
+         "x1": 1101,
+         "y1": 542
+        }
+       },
+       {
+        "text": "second",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1114,
+         "y0": 498,
+         "x1": 1265,
+         "y1": 542
+        }
+       },
+       {
+        "text": "floor",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1282,
+         "y0": 498,
+         "x1": 1389,
+         "y1": 541
+        }
+       },
+       {
+        "text": "apartment",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1400,
+         "y0": 507,
+         "x1": 1619,
+         "y1": 553
+        }
+       },
+       {
+        "text": "at",
+        "confidence": 95,
+        "bbox": {
+         "x0": 1633,
+         "y0": 507,
+         "x1": 1673,
+         "y1": 541
+        }
+       },
+       {
+        "text": "42",
+        "confidence": 95,
+        "bbox": {
+         "x0": 1686,
+         "y0": 500,
+         "x1": 1741,
+         "y1": 540
+        }
+       },
+       {
+        "text": "Oak",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1756,
+         "y0": 497,
+         "x1": 1847,
+         "y1": 541
+        }
+       },
+       {
+        "text": "Avenue.",
+        "confidence": 95,
+        "bbox": {
+         "x0": 1860,
+         "y0": 499,
+         "x1": 2044,
+         "y1": 541
+        }
+       },
+       {
+        "text": "The",
+        "confidence": 96,
+        "bbox": {
+         "x0": 2056,
+         "y0": 497,
+         "x1": 2144,
+         "y1": 541
+        }
+       }
+      ]
+     },
+     {
+      "text": "lease begins on the first day of June and runs for twelve months, ending on the last day of",
+      "confidence": 96,
+      "bbox": {
+       "x0": 286,
+       "y0": 582,
+       "x1": 2253,
+       "y1": 639
+      },
+      "baseline": {
+       "x0": 286,
+       "y0": 627,
+       "x1": 2253,
+       "y1": 625
+      },
+      "words": [
+       {
+        "text": "lease",
+        "confidence": 96,
+        "bbox": {
+         "x0": 286,
+         "y0": 584,
+         "x1": 393,
+         "y1": 628
+        }
+       },
+       {
+        "text": "begins",
+        "confidence": 96,
+        "bbox": {
+         "x0": 406,
+         "y0": 584,
+         "x1": 550,
+         "y1": 639
+        }
+       },
+       {
+        "text": "on",
+        "confidence": 96,
+        "bbox": {
+         "x0": 563,
+         "y0": 597,
+         "x1": 618,
+         "y1": 627
+        }
+       },
+       {
+        "text": "the",
+        "confidence": 96,
+        "bbox": {
+         "x0": 633,
+         "y0": 584,
+         "x1": 700,
+         "y1": 627
+        }
+       },
+       {
+        "text": "first",
+        "confidence": 96,
+        "bbox": {
+         "x0": 716,
+         "y0": 583,
+         "x1": 802,
+         "y1": 627
+        }
+       },
+       {
+        "text": "day",
+        "confidence": 96,
+        "bbox": {
+         "x0": 815,
+         "y0": 583,
+         "x1": 895,
+         "y1": 639
+        }
+       },
+       {
+        "text": "of",
+        "confidence": 96,
+        "bbox": {
+         "x0": 908,
+         "y0": 583,
+         "x1": 955,
+         "y1": 627
+        }
+       },
+       {
+        "text": "June",
+        "confidence": 96,
+        "bbox": {
+         "x0": 965,
+         "y0": 585,
+         "x1": 1069,
+         "y1": 627
+        }
+       },
+       {
+        "text": "and",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1082,
+         "y0": 583,
+         "x1": 1161,
+         "y1": 627
+        }
+       },
+       {
+        "text": "runs",
+        "confidence": 90,
+        "bbox": {
+         "x0": 1176,
+         "y0": 595,
+         "x1": 1270,
+         "y1": 627
+        }
+       },
+       {
+        "text": "for",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1286,
+         "y0": 583,
+         "x1": 1349,
+         "y1": 627
+        }
+       },
+       {
+        "text": "twelve",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1362,
+         "y0": 582,
+         "x1": 1507,
+         "y1": 627
+        }
+       },
+       {
+        "text": "months,",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1522,
+         "y0": 583,
+         "x1": 1695,
+         "y1": 632
+        }
+       },
+       {
+        "text": "ending",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1710,
+         "y0": 582,
+         "x1": 1860,
+         "y1": 637
+        }
+       },
+       {
+        "text": "on",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1873,
+         "y0": 595,
+         "x1": 1927,
+         "y1": 626
+        }
+       },
+       {
+        "text": "the",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1942,
+         "y0": 583,
+         "x1": 2009,
+         "y1": 626
+        }
+       },
+       {
+        "text": "last",
+        "confidence": 96,
+        "bbox": {
+         "x0": 2023,
+         "y0": 582,
+         "x1": 2099,
+         "y1": 626
+        }
+       },
+       {
+        "text": "day",
+        "confidence": 96,
+        "bbox": {
+         "x0": 2112,
+         "y0": 582,
+         "x1": 2192,
+         "y1": 637
+        }
+       },
+       {
+        "text": "of",
+        "confidence": 96,
+        "bbox": {
+         "x0": 2205,
+         "y0": 582,
+         "x1": 2253,
+         "y1": 625
+        }
+       }
+      ]
+     },
+     {
+      "text": "May next year.",
+      "confidence": 94,
+      "bbox": {
+       "x0": 285,
+       "y0": 671,
+       "x1": 614,
+       "y1": 725
+      },
+      "baseline": {
+       "x0": 285,
+       "y0": 712,
+       "x1": 614,
+       "y1": 712
+      },
+      "words": [
+       {
+        "text": "May",
+        "confidence": 94,
+        "bbox": {
+         "x0": 285,
+         "y0": 671,
+         "x1": 385,
+         "y1": 724
+        }
+       },
+       {
+        "text": "next",
+        "confidence": 96,
+        "bbox": {
+         "x0": 399,
+         "y0": 677,
+         "x1": 493,
+         "y1": 712
+        }
+       },
+       {
+        "text": "year.",
+        "confidence": 93,
+        "bbox": {
+         "x0": 504,
+         "y0": 682,
+         "x1": 614,
+         "y1": 725
+        }
+       }
+      ]
+     },
+     {
+      "text": "The monthly rent fs due on the first of each month and may be paid by check or bank",
+      "confidence": 94,
+      "bbox": {
+       "x0": 282,
+       "y0": 795,
+       "x1": 2153,
+       "y1": 852
+      },
+      "baseline": {
+       "x0": 282,
+       "y0": 840,
+       "x1": 2153,
+       "y1": 838
+      },
+      "words": [
+       {
+        "text": "The",
+        "confidence": 96,
+        "bbox": {
+         "x0": 282,
+         "y0": 798,
+         "x1": 370,
+         "y1": 840
+        }
+       },
+       {
+        "text": "monthly",
+        "confidence": 96,
+        "bbox": {
+         "x0": 384,
+         "y0": 796,
+         "x1": 567,
+         "y1": 852
+        }
+       },
+       {
+        "text": "rent",
+        "confidence": 92,
+        "bbox": {
+         "x0": 581,
+         "y0": 807,
+         "x1": 665,
+         "y1": 840
+        }
+       },
+       {
+        "text": "fs",
+        "confidence": 54,
+        "bbox": {
+         "x0": 680,
+         "y0": 798,
+         "x1": 715,
+         "y1": 840
+        }
+       },
+       {
+        "text": "due",
+        "confidence": 96,
+        "bbox": {
+         "x0": 729,
+         "y0": 796,
+         "x1": 809,
+         "y1": 840
+        }
+       },
+       {
+        "text": "on",
+        "confidence": 96,
+        "bbox": {
+         "x0": 822,
+         "y0": 809,
+         "x1": 877,
+         "y1": 841
+        }
+       },
+       {
+        "text": "the",
+        "confidence": 96,
+        "bbox": {
+         "x0": 891,
+         "y0": 797,
+         "x1": 959,
+         "y1": 840
+        }
+       },
+       {
+        "text": "first",
+        "confidence": 96,
+        "bbox": {
+         "x0": 973,
+         "y0": 796,
+         "x1": 1059,
+         "y1": 840
+        }
+       },
+       {
+        "text": "of",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1073,
+         "y0": 795,
+         "x1": 1122,
+         "y1": 839
+        }
+       },
+       {
+        "text": "each",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1132,
+         "y0": 795,
+         "x1": 1232,
+         "y1": 840
+        }
+       },
+       {
+        "text": "month",
+        "confidence": 95,
+        "bbox": {
+         "x0": 1248,
+         "y0": 796,
+         "x1": 1386,
+         "y1": 839
+        }
+       },
+       {
+        "text": "and",
+        "confidence": 95,
+        "bbox": {
+         "x0": 1400,
+         "y0": 795,
+         "x1": 1479,
+         "y1": 839
+        }
+       },
+       {
+        "text": "may",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1495,
+         "y0": 795,
+         "x1": 1589,
+         "y1": 851
+        }
+       },
+       {
+        "text": "be",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1602,
+         "y0": 795,
+         "x1": 1655,
+         "y1": 839
+        }
+       },
+       {
+        "text": "paid",
+        "confidence": 95,
+        "bbox": {
+         "x0": 1668,
+         "y0": 795,
+         "x1": 1762,
+         "y1": 851
+        }
+       },
+       {
+        "text": "by",
+        "confidence": 95,
+        "bbox": {
+         "x0": 1776,
+         "y0": 795,
+         "x1": 1831,
+         "y1": 851
+        }
+       },
+       {
+        "text": "check",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1844,
+         "y0": 795,
+         "x1": 1973,
+         "y1": 839
+        }
+       },
+       {
+        "text": "or",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1986,
+         "y0": 808,
+         "x1": 2033,
+         "y1": 839
+        }
+       },
+       {
+        "text": "bank",
+        "confidence": 96,
+        "bbox": {
+         "x0": 2046,
+         "y0": 795,
+         "x1": 2153,
+         "y1": 839
+        }
+       }
+      ]
+     },
+     {
+      "text": "transfer. A late fee will apply if payment Is more than five days late. The security deposit",
+      "confidence": 93,
+      "bbox": {
+       "x0": 285,
+       "y0": 880,
+       "x1": 2241,
+       "y1": 937
+      },
+      "baseline": {
+       "x0": 285,
+       "y0": 925,
+       "x1": 2241,
+       "y1": 923
+      },
+      "words": [
+       {
+        "text": "transfer.",
+        "confidence": 86,
+        "bbox": {
+         "x0": 285,
+         "y0": 881,
+         "x1": 465,
+         "y1": 926
+        }
+       },
+       {
+        "text": "A",
+        "confidence": 95,
+        "bbox": {
+         "x0": 479,
+         "y0": 884,
+         "x1": 518,
+         "y1": 925
+        }
+       },
+       {
+        "text": "late",
+        "confidence": 94,
+        "bbox": {
+         "x0": 534,
+         "y0": 881,
+         "x1": 612,
+         "y1": 925
+        }
+       },
+       {
+        "text": "fee",
+        "confidence": 95,
+        "bbox": {
+         "x0": 628,
+         "y0": 881,
+         "x1": 692,
+         "y1": 925
+        }
+       },
+       {
+        "text": "will",
+        "confidence": 96,
+        "bbox": {
+         "x0": 706,
+         "y0": 881,
+         "x1": 790,
+         "y1": 925
+        }
+       },
+       {
+        "text": "apply",
+        "confidence": 96,
+        "bbox": {
+         "x0": 805,
+         "y0": 881,
+         "x1": 927,
+         "y1": 937
+        }
+       },
+       {
+        "text": "if",
+        "confidence": 92,
+        "bbox": {
+         "x0": 942,
+         "y0": 881,
+         "x1": 977,
+         "y1": 925
+        }
+       },
+       {
+        "text": "payment",
+        "confidence": 94,
+        "bbox": {
+         "x0": 988,
+         "y0": 891,
+         "x1": 1178,
+         "y1": 937
+        }
+       },
+       {
+        "text": "Is",
+        "confidence": 60,
+        "bbox": {
+         "x0": 1192,
+         "y0": 883,
+         "x1": 1227,
+         "y1": 925
+        }
+       },
+       {
+        "text": "more",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1242,
+         "y0": 894,
+         "x1": 1354,
+         "y1": 925
+        }
+       },
+       {
+        "text": "than",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1368,
+         "y0": 881,
+         "x1": 1461,
+         "y1": 924
+        }
+       },
+       {
+        "text": "five",
+        "confidence": 97,
+        "bbox": {
+         "x0": 1477,
+         "y0": 881,
+         "x1": 1561,
+         "y1": 925
+        }
+       },
+       {
+        "text": "days",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1574,
+         "y0": 881,
+         "x1": 1675,
+         "y1": 936
+        }
+       },
+       {
+        "text": "late.",
+        "confidence": 95,
+        "bbox": {
+         "x0": 1690,
+         "y0": 880,
+         "x1": 1781,
+         "y1": 925
+        }
+       },
+       {
+        "text": "The",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1792,
+         "y0": 881,
+         "x1": 1881,
+         "y1": 924
+        }
+       },
+       {
+        "text": "security",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1894,
+         "y0": 882,
+         "x1": 2068,
+         "y1": 936
+        }
+       },
+       {
+        "text": "deposit",
+        "confidence": 96,
+        "bbox": {
+         "x0": 2082,
+         "y0": 880,
+         "x1": 2241,
+         "y1": 936
+        }
+       }
+      ]
+     },
+     {
+      "text": "equals one month of rent.",
+      "confidence": 87,
+      "bbox": {
+       "x0": 285,
+       "y0": 966,
+       "x1": 843,
+       "y1": 1023
+      },
+      "baseline": {
+       "x0": 285,
+       "y0": 1009,
+       "x1": 843,
+       "y1": 1010
+      },
+      "words": [
+       {
+        "text": "equals",
+        "confidence": 53,
+        "bbox": {
+         "x0": 285,
+         "y0": 967,
+         "x1": 425,
+         "y1": 1023
+        }
+       },
+       {
+        "text": "one",
+        "confidence": 96,
+        "bbox": {
+         "x0": 438,
+         "y0": 979,
+         "x1": 518,
+         "y1": 1011
+        }
+       },
+       {
+        "text": "month",
+        "confidence": 95,
+        "bbox": {
+         "x0": 532,
+         "y0": 967,
+         "x1": 671,
+         "y1": 1010
+        }
+       },
+       {
+        "text": "of",
+        "confidence": 95,
+        "bbox": {
+         "x0": 684,
+         "y0": 966,
+         "x1": 733,
+         "y1": 1011
+        }
+       },
+       {
+        "text": "rent.",
+        "confidence": 95,
+        "bbox": {
+         "x0": 745,
+         "y0": 976,
+         "x1": 843,
+         "y1": 1011
+        }
+       }
+      ]
+     },
+     {
+      "text": "The tenant is responsible for electricity and internet service. The landlord pays for water,",
+      "confidence": 94,
+      "bbox": {
+       "x0": 282,
+       "y0": 1091,
+       "x1": 2235,
+       "y1": 1149
+      },
+      "baseline": {
+       "x0": 282,
+       "y0": 1137,
+       "x1": 2235,
+       "y1": 1135
+      },
+      "words": [
+       {
+        "text": "The",
+        "confidence": 96,
+        "bbox": {
+         "x0": 282,
+         "y0": 1095,
+         "x1": 370,
+         "y1": 1137
+        }
+       },
+       {
+        "text": "tenant",
+        "confidence": 96,
+        "bbox": {
+         "x0": 385,
+         "y0": 1103,
+         "x1": 518,
+         "y1": 1137
+        }
+       },
+       {
+        "text": "is",
+        "confidence": 95,
+        "bbox": {
+         "x0": 532,
+         "y0": 1095,
+         "x1": 567,
+         "y1": 1137
+        }
+       },
+       {
+        "text": "responsible",
+        "confidence": 95,
+        "bbox": {
+         "x0": 582,
+         "y0": 1093,
+         "x1": 832,
+         "y1": 1149
+        }
+       },
+       {
+        "text": "for",
+        "confidence": 96,
+        "bbox": {
+         "x0": 847,
+         "y0": 1093,
+         "x1": 911,
+         "y1": 1137
+        }
+       },
+       {
+        "text": "electricity",
+        "confidence": 94,
+        "bbox": {
+         "x0": 923,
+         "y0": 1093,
+         "x1": 1143,
+         "y1": 1149
+        }
+       },
+       {
+        "text": "and",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1155,
+         "y0": 1093,
+         "x1": 1235,
+         "y1": 1137
+        }
+       },
+       {
+        "text": "internet",
+        "confidence": 70,
+        "bbox": {
+         "x0": 1250,
+         "y0": 1094,
+         "x1": 1417,
+         "y1": 1137
+        }
+       },
+       {
+        "text": "service.",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1430,
+         "y0": 1095,
+         "x1": 1598,
+         "y1": 1137
+        }
+       },
+       {
+        "text": "The",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1611,
+         "y0": 1093,
+         "x1": 1699,
+         "y1": 1137
+        }
+       },
+       {
+        "text": "landlord",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1712,
+         "y0": 1092,
+         "x1": 1894,
+         "y1": 1136
+        }
+       },
+       {
+        "text": "pays",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1908,
+         "y0": 1105,
+         "x1": 2009,
+         "y1": 1148
+        }
+       },
+       {
+        "text": "for",
+        "confidence": 96,
+        "bbox": {
+         "x0": 2025,
+         "y0": 1091,
+         "x1": 2088,
+         "y1": 1136
+        }
+       },
+       {
+        "text": "water,",
+        "confidence": 96,
+        "bbox": {
+         "x0": 2100,
+         "y0": 1103,
+         "x1": 2235,
+         "y1": 1142
+        }
+       }
+      ]
+     },
+     {
+      "text": "trash pickup, and yard care. Pets are allowed with written approval and a small extra",
+      "confidence": 96,
+      "bbox": {
+       "x0": 286,
+       "y0": 1177,
+       "x1": 2136,
+       "y1": 1234
+      },
+      "baseline": {
+       "x0": 286,
+       "y0": 1222,
+       "x1": 2136,
+       "y1": 1220
+      },
+      "words": [
+       {
+        "text": "trash",
+        "confidence": 96,
+        "bbox": {
+         "x0": 286,
+         "y0": 1178,
+         "x1": 391,
+         "y1": 1222
+        }
+       },
+       {
+        "text": "pickup,",
+        "confidence": 96,
+        "bbox": {
+         "x0": 406,
+         "y0": 1179,
+         "x1": 568,
+         "y1": 1234
+        }
+       },
+       {
+        "text": "and",
+        "confidence": 96,
+        "bbox": {
+         "x0": 581,
+         "y0": 1178,
+         "x1": 660,
+         "y1": 1222
+        }
+       },
+       {
+        "text": "yard",
+        "confidence": 96,
+        "bbox": {
+         "x0": 673,
+         "y0": 1177,
+         "x1": 771,
+         "y1": 1234
+        }
+       },
+       {
+        "text": "care.",
+        "confidence": 94,
+        "bbox": {
+         "x0": 786,
+         "y0": 1190,
+         "x1": 891,
+         "y1": 1222
+        }
+       },
+       {
+        "text": "Pets",
+        "confidence": 95,
+        "bbox": {
+         "x0": 907,
+         "y0": 1181,
+         "x1": 996,
+         "y1": 1222
+        }
+       },
+       {
+        "text": "are",
+        "confidence": 95,
+        "bbox": {
+         "x0": 1009,
+         "y0": 1191,
+         "x1": 1076,
+         "y1": 1222
+        }
+       },
+       {
+        "text": "allowed",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1090,
+         "y0": 1178,
+         "x1": 1263,
+         "y1": 1222
+        }
+       },
+       {
+        "text": "with",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1278,
+         "y0": 1178,
+         "x1": 1375,
+         "y1": 1222
+        }
+       },
+       {
+        "text": "written",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1389,
+         "y0": 1179,
+         "x1": 1543,
+         "y1": 1221
+        }
+       },
+       {
+        "text": "approval",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1557,
+         "y0": 1177,
+         "x1": 1749,
+         "y1": 1233
+        }
+       },
+       {
+        "text": "and",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1763,
+         "y0": 1177,
+         "x1": 1842,
+         "y1": 1221
+        }
+       },
+       {
+        "text": "a",
+        "confidence": 94,
+        "bbox": {
+         "x0": 1856,
+         "y0": 1190,
+         "x1": 1880,
+         "y1": 1221
+        }
+       },
+       {
+        "text": "small",
+        "confidence": 94,
+        "bbox": {
+         "x0": 1895,
+         "y0": 1177,
+         "x1": 2012,
+         "y1": 1221
+        }
+       },
+       {
+        "text": "extra",
+        "confidence": 96,
+        "bbox": {
+         "x0": 2027,
+         "y0": 1187,
+         "x1": 2136,
+         "y1": 1221
+        }
+       }
+      ]
+     },
+     {
+      "text": "deposit.",
+      "confidence": 93,
+      "bbox": {
+       "x0": 285,
+       "y0": 1264,
+       "x1": 456,
+       "y1": 1319
+      },
+      "baseline": {
+       "x0": 285,
+       "y0": 1307,
+       "x1": 456,
+       "y1": 1306
+      },
+      "words": [
+       {
+        "text": "deposit.",
+        "confidence": 93,
+        "bbox": {
+         "x0": 285,
+         "y0": 1264,
+         "x1": 456,
+         "y1": 1319
+        }
+       }
+      ]
+     },
+     {
+      "text": "Either party may end the lease early with sixty days of written notice. Please keep this",
+      "confidence": 89,
+      "bbox": {
+       "x0": 288,
+       "y0": 1377,
+       "x1": 2174,
+       "y1": 1453
+      },
+      "baseline": {
+       "x0": 288,
+       "y0": 1434,
+       "x1": 2174,
+       "y1": 1432
+      },
+      "words": [
+       {
+        "text": "Either",
+        "confidence": 92,
+        "bbox": {
+         "x0": 288,
+         "y0": 1391,
+         "x1": 421,
+         "y1": 1435
+        }
+       },
+       {
+        "text": "party",
+        "confidence": 96,
+        "bbox": {
+         "x0": 434,
+         "y0": 1401,
+         "x1": 545,
+         "y1": 1447
+        }
+       },
+       {
+        "text": "may",
+        "confidence": 96,
+        "bbox": {
+         "x0": 560,
+         "y0": 1404,
+         "x1": 655,
+         "y1": 1447
+        }
+       },
+       {
+        "text": "end",
+        "confidence": 96,
+        "bbox": {
+         "x0": 667,
+         "y0": 1391,
+         "x1": 746,
+         "y1": 1435
+        }
+       },
+       {
+        "text": "the",
+        "confidence": 96,
+        "bbox": {
+         "x0": 761,
+         "y0": 1391,
+         "x1": 827,
+         "y1": 1435
+        }
+       },
+       {
+        "text": "lease",
+        "confidence": 8,
+        "bbox": {
+         "x0": 843,
+         "y0": 1391,
+         "x1": 951,
+         "y1": 1435
+        }
+       },
+       {
+        "text": "early",
+        "confidence": 84,
+        "bbox": {
+         "x0": 964,
+         "y0": 1391,
+         "x1": 1078,
+         "y1": 1450
+        }
+       },
+       {
+        "text": "with",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1088,
+         "y0": 1391,
+         "x1": 1184,
+         "y1": 1453
+        }
+       },
+       {
+        "text": "sixty",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1198,
+         "y0": 1392,
+         "x1": 1306,
+         "y1": 1447
+        }
+       },
+       {
+        "text": "days",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1319,
+         "y0": 1391,
+         "x1": 1420,
+         "y1": 1447
+        }
+       },
+       {
+        "text": "of",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1433,
+         "y0": 1390,
+         "x1": 1480,
+         "y1": 1434
+        }
+       },
+       {
+        "text": "written",
+        "confidence": 94,
+        "bbox": {
+         "x0": 1493,
+         "y0": 1392,
+         "x1": 1647,
+         "y1": 1434
+        }
+       },
+       {
+        "text": "notice.",
+        "confidence": 93,
+        "bbox": {
+         "x0": 1663,
+         "y0": 1392,
+         "x1": 1809,
+         "y1": 1435
+        }
+       },
+       {
+        "text": "Please",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1825,
+         "y0": 1377,
+         "x1": 1963,
+         "y1": 1434
+        }
+       },
+       {
+        "text": "keep",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1979,
+         "y0": 1390,
+         "x1": 2080,
+         "y1": 1445
+        }
+       },
+       {
+        "text": "this",
+        "confidence": 96,
+        "bbox": {
+         "x0": 2096,
+         "y0": 1390,
+         "x1": 2174,
+         "y1": 1433
+        }
+       }
+      ]
+     },
+     {
+      "text": "summary with your signed copy of the full agreement for future reference.",
+      "confidence": 94,
+      "bbox": {
+       "x0": 285,
+       "y0": 1475,
+       "x1": 1918,
+       "y1": 1532
+      },
+      "baseline": {
+       "x0": 285,
+       "y0": 1520,
+       "x1": 1918,
+       "y1": 1519
+      },
+      "words": [
+       {
+        "text": "summary",
+        "confidence": 72,
+        "bbox": {
+         "x0": 285,
+         "y0": 1489,
+         "x1": 489,
+         "y1": 1532
+        }
+       },
+       {
+        "text": "with",
+        "confidence": 95,
+        "bbox": {
+         "x0": 504,
+         "y0": 1477,
+         "x1": 600,
+         "y1": 1520
+        }
+       },
+       {
+        "text": "your",
+        "confidence": 96,
+        "bbox": {
+         "x0": 613,
+         "y0": 1489,
+         "x1": 716,
+         "y1": 1532
+        }
+       },
+       {
+        "text": "signed",
+        "confidence": 96,
+        "bbox": {
+         "x0": 728,
+         "y0": 1476,
+         "x1": 871,
+         "y1": 1530
+        }
+       },
+       {
+        "text": "copy",
+        "confidence": 95,
+        "bbox": {
+         "x0": 885,
+         "y0": 1488,
+         "x1": 992,
+         "y1": 1531
+        }
+       },
+       {
+        "text": "of",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1005,
+         "y0": 1476,
+         "x1": 1053,
+         "y1": 1520
+        }
+       },
+       {
+        "text": "the",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1066,
+         "y0": 1476,
+         "x1": 1132,
+         "y1": 1520
+        }
+       },
+       {
+        "text": "full",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1148,
+         "y0": 1475,
+         "x1": 1221,
+         "y1": 1520
+        }
+       },
+       {
+        "text": "agreement",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1235,
+         "y0": 1486,
+         "x1": 1464,
+         "y1": 1530
+        }
+       },
+       {
+        "text": "for",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1480,
+         "y0": 1475,
+         "x1": 1543,
+         "y1": 1519
+        }
+       },
+       {
+        "text": "future",
+        "confidence": 96,
+        "bbox": {
+         "x0": 1559,
+         "y0": 1476,
+         "x1": 1686,
+         "y1": 1520
+        }
+       },
+       {
+        "text": "reference.",
+        "confidence": 92,
+        "bbox": {
+         "x0": 1702,
+         "y0": 1475,
+         "x1": 1918,
+         "y1": 1519
+        }
+       }
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "target": {
+  "segment": {
+   "j0": 0,
+   "j1": 16,
+   "text": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "box": {
+    "x0": 280,
+    "x1": 2238,
+    "y0": 867,
+    "y1": 951
+   },
+   "lineBox": {
+    "x0": 284,
+    "y0": 881,
+    "x1": 2238,
+    "y1": 937
+   }
+  },
+  "fitText": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+  "ocrLineIndex": 5,
+  "ocrText": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+  "trueText": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+  "similarity": 1,
+  "bbox": {
+   "x0": 284,
+   "y0": 881,
+   "x1": 2238,
+   "y1": 937
+  },
+  "lowConfidenceWords": [],
+  "wouldBlockInApp": false,
+  "correctedOld": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+  "newText": "transfer. A late fee will apply if payment is more than nine days late. The security deposit",
+  "find": "five",
+  "replace": "nine"
+ },
+ "measure": {
+  "xHeight": 28,
+  "capHeight": 40,
+  "baseline": 923,
+  "inkLeft": 284,
+  "inkRight": 2238,
+  "otsu": 180,
+  "inkWidth": 1954,
+  "inkRGB_untouchedMedian": [
+   148,
+   144,
+   134
+  ],
+  "inkRGB_darkest40pct": [
+   120,
+   115,
+   106
+  ],
+  "inkRGB_drawn": [
+   74,
+   70,
+   60
+  ],
+  "paperRGB": [
+   233,
+   226,
+   216
+  ],
+  "lineHeight": 84
+ },
+ "preview": {
+  "showGapBeforeSave": false,
+  "gapPx": 0,
+  "gapMm": 0,
+  "slotPx": 86,
+  "drawnInkWidthPx": 91.6,
+  "decision": "fits: spacing -0.0331 em, scale 1.000",
+  "gapRectDeskewedPx": null,
+  "gapPolygonPdfUser": null
+ },
+ "visual": {
+  "gapCheck": {
+   "region": {
+    "x0": 1553,
+    "x1": 1563,
+    "y0": 881,
+    "y1": 925,
+    "pixels": 440
+   },
+   "gapMean": 209.4,
+   "gapStd": 19.42,
+   "paperMean": 209.94,
+   "paperStd": 27.25,
+   "meanDelta": -0.54,
+   "noiseFloor5x5": 79.37,
+   "maxBlobDeviation5x5": 28.76,
+   "blobAboveFloor": false,
+   "oldWordAreaBefore": 200.65
+  },
+  "words": [
+   {
+    "word": "transfer.",
+    "edited": false,
+    "before": {
+     "baselineY": 924,
+     "xHeightPx": 28,
+     "capHeightPx": 39,
+     "inkLeft": 286,
+     "inkRight": 462,
+     "inkWidthPx": 176,
+     "advancePerCharPx": 19.56,
+     "stemWidthPx": 9.034
+    },
+    "after": {
+     "baselineY": 924,
+     "xHeightPx": 28,
+     "capHeightPx": 39,
+     "inkLeft": 286,
+     "inkRight": 462,
+     "inkWidthPx": 176,
+     "advancePerCharPx": 19.56,
+     "stemWidthPx": 9.034
+    }
+   },
+   {
+    "word": "A",
+    "edited": false,
+    "before": {
+     "baselineY": 913,
+     "xHeightPx": 26,
+     "capHeightPx": 28,
+     "inkLeft": 487,
+     "inkRight": 505,
+     "inkWidthPx": 18,
+     "advancePerCharPx": 18,
+     "stemWidthPx": 7.22
+    },
+    "after": {
+     "baselineY": 913,
+     "xHeightPx": 26,
+     "capHeightPx": 28,
+     "inkLeft": 487,
+     "inkRight": 505,
+     "inkWidthPx": 18,
+     "advancePerCharPx": 18,
+     "stemWidthPx": 7.22
+    }
+   },
+   {
+    "word": "late",
+    "edited": false,
+    "before": {
+     "baselineY": 923,
+     "xHeightPx": 27,
+     "capHeightPx": 39,
+     "inkLeft": 535,
+     "inkRight": 607,
+     "inkWidthPx": 72,
+     "advancePerCharPx": 18,
+     "stemWidthPx": 8.891
+    },
+    "after": {
+     "baselineY": 923,
+     "xHeightPx": 27,
+     "capHeightPx": 39,
+     "inkLeft": 535,
+     "inkRight": 607,
+     "inkWidthPx": 72,
+     "advancePerCharPx": 18,
+     "stemWidthPx": 8.891
+    }
+   },
+   {
+    "word": "fee",
+    "edited": false,
+    "before": {
+     "baselineY": 922,
+     "xHeightPx": 26,
+     "capHeightPx": 38,
+     "inkLeft": 628,
+     "inkRight": 691,
+     "inkWidthPx": 63,
+     "advancePerCharPx": 21,
+     "stemWidthPx": 10.352
+    },
+    "after": {
+     "baselineY": 922,
+     "xHeightPx": 26,
+     "capHeightPx": 38,
+     "inkLeft": 628,
+     "inkRight": 691,
+     "inkWidthPx": 63,
+     "advancePerCharPx": 21,
+     "stemWidthPx": 10.352
+    }
+   },
+   {
+    "word": "will",
+    "edited": false,
+    "before": {
+     "baselineY": 922,
+     "xHeightPx": 26,
+     "capHeightPx": 39,
+     "inkLeft": 707,
+     "inkRight": 788,
+     "inkWidthPx": 81,
+     "advancePerCharPx": 20.25,
+     "stemWidthPx": 7.854
+    },
+    "after": {
+     "baselineY": 922,
+     "xHeightPx": 26,
+     "capHeightPx": 39,
+     "inkLeft": 707,
+     "inkRight": 788,
+     "inkWidthPx": 81,
+     "advancePerCharPx": 20.25,
+     "stemWidthPx": 7.854
+    }
+   },
+   {
+    "word": "apply",
+    "edited": false,
+    "before": {
+     "baselineY": 923,
+     "xHeightPx": 27,
+     "capHeightPx": 39,
+     "inkLeft": 812,
+     "inkRight": 921,
+     "inkWidthPx": 109,
+     "advancePerCharPx": 21.8,
+     "stemWidthPx": 8.18
+    },
+    "after": {
+     "baselineY": 923,
+     "xHeightPx": 27,
+     "capHeightPx": 39,
+     "inkLeft": 812,
+     "inkRight": 921,
+     "inkWidthPx": 109,
+     "advancePerCharPx": 21.8,
+     "stemWidthPx": 8.18
+    }
+   },
+   {
+    "word": "if",
+    "edited": false,
+    "before": {
+     "baselineY": 922,
+     "xHeightPx": 36,
+     "capHeightPx": 38,
+     "inkLeft": 944,
+     "inkRight": 973,
+     "inkWidthPx": 29,
+     "advancePerCharPx": 14.5,
+     "stemWidthPx": 7.432
+    },
+    "after": {
+     "baselineY": 922,
+     "xHeightPx": 36,
+     "capHeightPx": 38,
+     "inkLeft": 944,
+     "inkRight": 973,
+     "inkWidthPx": 29,
+     "advancePerCharPx": 14.5,
+     "stemWidthPx": 7.432
+    }
+   },
+   {
+    "word": "payment",
+    "edited": false,
+    "before": {
+     "baselineY": 922,
+     "xHeightPx": 26,
+     "capHeightPx": 27,
+     "inkLeft": 999,
+     "inkRight": 1167,
+     "inkWidthPx": 168,
+     "advancePerCharPx": 24,
+     "stemWidthPx": 7.631
+    },
+    "after": {
+     "baselineY": 922,
+     "xHeightPx": 26,
+     "capHeightPx": 27,
+     "inkLeft": 999,
+     "inkRight": 1167,
+     "inkWidthPx": 168,
+     "advancePerCharPx": 24,
+     "stemWidthPx": 7.631
+    }
+   },
+   {
+    "word": "is",
+    "edited": false,
+    "before": {
+     "baselineY": 922,
+     "xHeightPx": 26,
+     "capHeightPx": 36,
+     "inkLeft": 1193,
+     "inkRight": 1226,
+     "inkWidthPx": 33,
+     "advancePerCharPx": 16.5,
+     "stemWidthPx": 6.797
+    },
+    "after": {
+     "baselineY": 922,
+     "xHeightPx": 26,
+     "capHeightPx": 36,
+     "inkLeft": 1193,
+     "inkRight": 1226,
+     "inkWidthPx": 33,
+     "advancePerCharPx": 16.5,
+     "stemWidthPx": 6.797
+    }
+   },
+   {
+    "word": "more",
+    "edited": false,
+    "before": {
+     "baselineY": 921,
+     "xHeightPx": 25,
+     "capHeightPx": 26,
+     "inkLeft": 1255,
+     "inkRight": 1343,
+     "inkWidthPx": 88,
+     "advancePerCharPx": 22,
+     "stemWidthPx": 8.151
+    },
+    "after": {
+     "baselineY": 921,
+     "xHeightPx": 25,
+     "capHeightPx": 26,
+     "inkLeft": 1255,
+     "inkRight": 1343,
+     "inkWidthPx": 88,
+     "advancePerCharPx": 22,
+     "stemWidthPx": 8.151
+    }
+   },
+   {
+    "word": "than",
+    "edited": false,
+    "before": {
+     "baselineY": 922,
+     "xHeightPx": 27,
+     "capHeightPx": 38,
+     "inkLeft": 1369,
+     "inkRight": 1449,
+     "inkWidthPx": 80,
+     "advancePerCharPx": 20,
+     "stemWidthPx": 7.755
+    },
+    "after": {
+     "baselineY": 922,
+     "xHeightPx": 27,
+     "capHeightPx": 38,
+     "inkLeft": 1369,
+     "inkRight": 1449,
+     "inkWidthPx": 80,
+     "advancePerCharPx": 20,
+     "stemWidthPx": 7.755
+    }
+   },
+   {
+    "word": "five",
+    "edited": true,
+    "before": {
+     "baselineY": 921,
+     "xHeightPx": 25,
+     "capHeightPx": 37,
+     "inkLeft": 1478,
+     "inkRight": 1558,
+     "inkWidthPx": 80,
+     "advancePerCharPx": 20,
+     "stemWidthPx": 7.099
+    },
+    "after": {
+     "baselineY": 922,
+     "xHeightPx": 24,
+     "capHeightPx": 25,
+     "inkLeft": 1479,
+     "inkRight": 1550,
+     "inkWidthPx": 71,
+     "advancePerCharPx": 17.75,
+     "stemWidthPx": 7.603
+    }
+   },
+   {
+    "word": "days",
+    "edited": false,
+    "before": {
+     "baselineY": 922,
+     "xHeightPx": 26,
+     "capHeightPx": 38,
+     "inkLeft": 1575,
+     "inkRight": 1663,
+     "inkWidthPx": 88,
+     "advancePerCharPx": 22,
+     "stemWidthPx": 6.98
+    },
+    "after": {
+     "baselineY": 922,
+     "xHeightPx": 26,
+     "capHeightPx": 38,
+     "inkLeft": 1575,
+     "inkRight": 1663,
+     "inkWidthPx": 88,
+     "advancePerCharPx": 22,
+     "stemWidthPx": 6.98
+    }
+   },
+   {
+    "word": "late.",
+    "edited": false,
+    "before": {
+     "baselineY": 922,
+     "xHeightPx": 26,
+     "capHeightPx": 38,
+     "inkLeft": 1692,
+     "inkRight": 1778,
+     "inkWidthPx": 86,
+     "advancePerCharPx": 17.2,
+     "stemWidthPx": 7.049
+    },
+    "after": {
+     "baselineY": 922,
+     "xHeightPx": 26,
+     "capHeightPx": 38,
+     "inkLeft": 1692,
+     "inkRight": 1778,
+     "inkWidthPx": 86,
+     "advancePerCharPx": 17.2,
+     "stemWidthPx": 7.049
+    }
+   },
+   {
+    "word": "The",
+    "edited": false,
+    "before": {
+     "baselineY": 922,
+     "xHeightPx": 37,
+     "capHeightPx": 39,
+     "inkLeft": 1809,
+     "inkRight": 1876,
+     "inkWidthPx": 67,
+     "advancePerCharPx": 22.33,
+     "stemWidthPx": 7.402
+    },
+    "after": {
+     "baselineY": 922,
+     "xHeightPx": 37,
+     "capHeightPx": 39,
+     "inkLeft": 1809,
+     "inkRight": 1876,
+     "inkWidthPx": 67,
+     "advancePerCharPx": 22.33,
+     "stemWidthPx": 7.402
+    }
+   },
+   {
+    "word": "security",
+    "edited": false,
+    "before": {
+     "baselineY": 921,
+     "xHeightPx": 25,
+     "capHeightPx": 28,
+     "inkLeft": 1896,
+     "inkRight": 2065,
+     "inkWidthPx": 169,
+     "advancePerCharPx": 21.13,
+     "stemWidthPx": 6.665
+    },
+    "after": {
+     "baselineY": 921,
+     "xHeightPx": 25,
+     "capHeightPx": 28,
+     "inkLeft": 1896,
+     "inkRight": 2065,
+     "inkWidthPx": 169,
+     "advancePerCharPx": 21.13,
+     "stemWidthPx": 6.665
+    }
+   },
+   {
+    "word": "deposit",
+    "edited": false,
+    "before": {
+     "baselineY": 921,
+     "xHeightPx": 25,
+     "capHeightPx": 37,
+     "inkLeft": 2087,
+     "inkRight": 2236,
+     "inkWidthPx": 149,
+     "advancePerCharPx": 21.29,
+     "stemWidthPx": 6.799
+    },
+    "after": {
+     "baselineY": 921,
+     "xHeightPx": 25,
+     "capHeightPx": 37,
+     "inkLeft": 2087,
+     "inkRight": 2236,
+     "inkWidthPx": 149,
+     "advancePerCharPx": 21.29,
+     "stemWidthPx": 6.799
+    }
+   }
+  ],
+  "newWord": {
+   "baselineDeltaPx": 0,
+   "xHeightDeltaPx": -2,
+   "capHeightDeltaPx": -13,
+   "stemWidthPx": 7.603,
+   "stemWidthUntouchedMedianPx": 7.631,
+   "stemWidthOldWordPx": 7.099,
+   "advancePerCharPx": 17.75,
+   "advancePerCharUntouchedMedianPx": 21,
+   "advancePerCharOldWordPx": 20,
+   "gapBeforePx": 30,
+   "gapBeforeWasPx": 29,
+   "gapAfterPx": 25,
+   "gapAfterWasPx": 17,
+   "typicalWordGapPx": 26
+  },
+  "oldWordBaselineDeltaPx": -1,
+  "oldWordXHeightDeltaPx": -1,
+  "patchEdge": {
+   "meanAbsStepAcrossBorderAfter": 0.471,
+   "sameSpotsBefore": 0.469,
+   "paperBorderPixels": 378
+  },
+  "grain": {
+   "insidePatchAfter": {
+    "std": 0.855,
+    "samples": 6899
+   },
+   "insidePatchBefore": {
+    "std": 1.025,
+    "samples": 6697
+   },
+   "ringAroundPatch": {
+    "std": 0.729,
+    "samples": 4780
+   }
+  }
+ },
+ "look": {
+  "target": {
+   "inkRGB": [
+    148,
+    144,
+    134
+   ],
+   "edge": 4.376,
+   "noise": 1.387,
+   "inkDensity": 23.49230769230769,
+   "inkMass": 2172.740963855422,
+   "inkP10RGB": [
+    112,
+    108,
+    98
+   ],
+   "inkMedianGray": 144.1,
+   "strokeWidth": 7.5577190542420025,
+   "deepFracPerWord": [
+    {
+     "text": "transfer.",
+     "deepFrac": 0
+    },
+    {
+     "text": "A",
+     "deepFrac": 0
+    },
+    {
+     "text": "late",
+     "deepFrac": 0
+    },
+    {
+     "text": "fee",
+     "deepFrac": 0
+    },
+    {
+     "text": "will",
+     "deepFrac": 0
+    },
+    {
+     "text": "apply",
+     "deepFrac": 0
+    },
+    {
+     "text": "if",
+     "deepFrac": 0
+    },
+    {
+     "text": "payment",
+     "deepFrac": 0
+    },
+    {
+     "text": "is",
+     "deepFrac": 0
+    },
+    {
+     "text": "more",
+     "deepFrac": 0
+    },
+    {
+     "text": "than",
+     "deepFrac": 0
+    },
+    {
+     "text": "days",
+     "deepFrac": 0
+    },
+    {
+     "text": "late.",
+     "deepFrac": 0
+    },
+    {
+     "text": "The",
+     "deepFrac": 0
+    },
+    {
+     "text": "security",
+     "deepFrac": 0
+    },
+    {
+     "text": "deposit",
+     "deepFrac": 0
+    }
+   ],
+   "deepFrac": 0,
+   "coreMedianGray": 119
+  },
+  "untouchedWords": [
+   {
+    "word": "transfer.",
+    "inkMedianRGB": [
+     148,
+     144,
+     135
+    ],
+    "inkMedianGray": 144.1,
+    "inkP10RGB": [
+     111,
+     106,
+     98
+    ],
+    "inkPixels": 4492,
+    "edge10_90px": 4.59,
+    "edgeSamples": 323,
+    "noiseStd": 1.063,
+    "noiseSamples": 4079
+   },
+   {
+    "word": "A",
+    "inkMedianRGB": [
+     143,
+     139,
+     130
+    ],
+    "inkMedianGray": 139.2,
+    "inkP10RGB": [
+     96,
+     92,
+     83
+    ],
+    "inkPixels": 461,
+    "edge10_90px": 4.292,
+    "edgeSamples": 23,
+    "noiseStd": 1.913,
+    "noiseSamples": 36
+   },
+   {
+    "word": "late",
+    "inkMedianRGB": [
+     147,
+     143,
+     134
+    ],
+    "inkMedianGray": 142.9,
+    "inkP10RGB": [
+     111,
+     107,
+     98
+    ],
+    "inkPixels": 2058,
+    "edge10_90px": 4.205,
+    "edgeSamples": 152,
+    "noiseStd": 1.085,
+    "noiseSamples": 1719
+   },
+   {
+    "word": "fee",
+    "inkMedianRGB": [
+     147,
+     143,
+     133
+    ],
+    "inkMedianGray": 142.8,
+    "inkP10RGB": [
+     108,
+     104,
+     94
+    ],
+    "inkPixels": 1686,
+    "edge10_90px": 4.408,
+    "edgeSamples": 122,
+    "noiseStd": 1.163,
+    "noiseSamples": 1214
+   },
+   {
+    "word": "will",
+    "inkMedianRGB": [
+     147,
+     142,
+     134
+    ],
+    "inkMedianGray": 142.8,
+    "inkP10RGB": [
+     109,
+     105,
+     96
+    ],
+    "inkPixels": 2056,
+    "edge10_90px": 4.626,
+    "edgeSamples": 163,
+    "noiseStd": 1.086,
+    "noiseSamples": 1596
+   },
+   {
+    "word": "apply",
+    "inkMedianRGB": [
+     146,
+     142,
+     132
+    ],
+    "inkMedianGray": 141.9,
+    "inkP10RGB": [
+     110,
+     106,
+     97
+    ],
+    "inkPixels": 3087,
+    "edge10_90px": 4.267,
+    "edgeSamples": 232,
+    "noiseStd": 1.345,
+    "noiseSamples": 1717
+   },
+   {
+    "word": "if",
+    "inkMedianRGB": [
+     151,
+     147,
+     136
+    ],
+    "inkMedianGray": 146.9,
+    "inkP10RGB": [
+     112,
+     108,
+     98
+    ],
+    "inkPixels": 878,
+    "edge10_90px": 4.432,
+    "edgeSamples": 64,
+    "noiseStd": null,
+    "noiseSamples": 26
+   },
+   {
+    "word": "payment",
+    "inkMedianRGB": [
+     149,
+     144,
+     136
+    ],
+    "inkMedianGray": 144.8,
+    "inkP10RGB": [
+     111,
+     107,
+     99
+    ],
+    "inkPixels": 3843,
+    "edge10_90px": 4.175,
+    "edgeSamples": 329,
+    "noiseStd": 1.298,
+    "noiseSamples": 3885
+   },
+   {
+    "word": "is",
+    "inkMedianRGB": [
+     157,
+     153,
+     142
+    ],
+    "inkMedianGray": 152.8,
+    "inkP10RGB": [
+     115,
+     111,
+     101
+    ],
+    "inkPixels": 843,
+    "edge10_90px": 5.217,
+    "edgeSamples": 64,
+    "noiseStd": 1.387,
+    "noiseSamples": 837
+   },
+   {
+    "word": "more",
+    "inkMedianRGB": [
+     147,
+     143,
+     134
+    ],
+    "inkMedianGray": 143.2,
+    "inkP10RGB": [
+     112,
+     108,
+     100
+    ],
+    "inkPixels": 1962,
+    "edge10_90px": 4.3,
+    "edgeSamples": 192,
+    "noiseStd": 1.415,
+    "noiseSamples": 2146
+   },
+   {
+    "word": "than",
+    "inkMedianRGB": [
+     146,
+     142,
+     133
+    ],
+    "inkMedianGray": 142.2,
+    "inkP10RGB": [
+     112,
+     108,
+     99
+    ],
+    "inkPixels": 1960,
+    "edge10_90px": 4.253,
+    "edgeSamples": 179,
+    "noiseStd": 1.35,
+    "noiseSamples": 1912
+   },
+   {
+    "word": "days",
+    "inkMedianRGB": [
+     150,
+     145,
+     136
+    ],
+    "inkMedianGray": 145.2,
+    "inkP10RGB": [
+     112,
+     108,
+     99
+    ],
+    "inkPixels": 1916,
+    "edge10_90px": 4.376,
+    "edgeSamples": 160,
+    "noiseStd": 1.692,
+    "noiseSamples": 1821
+   },
+   {
+    "word": "late.",
+    "inkMedianRGB": [
+     149,
+     144,
+     134
+    ],
+    "inkMedianGray": 144.9,
+    "inkP10RGB": [
+     113,
+     108,
+     99
+    ],
+    "inkPixels": 1832,
+    "edge10_90px": 4.136,
+    "edgeSamples": 168,
+    "noiseStd": 1.576,
+    "noiseSamples": 2515
+   },
+   {
+    "word": "The",
+    "inkMedianRGB": [
+     146,
+     141,
+     132
+    ],
+    "inkMedianGray": 141.3,
+    "inkP10RGB": [
+     106,
+     102,
+     92
+    ],
+    "inkPixels": 1527,
+    "edge10_90px": 4.483,
+    "edgeSamples": 118,
+    "noiseStd": 1.691,
+    "noiseSamples": 1465
+   },
+   {
+    "word": "security",
+    "inkMedianRGB": [
+     151,
+     147,
+     138
+    ],
+    "inkMedianGray": 147.2,
+    "inkP10RGB": [
+     112,
+     108,
+     98
+    ],
+    "inkPixels": 3245,
+    "edge10_90px": 4.529,
+    "edgeSamples": 307,
+    "noiseStd": 1.665,
+    "noiseSamples": 4385
+   },
+   {
+    "word": "deposit",
+    "inkMedianRGB": [
+     150,
+     145,
+     136
+    ],
+    "inkMedianGray": 145.2,
+    "inkP10RGB": [
+     113,
+     108,
+     100
+    ],
+    "inkPixels": 3299,
+    "edge10_90px": 4.186,
+    "edgeSamples": 313,
+    "noiseStd": 1.811,
+    "noiseSamples": 3499
+   }
+  ],
+  "newWord": {
+   "text": "nine",
+   "inkMedianRGB": [
+    160,
+    155,
+    145
+   ],
+   "inkMedianGray": 155.4,
+   "inkP10RGB": [
+    142,
+    137,
+    127
+   ],
+   "inkPixels": 1921,
+   "edge10_90px": 4.384,
+   "edgeSamples": 128,
+   "noiseStd": 0.838,
+   "noiseSamples": 5718
+  },
+  "drawnColor": [
+   74,
+   70,
+   60
+  ],
+  "drawnColorUnclamped": [
+   74,
+   70,
+   60
+  ],
+  "blurSigmaPx": 3.7720000000000002,
+  "strokeWeightPx": 0.9,
+  "inkGain": 1.1,
+  "jointFit": {
+   "cost": 5.056535962267357,
+   "sg": 3.1,
+   "gn": 1.1,
+   "w": 0.912841796875,
+   "ig": 70.23400000000004,
+   "core": 128.355,
+   "inkMedian": 147.355,
+   "stem": 7.5470737913486,
+   "edge": 4.15,
+   "candidatesTried": 770,
+   "nearMisses": [
+    {
+     "sg": 4.25,
+     "gn": 5,
+     "med": 144.4,
+     "stem": 11.919,
+     "edge": 4.371,
+     "core": 127.94199999999998,
+     "ok": true
+    },
+    {
+     "sg": 4.3,
+     "gn": 5,
+     "med": 143.9,
+     "stem": 12.146,
+     "edge": 4.421,
+     "core": 127.94199999999998,
+     "ok": true
+    },
+    {
+     "sg": 4.1,
+     "gn": 5,
+     "med": 146.4,
+     "stem": 11.48,
+     "edge": 4.323,
+     "core": 127.94199999999998,
+     "ok": true
+    },
+    {
+     "sg": 4.2,
+     "gn": 5,
+     "med": 144.9,
+     "stem": 11.749,
+     "edge": 4.312,
+     "core": 127.35499999999999,
+     "ok": true
+    },
+    {
+     "sg": 4.05,
+     "gn": 5,
+     "med": 146.4,
+     "stem": 11.252,
+     "edge": 4.305,
+     "core": 128.355,
+     "ok": true
+    },
+    {
+     "sg": 4.35,
+     "gn": 5,
+     "med": 143.4,
+     "stem": 12.335,
+     "edge": 4.451,
+     "core": 127.94199999999998,
+     "ok": true
+    }
+   ]
+  },
+  "stemCalibration": [
+   {
+    "weightPx": 0.913,
+    "sigma": 3.1,
+    "wordStem": 7.127,
+    "edge": 4.08
+   },
+   {
+    "weightPx": 1.107,
+    "sigma": 3.189,
+    "wordStem": 7.596,
+    "edge": 4.17
+   },
+   {
+    "weightPx": 1.107,
+    "sigma": 3.251,
+    "wordStem": 7.64,
+    "edge": 4.125
+   },
+   {
+    "weightPx": 1.07,
+    "sigma": 3.326,
+    "wordStem": 7.616,
+    "edge": 4.125
+   },
+   {
+    "weightPx": 1.07,
+    "sigma": 3.401,
+    "wordStem": 7.701,
+    "edge": 4.087
+   },
+   {
+    "weightPx": 1.005,
+    "sigma": 3.488,
+    "wordStem": 7.634,
+    "edge": 4.07
+   },
+   {
+    "weightPx": 0.971,
+    "sigma": 3.58,
+    "wordStem": 7.658,
+    "edge": 4.144
+   },
+   {
+    "weightPx": 0.926,
+    "sigma": 3.649,
+    "wordStem": 7.559,
+    "edge": 4.174
+   },
+   {
+    "weightPx": 0.926,
+    "sigma": 3.71,
+    "wordStem": 7.569,
+    "edge": 4.243
+   },
+   {
+    "weightPx": 0.926,
+    "sigma": 3.75,
+    "wordStem": 7.694,
+    "edge": 4.327
+   },
+   {
+    "weightPx": 0.864,
+    "sigma": 3.75,
+    "wordStem": 7.472,
+    "edge": 4.302
+   },
+   {
+    "weightPx": 0.903,
+    "sigma": 3.772,
+    "wordStem": 7.603,
+    "edge": 4.384
+   }
+  ],
+  "deepCores": {
+   "thresholdGray": 48.8,
+   "neighbours": [
+    {
+     "text": "transfer.",
+     "deepFrac": 0
+    },
+    {
+     "text": "A",
+     "deepFrac": 0
+    },
+    {
+     "text": "late",
+     "deepFrac": 0
+    },
+    {
+     "text": "fee",
+     "deepFrac": 0
+    },
+    {
+     "text": "will",
+     "deepFrac": 0
+    },
+    {
+     "text": "apply",
+     "deepFrac": 0
+    },
+    {
+     "text": "if",
+     "deepFrac": 0
+    },
+    {
+     "text": "payment",
+     "deepFrac": 0
+    },
+    {
+     "text": "is",
+     "deepFrac": 0
+    },
+    {
+     "text": "more",
+     "deepFrac": 0
+    },
+    {
+     "text": "than",
+     "deepFrac": 0
+    },
+    {
+     "text": "days",
+     "deepFrac": 0
+    },
+    {
+     "text": "late.",
+     "deepFrac": 0
+    },
+    {
+     "text": "The",
+     "deepFrac": 0
+    },
+    {
+     "text": "security",
+     "deepFrac": 0
+    },
+    {
+     "text": "deposit",
+     "deepFrac": 0
+    }
+   ],
+   "neighbourMedian": 0,
+   "newWord": 0
+  },
+  "edgeBlend": {
+   "dbgTop": [
+    {
+     "x": 103,
+     "y": 44,
+     "d": [
+      90,
+      90,
+      90
+     ],
+     "raw": [
+      90,
+      91,
+      90
+     ]
+    },
+    {
+     "x": 103,
+     "y": 45,
+     "d": [
+      90,
+      90,
+      90
+     ],
+     "raw": [
+      92,
+      93,
+      92
+     ]
+    },
+    {
+     "x": 103,
+     "y": 46,
+     "d": [
+      90,
+      90,
+      90
+     ],
+     "raw": [
+      90,
+      90,
+      90
+     ]
+    },
+    {
+     "x": 103,
+     "y": 43,
+     "d": [
+      87,
+      87,
+      86
+     ],
+     "raw": [
+      87,
+      87,
+      86
+     ]
+    },
+    {
+     "x": 103,
+     "y": 47,
+     "d": [
+      83,
+      83,
+      83
+     ],
+     "raw": [
+      83,
+      83,
+      83
+     ]
+    },
+    {
+     "x": 103,
+     "y": 42,
+     "d": [
+      80,
+      81,
+      80
+     ],
+     "raw": [
+      80,
+      81,
+      80
+     ]
+    },
+    {
+     "x": 103,
+     "y": 48,
+     "d": [
+      75,
+      76,
+      75
+     ],
+     "raw": [
+      75,
+      76,
+      75
+     ]
+    },
+    {
+     "x": 103,
+     "y": 41,
+     "d": [
+      74,
+      75,
+      74
+     ],
+     "raw": [
+      74,
+      75,
+      74
+     ]
+    }
+   ],
+   "bw": 104,
+   "bh": 96,
+   "membraneMaxAbsBorderDiff": 90,
+   "featherPx": 3,
+   "method": "Poisson clone: Laplace membrane (Jacobi, 1500 it) pinned to the original along the border (5-px median), then 3-px linear feather"
+  },
+  "handKeep": {
+   "colouredMarkPixelsInBox": 0,
+   "restoredFromOriginal": 0
+  },
+  "coreMedian": {
+   "untouched": 119,
+   "newWord": 141.355
+  },
+  "paperRebuild": {
+   "inkDelta": 5.83,
+   "grainPoolPixels": 5613,
+   "inpaintPixels": 5443
+  },
+  "sigmaTrials": [
+   [
+    0,
+    1.582
+   ],
+   [
+    0.1,
+    1.582
+   ],
+   [
+    0.2,
+    1.582
+   ],
+   [
+    0.3,
+    1.583
+   ],
+   [
+    0.4,
+    1.644
+   ],
+   [
+    0.5,
+    1.771
+   ],
+   [
+    0.6,
+    1.931
+   ],
+   [
+    0.7,
+    2.185
+   ],
+   [
+    0.8,
+    2.418
+   ],
+   [
+    0.9,
+    2.576
+   ],
+   [
+    1,
+    2.706
+   ],
+   [
+    1.1,
+    2.816
+   ],
+   [
+    1.2,
+    2.942
+   ],
+   [
+    1.3,
+    3.029
+   ],
+   [
+    1.4,
+    3.147
+   ],
+   [
+    1.5,
+    3.291
+   ],
+   [
+    1.6,
+    3.421
+   ],
+   [
+    1.7,
+    3.507
+   ],
+   [
+    1.8,
+    3.603
+   ],
+   [
+    1.9,
+    3.666
+   ],
+   [
+    2,
+    3.673
+   ],
+   [
+    2.1,
+    3.723
+   ],
+   [
+    2.2,
+    3.737
+   ],
+   [
+    2.3,
+    3.763
+   ],
+   [
+    2.4,
+    3.821
+   ],
+   [
+    2.5,
+    3.796
+   ],
+   [
+    2.6,
+    3.854
+   ],
+   [
+    2.7,
+    3.854
+   ],
+   [
+    2.8,
+    3.871
+   ],
+   [
+    2.9,
+    3.991
+   ],
+   [
+    3,
+    4.021
+   ],
+   [
+    3.1,
+    3.99
+   ],
+   [
+    3.2,
+    4.052
+   ],
+   [
+    3.3,
+    4.029
+   ],
+   [
+    3.4,
+    4.088
+   ],
+   [
+    3.5,
+    4.036
+   ],
+   [
+    3.6,
+    4.089
+   ],
+   [
+    3.7,
+    4.055
+   ],
+   [
+    3.8,
+    4.156
+   ],
+   [
+    3.9,
+    4.41
+   ],
+   [
+    4,
+    4.506
+   ]
+  ],
+  "addedNoiseSd": 1.387,
+  "iterations": [
+   {
+    "sigma": 2.8,
+    "color": [
+     148,
+     144,
+     134
+    ],
+    "noiseSd": 1.39,
+    "measured": {
+     "inkMedianRGB": [
+      167,
+      162,
+      152
+     ],
+     "inkMedianGray": 162.4,
+     "inkP10RGB": [
+      156,
+      152,
+      142
+     ],
+     "inkPixels": 1996,
+     "edge10_90px": 4.42,
+     "edgeSamples": 98,
+     "noiseStd": 0.848,
+     "noiseSamples": 5612
+    },
+    "strokeWeightPx": 3.997
+   },
+   {
+    "sigma": 3.4,
+    "color": [
+     104,
+     100,
+     90
+    ],
+    "noiseSd": 1.39,
+    "measured": {
+     "inkMedianRGB": [
+      158,
+      153,
+      143
+     ],
+     "inkMedianGray": 153.4,
+     "inkP10RGB": [
+      140,
+      135,
+      125
+     ],
+     "inkPixels": 2288,
+     "edge10_90px": 4.323,
+     "edgeSamples": 126,
+     "noiseStd": 0.824,
+     "noiseSamples": 5580
+    },
+    "strokeWeightPx": 2.404
+   },
+   {
+    "sigma": 3.7,
+    "color": [
+     76,
+     73,
+     63
+    ],
+    "noiseSd": 1.39,
+    "measured": {
+     "inkMedianRGB": [
+      159,
+      155,
+      145
+     ],
+     "inkMedianGray": 155.4,
+     "inkP10RGB": [
+      141,
+      137,
+      127
+     ],
+     "inkPixels": 2156,
+     "edge10_90px": 4.421,
+     "edgeSamples": 107,
+     "noiseStd": 0.784,
+     "noiseSamples": 5620
+    },
+    "strokeWeightPx": 1.228
+   },
+   {
+    "sigma": 3.8,
+    "color": [
+     47,
+     44,
+     34
+    ],
+    "noiseSd": 1.39,
+    "measured": {
+     "inkMedianRGB": [
+      159,
+      155,
+      144
+     ],
+     "inkMedianGray": 155.1,
+     "inkP10RGB": [
+      140,
+      135,
+      125
+     ],
+     "inkPixels": 2089,
+     "edge10_90px": 4.316,
+     "edgeSamples": 127,
+     "noiseStd": 0.78,
+     "noiseSamples": 5667
+    },
+    "strokeWeightPx": 0.462
+   },
+   {
+    "sigma": 3.9,
+    "color": [
+     19,
+     17,
+     7
+    ],
+    "noiseSd": 1.39,
+    "measured": {
+     "inkMedianRGB": [
+      159,
+      155,
+      144
+     ],
+     "inkMedianGray": 154.9,
+     "inkP10RGB": [
+      139,
+      135,
+      125
+     ],
+     "inkPixels": 2076,
+     "edge10_90px": 4.428,
+     "edgeSamples": 113,
+     "noiseStd": 0.775,
+     "noiseSamples": 5695
+    },
+    "strokeWeightPx": -0.043
+   },
+   {
+    "sigma": 3.9,
+    "color": [
+     -8,
+     -10,
+     -20
+    ],
+    "noiseSd": 1.39,
+    "measured": {
+     "inkMedianRGB": [
+      159,
+      155,
+      148
+     ],
+     "inkMedianGray": 155.4,
+     "inkP10RGB": [
+      138,
+      134,
+      128
+     ],
+     "inkPixels": 2046,
+     "edge10_90px": 4.41,
+     "edgeSamples": 122,
+     "noiseStd": 0.774,
+     "noiseSamples": 5718
+    },
+    "strokeWeightPx": -0.372
+   }
+  ],
+  "newWordIsSharpestOnLine": false,
+  "sharpestUntouchedEdgePx": 4.136,
+  "levels": {
+   "paper": 222,
+   "ink10pct": 107,
+   "l10": 210.5,
+   "l90": 118.5
+  },
+  "inpaintThreshold": "local paper (grey closing) - 5.8",
+  "inpaintLocalPaper": 231,
+  "strokeWidth50": {
+   "untouchedMedian": 7.558,
+   "newWord": 7.603
+  },
+  "colourTarget": "ink p10",
+  "inpaintPixels": 5443,
+  "localPaperNoiseStd": 1.943,
+  "noiseModel": "Gaussian field (0.7 px correlation): fitted line noise on new ink, local paper noise on inpainted paper, none on untouched paper"
+ },
+ "overflow": {
+  "slotPx": 86,
+  "naturalInkWidthPx": 91.6,
+  "spacingTriedEm": -0.0331,
+  "scaleTried": 1,
+  "widthAfterMaxPx": 86,
+  "letterSpacingPx": -1.871,
+  "letterSpacingEm": -0.0331,
+  "horizontalScale": 1,
+  "finalInkWidthPx": 86,
+  "rule": "spacing <= +-0.04 em/letter, then scale 0.97..1.03; shorter -> gap; longer -> refuse",
+  "gapPx": 0,
+  "decision": "fits: spacing -0.0331 em, scale 1.000"
+ },
+ "editedWords": {
+  "tokens": [
+   11,
+   11
+  ],
+  "ocrWords": [
+   11,
+   11
+  ],
+  "old": "five",
+  "new": "nine",
+  "ocr": [
+   {
+    "text": "five",
+    "confidence": 97,
+    "bbox": {
+     "x0": 1469,
+     "y0": 877,
+     "x1": 1555,
+     "y1": 941
+    }
+   }
+  ],
+  "tokenAlignment": [
+   [
+    "transfer.",
+    "transfer."
+   ],
+   [
+    "A",
+    "A"
+   ],
+   [
+    "late",
+    "late"
+   ],
+   [
+    "fee",
+    "fee"
+   ],
+   [
+    "will",
+    "will"
+   ],
+   [
+    "apply",
+    "apply"
+   ],
+   [
+    "if",
+    "if"
+   ],
+   [
+    "payment",
+    "payment"
+   ],
+   [
+    "is",
+    "is"
+   ],
+   [
+    "more",
+    "more"
+   ],
+   [
+    "than",
+    "than"
+   ],
+   [
+    "five",
+    "five"
+   ],
+   [
+    "days",
+    "days"
+   ],
+   [
+    "late.",
+    "late."
+   ],
+   [
+    "The",
+    "The"
+   ],
+   [
+    "security",
+    "security"
+   ],
+   [
+    "deposit",
+    "deposit"
+   ]
+  ]
+ },
+ "font": {
+  "glyphReuse": {
+   "notUsed": "glyph segmentation found 2 glyphs for 4 characters"
+  },
+  "localFit": null,
+  "chosen": "serif",
+  "file": "vendor/fonts/liberation/LiberationSerif-Regular.ttf",
+  "name": "Liberation Serif Regular 2.1.5",
+  "license": "vendor/fonts/liberation/LICENSE (SIL OFL 1.1)",
+  "sizePx": 56.44,
+  "horizontalScale": 0.9746,
+  "lineHorizontalScale": 0.9746,
+  "blurPx": 3.7720000000000002,
+  "trials": {
+   "serif": {
+    "font": "Liberation Serif Regular 2.1.5",
+    "sizePx": 56.44,
+    "blurPx": 3,
+    "strokeWeightPx": 1.69,
+    "widthRatio": 0.9746,
+    "horizontalScale": 0.9746,
+    "ncc": 0.9319,
+    "fitXHeight": 28,
+    "fitCapHeight": 40
+   },
+   "sans": {
+    "font": "Liberation Sans Regular 2.1.5",
+    "sizePx": 56.33,
+    "blurPx": 3,
+    "strokeWeightPx": 0.84,
+    "widthRatio": 0.8976,
+    "horizontalScale": 0.9,
+    "ncc": 0.6993,
+    "fitXHeight": 28,
+    "fitCapHeight": 37
+   },
+   "mono": {
+    "font": "Liberation Mono Regular 2.1.5",
+    "sizePx": 51.1,
+    "blurPx": 3,
+    "strokeWeightPx": 2.3,
+    "widthRatio": 0.6951,
+    "horizontalScale": 0.9,
+    "ncc": 0.5027,
+    "fitXHeight": 30,
+    "fitCapHeight": 40
+   }
+  },
+  "fitGrid_blur_weight_ncc": {
+   "serif": [
+    [
+     0,
+     0,
+     0.6512
+    ],
+    [
+     0,
+     0.9,
+     0.649
+    ],
+    [
+     0,
+     1.69,
+     0.6616
+    ],
+    [
+     0,
+     2.46,
+     0.637
+    ],
+    [
+     0,
+     3.27,
+     0.6571
+    ],
+    [
+     0.75,
+     0,
+     0.6512
+    ],
+    [
+     0.75,
+     0.9,
+     0.649
+    ],
+    [
+     0.75,
+     1.69,
+     0.6616
+    ],
+    [
+     0.75,
+     2.46,
+     0.637
+    ],
+    [
+     0.75,
+     3.27,
+     0.657
+    ],
+    [
+     1.5,
+     0,
+     0.8241
+    ],
+    [
+     1.5,
+     0.85,
+     0.8568
+    ],
+    [
+     1.5,
+     1.68,
+     0.7787
+    ],
+    [
+     1.5,
+     2.39,
+     0.7872
+    ],
+    [
+     1.5,
+     3.22,
+     0.7126
+    ],
+    [
+     2.25,
+     0,
+     0.431
+    ],
+    [
+     2.25,
+     0.9,
+     0.9081
+    ],
+    [
+     2.25,
+     1.68,
+     0.8951
+    ],
+    [
+     2.25,
+     2.41,
+     0.853
+    ],
+    [
+     2.25,
+     3.22,
+     0.8294
+    ],
+    [
+     3,
+     0,
+     0.4435
+    ],
+    [
+     3,
+     0.95,
+     0.5271
+    ],
+    [
+     3,
+     1.69,
+     0.9319
+    ],
+    [
+     3,
+     2.45,
+     0.9113
+    ],
+    [
+     3,
+     3.13,
+     0.8786
+    ]
+   ],
+   "sans": [
+    [
+     0,
+     0,
+     0.4395
+    ],
+    [
+     0,
+     0.81,
+     0.4717
+    ],
+    [
+     0,
+     1.57,
+     0.5016
+    ],
+    [
+     0,
+     2.28,
+     0.5256
+    ],
+    [
+     0,
+     3.02,
+     0.5326
+    ],
+    [
+     0.75,
+     0,
+     0.4395
+    ],
+    [
+     0.75,
+     0.81,
+     0.4717
+    ],
+    [
+     0.75,
+     1.57,
+     0.5016
+    ],
+    [
+     0.75,
+     2.28,
+     0.5256
+    ],
+    [
+     0.75,
+     3.02,
+     0.5326
+    ],
+    [
+     1.5,
+     0,
+     0.5388
+    ],
+    [
+     1.5,
+     0.81,
+     0.5755
+    ],
+    [
+     1.5,
+     1.5,
+     0.5913
+    ],
+    [
+     1.5,
+     2.28,
+     0.5982
+    ],
+    [
+     1.5,
+     3.02,
+     0.6061
+    ],
+    [
+     2.25,
+     0,
+     0.5227
+    ],
+    [
+     2.25,
+     0.84,
+     0.628
+    ],
+    [
+     2.25,
+     1.58,
+     0.6522
+    ],
+    [
+     2.25,
+     2.26,
+     0.6599
+    ],
+    [
+     2.25,
+     2.98,
+     0.6465
+    ],
+    [
+     3,
+     0,
+     0.4349
+    ],
+    [
+     3,
+     0.84,
+     0.6993
+    ],
+    [
+     3,
+     1.68,
+     0.6932
+    ],
+    [
+     3,
+     2.39,
+     0.6922
+    ],
+    [
+     3,
+     3.01,
+     0.7025
+    ]
+   ],
+   "mono": [
+    [
+     0,
+     0,
+     0.2755
+    ],
+    [
+     0,
+     0.81,
+     0.3013
+    ],
+    [
+     0,
+     1.52,
+     0.3636
+    ],
+    [
+     0,
+     2.28,
+     0.3563
+    ],
+    [
+     0,
+     3.02,
+     0.3813
+    ],
+    [
+     0.75,
+     0,
+     0.2755
+    ],
+    [
+     0.75,
+     0.81,
+     0.3013
+    ],
+    [
+     0.75,
+     1.52,
+     0.3636
+    ],
+    [
+     0.75,
+     2.28,
+     0.3563
+    ],
+    [
+     0.75,
+     3.02,
+     0.3813
+    ],
+    [
+     1.5,
+     0,
+     0.3438
+    ],
+    [
+     1.5,
+     0.8,
+     0.3548
+    ],
+    [
+     1.5,
+     1.52,
+     0.407
+    ],
+    [
+     1.5,
+     2.28,
+     0.4198
+    ],
+    [
+     1.5,
+     2.99,
+     0.4265
+    ],
+    [
+     2.25,
+     0,
+     0.3381
+    ],
+    [
+     2.25,
+     0.81,
+     0.4089
+    ],
+    [
+     2.25,
+     1.52,
+     0.4777
+    ],
+    [
+     2.25,
+     2.22,
+     0.4448
+    ],
+    [
+     2.25,
+     2.93,
+     0.4349
+    ],
+    [
+     3,
+     0,
+     0.3807
+    ],
+    [
+     3,
+     0.87,
+     0.419
+    ],
+    [
+     3,
+     1.61,
+     0.4709
+    ],
+    [
+     3,
+     2.3,
+     0.5027
+    ],
+    [
+     3,
+     2.95,
+     0.4714
+    ]
+   ]
+  }
+ },
+ "paintBox": {
+  "corrected": {
+   "x0": 1460,
+   "y0": 861,
+   "x1": 1564,
+   "y1": 957
+  },
+  "originalPolygon": [
+   [
+    789.9,
+    715.78
+   ],
+   [
+    828.11,
+    711.29
+   ],
+   [
+    831.83,
+    747
+   ],
+   [
+    793.81,
+    751.41
+   ]
+  ],
+  "patchRect": {
+   "x0": 788,
+   "y0": 710,
+   "x1": 833,
+   "y1": 753
+  },
+  "maskPixels": 1093,
+  "colouredMarkPixelsExcludedFromPatch": 0
+ },
+ "pixel": {
+  "compositeChangedOutsideMask": 0,
+  "compositeChangedInsideMask": 942,
+  "renderScale": 2,
+  "renderSize": [
+   1512,
+   2016
+  ],
+  "renderChangedOutsidePatchRect": 340256,
+  "renderChangedInsidePatchRect": 974,
+  "renderChangedOutsideMask": 340256,
+  "renderMaxAbsDiffOutside": 9,
+  "renderDiffHistogram": {
+   "1": 117866,
+   "2": 127846,
+   "3": 89981,
+   "4": 3724,
+   "5": 755,
+   "6": 67,
+   "7": 9,
+   "8": 3,
+   "9": 5
+  },
+  "outsideSamples": [
+   [
+    15,
+    0
+   ],
+   [
+    16,
+    0
+   ],
+   [
+    36,
+    0
+   ],
+   [
+    47,
+    0
+   ],
+   [
+    48,
+    0
+   ],
+   [
+    60,
+    0
+   ],
+   [
+    74,
+    0
+   ],
+   [
+    75,
+    0
+   ],
+   [
+    81,
+    0
+   ],
+   [
+    84,
+    0
+   ],
+   [
+    85,
+    0
+   ],
+   [
+    111,
+    0
+   ],
+   [
+    112,
+    0
+   ],
+   [
+    122,
+    0
+   ],
+   [
+    123,
+    0
+   ],
+   [
+    127,
+    0
+   ],
+   [
+    128,
+    0
+   ],
+   [
+    157,
+    0
+   ],
+   [
+    173,
+    0
+   ],
+   [
+    175,
+    0
+   ]
+  ]
+ },
+ "verifyOcr": {
+  "editedLine": "transfer. A late fee will apply if payment is more than nine days late. The security deposit",
+  "originalLineSameBox": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+  "editedWords": [
+   {
+    "text": "transfer.",
+    "confidence": 96,
+    "bbox": {
+     "x0": 280,
+     "y0": 876,
+     "x1": 464,
+     "y1": 941
+    }
+   },
+   {
+    "text": "A",
+    "confidence": 96,
+    "bbox": {
+     "x0": 485,
+     "y0": 884,
+     "x1": 503,
+     "y1": 926
+    }
+   },
+   {
+    "text": "late",
+    "confidence": 96,
+    "bbox": {
+     "x0": 523,
+     "y0": 876,
+     "x1": 605,
+     "y1": 941
+    }
+   },
+   {
+    "text": "fee",
+    "confidence": 95,
+    "bbox": {
+     "x0": 626,
+     "y0": 876,
+     "x1": 687,
+     "y1": 941
+    }
+   },
+   {
+    "text": "will",
+    "confidence": 96,
+    "bbox": {
+     "x0": 707,
+     "y0": 876,
+     "x1": 790,
+     "y1": 941
+    }
+   },
+   {
+    "text": "apply",
+    "confidence": 96,
+    "bbox": {
+     "x0": 810,
+     "y0": 876,
+     "x1": 920,
+     "y1": 941
+    }
+   },
+   {
+    "text": "if",
+    "confidence": 96,
+    "bbox": {
+     "x0": 943,
+     "y0": 882,
+     "x1": 976,
+     "y1": 925
+    }
+   },
+   {
+    "text": "payment",
+    "confidence": 96,
+    "bbox": {
+     "x0": 1000,
+     "y0": 876,
+     "x1": 1169,
+     "y1": 941
+    }
+   },
+   {
+    "text": "is",
+    "confidence": 96,
+    "bbox": {
+     "x0": 1192,
+     "y0": 876,
+     "x1": 1234,
+     "y1": 941
+    }
+   },
+   {
+    "text": "more",
+    "confidence": 96,
+    "bbox": {
+     "x0": 1255,
+     "y0": 876,
+     "x1": 1342,
+     "y1": 941
+    }
+   },
+   {
+    "text": "than",
+    "confidence": 96,
+    "bbox": {
+     "x0": 1363,
+     "y0": 876,
+     "x1": 1450,
+     "y1": 941
+    }
+   },
+   {
+    "text": "nine",
+    "confidence": 96,
+    "bbox": {
+     "x0": 1471,
+     "y0": 876,
+     "x1": 1559,
+     "y1": 941
+    }
+   },
+   {
+    "text": "days",
+    "confidence": 96,
+    "bbox": {
+     "x0": 1580,
+     "y0": 876,
+     "x1": 1662,
+     "y1": 941
+    }
+   },
+   {
+    "text": "late.",
+    "confidence": 96,
+    "bbox": {
+     "x0": 1682,
+     "y0": 876,
+     "x1": 1779,
+     "y1": 941
+    }
+   },
+   {
+    "text": "The",
+    "confidence": 96,
+    "bbox": {
+     "x0": 1812,
+     "y0": 876,
+     "x1": 1878,
+     "y1": 941
+    }
+   },
+   {
+    "text": "security",
+    "confidence": 96,
+    "bbox": {
+     "x0": 1899,
+     "y0": 876,
+     "x1": 2067,
+     "y1": 941
+    }
+   },
+   {
+    "text": "deposit",
+    "confidence": 96,
+    "bbox": {
+     "x0": 2089,
+     "y0": 876,
+     "x1": 2238,
+     "y1": 941
+    }
+   }
+  ]
+ },
+ "timingsMs": {
+  "load": 38,
+  "geometry": 547,
+  "enhance": 441,
+  "ocr": 2240,
+  "edit": 207958,
+  "patch": 282,
+  "render+diff": 2087,
+  "reocr": 882
+ }
+}

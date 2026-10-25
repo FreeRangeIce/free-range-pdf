@@ -1,0 +1,63 @@
+{
+ "poppler": {
+  "sizeIn": [
+   1512,
+   2016
+  ],
+  "sizeOut": [
+   1512,
+   2016
+  ],
+  "original": {
+   "rotationToUpright": 0,
+   "upright": true,
+   "meanAbsVsUprightRef": 0.49
+  },
+  "edited": {
+   "rotationToUpright": 0,
+   "upright": true,
+   "meanAbsVsUprightRef": 0.49
+  },
+  "orientationKept": true,
+  "editRectRotationDeg": 90,
+  "changedOutsideEditRect": 0,
+  "maxAbsOutsideEditRect": 0,
+  "meanAbsOutsideEditRect": 0.0,
+  "changedInsideEditRect": 979
+ },
+ "pdfjs": {
+  "sizeIn": [
+   1512,
+   2016
+  ],
+  "sizeOut": [
+   1512,
+   2016
+  ],
+  "original": {
+   "rotationToUpright": 0,
+   "upright": true,
+   "meanAbsVsUprightRef": 0.04
+  },
+  "edited": {
+   "rotationToUpright": 0,
+   "upright": true,
+   "meanAbsVsUprightRef": 0.03
+  },
+  "orientationKept": true,
+  "editRectRotationDeg": 90,
+  "changedOutsideEditRect": 386949,
+  "maxAbsOutsideEditRect": 6,
+  "meanAbsOutsideEditRect": 0.1935,
+  "changedInsideEditRect": 1129
+ },
+ "colorSpace": {
+  "input": {
+   "kind": "/DeviceRGB"
+  },
+  "output": {
+   "kind": "/DeviceRGB"
+  },
+  "same": true
+ }
+}
