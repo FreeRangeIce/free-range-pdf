@@ -142,6 +142,75 @@
    "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
    "find": "five",
    "replace": "nine"
+  },
+  {
+   "name": "orient-exif3",
+   "dir": "orient/orient-exif3",
+   "file": "inputs/orient-exif3.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine"
+  },
+  {
+   "name": "orient-rot180",
+   "dir": "orient/orient-rot180",
+   "file": "inputs/orient-rot180.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine",
+   "rotate": 180
+  },
+  {
+   "name": "orient-rot270",
+   "dir": "orient/orient-rot270",
+   "file": "inputs/orient-rot270.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine",
+   "rotate": 270
+  },
+  {
+   "name": "orient-vflip",
+   "dir": "orient/orient-vflip",
+   "file": "inputs/orient-vflip.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine",
+   "note": "stored mirrored top-bottom, placed with cm [w 0 0 -h 0 h]"
+  },
+  {
+   "name": "orient-hflip",
+   "dir": "orient/orient-hflip",
+   "file": "inputs/orient-hflip.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine",
+   "note": "stored mirrored left-right, placed with cm [-w 0 0 h w 0]"
+  },
+  {
+   "name": "color-gray",
+   "dir": "orient/color-gray",
+   "file": "inputs/color-gray.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine"
+  },
+  {
+   "name": "color-gray-iccbased",
+   "dir": "orient/color-gray-iccbased",
+   "file": "inputs/color-gray-iccbased.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine"
+  },
+  {
+   "name": "color-cmyk",
+   "dir": "orient/color-cmyk",
+   "file": "inputs/color-cmyk.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine",
+   "expectSaveBlocked": true
   }
  ]
 }

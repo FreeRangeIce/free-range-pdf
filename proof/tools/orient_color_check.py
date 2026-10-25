@@ -27,15 +27,16 @@ for rnd in ['poppler', 'pdfjs']:
     if a.shape == b.shape:
         # image rectangle -> page: find the rotation k for which the rotated image-space rect has the page's shape and contains the changed pixels
         D = np.abs(a.astype(int) - b.astype(int)).max(2); best = None
-        for k in range(4):
+        for k, flip in [(k, f) for f in (False, True) for k in range(4)]:  # 4 turns x optional mirror (flipped placements)
             m = np.rot90(rect, -k)
+            if flip: m = np.fliplr(m)
             if m.shape != D.shape: continue
             m = np.pad(m, 3)[3:-3, 3:-3] if False else m
             yy, xx = np.nonzero(m); mm = np.zeros_like(m); mm[max(0, yy.min() - 3):yy.max() + 4, max(0, xx.min() - 3):xx.max() + 4] = True
             n_out = int((D[~mm] > 0).sum())
-            if best is None or n_out < best[0]: best = (n_out, k, mm)
+            if best is None or n_out < best[0]: best = (n_out, k + 4 * flip, mm)
         n_out, k, mm = best
-        o.update({'editRectRotationDeg': k * 90, 'changedOutsideEditRect': n_out, 'maxAbsOutsideEditRect': int(D[~mm].max()), 'meanAbsOutsideEditRect': round(float(D[~mm].mean()), 4), 'changedInsideEditRect': int((D[mm] > 0).sum())})
+        o.update({'editRectRotationDeg': (k % 4) * 90, 'editRectMirrored': k >= 4, 'changedOutsideEditRect': n_out, 'maxAbsOutsideEditRect': int(D[~mm].max()), 'meanAbsOutsideEditRect': round(float(D[~mm].mean()), 4), 'changedInsideEditRect': int((D[mm] > 0).sum())})
     out[rnd] = o
 import pikepdf, hashlib
 def cs_of(f):

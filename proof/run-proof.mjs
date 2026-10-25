@@ -27,7 +27,7 @@ const INPUTS = ['inputs/text-standin.pdf', 'inputs/text-runs-standin.pdf', 'inpu
 const shaBefore = Object.fromEntries(INPUTS.map(f => [path.basename(f), sha(f)]));
 const mtimeBefore = Object.fromEntries(INPUTS.map(f => [path.basename(f), fs.statSync(f).mtimeMs]));
 
-const only = process.argv[2]; // optional: text|scan|photo
+const only = process.argv[2]; // optional: text|scan|photo|orient (all orient/* cases)|<case name>
 const browser = await chromium.launch({ executablePath: '/usr/bin/google-chrome', headless: true, args: ['--no-sandbox'] });
 const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 });
 const blocked = [];
@@ -90,7 +90,7 @@ if (only === 'makesearchable') {
   fs.writeFileSync(path.join(PROOF, 'standins/searchable-standin-meta.json'), JSON.stringify({ ...r, b64: undefined }, null, 1)); console.log('searchable', r.words, r.droppedLine);
 }
 for (const c of [...EDITS.scans, ...PRIV_EDITS]) {
-  if (only && only !== c.name && only !== 'scans' && !(only === 'real' && c.private && !c.name.startsWith('pr')) && !(only === 'photoreal' && c.name.startsWith('pr'))) continue;
+  if (only && only !== c.name && only !== 'scans' && !(only === 'orient' && c.dir.startsWith('orient/')) && !(only === 'real' && c.private && !c.name.startsWith('pr')) && !(only === 'photoreal' && c.name.startsWith('pr'))) continue;
   const BASE = c.private ? PRIV : PROOF, URLB = c.private ? '/private/' : '/proof/';
   const t1 = Date.now(); const dir = path.join(BASE, c.dir); const inPdf = path.join(BASE, c.file); const outName = path.basename(c.file).replace('.pdf', '.edited.pdf');
   let r;
