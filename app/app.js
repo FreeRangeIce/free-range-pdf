@@ -101,7 +101,7 @@ function lineKey(ev, i) { // roving tabindex: arrows move between lines, Enter/S
   else if (ev.key === 'Home') { ev.preventDefault(); select(0, false, false, true); } else if (ev.key === 'End') { ev.preventDefault(); select(S.lines.length - 1, false, false, true); }
   else if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); select(i); }
 }
-function resetPreview() { for (const id of ['gapbar', 'subst', 'refuse', 'crop', 'charmark']) $(id).hidden = true; $('status').textContent = '\u00a0'; $('charmark').hidden = true; setApply('off'); S.lastPreview = null; }
+function resetPreview() { for (const id of ['gapbar', 'subst', 'refuse', 'crop', 'charmark']) $(id).hidden = true; $('status').textContent = ''; $('charmark').hidden = true; setApply('off'); S.lastPreview = null; }
 
 // ---- live preview of the edit (trial replay on the current version; nothing is committed) ----
 let timer = null;

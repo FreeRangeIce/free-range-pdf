@@ -11,6 +11,6 @@ Original (base.pdf) SHA-256: b7e45aa7b7806c9dad3b80daaa4394b306d6ba332ffad1b7cbe
 | 5 blocked characters | Emoji, zero-width, tab, RTL, Arabic, CJK: short inline mark; long sentence only after Apply pressed; never applied (shots 13, 14) |
 | 6 unsupported line wording | "This line can't be edited here. Nothing was changed." (draft) |
 | 7 busy | "Working..." flag; Undo/Download disabled while busy |
-| 8 password | enc.pdf: password-protected message (draft); owner-only: separate PLACEHOLDER restrictions message |
+| 8 password | enc.pdf: password-protected message (draft); owner-only: currently reuses the same password-protected message (draft, MSG.restricted); a separate restricted-file line is pending |
 
 Shots in proof/app-shots: 01-open, 03-after-edit1, 04-preview-gap, 05-refusal, 06-after-undo, 07-credits, 08-failed-checks-open (verifier fed unedited bytes), 11-failed-open-cleared.
