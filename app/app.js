@@ -12,7 +12,7 @@ const MSG = {
   cantEdit: "This line can't be edited here. The file stores it in a way this editor can't change safely. Nothing was changed.",
   generic: "This edit couldn't be applied. Nothing was changed.",
   password: "This PDF is password-protected, so it can't be opened here. Remove the password first, then try again.",
-  restricted: "This PDF is password-protected, so it can't be opened here. Remove the password first, then try again.", // owner-restricted PDFs: same approved wording
+  restricted: "This PDF is password-protected, so it can't be opened here. Remove the password first, then try again.", // owner-restricted PDFs: reuses the password wording for now (draft; separate restricted line pending)
   empty: 'Type the new text first. To remove words, delete them and keep the rest of the line.',
   charShort: "This character can't be used here",
   charLong: (c) => `This editor can't write that character: ${c}. Use letters, numbers and common punctuation.`,
@@ -243,7 +243,7 @@ $('checkdetails').addEventListener('click', ev => { ev.preventDefault(); const u
 $('download').addEventListener('click', () => { if (!S.verified) return; const a = document.createElement('a'); a.href = blobUrl(S.cur); a.download = outName(); a.click(); S.savedKey = JSON.stringify(S.edits); refreshNotes(); setTimeout(() => URL.revokeObjectURL(a.href), 5000); });
 
 // ---- open ----
-function resetDoc() { // FIRST thing on every open: nothing of a previous document may stay live
+function resetDoc() { // runs once a new file has passed every check: nothing of the previous document may stay live
   S.cur = null; S.orig = null; S.queuedUndo = false; S.pending = false; S.origSha = null; S.edits = []; S.curRes = []; S.lines = []; S.sel = -1; S.verified = false; S.lastPreview = null; S.savedKey = null; S.name = ''; S.previewSeq++;
   clearTimeout(timer); $('download').disabled = true; $('undo').disabled = true; refreshNotes(); $('dlname').textContent = ''; setApply('off'); $('docinfo').textContent = '';
   $('emptystate').hidden = true; $('editor').hidden = true; $('nosel').hidden = false; $('nosel').className = 'muted'; $('nosel').textContent = 'No line selected.'; $('overlay').innerHTML = ''; $('legendwrap').hidden = true;
@@ -251,7 +251,7 @@ function resetDoc() { // FIRST thing on every open: nothing of a previous docume
   for (const id of ['gapbar', 'subst', 'refuse', 'crop', 'charmark']) $(id).hidden = true;
 }
 function keepOpen(text) { const n = $('nosel'); n.hidden = false; n.className = 'refuse'; n.textContent = text; } // failed open with a document loaded: show the message, change nothing else
-function failOpen(text) { resetDoc(); $('emptystate').hidden = false; $('nosel').className = 'refuse'; $('nosel').textContent = text; if (S.everOpened) { const d = document.createElement('div'); d.className = 'reason'; d.textContent = MSG.openFailedAfter; $('nosel').appendChild(d); } }
+function failOpen(text, noReason) { resetDoc(); $('emptystate').hidden = false; $('nosel').className = 'refuse'; $('nosel').textContent = text; if (S.everOpened && !noReason) { const d = document.createElement('div'); d.className = 'reason'; d.textContent = MSG.openFailedAfter; $('nosel').appendChild(d); } }
 let openSeq = 0;
 async function openBytes(u8, name) {
   // Validate the new file completely BEFORE touching the loaded document: a failed open must leave it, its edits, undo, selection and Download exactly as they were.
@@ -273,7 +273,7 @@ async function openBytes(u8, name) {
     S.name = name; S.orig = new Uint8Array(u8); S.origSha = sha; S.edits = []; S.curRes = []; S.sel = -1; S.cur = S.orig.slice();
     $('docinfo').textContent = `${name}  \u00b7  ${pd.getPageCount()} page(s), editing page 1  \u00b7  SHA-256 ${S.origSha.slice(0, 12)}\u2026`;
     S.everOpened = true; await showCurrent(); if (my !== openSeq) return; $('legendwrap').hidden = false; renderEdits(); await verify(); select(0, false, false, false);
-  } catch (err) { console.warn('open failed:', err && err.message); if (swapped) failOpen(MSG.unreadable); else return fail(MSG.unreadable); }
+  } catch (err) { console.warn('open failed:', err && err.message); if (swapped) failOpen(MSG.openFailedAfter, true); else return fail(MSG.unreadable); }
   finally { if (my === openSeq && (swapped || !had) && !wasBusy) setBusy(false); }
 }
 $('openbtn').addEventListener('click', () => $('file').click()); $('openbtn2').addEventListener('click', () => $('file').click());
