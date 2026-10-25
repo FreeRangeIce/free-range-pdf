@@ -12,7 +12,7 @@ const MSG = {
   cantEdit: "This line can't be edited here. The file stores it in a way this editor can't change safely. Nothing was changed.",
   generic: "This edit couldn't be applied. Nothing was changed.",
   password: "This PDF is password-protected, so it can't be opened here. Remove the password first, then try again.",
-  restricted: "This PDF is password-protected, so it can't be opened here. Remove the password first, then try again.", // owner-restricted PDFs: reuses the password wording for now (draft; separate restricted line pending)
+  restricted: "This PDF is locked against editing by whoever made it, so it can't be edited here. Ask for an unlocked copy, then try again. Nothing was changed.",
   empty: 'Type the new text first. To remove words, delete them and keep the rest of the line.',
   charShort: "This character can't be used here",
   charLong: (c) => `This editor can't write that character: ${c}. Use letters, numbers and common punctuation.`,
