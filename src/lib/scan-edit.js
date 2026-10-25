@@ -2,7 +2,7 @@
 // OpenCV.js: paper edges -> perspective/deskew -> crop -> ~300 dpi; CLAHE / adaptive threshold for OCR only.
 // Tesseract.js (eng, tessdata_fast, vendored) gives lines/words/confidences.
 // Output: the page image is decoded, the patch is written INTO it, and the whole image is re-saved losslessly
-// (Flate + PNG predictor). The old JPEG stream, image/catalog XMP, EXIF/GPS/ICC segments and /Thumb are gone.
+// (Flate + PNG predictor) under the original /ColorSpace. The old JPEG stream (with its EXIF/GPS/APP2 ICC segments), image/catalog XMP and /Thumb are gone.
 import { openPdf, renderPage, diff, crop, scaled, png, sha256, u8ToB64, fetchBytes, getData } from './img-util.js';
 import { tokenize, mul, apply } from './content-stream.js';
 import { collectGarbage } from './pdf-gc.js';
@@ -63,10 +63,20 @@ function findPageImage(pdoc, pageIndex = 0) {
   throw new Error('no page image found');
 }
 
+function jpegWithoutApp1(u8) { // drop APP1 (EXIF/XMP) marker segments before SOS; everything else byte for byte
+  if (u8[0] !== 0xFF || u8[1] !== 0xD8) return u8; const parts = [u8.subarray(0, 2)]; let i = 2;
+  while (i + 4 <= u8.length && u8[i] === 0xFF) { const m = u8[i + 1]; if (m === 0xDA) break; const L = (u8[i + 2] << 8) | u8[i + 3]; if (m !== 0xE1) parts.push(u8.subarray(i, i + 2 + L)); i += 2 + L; }
+  parts.push(u8.subarray(i)); const out = new Uint8Array(parts.reduce((a, p) => a + p.length, 0)); let o = 0; for (const p of parts) { out.set(p, o); o += p.length; } return out; }
 async function decodeImageToCanvas(img) {
   if (img.filter !== '/DCTDecode') throw new Error('proof handles DCTDecode (JPEG) page images; got ' + img.filter);
-  // colorSpaceConversion 'default': an embedded ICC profile is applied, so the lossless re-save (DeviceRGB = sRGB) keeps colour
-  const bmp = await createImageBitmap(new Blob([img.raw], { type: 'image/jpeg' }), { colorSpaceConversion: 'default', premultiplyAlpha: 'none' });
+  // The pixels are kept in the image's OWN colour space (colorSpaceConversion 'none': a JPEG APP2 ICC profile is NOT applied)
+  // and re-saved under the original /ColorSpace, so a PDF viewer shows exactly what it showed for the original (pdf.js and
+  // poppler ignore APP2 inside a DCT stream; an /ICCBased ColorSpace is copied as is). imageOrientation 'none': EXIF
+  // Orientation is ignored, as PDF viewers ignore it inside an image stream (the on-page orientation comes from the PDF only).
+  // Chrome still applies EXIF Orientation with imageOrientation 'none', so the APP1 (EXIF) segments are left out of the bytes
+  // given to the DECODER only (they carry no pixel data; the entropy-coded data is untouched).
+  const bmp = await createImageBitmap(new Blob([jpegWithoutApp1(img.raw)], { type: 'image/jpeg' }), { colorSpaceConversion: 'none', imageOrientation: 'none', premultiplyAlpha: 'none' });
+  if (bmp.width !== img.width || bmp.height !== img.height) throw new Error(`decoded image is ${bmp.width}x${bmp.height}, the PDF says ${img.width}x${img.height}`);
   const c = document.createElement('canvas'); c.width = bmp.width; c.height = bmp.height;
   c.getContext('2d', { willReadFrequently: true }).drawImage(bmp, 0, 0); return c;
 }
@@ -227,7 +237,9 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
     paper.quad = [[0, 0], [W, 0], [W, H], [0, H]]; paper.method = `full image: ${(paper.borderBrightFrac * 100).toFixed(1)}% of the outer frame is paper-bright, so the paper fills the scan (no background edge)`;
   }
   // page /Rotate: reorder the quad so its first corner is the DISPLAYED top-left (rotation is clockwise)
-  { const perm = { 0: [0, 1, 2, 3], 90: [3, 0, 1, 2], 180: [2, 3, 0, 1], 270: [1, 2, 3, 0] }[rot]; paper.quadImage = paper.quad; paper.quad = perm.map(i => paper.quad[i]); paper.pageRotate = rot; }
+  // + a rotated placement matrix (cm): the image's x axis in user space; a clockwise turn on the page counts like /Rotate
+  const ctmRot = ((-Math.round(Math.atan2(img.ctm[1], img.ctm[0]) / (Math.PI / 2)) * 90) % 360 + 360) % 360, rotEff = (rot + ctmRot) % 360;
+  { const perm = { 0: [0, 1, 2, 3], 90: [3, 0, 1, 2], 180: [2, 3, 0, 1], 270: [1, 2, 3, 0] }[rotEff]; paper.quadImage = paper.quad; paper.quad = perm.map(i => paper.quad[i]); paper.pageRotate = rot; paper.placementRotate = ctmRot; }
   const ps = paperSize(paper.quad, W, H);
   // crop to the paper: pull the corners 0.4% toward the centre so no background sliver reaches OCR
   { const cx = paper.quad.reduce((a, p) => a + p[0], 0) / 4, cy = paper.quad.reduce((a, p) => a + p[1], 0) / 4; paper.quadInset = paper.quad.map(([x, y]) => [x + (cx - x) * 0.008, y + (cy - y) * 0.008]); }
@@ -847,7 +859,15 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
   const rgb = new Uint8Array(W * H * 3); for (let i = 0, j = 0; i < W * H; i++, j += 3) { rgb[j] = compData[i * 4]; rgb[j + 1] = compData[i * 4 + 1]; rgb[j + 2] = compData[i * 4 + 2]; }
   const filtered = pngPredict(rgb, W, H, 3);
   const page = pdoc.getPage(pageIndex);
-  const newImg = pdoc.context.flateStream(filtered, { Type: 'XObject', Subtype: 'Image', Width: W, Height: H, ColorSpace: 'DeviceRGB', BitsPerComponent: 8,
+  // colour space: the original image's /ColorSpace entry is reused unchanged (same object, so an /ICCBased profile stream is
+  // byte-identical); the pixels above are in that space (not converted)
+  const origCS = img.obj.dict.get(PDFName.of('ColorSpace'));
+  const csInfo = (() => { const o = origCS instanceof PDFRef ? pdoc.context.lookup(origCS) : origCS; const t = o ? o.toString() : null;
+    if (!o || t === '/DeviceRGB') return { kind: 'DeviceRGB' };
+    if (o instanceof PDFArray && o.get(0).toString() === '/ICCBased') { const st = pdoc.context.lookup(o.get(1)); const N = st.dict.lookup(PDFName.of('N'))?.asNumber?.(); return { kind: 'ICCBased', N, profileStreamBytes: st.contents.length }; }
+    return { kind: 'other', text: t.slice(0, 80) }; })();
+  if (!(csInfo.kind === 'DeviceRGB' || (csInfo.kind === 'ICCBased' && csInfo.N === 3))) throw new Error('SAVE BLOCKED: the page image uses colour space ' + JSON.stringify(csInfo) + '; only RGB images (DeviceRGB or a 3-channel ICC profile) can be re-saved without a colour change');
+  const newImg = pdoc.context.flateStream(filtered, { Type: 'XObject', Subtype: 'Image', Width: W, Height: H, ColorSpace: origCS || 'DeviceRGB', BitsPerComponent: 8,
     DecodeParms: { Predictor: 15, Colors: 3, BitsPerComponent: 8, Columns: W } });
   const newImgRef = pdoc.context.register(newImg);
   img.xo.set(PDFName.of(img.name), newImgRef);
@@ -857,7 +877,7 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
   pdoc.getPages().forEach((pg, i) => { if (pg.node.get(PDFName.of('Thumb'))) { pg.node.delete(PDFName.of('Thumb')); stripped.push(`page ${i + 1} /Thumb`); } });
   if (img.obj.dict.get(PDFName.of('Metadata'))) stripped.push('page image /Metadata (XMP) - dropped with the old image');
   const jpegSegs = jpegSegments(img.raw); if (jpegSegs.some(x => x.name === 'APP1-Exif')) stripped.push('JPEG APP1 EXIF (incl. GPS IFD and IFD1 thumbnail) - dropped with the old JPEG stream');
-  if (jpegSegs.some(x => x.name === 'APP2-ICC')) stripped.push('JPEG APP2 ICC profile - applied while decoding, then dropped (pixels are sRGB, written as DeviceRGB)');
+  if (jpegSegs.some(x => x.name === 'APP2-ICC')) stripped.push('JPEG APP2 ICC profile - NOT applied (PDF viewers ignore it; pixels kept in the image\'s own values), dropped with the old JPEG stream');
   // hidden text layer
   const hiddenInfo = hidden === 'edit' ? await editHiddenLayer(pdoc, page, pageIndex, { find, replace, poly, W, H, ctm: img.ctm, L, oi0, oi1, back, confirm, confirmBelow })
     : await addHiddenLayer(pdoc, page, { lines: O.lines, li, newTokens: newText.split(' '), back, W, H, ctm: img.ctm });
@@ -872,11 +892,11 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
     const same = back2[j] === O0[k] && back2[j + 1] === O0[k + 1] && back2[j + 2] === O0[k + 2];
     if (back2[j] !== compData[k] || back2[j + 1] !== compData[k + 1] || back2[j + 2] !== compData[k + 2]) imgVsComposite++;
     if (!same) { if (inMaskOrig(x, y)) imgInside++; else imgOutside++; } }
-  const imageCheck = { newFilter: img2.filter, newImageStreamBytes: img2.raw.length, oldImageStreamBytes: img.raw.length, decodedVsComposite: imgVsComposite, changedOutsidePatchMask: imgOutside, changedInsidePatchMask: imgInside, imagesInOutput: countImages(chk) };
+  const imageCheck = { colorSpace: csInfo, newFilter: img2.filter, newImageStreamBytes: img2.raw.length, oldImageStreamBytes: img.raw.length, decodedVsComposite: imgVsComposite, changedOutsidePatchMask: imgOutside, changedInsidePatchMask: imgInside, imagesInOutput: countImages(chk) };
   const maskCanvas = document.createElement('canvas'); maskCanvas.width = W; maskCanvas.height = H; { const mc = maskCanvas.getContext('2d'); const md = mc.createImageData(W, H); for (let y = py0; y < py1; y++) for (let x = px0; x < px1; x++) if (inMaskOrig(x, y)) { const k = (y * W + x) * 4; md.data[k] = md.data[k + 1] = md.data[k + 2] = 255; } for (let i = 3; i < md.data.length; i += 4) md.data[i] = 255; mc.putImageData(md, 0, 0); }
 
   // 11) render both PDFs with pdf.js at 1 image pixel = 1 device pixel and diff (every page)
-  const scale = W / Math.abs(img.ctm[0]);
+  const scale = W / Math.hypot(img.ctm[0], img.ctm[1]); // 1 image px = 1 device px (rotated placements too)
   const rA = await renderPage(original, scale, pageIndex + 1), rB = await renderPage(out, scale, pageIndex + 1);
   const toRender = renderMapper(img.ctm, W, H, rot, rA.width, rA.height, scale, chk.getPage(pageIndex));
   const polyR = poly.map(toRender); const rx0 = Math.floor(Math.min(...polyR.map(p => p[0]))) - 2, ry0 = Math.floor(Math.min(...polyR.map(p => p[1]))) - 2, rx1 = Math.ceil(Math.max(...polyR.map(p => p[0]))) + 2, ry1 = Math.ceil(Math.max(...polyR.map(p => p[1]))) + 2;
@@ -999,7 +1019,7 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
     measure: { ...meas, inkRGB_untouchedMedian: target.inkRGB, inkRGB_darkest40pct: inkRGB, inkRGB_drawn: inkFitRGB, paperRGB, lineHeight: lh },
     preview: (() => { // what the UI shows BEFORE Save: the natural-width gap the width rule leaves (nothing to the right moves)
       const g = overflow.gapPx > 0 ? { x0: Math.round(inkLeftReal + overflow.naturalInkWidthPx), x1: wb.x1, y0: box.y0, y1: box.y1 } : null;
-      const tu = ([ix, iy]) => [img.ctm[4] + ix / W * img.ctm[0], img.ctm[5] + (1 - iy / H) * img.ctm[3]];
+      const tu = ([ix, iy]) => [img.ctm[4] + ix / W * img.ctm[0] + (1 - iy / H) * img.ctm[2], img.ctm[5] + ix / W * img.ctm[1] + (1 - iy / H) * img.ctm[3]];
       return { showGapBeforeSave: !!g, gapPx: overflow.gapPx, gapMm: +(overflow.gapPx / 300 * 25.4).toFixed(2), slotPx: overflow.slotPx, drawnInkWidthPx: overflow.naturalInkWidthPx, decision: overflow.decision,
         gapRectDeskewedPx: g, gapPolygonPdfUser: g ? [[g.x0, g.y0], [g.x1, g.y0], [g.x1, g.y1], [g.x0, g.y1]].map(back).map(tu).map(p => p.map(v => +v.toFixed(2))) : null }; })(),
     visual, look: { ...look, inpaintThreshold: bgInfo.dbg.thr, inpaintLocalPaper: bgInfo.dbg.localPaper, strokeWidth50: { untouchedMedian: +target.strokeWidth.toFixed(3), newWord: +strokeW(i => { const D = finalCanvasData; return grayAt(D, i); }, bw, bh, swThr).toFixed(3) }, colourTarget, inpaintPixels: bgInfo.inpaintPixels, localPaperNoiseStd: bgInfo.localPaperNoiseStd, noiseModel: 'Gaussian field (0.7 px correlation): fitted line noise on new ink, local paper noise on inpainted paper, none on untouched paper' }, overflow, editedWords: { tokens: [ti0, ti1], ocrWords: [oi0, oi1], old: oldSeg, new: newSeg, ocr: eWords, tokenAlignment },
@@ -1050,7 +1070,7 @@ function jpegSegments(b) {
 function countImages(pdoc) { let n = 0; for (const [, o] of pdoc.context.enumerateIndirectObjects()) if (o instanceof PDFRawStream && o.dict.lookup(PDFName.of('Subtype'))?.toString() === '/Image') n++; return n; }
 function renderMapper(ctm, W, H, rot, RW, RH, s, page) {
   const { width: PW, height: PH } = page.getMediaBox();
-  return ([ix, iy]) => { const x = ctm[4] + ix / W * ctm[0], y = ctm[5] + (1 - iy / H) * ctm[3];
+  return ([ix, iy]) => { const x = ctm[4] + ix / W * ctm[0] + (1 - iy / H) * ctm[2], y = ctm[5] + ix / W * ctm[1] + (1 - iy / H) * ctm[3];
     if (rot === 0) return [x * s, (PH - y) * s]; if (rot === 180) return [(PW - x) * s, y * s]; if (rot === 90) return [y * s, x * s]; return [(PH - y) * s, (PW - x) * s]; };
 }
 async function sameImageStream(a, b, p) { const A = await PDFDocument.load(a.slice()), B = await PDFDocument.load(b.slice()); return (await sha256(findPageImage(A, p).raw)) === (await sha256(findPageImage(B, p).raw)); }
@@ -1074,7 +1094,7 @@ async function addHiddenLayer(pdoc, page, { lines, li, newTokens, back, W, H, ct
   pdoc.registerFontkit(window.fontkit);
   const font = standard ? await pdoc.embedFont(window.PDFLib.StandardFonts.Helvetica) : await pdoc.embedFont(await fetchBytes(REPO('vendor/fonts/liberation/LiberationSans-Regular.ttf')), { subset: true });
   const fname = page.node.newFontDictionary(standard ? 'F3' : 'FRPOCR', font.ref);
-  const toUser = ([ix, iy]) => [ctm[4] + ix / W * ctm[0], ctm[5] + (1 - iy / H) * ctm[3]];
+  const toUser = ([ix, iy]) => [ctm[4] + ix / W * ctm[0] + (1 - iy / H) * ctm[2], ctm[5] + ix / W * ctm[1] + (1 - iy / H) * ctm[3]]; // full placement matrix (rotated placements too)
   const f = n => (+n.toFixed(4)).toString(); let cs = 'q\nBT\n3 Tr\n'; let words = 0;
   lines.forEach((l, i) => l.words.forEach((w, wi) => {
     if (i === dropLine && wi > 0) return; // simulate a scanner OCR layer that lost the rest of this line
@@ -1096,7 +1116,7 @@ async function editHiddenLayer(pdoc, page, pageIndex, { find, replace, poly, W, 
   const cvr = page.node.get(PDFName.of('Contents')); const refs = cvr instanceof PDFArray ? cvr.asArray() : [cvr];
   const s = refs.map(r => bytesToBinary(decodePDFRawStream(pdoc.context.lookup(r)).decode())).join('\n');
   const ops = tokenize(s);
-  const toUser = ([ix, iy]) => [ctm[4] + ix / W * ctm[0], ctm[5] + (1 - iy / H) * ctm[3]];
+  const toUser = ([ix, iy]) => [ctm[4] + ix / W * ctm[0] + (1 - iy / H) * ctm[2], ctm[5] + ix / W * ctm[1] + (1 - iy / H) * ctm[3]]; // full placement matrix (rotated placements too)
   const up = poly.map(toUser); const bx0 = Math.min(...up.map(p => p[0])), bx1 = Math.max(...up.map(p => p[0])), by0 = Math.min(...up.map(p => p[1])), by1 = Math.max(...up.map(p => p[1]));
   let C = [1, 0, 0, 1, 0, 0], Tm = [1, 0, 0, 1, 0, 0], Tlm = Tm, Tr = 0, size = 12, TL = 0; const st = []; const runs = [];
   for (let i = 0; i < ops.length; i++) { const o = ops[i]; const a = o.args;

@@ -92,6 +92,56 @@
    "find": "morning",
    "replace": "evening",
    "note": "the stand-in's hidden layer kept only 'Saturday,' on this line (like the real scan's lost line): our OCR read the line, so the scanner runs in the line box are replaced by a fresh line from our OCR"
+  },
+  {
+   "name": "orient-exif6",
+   "dir": "orient/orient-exif6",
+   "file": "inputs/orient-exif6.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine"
+  },
+  {
+   "name": "orient-exif8",
+   "dir": "orient/orient-exif8",
+   "file": "inputs/orient-exif8.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine"
+  },
+  {
+   "name": "orient-rot90",
+   "dir": "orient/orient-rot90",
+   "file": "inputs/orient-rot90.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine",
+   "rotate": 90
+  },
+  {
+   "name": "orient-cm90",
+   "dir": "orient/orient-cm90",
+   "file": "inputs/orient-cm90.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine",
+   "rotate": 90
+  },
+  {
+   "name": "icc-wide-app2",
+   "dir": "orient/icc-wide-app2",
+   "file": "inputs/icc-wide-app2.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine"
+  },
+  {
+   "name": "icc-wide-iccbased",
+   "dir": "orient/icc-wide-iccbased",
+   "file": "inputs/icc-wide-iccbased.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine"
   }
  ]
 }
