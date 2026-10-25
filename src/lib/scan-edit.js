@@ -561,7 +561,7 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
     // pixel whose chroma differs from the paper's (the ink's JPEG colour fringe); this is what left pink specks / halos before
     let paperChroma = null;
     if (isPhoto) { const A = [], B = []; for (let i = 0; i < ew * eh; i += 2) if (!inkD.data[i]) { A.push(rgb.data[i * 3] - rgb.data[i * 3 + 1]); B.push(rgb.data[i * 3 + 2] - rgb.data[i * 3 + 1]); }
-      if (A.length > 100) { paperChroma = [median(A), median(B)]; for (let i = 0; i < ew * eh; i++) { const da = Math.abs(rgb.data[i * 3] - rgb.data[i * 3 + 1] - paperChroma[0]) + Math.abs(rgb.data[i * 3 + 2] - rgb.data[i * 3 + 1] - paperChroma[1]); if (da > 10) inkD.data[i] = 255; } } } // photos: only STRONG ink is withheld from the paper model, so natural paper mottling stays in it (no lighter halo)
+      if (A.length > 100) { paperChroma = [median(A), median(B)]; { const mad = (v, m) => 1.4826 * median(v.map(t => Math.abs(t - m))); paperChroma.push(Math.max(4, 4 * mad(A, paperChroma[0])), Math.max(4, 4 * mad(B, paperChroma[1]))); } for (let i = 0; i < ew * eh; i++) { const da = Math.abs(rgb.data[i * 3] - rgb.data[i * 3 + 1] - paperChroma[0]) + Math.abs(rgb.data[i * 3 + 2] - rgb.data[i * 3 + 1] - paperChroma[1]); if (da > 10) inkD.data[i] = 255; } } } // photos: only STRONG ink is withheld from the paper model, so natural paper mottling stays in it (no lighter halo)
     // inpaint mask = dilated ink INSIDE the box only (outside the box nothing is touched)
     const m = new cv.Mat(eh, ew, cv.CV_8U); m.data.fill(0); for (let y = oy; y < oy + bh; y++) for (let x = ox; x < ox + bw; x++) m.data[y * ew + x] = oldD.data[y * ew + x] && !handD.data[y * ew + x] ? 255 : 0;
     if (isPhoto) { const k5 = cv.getStructuringElement(cv.MORPH_ELLIPSE, new cv.Size(5, 5)); cv.dilate(m, m, k5); k5.delete(); for (let y = 0; y < eh; y++) for (let x = 0; x < ew; x++) { const e = y * ew + x; if (!(y >= oy && y < oy + bh && x >= ox && x < ox + bw) || handD.data[e]) m.data[e] = 0; } } // +2 px so the feather below sits outside the old ink
@@ -586,8 +586,11 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
         const ss = Math.min(eh - 1, sy + y - ty) * ew + Math.min(ew - 1, sx + x - tx); const src = inkF.data[ss] ? s : ss;
         for (let q = 0; q < 3; q++) bg[(y * bw + x) * 3 + q] = Math.max(0, Math.min(255, sm.data[e * 3 + q] + (rgb.data[src * 3 + q] - sm.data[src * 3 + q]))); im[y * bw + x] = 1; n++; } }
     if (isPhoto && paperChroma) for (let y = 0; y < bh; y++) for (let x = 0; x < bw; x++) { const e = (y + oy) * ew + x + ox; if (!m.data[e]) continue; const j = y * bw + x;
-      const Y = 0.299 * bg[j * 3] + 0.587 * bg[j * 3 + 1] + 0.114 * bg[j * 3 + 2]; const G = Y - 0.299 * paperChroma[0] - 0.114 * paperChroma[1];
-      bg[j * 3] = Math.max(0, Math.min(255, G + paperChroma[0])); bg[j * 3 + 1] = Math.max(0, Math.min(255, G)); bg[j * 3 + 2] = Math.max(0, Math.min(255, G + paperChroma[1])); }
+      // keep the donor paper's own colour grain; only clamp chroma OUTLIERS (ink fringe specks) to the paper's chroma +- 4 sd
+      const Y = 0.299 * bg[j * 3] + 0.587 * bg[j * 3 + 1] + 0.114 * bg[j * 3 + 2];
+      const ca = paperChroma[0] + Math.max(-paperChroma[2], Math.min(paperChroma[2], bg[j * 3] - bg[j * 3 + 1] - paperChroma[0])), cb = paperChroma[1] + Math.max(-paperChroma[3], Math.min(paperChroma[3], bg[j * 3 + 2] - bg[j * 3 + 1] - paperChroma[1]));
+      const G = Y - 0.299 * ca - 0.114 * cb;
+      bg[j * 3] = Math.max(0, Math.min(255, G + ca)); bg[j * 3 + 1] = Math.max(0, Math.min(255, G)); bg[j * 3 + 2] = Math.max(0, Math.min(255, G + cb)); }
     if (isPhoto) { // 2-4 px feather: blend repainted paper into the untouched pixels with a soft mask (gradient and grain carry across)
       const mf = new cv.Mat(); m.convertTo(mf, cv.CV_32F, 1 / 255); cv.GaussianBlur(mf, mf, new cv.Size(0, 0), 1.0);
       for (let y = 0; y < bh; y++) for (let x = 0; x < bw; x++) { const e = (y + oy) * ew + x + ox; if (!m.data[e]) continue; const a = Math.min(1, mf.data32F[e]); const j = y * bw + x; for (let q = 0; q < 3; q++) bg[j * 3 + q] = rgb.data[e * 3 + q] * (1 - a) + bg[j * 3 + q] * a; }
@@ -623,6 +626,10 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
     const D0 = x.createImageData(bw, bh); for (let i = 0; i < bw * bh; i++) { for (let q = 0; q < 3; q++) D0.data[i * 4 + q] = bgInfo.bg[i * 3 + q]; D0.data[i * 4 + 3] = 255; }
     const ink0 = paperLvl - target.inkMedianGray, lo = Math.max(4, 0.10 * ink0), hi = Math.max(lo + 4, 0.30 * ink0);
     const { runs, src, dest, gaps } = glyphPlan;
+    // ink colour of the glyphs that stay (chroma R-G, B-G of their strong ink); moved glyphs are pulled to it (luminance kept)
+    const inkChroma = ks => { const A = [], B = []; for (const k of ks) { const g = runs[k]; for (let y = 0; y < bh; y++) for (let sx = g.x0; sx < g.x1; sx++) { const bx = sx - box.x0; if (bx < 0 || bx >= bw) continue; const j = y * bw + bx, o = ((box.y0 + y) * cw + sx) * 4;
+      const dk = (0.299 * bgInfo.bg[j * 3] + 0.587 * bgInfo.bg[j * 3 + 1] + 0.114 * bgInfo.bg[j * 3 + 2]) - (0.299 * cd[o] + 0.587 * cd[o + 1] + 0.114 * cd[o + 2]); if (dk > 0.6 * ink0) { A.push(cd[o] - cd[o + 1]); B.push(cd[o + 2] - cd[o + 1]); } } } return A.length ? [median(A), median(B)] : null; };
+    const stay = src.map((k, i) => k === i ? k : -1).filter(k => k >= 0); const refChroma = inkChroma(stay); glyphPlan.inkChroma = { stay: refChroma, moved: {} };
     src.forEach((k, i) => { const g = runs[k]; const padL = Math.max(1, Math.min(3, Math.floor(((k > 0 ? gaps[k - 1] : 6)) / 2))), padR = Math.max(1, Math.min(3, Math.floor(((k < gaps.length ? gaps[k] : 6)) / 2)));
       const w = g.x1 - g.x0 + padL + padR, dx = dest[i] - g.x0;
       // weight: darkness of the source pixel vs the rebuilt paper at the source, smoothstep lo..hi, limited to within 3 px
@@ -632,6 +639,7 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
         dkA[y * w + u] = (0.299 * bgInfo.bg[j * 3] + 0.587 * bgInfo.bg[j * 3 + 1] + 0.114 * bgInfo.bg[j * 3 + 2]) - (0.299 * cd[o] + 0.587 * cd[o + 1] + 0.114 * cd[o + 2]); }
       const strongThr = 0.45 * ink0, R = 3; const near = new Uint8Array(w * bh);
       for (let y = 0; y < bh; y++) for (let u = 0; u < w; u++) if (dkA[y * w + u] > strongThr) for (let dy = -R; dy <= R; dy++) for (let du = -R; du <= R; du++) { const yy = y + dy, uu = u + du; if (yy >= 0 && yy < bh && uu >= 0 && uu < w && dy * dy + du * du <= R * R) near[yy * w + uu] = 1; }
+      const movedC = k !== i && refChroma ? inkChroma([k]) : null; if (movedC) glyphPlan.inkChroma.moved[glyphPlan.chars[i]] = { before: movedC, shift: [refChroma[0] - movedC[0], refChroma[1] - movedC[1]] };
       const wg = new Float32Array(w * bh); for (let i = 0; i < w * bh; i++) { if (!near[i]) continue; const t = Math.max(0, Math.min(1, (dkA[i] - lo) / (hi - lo))); wg[i] = t * t * (3 - 2 * t); }
       for (let y = 0; y < bh; y++) for (let u = 0; u < w; u++) { const a = wg[y * w + u]; if (a <= 0) continue; const sx = g.x0 - padL + u, tx = sx + dx; const bs = sx - box.x0, bt = tx - box.x0; if (bs < 0 || bs >= bw || bt < 0 || bt >= bw) continue;
         const js = y * bw + bs, jt = y * bw + bt, o = ((box.y0 + y) * cw + sx) * 4;
@@ -639,7 +647,9 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
         const dQ = [0, 1, 2].map(q => cd[o + q] - bgInfo.bg[js * 3 + q]); const dY = 0.299 * dQ[0] + 0.587 * dQ[1] + 0.114 * dQ[2];
         // stroke core: the source pixel itself (exact original weight/tone); soft edge: luminance darkness over the new paper
         const core = Math.max(0, Math.min(1, (dkA[y * w + u] - 0.4 * ink0) / (0.3 * ink0)));
-        for (let q = 0; q < 3; q++) { const v = (bgInfo.bg[jt * 3 + q] + dY) * (1 - core) + cd[o + q] * core; D0.data[jt * 4 + q] = Math.max(0, Math.min(255, D0.data[jt * 4 + q] * (1 - a) + v * a)); } } });
+        const v = [0, 1, 2].map(q => (bgInfo.bg[jt * 3 + q] + dY) * (1 - core) + cd[o + q] * core);
+        if (movedC) { const f = Math.max(0, Math.min(1, dkA[y * w + u] / ink0)); const Yv = 0.299 * v[0] + 0.587 * v[1] + 0.114 * v[2]; const ca = v[0] - v[1] + f * (refChroma[0] - movedC[0]), cb = v[2] - v[1] + f * (refChroma[1] - movedC[1]); const G = Yv - 0.299 * ca - 0.114 * cb; v[0] = G + ca; v[1] = G; v[2] = G + cb; }
+        for (let q = 0; q < 3; q++) D0.data[jt * 4 + q] = Math.max(0, Math.min(255, D0.data[jt * 4 + q] * (1 - a) + v[q] * a)); } });
     x.putImageData(D0, 0, 0); return c;
   }
   function compose(color, sigma, noiseSd, seed = 1234) {
@@ -761,7 +771,15 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
     const ctx = finalCanvas.getContext('2d', { willReadFrequently: true }); const C = ctx.getImageData(0, 0, bw, bh); const O = corrCanvas.getContext('2d', { willReadFrequently: true }).getImageData(box.x0, box.y0, bw, bh).data;
     let changedBefore = 0; for (let i = 0; i < bw * bh; i++) if (bgInfo.handInBox[i]) { if (Math.abs(C.data[i * 4] - O[i * 4]) + Math.abs(C.data[i * 4 + 1] - O[i * 4 + 1]) + Math.abs(C.data[i * 4 + 2] - O[i * 4 + 2]) > 0) changedBefore++; for (let q = 0; q < 4; q++) C.data[i * 4 + q] = O[i * 4 + q]; }
     ctx.putImageData(C, 0, 0); return { colouredMarkPixelsInBox: bgInfo.handInBoxN, restoredFromOriginal: changedBefore }; })();
-    return { finalCanvas, edgeBlend, handKeep }; };
+    const keepUnmoved = useGlyphs ? (() => { // glyph swap: only the columns of the moved glyphs (+ their vacated slots) change; a 3 px ramp
+      // blends back to the ORIGINAL outside them, so untouched glyphs (e.g. the 1 and 6) and their paper stay exactly as they were
+      const { runs, src, dest } = glyphPlan; const mv = src.map((k, i) => k !== i ? i : -1).filter(i => i >= 0); if (!mv.length) return null;
+      const L = Math.min(...mv.map(i => Math.min(dest[i], runs[i].x0))) - 3 - box.x0, R = Math.max(...mv.map(i => Math.max(dest[i] + runs[src[i]].x1 - runs[src[i]].x0, runs[i].x1))) + 3 - box.x0, RAMP = 3;
+      const ctx = finalCanvas.getContext('2d', { willReadFrequently: true }); const C = ctx.getImageData(0, 0, bw, bh); const O = corrCanvas.getContext('2d', { willReadFrequently: true }).getImageData(box.x0, box.y0, bw, bh).data;
+      for (let x = 0; x < bw; x++) { const dd = x < L ? L - x : x >= R ? x - R + 1 : 0; const a = dd === 0 ? 1 : dd > RAMP ? 0 : 1 - dd / (RAMP + 1); if (a === 1) continue;
+        for (let y = 0; y < bh; y++) { const k = (y * bw + x) * 4; for (let q = 0; q < 3; q++) C.data[k + q] = a === 0 ? O[k + q] : Math.round(O[k + q] * (1 - a) + C.data[k + q] * a); } }
+      ctx.putImageData(C, 0, 0); glyphPlan.keepUnmoved = { movedColumns: [L + box.x0, R + box.x0], rampPx: RAMP }; return glyphPlan.keepUnmoved; })() : null;
+    return { finalCanvas, edgeBlend, handKeep, keepUnmoved }; };
   let _f = buildFinal(); const finStem = () => strokeW(i => grayAt(_f.finalCanvas.getContext('2d', { willReadFrequently: true }).getImageData(0, 0, bw, bh).data, i), bw, bh, swThr);
   const stemCal = [];
   // word-only stem (same region as the visual table) AND edge width: both pulled to the untouched words' values
