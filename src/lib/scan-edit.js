@@ -225,6 +225,19 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
   const rot = pdoc.getPage(pageIndex).getRotation().angle % 360;
   const img = findPageImage(pdoc, pageIndex);
   const imageShaBefore = await sha256(img.raw);
+  // colour space (checked BEFORE any work): the original image's /ColorSpace entry is reused unchanged on save (same object,
+  // so an /ICCBased profile stream is byte-identical); pixels are kept in that space (not converted). RGB (DeviceRGB,
+  // ICCBased N=3) is written as 3 channels, gray (DeviceGray, ICCBased N=1) as 1 channel; anything else (CMYK, Lab,
+  // Indexed, ...) is blocked.
+  const origCS = img.obj.dict.get(PDFName.of('ColorSpace'));
+  const csInfo = (() => { const o = origCS instanceof PDFRef ? pdoc.context.lookup(origCS) : origCS; const t = o ? o.toString() : null;
+    if (!o || t === '/DeviceRGB') return { kind: 'DeviceRGB' };
+    if (t === '/DeviceGray') return { kind: 'DeviceGray' };
+    if (o instanceof PDFArray && o.get(0).toString() === '/ICCBased') { const st = pdoc.context.lookup(o.get(1)); const N = st.dict.lookup(PDFName.of('N'))?.asNumber?.(); return { kind: 'ICCBased', N, profileStreamBytes: st.contents.length }; }
+    return { kind: 'other', text: t.slice(0, 80) }; })();
+  const NC = csInfo.kind === 'DeviceRGB' || (csInfo.kind === 'ICCBased' && csInfo.N === 3) ? 3 : csInfo.kind === 'DeviceGray' || (csInfo.kind === 'ICCBased' && csInfo.N === 1) ? 1 : 0;
+  if (!NC) throw new Error('SAVE BLOCKED: the page image uses colour space ' + JSON.stringify(csInfo) + '; only RGB images (DeviceRGB or a 3-channel ICC profile) or gray images (DeviceGray or a 1-channel ICC profile) can be re-saved without a colour change');
+  if (img.obj.dict.get(PDFName.of('Decode'))) throw new Error('SAVE BLOCKED: the page image has a /Decode array; re-saving it is not supported without a colour change');
   const origCanvas = await decodeImageToCanvas(img);
   const W = origCanvas.width, H = origCanvas.height;
   tick('load', t0); t0 = performance.now();
@@ -238,8 +251,17 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
   }
   // page /Rotate: reorder the quad so its first corner is the DISPLAYED top-left (rotation is clockwise)
   // + a rotated placement matrix (cm): the image's x axis in user space; a clockwise turn on the page counts like /Rotate
-  const ctmRot = ((-Math.round(Math.atan2(img.ctm[1], img.ctm[0]) / (Math.PI / 2)) * 90) % 360 + 360) % 360, rotEff = (rot + ctmRot) % 360;
-  { const perm = { 0: [0, 1, 2, 3], 90: [3, 0, 1, 2], 180: [2, 3, 0, 1], 270: [1, 2, 3, 0] }[rotEff]; paper.quadImage = paper.quad; paper.quad = perm.map(i => paper.quad[i]); paper.pageRotate = rot; paper.placementRotate = ctmRot; }
+  // page /Rotate + placement matrix (cm, incl. a negative-scale FLIP): reorder the quad so its first corner is the corner
+  // DISPLAYED top-left, then TR, BR, BL. The order comes from where the image's own 4 corners land on the displayed page
+  // (cm, then the clockwise /Rotate), so a flipped placement gives a mirrored (reflected) corner order and the warp to the
+  // upright rectangle un-mirrors it; mapping the edit back through the same warp puts it on the right pixels.
+  const ctmRot = ((-Math.round(Math.atan2(img.ctm[1], img.ctm[0]) / (Math.PI / 2)) * 90) % 360 + 360) % 360;
+  const ctmFlip = img.ctm[0] * img.ctm[3] - img.ctm[1] * img.ctm[2] < 0;
+  { const toDisp = ([ix, iy]) => { const x = img.ctm[4] + ix / W * img.ctm[0] + (1 - iy / H) * img.ctm[2], y = img.ctm[5] + ix / W * img.ctm[1] + (1 - iy / H) * img.ctm[3];
+      return rot === 0 ? [x, -y] : rot === 180 ? [-x, y] : rot === 90 ? [y, x] : [-y, -x]; };
+    const ic = [[0, 0], [W, 0], [W, H], [0, H]].map(toDisp), od = orderQuad(ic), perm = od.map(p => ic.indexOf(p));
+    if (new Set(perm).size !== 4) throw new Error('NOT EDITABLE: the page image is placed with a skewed or non-right-angle matrix ' + JSON.stringify(img.ctm) + '; only 90-degree turns and flips are supported');
+    paper.quadImage = paper.quad; paper.quad = perm.map(i => paper.quad[i]); paper.pageRotate = rot; paper.placementRotate = ctmRot; paper.placementFlip = ctmFlip; paper.cornerPerm = perm; }
   const ps = paperSize(paper.quad, W, H);
   // crop to the paper: pull the corners 0.4% toward the centre so no background sliver reaches OCR
   { const cx = paper.quad.reduce((a, p) => a + p[0], 0) / 4, cy = paper.quad.reduce((a, p) => a + p[1], 0) / 4; paper.quadInset = paper.quad.map(([x, y]) => [x + (cx - x) * 0.008, y + (cy - y) * 0.008]); }
@@ -844,6 +866,7 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
     [po, ch_, k1, colr, k2].forEach(m => m.delete()); }
   const patch = new ImageData(PW, PH); let maskCount = 0;
   for (let i = 0; i < PW * PH; i++) { if (pMask.data[i]) { maskCount++; for (let c = 0; c < 3; c++) patch.data[i * 4 + c] = patchMat.data[i * 4 + c]; patch.data[i * 4 + 3] = 255; } }
+  if (NC === 1) for (let i = 0; i < PW * PH; i++) if (patch.data[i * 4 + 3]) { const g = Math.round(0.299 * patch.data[i * 4] + 0.587 * patch.data[i * 4 + 1] + 0.114 * patch.data[i * 4 + 2]); patch.data[i * 4] = patch.data[i * 4 + 1] = patch.data[i * 4 + 2] = g; } // gray image: the edit is written in gray
   const patchCanvas = document.createElement('canvas'); patchCanvas.width = PW; patchCanvas.height = PH; patchCanvas.getContext('2d').putImageData(patch, 0, 0);
   const patchPng = new Uint8Array(await (await new Promise(r => patchCanvas.toBlob(r, 'image/png'))).arrayBuffer());
   // in-memory composite (pixel space) for an exact check of "outside the painted box is untouched"
@@ -856,19 +879,14 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
   // 10) new PDF: write the patch INTO the page image and re-save the whole image losslessly (Flate + PNG predictor).
   //     The original JPEG stream is dropped (GC), so its pixels (and the old word) are gone from the file.
   const compData = cctx.getImageData(0, 0, W, H).data;
-  const rgb = new Uint8Array(W * H * 3); for (let i = 0, j = 0; i < W * H; i++, j += 3) { rgb[j] = compData[i * 4]; rgb[j + 1] = compData[i * 4 + 1]; rgb[j + 2] = compData[i * 4 + 2]; }
-  const filtered = pngPredict(rgb, W, H, 3);
+  const rgb = new Uint8Array(W * H * NC); for (let i = 0, j = 0; i < W * H; i++, j += NC) for (let c = 0; c < NC; c++) rgb[j + c] = compData[i * 4 + c];
+  if (NC === 1) { let notGray = 0; for (let i = 0; i < W * H; i++) if (compData[i * 4] !== compData[i * 4 + 1] || compData[i * 4] !== compData[i * 4 + 2]) notGray++; if (notGray) throw new Error('SAVE BLOCKED: the gray page image decoded with ' + notGray + ' non-gray pixel(s); nothing written'); }
+  const filtered = pngPredict(rgb, W, H, NC);
   const page = pdoc.getPage(pageIndex);
   // colour space: the original image's /ColorSpace entry is reused unchanged (same object, so an /ICCBased profile stream is
   // byte-identical); the pixels above are in that space (not converted)
-  const origCS = img.obj.dict.get(PDFName.of('ColorSpace'));
-  const csInfo = (() => { const o = origCS instanceof PDFRef ? pdoc.context.lookup(origCS) : origCS; const t = o ? o.toString() : null;
-    if (!o || t === '/DeviceRGB') return { kind: 'DeviceRGB' };
-    if (o instanceof PDFArray && o.get(0).toString() === '/ICCBased') { const st = pdoc.context.lookup(o.get(1)); const N = st.dict.lookup(PDFName.of('N'))?.asNumber?.(); return { kind: 'ICCBased', N, profileStreamBytes: st.contents.length }; }
-    return { kind: 'other', text: t.slice(0, 80) }; })();
-  if (!(csInfo.kind === 'DeviceRGB' || (csInfo.kind === 'ICCBased' && csInfo.N === 3))) throw new Error('SAVE BLOCKED: the page image uses colour space ' + JSON.stringify(csInfo) + '; only RGB images (DeviceRGB or a 3-channel ICC profile) can be re-saved without a colour change');
   const newImg = pdoc.context.flateStream(filtered, { Type: 'XObject', Subtype: 'Image', Width: W, Height: H, ColorSpace: origCS || 'DeviceRGB', BitsPerComponent: 8,
-    DecodeParms: { Predictor: 15, Colors: 3, BitsPerComponent: 8, Columns: W } });
+    DecodeParms: { Predictor: 15, Colors: NC, BitsPerComponent: 8, Columns: W } });
   const newImgRef = pdoc.context.register(newImg);
   img.xo.set(PDFName.of(img.name), newImgRef);
   // metadata: catalog XMP, every page /Thumb (none rebuilt), old image's XMP goes with the old image
@@ -886,13 +904,14 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
   // verify: the saved image decodes (our own inflate + un-predict) to exactly the composite, i.e. identical to the
   // original decode everywhere outside the patch mask
   const chk = await PDFDocument.load(out); const img2 = findPageImage(chk, pageIndex);
-  const inflated = decodePDFRawStream(img2.obj).decode(); const back2 = pngUnpredict(inflated, W, H, 3);
+  const inflated = decodePDFRawStream(img2.obj).decode(); const back2 = pngUnpredict(inflated, W, H, NC);
   const O0 = getData(origCanvas).data; let imgOutside = 0, imgInside = 0, imgVsComposite = 0;
   for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const i = y * W + x, j = i * 3, k = i * 4;
-    const same = back2[j] === O0[k] && back2[j + 1] === O0[k + 1] && back2[j + 2] === O0[k + 2];
-    if (back2[j] !== compData[k] || back2[j + 1] !== compData[k + 1] || back2[j + 2] !== compData[k + 2]) imgVsComposite++;
+    const v = c => back2[i * NC + (NC === 3 ? c : 0)];
+    const same = v(0) === O0[k] && v(1) === O0[k + 1] && v(2) === O0[k + 2];
+    if (v(0) !== compData[k] || v(1) !== compData[k + 1] || v(2) !== compData[k + 2]) imgVsComposite++;
     if (!same) { if (inMaskOrig(x, y)) imgInside++; else imgOutside++; } }
-  const imageCheck = { colorSpace: csInfo, newFilter: img2.filter, newImageStreamBytes: img2.raw.length, oldImageStreamBytes: img.raw.length, decodedVsComposite: imgVsComposite, changedOutsidePatchMask: imgOutside, changedInsidePatchMask: imgInside, imagesInOutput: countImages(chk) };
+  const imageCheck = { colorSpace: csInfo, channelsWritten: NC, newFilter: img2.filter, newImageStreamBytes: img2.raw.length, oldImageStreamBytes: img.raw.length, decodedVsComposite: imgVsComposite, changedOutsidePatchMask: imgOutside, changedInsidePatchMask: imgInside, imagesInOutput: countImages(chk) };
   const maskCanvas = document.createElement('canvas'); maskCanvas.width = W; maskCanvas.height = H; { const mc = maskCanvas.getContext('2d'); const md = mc.createImageData(W, H); for (let y = py0; y < py1; y++) for (let x = px0; x < px1; x++) if (inMaskOrig(x, y)) { const k = (y * W + x) * 4; md.data[k] = md.data[k + 1] = md.data[k + 2] = 255; } for (let i = 3; i < md.data.length; i += 4) md.data[i] = 255; mc.putImageData(md, 0, 0); }
 
   // 11) render both PDFs with pdf.js at 1 image pixel = 1 device pixel and diff (every page)
