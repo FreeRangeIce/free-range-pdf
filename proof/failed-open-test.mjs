@@ -31,4 +31,21 @@ for (const [k, f, want] of cases) {
 await pg.setInputFiles('#file', IN + 'runs.pdf'); await pg.waitForFunction(() => window.FRP_APP.S.name === 'runs.pdf', null, { timeout: 60000 }); await idle(); await pg.waitForTimeout(500);
 const v = await snap(); res.validReplaces = { ok: v.nEdits === 0 && v.undoLen === 0 && v.name === 'runs.pdf' && v.origSha !== before.origSha && !v.editorHidden && !(await pg.$eval('#nosel', e => !e.hidden && e.className === 'refuse')), name: v.name, edits: v.nEdits };
 if (!res.validReplaces.ok) fails++;
+// races: with base.pdf loaded and edited, pick two files back to back (the second before the first open finishes)
+// kept: base.pdf, its edit and an enabled Download survive; swapped: the new file is open like any fresh open (no edits, Download off until an edit)
+const loadEdited = async () => { const p = await (await b.newContext({ viewport: { width: 1440, height: 1000 } })).newPage(); p.errs = []; p.on('pageerror', e => p.errs.push(e.message));
+  await p.route('**/*', r => /^(http:\/\/127\.0\.0\.1|blob:|data:)/.test(r.request().url()) ? r.continue() : r.abort());
+  await p.goto(URL_); await p.setInputFiles('#file', IN + 'base.pdf'); await p.waitForSelector('#editor:not([hidden])');
+  await p.waitForFunction(() => window.FRP_APP.S.lines.length && !window.FRP_APP.S.busy, null, { timeout: 60000 });
+  await p.evaluate(() => { const i = window.FRP_APP.S.lines.findIndex(l => l.text.includes('Thursday morning')); document.querySelectorAll('.ln')[i].click(); });
+  await p.fill('#newtext', (await p.inputValue('#newtext')).replace('Thursday', 'Friday')); await p.waitForFunction(() => !document.getElementById('apply').disabled, null, { timeout: 60000 }); await p.keyboard.press('Enter');
+  await p.waitForFunction(() => { const S = window.FRP_APP.S; return S.edits.length === 1 && S.verified && !S.busy && !S.pending; }, null, { timeout: 90000 }); return p; };
+const st = p => p.evaluate(() => { const S = window.FRP_APP.S, $ = id => document.getElementById(id); return { name: S.name, edits: S.edits.length, busy: S.busy, busyflag: !$('busyflag').hidden, download: !$('download').disabled, verified: S.verified, editor: !$('editor').hidden, empty: !$('emptystate').hidden, msg: $('nosel').hidden ? '' : $('nosel').textContent }; });
+const races = [['valid>corrupt', 'multi.pdf', 'corrupt.pdf', 'base.pdf'], ['corrupt>valid', 'corrupt.pdf', 'multi.pdf', 'multi.pdf'], ['valid>valid', 'runs.pdf', 'multi.pdf', 'multi.pdf'], ['corrupt>bad', 'corrupt.pdf', 'fake.pdf', 'base.pdf']];
+for (const [k, f1, f2, want] of races) {
+  const p = await loadEdited(); const inp = await p.$('#file'); await inp.setInputFiles(IN + f1); await inp.setInputFiles(IN + f2);
+  await p.waitForFunction(() => !window.FRP_APP.S.busy, null, { timeout: 30000 }).catch(() => {}); await p.waitForTimeout(2500); const s = await st(p);
+  const kept = want === 'base.pdf', ok = s.name === want && !s.busy && !s.busyflag && s.download === kept && s.verified === kept && s.editor && !s.empty && s.edits === (kept ? 1 : 0) && (!kept || s.msg === MSG.unreadable) && !p.errs.length;
+  if (!ok) fails++; res['race ' + k] = { ok, ...s, pageErrors: p.errs }; await p.context().close();
+}
 console.log(JSON.stringify({ res, pageErrors: errs }, null, 1)); console.log(fails ? `FAIL ${fails}` : 'PASS'); await b.close(); process.exit(fails ? 1 : 0);

@@ -253,10 +253,13 @@ function resetDoc() { // runs once a new file has passed every check: nothing of
 function keepOpen(text) { const n = $('nosel'); n.hidden = false; n.className = 'refuse'; n.textContent = text; } // failed open with a document loaded: show the message, change nothing else
 function failOpen(text, noReason) { resetDoc(); $('emptystate').hidden = false; $('nosel').className = 'refuse'; $('nosel').textContent = text; if (S.everOpened && !noReason) { const d = document.createElement('div'); d.className = 'reason'; d.textContent = MSG.openFailedAfter; $('nosel').appendChild(d); } }
 let openSeq = 0;
+let openHold = null; // pre-open state for the current busy period of (possibly overlapping) opens
 async function openBytes(u8, name) {
   // Validate the new file completely BEFORE touching the loaded document: a failed open must leave it, its edits, undo, selection and Download exactly as they were.
-  const my = ++openSeq; const had = !!S.cur, dlWas = $('download').disabled, wasBusy = S.busy; if (!wasBusy) setBusy(true);
-  const fail = text => { if (my !== openSeq) return; if (!had) return failOpen(text); keepOpen(text); if (!wasBusy) { setBusy(false); $('download').disabled = dlWas; } };
+  // Overlapping opens share ONE busy period: the state before the first of them is stored once, and whichever open is newest releases it.
+  const my = ++openSeq; const had = !!S.cur; if (!openHold) { openHold = { dlWas: $('download').disabled, wasBusy: S.busy, swapped: false }; if (!S.busy) setBusy(true); }
+  const hold = openHold, wasBusy = hold.wasBusy, release = () => { if (openHold === hold) openHold = null; };
+  const fail = text => { if (my !== openSeq) return; release(); if (!had) return failOpen(text); keepOpen(text); if (!wasBusy) { setBusy(false); $('download').disabled = hold.swapped ? !S.verified : hold.dlWas; } };
   let swapped = false;
   try {
     let pd;
@@ -269,12 +272,12 @@ async function openBytes(u8, name) {
     if (cls.route !== 'text') { fail(MSG.notText); if (!had) S.everOpened = true; return; } /* same closed state and earlier-file line as any other bad file */
     try { await readLines(u8.slice()); const d = await openPdf(u8.slice()); await d.getPage(1); await d.destroy(); } catch (err) { console.warn('open failed:', err && err.message); return fail(MSG.unreadable); }
     const sha = await sha256(u8); if (my !== openSeq) return;
-    resetDoc(); swapped = true; // the new file is good: only now drop the old one
+    resetDoc(); swapped = true; hold.swapped = true; // the new file is good: only now drop the old one
     S.name = name; S.orig = new Uint8Array(u8); S.origSha = sha; S.edits = []; S.curRes = []; S.sel = -1; S.cur = S.orig.slice();
     $('docinfo').textContent = `${name}  \u00b7  ${pd.getPageCount()} page(s), editing page 1  \u00b7  SHA-256 ${S.origSha.slice(0, 12)}\u2026`;
     S.everOpened = true; await showCurrent(); if (my !== openSeq) return; $('legendwrap').hidden = false; renderEdits(); await verify(); select(0, false, false, false);
   } catch (err) { console.warn('open failed:', err && err.message); if (swapped) failOpen(MSG.openFailedAfter, true); else return fail(MSG.unreadable); }
-  finally { if (my === openSeq && (swapped || !had) && !wasBusy) setBusy(false); }
+  finally { if (my === openSeq) { release(); if ((swapped || !had) && !wasBusy) setBusy(false); } }
 }
 $('openbtn').addEventListener('click', () => $('file').click()); $('openbtn2').addEventListener('click', () => $('file').click());
 $('file').addEventListener('change', async ev => { const f = ev.target.files[0]; ev.target.value = ''; if (!f) return; let b; try { b = new Uint8Array(await f.arrayBuffer()); } catch { return failOpen(MSG.unreadable); } openBytes(b, f.name); });
