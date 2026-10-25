@@ -26,6 +26,6 @@ await pickLine('Thursday morning'); await typeEdit('Thursday', 'Friday'); await 
 R.undoWhileBusy = { undoDisabled: await pg.$eval('#undo', e => e.disabled), noteText: await txt('busynote') }; await pg.keyboard.press('Control+z'); await idle(1);
 R.afterBusyUndo = { edits: await pg.evaluate(() => window.FRP_APP.S.edits.length) };
 // failed open of a new file after an earlier one was open
-await pg.setInputFiles('#file', '/workspace/frpdf-stress/in/corrupt.pdf'); await pg.waitForFunction(() => document.getElementById('nosel').className === 'refuse', null, { timeout: 30000 }); await pg.waitForTimeout(300);
+await pg.setInputFiles('#file', new URL('./fixtures/corrupt.pdf', import.meta.url).pathname); await pg.waitForFunction(() => document.getElementById('nosel').className === 'refuse', null, { timeout: 30000 }); await pg.waitForTimeout(300);
 R.failedOpen = await txt('nosel'); await pg.screenshot({ path: out + '15-failed-open.png' });
 console.log(JSON.stringify({ R, badRequests: bad, externalRequests: ext }, null, 1)); await b.close();

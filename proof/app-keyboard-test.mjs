@@ -33,8 +33,8 @@ await pg.goto(URL_); await pg.click('#sample'); await pg.waitForSelector('#edito
 await pg.click('.ln[data-i="8"]'); const v3 = await pg.inputValue('#newtext'); await pg.fill('#newtext', v3.replace('Thursday', 'Friday')); await pg.waitForFunction(() => document.getElementById('apply').getAttribute('aria-disabled') === 'false', null, { timeout: 60000 });
 await pg.click('#apply'); const busyDuring = await pg.evaluate(() => ({ busy: window.FRP_APP.S.busy, undoDisabled: document.getElementById('undo').disabled, flag: !document.getElementById('busyflag').hidden })); await pg.waitForFunction(() => window.FRP_APP.S.edits.length === 1 && !window.FRP_APP.S.busy, null, { timeout: 90000 }); await pg.waitForTimeout(1000);
 R.busyDuringApply = busyDuring; R.beforeFail = await S();
-await pg.setInputFiles('#file', '/workspace/frpdf-stress/in/fake.pdf'); await pg.waitForTimeout(1500); R.afterFailedOpen = await S(); R.afterFailedOpenMsg = await pg.textContent('#nosel'); await pg.screenshot({ path: out + '11-failed-open-cleared.png' });
-await pg.setInputFiles('#file', '/workspace/frpdf-stress/in/enc.pdf'); await pg.waitForTimeout(1500); R.passwordMsg = await pg.textContent('#nosel');
+await pg.setInputFiles('#file', new URL('./fixtures/fake.pdf', import.meta.url).pathname); await pg.waitForTimeout(1500); R.afterFailedOpen = await S(); R.afterFailedOpenMsg = await pg.textContent('#nosel'); await pg.screenshot({ path: out + '11-failed-open-cleared.png' });
+await pg.setInputFiles('#file', new URL('./fixtures/enc.pdf', import.meta.url).pathname); await pg.waitForTimeout(1500); R.passwordMsg = await pg.textContent('#nosel');
 // ---- holes 2 and 5 on a fresh open
 await pg.click('#sample'); await pg.waitForSelector('#editor:not([hidden])'); await pg.waitForTimeout(1500); await pg.click('.ln[data-i="8"]');
 await pg.fill('#newtext', ''); await pg.waitForTimeout(600); R.empty = await S(); await pg.keyboard.press('Enter'); await pg.waitForTimeout(400); R.emptyAfterEnter = await S(); await pg.screenshot({ path: out + '12-empty-blocked.png' });

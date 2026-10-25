@@ -1,6 +1,6 @@
 // A failed open with a document loaded must change nothing: edits, undo, selection, page, Download stay as they were. usage: node proof/failed-open-test.mjs [url]
 import { chromium } from 'playwright-core'; import crypto from 'crypto';
-const URL_ = process.argv[2] || 'http://127.0.0.1:8090/app/index.html', IN = '/workspace/frpdf-stress/in/';
+const URL_ = process.argv[2] || 'http://127.0.0.1:8090/app/index.html', IN = new URL('./fixtures/', import.meta.url).pathname;
 const MSG = { unreadable: "This file couldn't be opened as a PDF. Nothing was changed." };
 const b = await chromium.launch({ executablePath: '/usr/bin/google-chrome', headless: true, args: ['--no-sandbox'] });
 const pg = await (await b.newContext({ viewport: { width: 1440, height: 1000 } })).newPage(); const errs = [];
@@ -18,7 +18,7 @@ await pg.waitForFunction(() => !document.getElementById('apply').disabled, null,
 await pg.waitForFunction(() => window.FRP_APP.S.edits.length === 1, null, { timeout: 90000 }); await idle(); await pg.waitForFunction(() => window.FRP_APP.S.verified, null, { timeout: 60000 }); await pg.waitForTimeout(500);
 const before = await snap(); let fails = 0; const res = {};
 if (before.nEdits !== 1 || before.download) { console.log('setup failed', before); fails++; }
-const cases = [['corrupt', 'corrupt.pdf', MSG.unreadable], ['fake', 'fake.pdf', MSG.unreadable], ['empty', 'empty.pdf', MSG.unreadable], ['trunc', 'trunc.pdf', null], ['password', 'enc.pdf', null], ['restricted', 'enc-owner-only.pdf', null], ['notText', 'scan.pdf', null]];
+const cases = [['corrupt', 'corrupt.pdf', MSG.unreadable], ['fake', 'fake.pdf', MSG.unreadable], ['empty', 'empty.pdf', MSG.unreadable], ['trunc', 'trunc.pdf', null], ['password', 'enc.pdf', null], ['restricted', 'enc-owner-only.pdf', null], ['notText', '../inputs/scan-standin.pdf', null]];
 for (const [k, f, want] of cases) {
   await pg.evaluate(() => { const n = document.getElementById('nosel'); n.className = 'muted'; });
   await pg.setInputFiles('#file', IN + f);
