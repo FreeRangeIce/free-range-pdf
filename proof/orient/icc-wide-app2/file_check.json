@@ -1,6 +1,6 @@
 {
  "input": {
-  "file": "/workspace/free-range-pdf/proof/inputs/icc-wide-app2.pdf",
+  "file": "/workspace/frpdf-photo-merge-wt/proof/inputs/icc-wide-app2.pdf",
   "bytes": 216198,
   "eofMarkers": 1,
   "startxrefs": 1,
@@ -70,7 +70,7 @@
   ]
  },
  "output": {
-  "file": "/workspace/free-range-pdf/proof/orient/icc-wide-app2/icc-wide-app2.edited.pdf",
+  "file": "/workspace/frpdf-photo-merge-wt/proof/orient/icc-wide-app2/icc-wide-app2.edited.pdf",
   "bytes": 856043,
   "eofMarkers": 1,
   "startxrefs": 1,

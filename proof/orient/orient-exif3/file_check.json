@@ -1,0 +1,166 @@
+{
+ "input": {
+  "file": "/workspace/frpdf-photo-merge-wt/proof/inputs/orient-exif3.pdf",
+  "bytes": 215768,
+  "eofMarkers": 1,
+  "startxrefs": 1,
+  "trailerHasPrev": false,
+  "incrementalUpdate": false,
+  "reachabilityMethod": "raw object graph (no object streams)",
+  "objects": 6,
+  "orphans": [],
+  "fonts": {},
+  "streams": 2,
+  "undecodableStreams": 0,
+  "search": {
+   "plainHitsNonImageStreams": {
+    "five": [],
+    "nine": []
+   },
+   "glyphCodeHits": {
+    "five": [],
+    "nine": []
+   },
+   "perShowOpHits": {
+    "five": [],
+    "nine": []
+   },
+   "newWordShowOpHits": {}
+  },
+  "pdftotext": {
+   "five": 0,
+   "nine": 0
+  },
+  "pdftotextReplacementChars": 0,
+  "pdftotextLinesWith": {
+   "five": [],
+   "nine": []
+  },
+  "images": [
+   {
+    "obj": "4 0 R",
+    "w": 1512,
+    "h": 2016,
+    "filter": "/DCTDecode",
+    "colorSpace": "/DeviceRGB",
+    "hasMetadata": false,
+    "jpegAPP1Exif": true,
+    "jpegICC": false,
+    "jpegXMP": false,
+    "bytes": 214313
+   }
+  ],
+  "pageThumbs": [],
+  "catalogMetadata": false,
+  "pageRotate": [
+   0
+  ],
+  "rawFileMarkers": {
+   "Exif\\0\\0": 1,
+   "GPS (text)": 0,
+   "xmpmeta": 0,
+   "/Thumb": 0,
+   "ICC_PROFILE": 0,
+   "/Metadata": 0
+  },
+  "pdfimagesList": [
+   "page   num  type   width height color comp bpc  enc interp  object ID x-ppi y-ppi size ratio",
+   "--------------------------------------------------------------------------------------------",
+   "   1     0 image    1512  2016  rgb     3   8  jpeg   no         4  0   144   144  209K 2.3%"
+  ]
+ },
+ "output": {
+  "file": "/workspace/frpdf-photo-merge-wt/proof/orient/orient-exif3/orient-exif3.edited.pdf",
+  "bytes": 856039,
+  "eofMarkers": 1,
+  "startxrefs": 1,
+  "trailerHasPrev": false,
+  "incrementalUpdate": false,
+  "reachabilityMethod": "raw object graph (no object streams)",
+  "objects": 14,
+  "orphans": [],
+  "fonts": {
+   "p1/FRPOCR-7098480789": {
+    "base": "/LiberationSans-9742",
+    "unicodeSource": "ToUnicode"
+   }
+  },
+  "streams": 7,
+  "undecodableStreams": 0,
+  "search": {
+   "plainHitsNonImageStreams": {
+    "five": [],
+    "nine": []
+   },
+   "glyphCodeHits": {
+    "five": [],
+    "nine": [
+     {
+      "fontObj": "(8, 0)",
+      "font": "/LiberationSans-9742",
+      "codes": "0003001000030002",
+      "stream": "11 0 R",
+      "contiguousBytes": 0,
+      "hexForm": 1,
+      "kind": "page 1 content stream"
+     }
+    ]
+   },
+   "perShowOpHits": {
+    "five": [],
+    "nine": [
+     {
+      "page": 1,
+      "font": "/LiberationSans-9742",
+      "y": 638.0489,
+      "text": "nine"
+     }
+    ]
+   },
+   "newWordShowOpHits": {}
+  },
+  "pdftotext": {
+   "five": 0,
+   "nine": 1
+  },
+  "pdftotextReplacementChars": 0,
+  "pdftotextLinesWith": {
+   "five": [],
+   "nine": [
+    "more than nine"
+   ]
+  },
+  "images": [
+   {
+    "obj": "7 0 R",
+    "w": 1512,
+    "h": 2016,
+    "filter": "/FlateDecode",
+    "colorSpace": "/DeviceRGB",
+    "hasMetadata": false,
+    "jpegAPP1Exif": false,
+    "jpegICC": false,
+    "jpegXMP": false,
+    "bytes": 840462
+   }
+  ],
+  "pageThumbs": [],
+  "catalogMetadata": false,
+  "pageRotate": [
+   0
+  ],
+  "rawFileMarkers": {
+   "Exif\\0\\0": 0,
+   "GPS (text)": 0,
+   "xmpmeta": 0,
+   "/Thumb": 0,
+   "ICC_PROFILE": 0,
+   "/Metadata": 0
+  },
+  "pdfimagesList": [
+   "page   num  type   width height color comp bpc  enc interp  object ID x-ppi y-ppi size ratio",
+   "--------------------------------------------------------------------------------------------",
+   "   1     0 image    1512  2016  rgb     3   8  image  no         7  0   144   144  821K 9.2%"
+  ]
+ }
+}

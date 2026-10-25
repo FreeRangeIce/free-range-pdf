@@ -1,0 +1,69 @@
+{
+ "poppler": {
+  "sizeIn": [
+   1512,
+   2016
+  ],
+  "sizeOut": [
+   1512,
+   2016
+  ],
+  "original": {
+   "rotationToUpright": 0,
+   "upright": true,
+   "meanAbsVsUprightRef": 1.52
+  },
+  "edited": {
+   "rotationToUpright": 0,
+   "upright": true,
+   "meanAbsVsUprightRef": 1.52
+  },
+  "orientationKept": true,
+  "editRectRotationDeg": 0,
+  "editRectMirrored": false,
+  "changedOutsideEditRect": 0,
+  "maxAbsOutsideEditRect": 0,
+  "meanAbsOutsideEditRect": 0.0,
+  "changedInsideEditRect": 914
+ },
+ "pdfjs": {
+  "sizeIn": [
+   1512,
+   2016
+  ],
+  "sizeOut": [
+   1512,
+   2016
+  ],
+  "original": {
+   "rotationToUpright": 0,
+   "upright": true,
+   "meanAbsVsUprightRef": 1.03
+  },
+  "edited": {
+   "rotationToUpright": 0,
+   "upright": true,
+   "meanAbsVsUprightRef": 1.04
+  },
+  "orientationKept": true,
+  "editRectRotationDeg": 0,
+  "editRectMirrored": false,
+  "changedOutsideEditRect": 76071,
+  "maxAbsOutsideEditRect": 2,
+  "meanAbsOutsideEditRect": 0.0262,
+  "changedInsideEditRect": 963
+ },
+ "colorSpace": {
+  "input": {
+   "kind": "ICCBased",
+   "N": 1,
+   "profileSha256": "aa83cb52d04e4b72b7ab7446813391ef55c5b135acde6e7b2abb22651cf58bca"
+  },
+  "output": {
+   "kind": "ICCBased",
+   "N": 1,
+   "profileSha256": "aa83cb52d04e4b72b7ab7446813391ef55c5b135acde6e7b2abb22651cf58bca"
+  },
+  "same": true
+ }
+}

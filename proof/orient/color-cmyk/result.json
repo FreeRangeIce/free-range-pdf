@@ -1,0 +1,17 @@
+{
+ "case": {
+  "name": "color-cmyk",
+  "dir": "orient/color-cmyk",
+  "file": "inputs/color-cmyk.pdf",
+  "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+  "find": "five",
+  "replace": "nine",
+  "expectSaveBlocked": true
+ },
+ "refused": true,
+ "kind": "saveBlocked",
+ "reason": "SAVE BLOCKED: the page image uses colour space {\"kind\":\"other\",\"text\":\"/DeviceCMYK\"}; only RGB images (DeviceRGB or a 3-channel ICC profile) or gray images (DeviceGray or a 1-channel ICC profile) can be re-saved without a colour change\n    at Object.editScanLine (http://127.0.0.1:33787/src/lib/scan-edit.js:239:18)\n    at async <anonymous>:396:30",
+ "pdfFilesInOutputDir": [],
+ "outputFilesWritten": false,
+ "inputSha256": "826c1817cb20ce73ee37acb48e71b8ce0e3f8543ff70ca45ff5ccccb1d81528e"
+}

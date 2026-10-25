@@ -100,6 +100,7 @@
   "colorSpace": {
    "kind": "DeviceRGB"
   },
+  "channelsWritten": 3,
   "newFilter": "/FlateDecode",
   "newImageStreamBytes": 1075312,
   "oldImageStreamBytes": 214670,
@@ -210,6 +211,13 @@
   ],
   "pageRotate": 0,
   "placementRotate": 90,
+  "placementFlip": false,
+  "cornerPerm": [
+   3,
+   0,
+   1,
+   2
+  ],
   "quadInset": [
    [
     451.6,
@@ -6013,13 +6021,13 @@
   ]
  },
  "timingsMs": {
-  "load": 36,
-  "geometry": 508,
-  "enhance": 403,
-  "ocr": 2121,
-  "edit": 436993,
-  "patch": 289,
-  "render+diff": 2186,
-  "reocr": 763
+  "load": 44,
+  "geometry": 512,
+  "enhance": 424,
+  "ocr": 2240,
+  "edit": 430890,
+  "patch": 363,
+  "render+diff": 3412,
+  "reocr": 970
  }
 }
