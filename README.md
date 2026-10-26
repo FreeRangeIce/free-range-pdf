@@ -1,6 +1,6 @@
 # FreeRangePDF (FreeRangeIce/free-range-pdf), stage 1: proof of method only
 
-This is a static, desktop-only (1440px) PDF line editor that runs in the browser. There is no server and no cloud OCR, and the file never leaves the browser. **The app UI is not built yet.** This repo holds only the proof that the editing method works.
+This is a static, desktop-only (1440px) PDF line editor that runs in the browser. There is no server and no cloud OCR, and the file never leaves the browser. **The editor is live at [freerangeice.github.io/free-range-pdf/app/](https://freerangeice.github.io/free-range-pdf/app/).** This repo also holds the proof that the editing method works.
 
 - `src/lib/text-edit.js`: path A, for PDFs with a text layer (pdf.js reads the line, pdf-lib removes the line's text-show operators and redraws it, using the embedded font or an OFL fallback).
 - `src/lib/scan-edit.js`: path B, for scans and photos (OpenCV.js paper detection, deskew, 300 dpi and CLAHE; Tesseract.js eng OCR; then paint, redraw and a lossless patch over the untouched original image).
