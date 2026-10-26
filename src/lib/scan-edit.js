@@ -238,6 +238,20 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
   const NC = csInfo.kind === 'DeviceRGB' || (csInfo.kind === 'ICCBased' && csInfo.N === 3) ? 3 : csInfo.kind === 'DeviceGray' || (csInfo.kind === 'ICCBased' && csInfo.N === 1) ? 1 : 0;
   if (!NC) throw new Error('SAVE BLOCKED: the page image uses colour space ' + JSON.stringify(csInfo) + '; only RGB images (DeviceRGB or a 3-channel ICC profile) or gray images (DeviceGray or a 1-channel ICC profile) can be re-saved without a colour change');
   if (img.obj.dict.get(PDFName.of('Decode'))) throw new Error('SAVE BLOCKED: the page image has a /Decode array; re-saving it is not supported without a colour change');
+  // transparency (checked BEFORE any work): an /SMask (soft mask) or /Mask stencil stream is kept by reference on save (same
+  // object, bytes untouched), which is exact because the edited image keeps the same Width/Height and the mask is independent of
+  // the base image's samples. A colour-key /Mask array (exact sample-value match) or an /SMask with /Matte (pre-multiplied
+  // colours) depends on the edited sample values themselves, so those are blocked.
+  const maskInfo = (() => { const d = img.obj.dict; const r = {}; const sm = d.get(PDFName.of('SMask')), mk = d.get(PDFName.of('Mask'));
+    if (sm) { const o = sm instanceof PDFRef ? pdoc.context.lookup(sm) : sm;
+      if (!(o instanceof PDFRawStream)) throw new Error('SAVE BLOCKED: the page image has an /SMask that is not an image stream; nothing written');
+      if (o.dict.get(PDFName.of('Matte'))) throw new Error('SAVE BLOCKED: the page image has an /SMask with /Matte (pre-multiplied colours); re-saving it is not supported; nothing written');
+      r.SMask = sm; }
+    if (mk) { const o = mk instanceof PDFRef ? pdoc.context.lookup(mk) : mk;
+      if (o instanceof PDFArray) throw new Error('SAVE BLOCKED: the page image has a colour-key /Mask array ' + o.toString().slice(0, 80) + '; edited pixels could match the key, so re-saving it is not supported; nothing written');
+      if (!(o instanceof PDFRawStream)) throw new Error('SAVE BLOCKED: the page image has an unsupported /Mask entry; nothing written');
+      r.Mask = mk; }
+    return r; })();
   const origCanvas = await decodeImageToCanvas(img);
   const W = origCanvas.width, H = origCanvas.height;
   tick('load', t0); t0 = performance.now();
@@ -260,6 +274,9 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
   { const toDisp = ([ix, iy]) => { const x = img.ctm[4] + ix / W * img.ctm[0] + (1 - iy / H) * img.ctm[2], y = img.ctm[5] + ix / W * img.ctm[1] + (1 - iy / H) * img.ctm[3];
       return rot === 0 ? [x, -y] : rot === 180 ? [-x, y] : rot === 90 ? [y, x] : [-y, -x]; };
     const ic = [[0, 0], [W, 0], [W, H], [0, H]].map(toDisp), od = orderQuad(ic), perm = od.map(p => ic.indexOf(p));
+    { const [a, b, c, d] = img.ctm, sc = Math.max(Math.abs(a), Math.abs(b), Math.abs(c), Math.abs(d)), tol = 1e-6 * sc;
+      const axis = (Math.abs(b) <= tol && Math.abs(c) <= tol) || (Math.abs(a) <= tol && Math.abs(d) <= tol);
+      if (!axis) throw new Error('NOT EDITABLE: the page image is placed with a skewed or non-right-angle matrix ' + JSON.stringify(img.ctm) + '; only 90-degree turns and flips are supported'); }
     if (new Set(perm).size !== 4) throw new Error('NOT EDITABLE: the page image is placed with a skewed or non-right-angle matrix ' + JSON.stringify(img.ctm) + '; only 90-degree turns and flips are supported');
     paper.quadImage = paper.quad; paper.quad = perm.map(i => paper.quad[i]); paper.pageRotate = rot; paper.placementRotate = ctmRot; paper.placementFlip = ctmFlip; paper.cornerPerm = perm; }
   const ps = paperSize(paper.quad, W, H);
@@ -887,6 +904,7 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
   // byte-identical); the pixels above are in that space (not converted)
   const newImg = pdoc.context.flateStream(filtered, { Type: 'XObject', Subtype: 'Image', Width: W, Height: H, ColorSpace: origCS || 'DeviceRGB', BitsPerComponent: 8,
     DecodeParms: { Predictor: 15, Colors: NC, BitsPerComponent: 8, Columns: W } });
+  for (const [k, v] of Object.entries(maskInfo)) newImg.dict.set(PDFName.of(k), v); // same object reference, mask bytes untouched
   const newImgRef = pdoc.context.register(newImg);
   img.xo.set(PDFName.of(img.name), newImgRef);
   // metadata: catalog XMP, every page /Thumb (none rebuilt), old image's XMP goes with the old image
@@ -911,7 +929,7 @@ export async function editScanLine({ url, kind, trueLine, find, replace, pageInd
     const same = v(0) === O0[k] && v(1) === O0[k + 1] && v(2) === O0[k + 2];
     if (v(0) !== compData[k] || v(1) !== compData[k + 1] || v(2) !== compData[k + 2]) imgVsComposite++;
     if (!same) { if (inMaskOrig(x, y)) imgInside++; else imgOutside++; } }
-  const imageCheck = { colorSpace: csInfo, channelsWritten: NC, newFilter: img2.filter, newImageStreamBytes: img2.raw.length, oldImageStreamBytes: img.raw.length, decodedVsComposite: imgVsComposite, changedOutsidePatchMask: imgOutside, changedInsidePatchMask: imgInside, imagesInOutput: countImages(chk) };
+  const imageCheck = { colorSpace: csInfo, masksKeptByReference: Object.fromEntries(Object.entries(maskInfo).map(([k, v]) => [k, v.toString()])), channelsWritten: NC, newFilter: img2.filter, newImageStreamBytes: img2.raw.length, oldImageStreamBytes: img.raw.length, decodedVsComposite: imgVsComposite, changedOutsidePatchMask: imgOutside, changedInsidePatchMask: imgInside, imagesInOutput: countImages(chk) };
   const maskCanvas = document.createElement('canvas'); maskCanvas.width = W; maskCanvas.height = H; { const mc = maskCanvas.getContext('2d'); const md = mc.createImageData(W, H); for (let y = py0; y < py1; y++) for (let x = px0; x < px1; x++) if (inMaskOrig(x, y)) { const k = (y * W + x) * 4; md.data[k] = md.data[k + 1] = md.data[k + 2] = 255; } for (let i = 3; i < md.data.length; i += 4) md.data[i] = 255; mc.putImageData(md, 0, 0); }
 
   // 11) render both PDFs with pdf.js at 1 image pixel = 1 device pixel and diff (every page)
