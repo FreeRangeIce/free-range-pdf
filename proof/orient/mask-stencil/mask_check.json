@@ -1,0 +1,15 @@
+{
+ "input": [
+  "/Mask"
+ ],
+ "output": [
+  "/Mask"
+ ],
+ "same": true,
+ "sameObject": {
+  "/Mask": true
+ },
+ "sameBytes": {
+  "/Mask": true
+ }
+}

@@ -88,6 +88,7 @@
   "colorSpace": {
    "kind": "DeviceGray"
   },
+  "masksKeptByReference": {},
   "channelsWritten": 1,
   "newFilter": "/FlateDecode",
   "newImageStreamBytes": 413575,
@@ -6009,13 +6010,13 @@
   ]
  },
  "timingsMs": {
-  "load": 50,
-  "geometry": 691,
-  "enhance": 728,
-  "ocr": 3290,
-  "edit": 206982,
-  "patch": 291,
-  "render+diff": 1720,
-  "reocr": 865
+  "load": 39,
+  "geometry": 546,
+  "enhance": 437,
+  "ocr": 2175,
+  "edit": 197299,
+  "patch": 321,
+  "render+diff": 1573,
+  "reocr": 708
  }
 }

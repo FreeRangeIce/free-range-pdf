@@ -1,0 +1,15 @@
+{
+ "input": [
+  "/SMask"
+ ],
+ "output": [
+  "/SMask"
+ ],
+ "same": true,
+ "sameObject": {
+  "/SMask": true
+ },
+ "sameBytes": {
+  "/SMask": true
+ }
+}

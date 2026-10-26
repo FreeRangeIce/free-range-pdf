@@ -102,6 +102,7 @@
    "N": 3,
    "profileStreamBytes": 259
   },
+  "masksKeptByReference": {},
   "channelsWritten": 3,
   "newFilter": "/FlateDecode",
   "newImageStreamBytes": 840462,
@@ -6019,13 +6020,13 @@
   ]
  },
  "timingsMs": {
-  "load": 42,
-  "geometry": 514,
-  "enhance": 411,
-  "ocr": 2121,
-  "edit": 188540,
-  "patch": 307,
-  "render+diff": 2100,
-  "reocr": 723
+  "load": 39,
+  "geometry": 530,
+  "enhance": 399,
+  "ocr": 2110,
+  "edit": 186301,
+  "patch": 254,
+  "render+diff": 2091,
+  "reocr": 712
  }
 }

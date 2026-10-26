@@ -30,7 +30,8 @@ for (const c of ['orient-exif3', 'orient-exif6', 'orient-exif8', 'orient-rot90',
   ok(r.image.channelsWritten === (GRAY[c] || 3), `${c}: wrote ${r.image.channelsWritten} channel(s), expected ${GRAY[c] || 3}`);
   if (/flip/.test(c)) ok(oc.poppler.editRectMirrored && oc.pdfjs.editRectMirrored, `${c}: the edit should land in the mirrored image rect (flipped placement)`);
   ok(oc.colorSpace.same, `${c}: colour space ${JSON.stringify(oc.colorSpace.input)} -> ${JSON.stringify(oc.colorSpace.output)}`);
-  ok(fc.output.images[0].w === fc.input.images[0].w && fc.output.images[0].h === fc.input.images[0].h, `${c}: image size changed`);
+  { const big = l => l.reduce((a, i) => i.w * i.h > a.w * a.h ? i : a); const bi = big(fc.input.images), bo = big(fc.output.images); // page image = largest (a kept mask may sort first)
+    ok(bo.w === bi.w && bo.h === bi.h && fc.output.images.length === fc.input.images.length, `${c}: image size or image count changed`); }
 }
 // metadata: documents (does not decide) what the photo path keeps/strips today; a change in behaviour fails here on purpose
 { const { execFileSync } = await import('child_process'); const PROOF = P;

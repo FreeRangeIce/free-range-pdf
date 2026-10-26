@@ -100,6 +100,7 @@
   "colorSpace": {
    "kind": "DeviceRGB"
   },
+  "masksKeptByReference": {},
   "channelsWritten": 3,
   "newFilter": "/FlateDecode",
   "newImageStreamBytes": 995703,
@@ -6003,13 +6004,13 @@
   ]
  },
  "timingsMs": {
-  "load": 54,
-  "geometry": 864,
-  "enhance": 785,
-  "ocr": 4508,
-  "edit": 192084,
-  "patch": 287,
-  "render+diff": 2028,
-  "reocr": 792
+  "load": 43,
+  "geometry": 535,
+  "enhance": 400,
+  "ocr": 2127,
+  "edit": 186126,
+  "patch": 216,
+  "render+diff": 2063,
+  "reocr": 695
  }
 }

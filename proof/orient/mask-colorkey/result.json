@@ -1,0 +1,18 @@
+{
+ "case": {
+  "name": "mask-colorkey",
+  "dir": "orient/mask-colorkey",
+  "file": "inputs/mask-colorkey.pdf",
+  "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+  "find": "five",
+  "replace": "nine",
+  "expectSaveBlocked": true,
+  "note": "colour-key /Mask array: must be SAVE BLOCKED"
+ },
+ "refused": true,
+ "kind": "saveBlocked",
+ "reason": "SAVE BLOCKED: the page image has a colour-key /Mask array [ 0 40 ]; edited pixels could match the key, so re-saving it is not supported; nothing written\n    at http://127.0.0.1:38557/src/lib/scan-edit.js:251:40\n    at Object.editScanLine (http://127.0.0.1:38557/src/lib/scan-edit.js:254:17)\n    at async <anonymous>:396:30",
+ "pdfFilesInOutputDir": [],
+ "outputFilesWritten": false,
+ "inputSha256": "6f02e941d4062665a5393849d8c6adf585856ca8bc37133605d7fc8dac835e09"
+}

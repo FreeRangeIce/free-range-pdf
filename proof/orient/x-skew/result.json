@@ -1,0 +1,18 @@
+{
+ "case": {
+  "name": "x-skew",
+  "dir": "orient/x-skew",
+  "file": "inputs/x-skew.pdf",
+  "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+  "find": "five",
+  "replace": "nine",
+  "expectNotEditable": true,
+  "note": "sheared placement cm [756 0 60 -1008 0 1008]: must be NOT EDITABLE"
+ },
+ "refused": true,
+ "kind": "notEditable",
+ "reason": "NOT EDITABLE: the page image is placed with a skewed or non-right-angle matrix [756,0,60,-1008,0,1008]; only 90-degree turns and flips are supported\n    at Object.editScanLine (http://127.0.0.1:43995/src/lib/scan-edit.js:279:24)\n    at async <anonymous>:396:30",
+ "pdfFilesInOutputDir": [],
+ "outputFilesWritten": false,
+ "inputSha256": "436c2ad0ab7d6d1d74a35fd3467344fa149f57f573450c2514ab9926d9161df4"
+}

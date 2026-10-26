@@ -1,0 +1,192 @@
+{
+ "input": {
+  "file": "/workspace/frpdf-photo-merge-wt/proof/inputs/mask-stencil.pdf",
+  "bytes": 187571,
+  "eofMarkers": 1,
+  "startxrefs": 1,
+  "trailerHasPrev": false,
+  "incrementalUpdate": false,
+  "reachabilityMethod": "raw object graph (no object streams)",
+  "objects": 7,
+  "orphans": [],
+  "fonts": {},
+  "streams": 3,
+  "undecodableStreams": 0,
+  "search": {
+   "plainHitsNonImageStreams": {
+    "five": [],
+    "nine": []
+   },
+   "glyphCodeHits": {
+    "five": [],
+    "nine": []
+   },
+   "perShowOpHits": {
+    "five": [],
+    "nine": []
+   },
+   "newWordShowOpHits": {}
+  },
+  "pdftotext": {
+   "five": 0,
+   "nine": 0
+  },
+  "pdftotextReplacementChars": 0,
+  "pdftotextLinesWith": {
+   "five": [],
+   "nine": []
+  },
+  "images": [
+   {
+    "obj": "6 0 R",
+    "w": 1512,
+    "h": 2016,
+    "filter": "/DCTDecode",
+    "colorSpace": "/DeviceGray",
+    "hasMetadata": false,
+    "jpegAPP1Exif": true,
+    "jpegICC": false,
+    "jpegXMP": false,
+    "bytes": 185738
+   },
+   {
+    "obj": "7 0 R",
+    "w": 756,
+    "h": 1008,
+    "filter": "/FlateDecode",
+    "colorSpace": "None",
+    "hasMetadata": false,
+    "jpegAPP1Exif": false,
+    "jpegICC": false,
+    "jpegXMP": false,
+    "bytes": 123
+   }
+  ],
+  "pageThumbs": [],
+  "catalogMetadata": false,
+  "pageRotate": [
+   0
+  ],
+  "rawFileMarkers": {
+   "Exif\\0\\0": 1,
+   "GPS (text)": 0,
+   "xmpmeta": 0,
+   "/Thumb": 0,
+   "ICC_PROFILE": 0,
+   "/Metadata": 0
+  },
+  "pdfimagesList": [
+   "page   num  type   width height color comp bpc  enc interp  object ID x-ppi y-ppi size ratio",
+   "--------------------------------------------------------------------------------------------",
+   "   1     0 image    1512  2016  gray    1   8  jpeg   no         6  0   144   144  181K 6.1%",
+   "   1     1 mask      756  1008  -       1   1  image  no         6  0    72    72  123B 0.1%"
+  ]
+ },
+ "output": {
+  "file": "/workspace/frpdf-photo-merge-wt/proof/orient/mask-stencil/mask-stencil.edited.pdf",
+  "bytes": 429543,
+  "eofMarkers": 1,
+  "startxrefs": 1,
+  "trailerHasPrev": false,
+  "incrementalUpdate": false,
+  "reachabilityMethod": "raw object graph (no object streams)",
+  "objects": 15,
+  "orphans": [],
+  "fonts": {
+   "p1/FRPOCR-7098480789": {
+    "base": "/LiberationSans-9742",
+    "unicodeSource": "ToUnicode"
+   }
+  },
+  "streams": 8,
+  "undecodableStreams": 0,
+  "search": {
+   "plainHitsNonImageStreams": {
+    "five": [],
+    "nine": []
+   },
+   "glyphCodeHits": {
+    "five": [],
+    "nine": [
+     {
+      "fontObj": "(9, 0)",
+      "font": "/LiberationSans-9742",
+      "codes": "0003001000030002",
+      "stream": "12 0 R",
+      "contiguousBytes": 0,
+      "hexForm": 1,
+      "kind": "page 1 content stream"
+     }
+    ]
+   },
+   "perShowOpHits": {
+    "five": [],
+    "nine": [
+     {
+      "page": 1,
+      "font": "/LiberationSans-9742",
+      "y": 638.0489,
+      "text": "nine"
+     }
+    ]
+   },
+   "newWordShowOpHits": {}
+  },
+  "pdftotext": {
+   "five": 0,
+   "nine": 1
+  },
+  "pdftotextReplacementChars": 0,
+  "pdftotextLinesWith": {
+   "five": [],
+   "nine": [
+    "more than nine"
+   ]
+  },
+  "images": [
+   {
+    "obj": "7 0 R",
+    "w": 756,
+    "h": 1008,
+    "filter": "/FlateDecode",
+    "colorSpace": "None",
+    "hasMetadata": false,
+    "jpegAPP1Exif": false,
+    "jpegICC": false,
+    "jpegXMP": false,
+    "bytes": 123
+   },
+   {
+    "obj": "8 0 R",
+    "w": 1512,
+    "h": 2016,
+    "filter": "/FlateDecode",
+    "colorSpace": "/DeviceGray",
+    "hasMetadata": false,
+    "jpegAPP1Exif": false,
+    "jpegICC": false,
+    "jpegXMP": false,
+    "bytes": 413575
+   }
+  ],
+  "pageThumbs": [],
+  "catalogMetadata": false,
+  "pageRotate": [
+   0
+  ],
+  "rawFileMarkers": {
+   "Exif\\0\\0": 0,
+   "GPS (text)": 0,
+   "xmpmeta": 0,
+   "/Thumb": 0,
+   "ICC_PROFILE": 0,
+   "/Metadata": 0
+  },
+  "pdfimagesList": [
+   "page   num  type   width height color comp bpc  enc interp  object ID x-ppi y-ppi size ratio",
+   "--------------------------------------------------------------------------------------------",
+   "   1     0 image    1512  2016  gray    1   8  image  no         8  0   144   144  404K  14%",
+   "   1     1 mask      756  1008  -       1   1  image  no         8  0    72    72  123B 0.1%"
+  ]
+ }
+}
