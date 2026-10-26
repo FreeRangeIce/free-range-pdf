@@ -211,6 +211,53 @@
    "find": "five",
    "replace": "nine",
    "expectSaveBlocked": true
+  },
+  {
+   "name": "mask-gray-smask",
+   "dir": "orient/mask-gray-smask",
+   "file": "inputs/mask-gray-smask.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine",
+   "note": "DeviceGray DCT + /SMask (alpha 100 rows 40-200): SMask must be kept by reference, bytes identical"
+  },
+  {
+   "name": "mask-rgb-smask",
+   "dir": "orient/mask-rgb-smask",
+   "file": "inputs/mask-rgb-smask.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine",
+   "note": "DeviceRGB DCT (vflip placement) + /SMask: SMask must be kept by reference, bytes identical"
+  },
+  {
+   "name": "mask-stencil",
+   "dir": "orient/mask-stencil",
+   "file": "inputs/mask-stencil.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine",
+   "note": "DeviceGray DCT + /Mask stencil stream (1-bit, half size): Mask must be kept by reference"
+  },
+  {
+   "name": "mask-colorkey",
+   "dir": "orient/mask-colorkey",
+   "file": "inputs/mask-colorkey.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine",
+   "expectSaveBlocked": true,
+   "note": "colour-key /Mask array: must be SAVE BLOCKED"
+  },
+  {
+   "name": "x-skew",
+   "dir": "orient/x-skew",
+   "file": "inputs/x-skew.pdf",
+   "trueLine": "transfer. A late fee will apply if payment is more than five days late. The security deposit",
+   "find": "five",
+   "replace": "nine",
+   "expectNotEditable": true,
+   "note": "sheared placement cm [756 0 60 -1008 0 1008]: must be NOT EDITABLE"
   }
  ]
 }

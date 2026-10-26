@@ -5,11 +5,20 @@ import fs from 'fs'; import path from 'path'; import { fileURLToPath } from 'url
 const P = path.dirname(fileURLToPath(import.meta.url)); let bad = 0; const rows = [];
 const ok = (cond, msg) => { if (!cond) { bad++; console.log('FAIL', msg); } };
 // must be refused at save with the colour-space message, nothing written
-for (const c of ['color-cmyk']) { const r = JSON.parse(fs.readFileSync(path.join(P, 'orient', c, 'result.json')));
-  ok(r.refused && r.kind === 'saveBlocked' && /^SAVE BLOCKED: the page image uses colour space .*DeviceCMYK/.test(r.reason) && !r.pdfFilesInOutputDir.length, `${c}: expected SAVE BLOCKED (colour space), got ${JSON.stringify(r.reason || r.kind)}`);
+for (const c of ['color-cmyk', 'mask-colorkey']) { const r = JSON.parse(fs.readFileSync(path.join(P, 'orient', c, 'result.json')));
+  ok(r.refused && r.kind === 'saveBlocked' && (c === 'color-cmyk' ? /^SAVE BLOCKED: the page image uses colour space .*DeviceCMYK/ : /^SAVE BLOCKED: the page image has a colour-key \/Mask array/).test(r.reason) && !r.pdfFilesInOutputDir.length, `${c}: expected SAVE BLOCKED (colour space), got ${JSON.stringify(r.reason || r.kind)}`);
   rows.push([c, '-', 'SAVE BLOCKED', '-', '-', '-']); }
-const GRAY = { 'color-gray': 1, 'color-gray-iccbased': 1 };
-for (const c of ['orient-exif3', 'orient-exif6', 'orient-exif8', 'orient-rot90', 'orient-rot180', 'orient-rot270', 'orient-cm90', 'orient-vflip', 'orient-hflip', 'icc-wide-app2', 'icc-wide-iccbased', 'color-gray', 'color-gray-iccbased']) {
+const GRAY = { 'color-gray': 1, 'color-gray-iccbased': 1, 'mask-gray-smask': 1, 'mask-stencil': 1 };
+// skewed placement: must be refused as NOT EDITABLE, nothing written
+for (const c of ['x-skew']) { const r = JSON.parse(fs.readFileSync(path.join(P, 'orient', c, 'result.json')));
+  ok(r.refused && r.kind === 'notEditable' && /skewed or non-right-angle/.test(r.reason) && !r.pdfFilesInOutputDir.length, `${c}: expected NOT EDITABLE (skew), got ${JSON.stringify(r.reason || r.kind)}`);
+  rows.push([c, '-', 'NOT EDITABLE', '-', '-', '-']); }
+// masked images: the /SMask or /Mask stencil must be the same object with identical bytes in the output
+for (const [c, k] of [['mask-gray-smask', '/SMask'], ['mask-rgb-smask', '/SMask'], ['mask-stencil', '/Mask']]) { const d = path.join(P, 'orient', c);
+  const { execFileSync } = await import('child_process'); const m = JSON.parse(execFileSync('/workspace/.venv-pdf/bin/python', [path.join(P, 'tools/mask_check.py'), path.join(P, 'inputs', c + '.pdf'), path.join(d, c + '.edited.pdf')], { maxBuffer: 1 << 26 }).toString());
+  fs.writeFileSync(path.join(d, 'mask_check.json'), JSON.stringify(m, null, 1));
+  ok(m.input.includes(k) && m.output.includes(k) && m.same && m.sameObject[k] && m.sameBytes[k], `${c}: ${k} not kept by reference with identical bytes (${JSON.stringify(m.output)})`); }
+for (const c of ['orient-exif3', 'orient-exif6', 'orient-exif8', 'orient-rot90', 'orient-rot180', 'orient-rot270', 'orient-cm90', 'orient-vflip', 'orient-hflip', 'icc-wide-app2', 'icc-wide-iccbased', 'color-gray', 'color-gray-iccbased', 'mask-gray-smask', 'mask-rgb-smask', 'mask-stencil']) {
   const d = path.join(P, 'orient', c); const oc = JSON.parse(fs.readFileSync(path.join(d, 'orient_color_check.json')));
   const r = JSON.parse(fs.readFileSync(path.join(d, 'result.json'))); const fc = JSON.parse(fs.readFileSync(path.join(d, 'file_check.json')));
   for (const rnd of ['poppler', 'pdfjs']) { const o = oc[rnd]; if (!o) continue;
