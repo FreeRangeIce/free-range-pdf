@@ -1,6 +1,6 @@
 # FreeRangePDF (FreeRangeIce/free-range-pdf)
 
-This is a static, desktop-only (1440px) PDF line editor that runs in the browser. There is no server and no cloud OCR, and the file never leaves the browser. **The editor is live at [freerangeice.github.io/free-range-pdf/app/](https://freerangeice.github.io/free-range-pdf/app/).** This repo also holds the proof that the editing method works.
+This is a static, desktop-only (1440px) PDF line editor that runs in the browser. On a phone it shows a short note that it works best on a computer, instead of the squeezed layout. There is no server and no cloud OCR, and the file never leaves the browser. **The editor is live at [freerangeice.github.io/free-range-pdf/app/](https://freerangeice.github.io/free-range-pdf/app/).** This repo also holds the proof that the editing method works.
 
 The live editor changes only PDFs made of real text. The scan and photo path below is proof code and is not in the editor yet.
 

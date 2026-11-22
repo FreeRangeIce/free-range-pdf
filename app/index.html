@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>FreeRangePDF - text PDF editor</title>
-<meta name="viewport" content="width=1440">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self' blob: data:; script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval' blob:; worker-src 'self' blob:; connect-src 'self' blob: data:; img-src 'self' blob: data:; style-src 'self' 'unsafe-inline'; font-src 'self' blob: data:">
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="app.css">
@@ -15,6 +15,7 @@
   <span class="spacer"></span>
   <button id="creditsBtn" class="btn">Credits</button>
 </header>
+<div id="phonenote">This editor works best on a computer.</div>
 <main>
   <section id="left"><div class="legend" id="legendwrap" hidden><span><i class="sw blue"></i>Selected line (thin blue tick = edited)</span><span><i class="sw orange"></i>Substituted font</span></div>
     <div id="emptystate"><div>Open a PDF to start editing</div><button id="openbtn2" class="btn primary">Open PDF</button></div>

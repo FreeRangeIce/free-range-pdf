@@ -1,7 +1,7 @@
-*{box-sizing:border-box}body{margin:0;width:1440px;font:14px/1.4 system-ui,sans-serif;color:#1d2330;background:#eef0f4}
-header{display:flex;gap:10px;align-items:center;padding:10px 16px;background:#fff;border-bottom:1px solid #d5d9e2;height:52px}
-h1{font-size:18px;margin:0}h2{font-size:13px;font-weight:600;margin:14px 0 6px;color:#1d2330}.tag{background:#e6efff;color:#1f3a7a;border-radius:10px;padding:1px 8px;font-size:12px}
-.spacer{flex:1}.muted{color:#4f576a}.btn{border:1px solid #6d7892;background:#fff;color:#1d2330;border-radius:6px;padding:6px 12px;font:inherit;cursor:pointer}.btn:disabled{opacity:.5;cursor:default}
+*{box-sizing:border-box}body{margin:0 auto;width:1440px;font:14px/1.4 system-ui,sans-serif;color:#1d2330;background:#eef0f4}
+header{display:flex;gap:10px;align-items:center;padding:10px 16px;background:#fff;border-bottom:1px solid #d5d9e2;height:64px}
+h1{font-size:18px;margin:0}h2{font-size:13px;font-weight:600;margin:14px 0 6px;color:#1d2330}.tag{background:#c9d7f5;color:#102a63;border:1px solid #6b84b8;border-radius:10px;padding:1px 8px;font-size:12px;font-weight:600}
+.spacer{flex:1}.muted{color:#4f576a}.btn{border:1px solid #6d7892;background:#fff;color:#1d2330;border-radius:6px;padding:6px 12px;font:inherit;cursor:pointer}header .btn{min-height:44px;min-width:44px}.btn:disabled{opacity:.5;cursor:default}
 .btn.primary{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
 main{display:flex;gap:16px;padding:14px 16px;align-items:flex-start}
 #left{width:824px;flex:none}#pagewrap{position:relative;display:inline-block;background:#fff;box-shadow:0 1px 6px #0003}
@@ -10,7 +10,7 @@ main{display:flex;gap:16px;padding:14px 16px;align-items:flex-start}
 .ln.edited::before{content:"";position:absolute;left:-7px;top:1px;bottom:1px;width:2px;background:#1d4ed8}
 .ln.substspan{outline:2px solid #d9600b;outline-offset:1px}
 .legend{display:flex;gap:22px;margin:8px 0 6px;font-size:12px;line-height:16px;color:#3a4254}.sw{display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-2px;border-radius:2px}.sw.blue{border:2px solid #1d4ed8}.sw.orange{border:2px solid #d9600b}
-#right{width:552px;flex:none;background:#fff;border:1px solid #d5d9e2;border-radius:8px;display:flex;flex-direction:column;height:calc(100vh - 82px);min-height:560px}
+#right{width:552px;flex:none;background:#fff;border:1px solid #d5d9e2;border-radius:8px;display:flex;flex-direction:column;height:calc(100vh - 94px);min-height:560px}
 #rbody{flex:1;overflow:auto;padding:2px 18px 12px}#rfoot{display:flex;flex-direction:column;gap:6px;padding:10px 18px;border-top:1px solid #d5d9e2;background:#fafbfd;border-radius:0 0 8px 8px}#footrow{display:flex;gap:10px;align-items:center}#footnotes{font-size:13px;color:#1d2330;display:flex;gap:14px;min-height:0}#footnotes span{font-weight:600}.reason{margin-top:4px;font-size:12px;color:#4f576a;font-weight:400}
 .mono{font:14px/1.4 ui-monospace,Menlo,Consolas,monospace}#orig{padding:6px 8px;background:#f3f4f8;border-radius:4px;white-space:pre-wrap}
 #newtext{width:100%;padding:7px 8px;border:1px solid #6d7892;border-radius:4px}.lbl,label.lbl{display:block;font-size:12px;color:#4f576a;margin:8px 0 3px}
@@ -34,5 +34,13 @@ kbd{border:1px solid #9aa3b5;border-bottom-width:2px;border-radius:3px;padding:0
 #checksum.fail{display:block}#footnotes:not(:has(span:not([hidden]))){display:none}
 #emptystate{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;min-height:420px;font-size:15px;color:#1d2330}#crop{height:auto}
 .tech{display:block;font:12px/1.4 ui-monospace,Menlo,Consolas,monospace;color:#3a4254;margin:1px 0 3px 14px;word-break:break-word}
-#crop{max-width:none}#emptystate:not([hidden]) ~ .hint{display:none}#emptystate:not([hidden]) ~ #pagewrap{display:none}#emptystate{min-height:calc(100vh - 110px);text-align:center}
+#crop{max-width:none}#emptystate:not([hidden]) ~ .hint{display:none}#emptystate:not([hidden]) ~ #pagewrap{display:none}#emptystate{min-height:calc(100vh - 122px);text-align:center}
 .status:empty{min-height:0;margin-top:0}
+#phonenote{display:none}
+@media (max-width:600px){
+  body{width:auto;max-width:100%;min-height:100vh}
+  header{height:auto;min-height:0}
+  header .btn,header #file,header #docinfo,header #busyflag,header .spacer{display:none}
+  main,#credits{display:none}
+  #phonenote{display:block;padding:48px 24px;font-size:16px;line-height:1.5;color:#1d2330;text-align:center;max-width:28em;margin:0 auto}
+}
